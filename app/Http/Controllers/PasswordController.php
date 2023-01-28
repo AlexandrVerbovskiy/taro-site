@@ -16,14 +16,14 @@ class PasswordController
 
     public function showForgetPasswordForm()
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         return view('auth.forget-password');
     }
 
 
     public function submitForgetPasswordForm(Request $request)
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         $request->validate([
             'email' => 'required|email|exists:users',
         ]);
@@ -52,14 +52,14 @@ class PasswordController
 
     public function showResetPasswordForm($token)
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         return view('auth.forget-password-link', ['token' => $token]);
     }
 
 
     public function submitResetPasswordForm(Request $request)
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         $request->validate([
             'email' => 'required|email|exists:users',
             'password' => 'required|string|min:6|confirmed',

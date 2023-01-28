@@ -1,24 +1,38 @@
 @include('layouts.header')
 <div class="container py-4">
     <h2>Master</h2>
-    <form class='form' method="POST" action="{{url('/create-master')}}">
+    <form class='form' method="POST" action="{{url('/save-master')}}">
         {{ csrf_field() }}
+
+        @if(isset($id))
+            <input type="hidden" class="form-control"
+                   value="{{$id}}"
+                   id="id" name="id">
+        @endif
+
         <div class="form-group mb-3">
             <label for="first_name">First name:</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" required>
+            <input type="text" class="form-control" id="first_name"
+                   value="{{old('first_name')?old('first_name'):(isset($first_name)?$first_name:'')}}"
+                   name="first_name" required>
         </div>
 
         <div class="form-group mb-3">
             <label for="last_name">Last name:</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" required>
+            <input type="text" class="form-control" id="last_name"
+                   value="{{old('last_name')?old('last_name'):(isset($last_name)?$last_name:'')}}"
+                   name="last_name" required>
         </div>
 
         <div class="form-group mb-3">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" required> </textarea>
+            <textarea class="form-control" id="description" name="description" required
+            >{{old('description')?old('description'):(isset($description)?$description:'')}}</textarea>
         </div>
 
-        <input type="hidden" name="img_src" required>
+        <input type="hidden" name="img_src"
+               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
+               required>
 
         <div class="form-group">
             <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Save</button>

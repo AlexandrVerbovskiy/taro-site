@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Acivity;
 use App\Models\Master;
 use Illuminate\Http\Request;
 
@@ -10,13 +9,29 @@ class MastersController
 {
     public function create()
     {
-        if (!auth()->user()->admin) return redirect()->to('/');
+        if (!auth()->check() || !auth()->user()->admin) return redirect()->to('/');
         return view('masters.edit');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return redirect()->to('/');
+        $master = Master::where('id', '=', $id)->first();
+
+        if(!$master) return abort(404);
+
+        return view('masters.edit', [
+            'first_name'=>$master->first_name,
+            'last_name'=>$master->last_name,
+            'id'=>$master->id,
+            'description'=>$master->description,
+            'img_src'=>$master->img_src,
+        ]);
     }
 
     public function save(Request $request)
     {
-        if (!auth()->user()->admin) return redirect()->to('/');
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
 
         $data = $request->input();
 
@@ -27,10 +42,12 @@ class MastersController
         try {
             $findedByData = Master::where(["first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
             if ($findedByData && $findedByData['id'] != $data['id'])
-                return json_encode(["error" => true, "founded_id" => $findedByData['id']]);
+                return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
+                    'founded_id' => 'id'
+                ]);
 
             if ($findedByData && $findedByData['id'] == $data['id'] && $data['img_src'] == $findedByData['img_src'] && $data['description'] == $findedByData['description'] && $data['first_name'] == $findedByData['first_name'] && $data['last_name'] == $findedByData['last_name'])
-                return json_encode(["error" => false]);
+                return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 
 
             $master = Master::firstOrNew(['id' => $data['id']]);
@@ -43,7 +60,9 @@ class MastersController
             return redirect()->to('/');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
-            return redirect()->to('/');
+            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
+                'message' => $e->getMessage()
+            ]);
         }
     }
 

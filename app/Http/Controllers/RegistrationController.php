@@ -9,13 +9,13 @@ class RegistrationController extends Controller
 {
     public function create()
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         return view('auth.registration');
     }
 
     public function store()
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
 
         $this->validate(request(), [
             'email' => 'required|email',

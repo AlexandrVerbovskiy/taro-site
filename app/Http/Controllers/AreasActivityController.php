@@ -9,13 +9,29 @@ class AreasActivityController
 {
     public function create()
     {
-        if (!auth()->user()->admin) return redirect()->to('/');
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return view('areas-activities.edit');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $area_activity = Acivity::where('id', '=', $id)->first();
+
+        if(!$area_activity) return abort(404);
+
+        return view('areas-activities.edit', [
+            'title_ua'=>$area_activity->title_ua,
+            'title_ru'=>$area_activity->title_ru,
+            'id'=>$area_activity->id,
+            'body'=>$area_activity->body,
+            'img_src'=>$area_activity->img_src,
+        ]);
     }
 
     public function save(Request $request)
     {
-        if (!auth()->user()->admin) return redirect()->to('/');
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
 
         $data = $request->input();
 
@@ -26,10 +42,12 @@ class AreasActivityController
         try {
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua']])->first();
             if ($findedByData && $findedByData['id'] != $data['id'])
-                return json_encode(["error" => true, "founded_id" => $findedByData['id']]);
+                return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
+                    'founded_id' => 'id'
+                ]);
 
             if ($findedByData && $findedByData['id'] == $data['id'] && $data['img_src'] == $findedByData['img_src'] && $data['body'] == $findedByData['body'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
-                return json_encode(["error" => false]);
+                return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 
 
             $acivity = Acivity::firstOrNew(['id' => $data['id']]);
@@ -42,7 +60,9 @@ class AreasActivityController
             return redirect()->to('/');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
-            return redirect()->to('/');
+            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
+                'message' => $e->getMessage()
+            ]);
         }
     }
 
@@ -54,10 +74,7 @@ class AreasActivityController
 
     public function topic(Request $request, $id){
         $activity = Acivity::where('id', "=", $id)->first();
-        if(!$activity) {
-            var_dump("error");
-            die;
-        }
+        if(!$activity) return abort(404);
         return view('areas-activities.index', ['activity'=>$activity]);
     }
 }

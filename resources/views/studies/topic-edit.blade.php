@@ -1,16 +1,27 @@
 @include('layouts.header')
 <div class="container py-4">
     <h2>Topic</h2>
-    <form class='form' method="POST" action="{{url('/create-study-topic')}}">
+    <form class='form' method="POST" action="{{url('/save-study-topic')}}">
         {{ csrf_field() }}
+
+        @if(isset($id))
+            <input type="hidden" class="form-control"
+                   value="{{$id}}"
+                   id="id" name="id">
+        @endif
+
         <div class="form-group mb-3">
             <label for="title_ua">Name(ua):</label>
-            <input type="text" class="form-control" id="title_ua" name="title_ua" required>
+            <input type="text" class="form-control" id="title_ua"
+                   value="{{old('title_ua')?old('title_ua'):(isset($title_ua)?$title_ua:'')}}"
+                   name="title_ua" required>
         </div>
 
         <div class="form-group mb-3">
             <label for="title_ru">Name(ru):</label>
-            <input type="text" class="form-control" id="title_ru" name="title_ru" required>
+            <input type="text" class="form-control" id="title_ru"
+                   value="{{old('title_ru')?old('title_ru'):(isset($title_ru)?$title_ru:'')}}"
+                   name="title_ru" required>
         </div>
 
         <div class="form-group">

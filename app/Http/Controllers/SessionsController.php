@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 
 class SessionsController
 {
     public function create()
     {
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         return view('auth.login');
     }
 
     public function store()
     {
-
-        if (auth()->check()) return redirect()->to('/');
+        if (auth()->check()) return abort(404);
         if (auth()->attempt(request(['email', 'password'])) == false) {
-            return back()->withErrors([
+            return back()->withInput(Request::except('password'))->withErrors([
                 'message' => 'The email or password is incorrect, please try again'
             ]);
         }
-
         return redirect()->to('/');
     }
 
