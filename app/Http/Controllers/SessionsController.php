@@ -9,7 +9,7 @@ class SessionsController
     public function create()
     {
         if (auth()->check()) return redirect()->to('/');
-        return view('login');
+        return view('auth.login');
     }
 
     public function store()

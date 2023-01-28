@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AreasActivityController;
+use App\Http\Controllers\MastersController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\StudiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
@@ -20,6 +24,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/file-save', [MediaController::class, 'save']);
+
 Route::get('/registration', [RegistrationController::class, 'create']);
 Route::post('/registration', [RegistrationController::class, 'store']);
 
@@ -31,3 +37,20 @@ Route::get('/forget-password', [PasswordController::class, 'showForgetPasswordFo
 Route::post('/forget-password', [PasswordController::class, 'submitForgetPasswordForm']);
 Route::get('/reset-password/{token}', [PasswordController::class, 'showResetPasswordForm']);
 Route::post('/reset-password', [PasswordController::class, 'submitResetPasswordForm']);
+
+Route::get("/create-activity", [AreasActivityController::class, 'create']);
+Route::post("/create-activity", [AreasActivityController::class, 'save']);
+Route::get("/titles", [AreasActivityController::class, 'titles']);
+Route::get("/topic/{id}", [AreasActivityController::class, 'topic']);
+
+Route::get("/create-master", [MastersController::class, 'create']);
+Route::post("/create-master", [MastersController::class, 'save']);
+Route::get("/masters", [MastersController::class, 'masters']);
+Route::get("/master/{id}", [MastersController::class, 'master']);
+
+Route::get("/create-study-topic", [StudiesController::class, 'createTopic']);
+Route::post("/create-study-topic", [StudiesController::class, 'saveTopic']);
+Route::get("/create-study", [StudiesController::class, 'createStudy']);
+Route::post("/create-study", [StudiesController::class, 'saveStudy']);
+Route::get("/studies/{id}", [StudiesController::class, 'studies']);
+Route::get("/study/{id}", [StudiesController::class, 'study']);

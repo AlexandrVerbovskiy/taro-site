@@ -10,7 +10,7 @@ class RegistrationController extends Controller
     public function create()
     {
         if (auth()->check()) return redirect()->to('/');
-        return view('registration');
+        return view('auth.registration');
     }
 
     public function store()
