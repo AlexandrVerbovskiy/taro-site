@@ -11,16 +11,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                @if (auth()->check())
-                    <li class="nav-item">
-                        <a class="nav-link @if(Request::segment(1) == 'accounts') active @endif"
-                           href="{{url("/accounts")}}">Accounts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if(Request::segment(1) == 'static') active @endif"
-                           href="{{url("/static")}}">Static</a>
-                    </li>
-                @endif
             </ul>
 
             @if (!auth()->check())

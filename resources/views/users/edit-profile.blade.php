@@ -1,0 +1,56 @@
+@include('layouts.header')
+<div class="container py-4">
+    <h2>Register</h2>
+    <form method="POST" action="{{url('/edit-profile')}}">
+        {{ csrf_field() }}
+        <div class="form-group mb-3">
+            <label for="first_name">First name:</label>
+            <input type="text" class="form-control"
+                   value="{{ old('first_name') ? old('first_name') : $first_name  }}"
+                   id="first_name" name="first_name">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="last_name">Last name:</label>
+            <input type="text" class="form-control"
+                   value="{{old('last_name') ? old('last_name') : $last_name }}"
+                   id="last_name"
+                   name="last_name">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control"
+                   value="{{old('email') ? old('email') : $email}}"
+                   id="email" name="email">
+        </div>
+
+        <input type="hidden" class="form-control"
+               value="{{$id}}"
+               id="id" name="id">
+
+        <div class="form-group mb-3">
+            <label for="phone">Phone:</label>
+            <input type="text" class="form-control"
+                   value="{{old('phone') ? old('phone') : $phone }}"
+                   id="phone" name="phone">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="telegram">Telegram:</label>
+            <input type="text" class="form-control"
+                   value="{{old('telegram') ? old('telegram') : $telegram }}"
+                   id="telegram"
+                   name="telegram">
+        </div>
+
+        <div class="form-group">
+            <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+        @endif
+    </form>
+</div>
+@include('layouts.footer')
