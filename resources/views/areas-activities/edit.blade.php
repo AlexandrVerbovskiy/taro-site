@@ -25,8 +25,23 @@
         </div>
 
         <div class="form-group mb-3">
+            <label for="title_ru">Type:</label>
+            <select id="type" name="type" required>
+                <?php $saved_type = old('type') ? old('type') : (isset($type) ? $type : 'normal')?>
+                @if($saved_type=='normal')
+                    <option value="normal" selected>Normal</option>
+                    <option value="dop">Dop</option>
+                @else
+                    <option value="normal">Normal</option>
+                    <option value="dop" selected>Dop</option>
+                @endif
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
             <label for="body">Body:</label>
-            <textarea class="form-control" id="body" name="body" required>{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
+            <textarea class="form-control" id="body" name="body"
+                      required>{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
         </div>
 
         <input type="hidden" name="img_src"

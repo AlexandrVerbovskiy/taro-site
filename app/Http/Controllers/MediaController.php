@@ -9,9 +9,9 @@ class MediaController
 {
     public function save(Request $request)
     {
-        $file = $request->file("img");
+        $file = $request->file("file");
         $filename = time() ."_". $file->getClientOriginalName();
-        Storage::putFileAs('public/images/', $file, $filename);
+        Storage::putFileAs('public/'.$request->input('type').'s/', $file, $filename);
         return json_encode(["filename" => $filename]);
     }
 }

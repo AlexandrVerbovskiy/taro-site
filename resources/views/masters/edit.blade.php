@@ -30,9 +30,9 @@
             >{{old('description')?old('description'):(isset($description)?$description:'')}}</textarea>
         </div>
 
-        <input type="hidden" name="img_src"
+        <input type="hidden"
                value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
-               required>
+               name="img_src" required>
 
         <div class="form-group">
             <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Save</button>

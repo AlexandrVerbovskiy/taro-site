@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Master extends Model
+class CalendarDate extends Model
 {
-    protected $table = 'masters';
+    protected $table = 'calendar_dates';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'description',
-        'img_src'
+        'date'
     ];
 }

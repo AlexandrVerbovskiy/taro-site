@@ -26,6 +26,7 @@ class AreasActivityController
             'id'=>$area_activity->id,
             'body'=>$area_activity->body,
             'img_src'=>$area_activity->img_src,
+            'type'=>$area_activity->type
         ]);
     }
 
@@ -46,13 +47,14 @@ class AreasActivityController
                     'founded_id' => 'id'
                 ]);
 
-            if ($findedByData && $findedByData['id'] == $data['id'] && $data['img_src'] == $findedByData['img_src'] && $data['body'] == $findedByData['body'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
+            if ($findedByData && $findedByData['id'] == $data['id']&& $data['type'] == $findedByData['type'] && $data['img_src'] == $findedByData['img_src'] && $data['body'] == $findedByData['body'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 
 
             $acivity = Acivity::firstOrNew(['id' => $data['id']]);
             $acivity->img_src = $data['img_src'];
             $acivity->body = $data['body'];
+            $acivity->type = $data['type'];
             $acivity->title_ua = $data['title_ua'];
             $acivity->title_ru = $data['title_ru'];
             $acivity->save();

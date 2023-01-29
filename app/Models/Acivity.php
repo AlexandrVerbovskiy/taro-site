@@ -19,6 +19,7 @@ class Acivity extends Model
         'title_ua',
         'title_ru',
         'body',
-        'img_src'
+        'img_src',
+        'type'
     ];
 }

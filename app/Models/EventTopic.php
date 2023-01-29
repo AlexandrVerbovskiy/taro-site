@@ -4,16 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Master extends Model
+class EventTopic extends Model
 {
-    protected $table = 'masters';
+    protected $table = 'events_topics';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'description',
-        'img_src'
+        'title_ua',
+        'title_ru'
     ];
 }

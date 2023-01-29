@@ -39,9 +39,9 @@ class StudiesController
         }
 
         try {
-            $findedByData = StudyTopic::where(["title_ru" => $data['title_ru']])->first();
-            if (!$findedByData) {
-                $findedByData = StudyTopic::where(["title_ua" => $data['title_ua']])->first();
+            $findedByData = StudyTopic::where(["title_ru" => $data['title_ru']], ['id' ,'!=',$data['id']])->first();
+            if (!isset($findedByData)) {
+                $findedByData = StudyTopic::where(["title_ua" => $data['title_ua'], ['id' ,'!=',$data['id']]])->first();
             }
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -101,7 +101,7 @@ class StudiesController
         }
 
         try {
-            $findedByData = Study::where(["date" => $data['date'], "topic_id" => $data['topic_id']])->first();
+            $findedByData = Study::where(["title" => $data['title'], "date" => $data['date'], "topic_id" => $data['topic_id']])->first();
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                     'founded_id' => 'id'

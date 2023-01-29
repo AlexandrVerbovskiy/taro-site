@@ -11,29 +11,55 @@
         }
     });
 
-    function setimage() {
+    function setFile(body, callback) {
+        fetch('{{url('/file-save')}}', {
+            headers: {
+                'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
+            },
+            method: 'POST',
+            body
+        }).then(res => res.json()).then(data => callback(data.filename));
+    }
+
+    function setImage() {
         const input = $("#img_input");
         const fd = new FormData;
 
-        fd.append('img', input.prop('files')[0]);
+        fd.append('file', input.prop('files')[0]);
+        fd.append('type', 'image');
 
-        fetch('{{url('/file-save')}}', {
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('[name=_token]').getAttribute('value')
-            },
-            method: 'POST',
-            body: fd
-        }).then(res => res.json()).then(data => {
-            document.querySelector("[name='img_src']").value = data.filename;
-        });
+        setFile(fd,
+            url => document.querySelector("[name=img_src]").value = url);
+    }
+
+    function setUrl() {
+        const input = $("#file_input");
+        const type = $("#media_type");
+        const fd = new FormData;
+
+        fd.append('file', input.prop('files')[0]);
+        fd.append('type', type.prop('value'));
+
+        setFile(fd,
+            url => {
+                document.querySelector("#url").value = url;
+            })
     }
 
 
     if ($("#img_input").length > 0) {
         $("#img_input").on("change", function () {
-            setimage();
+            setImage();
         })
     }
+
+    if ($("#file_input").length > 0 && $("#media_type").length > 0) {
+        $("#file_input").on("change", function () {
+            setUrl();
+        })
+    }
+
+
 </script>
 
 </body>
