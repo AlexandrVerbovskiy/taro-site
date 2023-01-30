@@ -46,12 +46,13 @@ class CalendarController
         if(!array_key_exists('id', $data)) $data['id']='-1';
 
         try {
+            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'], 'calendar_date_id'=>$data['calendar_date_id']])->first();
+            if ($findedByData) return json_encode(["error" => true, "found_id" => $findedByData['id']]);
+
             $findedByData = CalendarTime::where(["time" => $data['time'], 'calendar_date_id'=>$data['calendar_date_id']])->first();
-            if ($findedByData && $findedByData['id'] != $data['id']) {
-                return json_encode(["error" => true, "found_id" => $findedByData['id']]);
-            } else if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["calendar_date_id"] == $data['calendar_date_id'] && $findedByData["time"] == $data['time']) {
+            if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["calendar_date_id"] == $data['calendar_date_id'] && $findedByData["time"] == $data['time'])
                 return json_encode(["error" => false, "message" => ""]);
-            }
+
 
             $date = CalendarTime::firstOrNew(['id' => $data['id']]);
             $date->time = $data['time'];

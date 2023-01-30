@@ -41,12 +41,13 @@ class AreasActivityController
         }
 
         try {
-            $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua']])->first();
-            if ($findedByData && $findedByData['id'] != $data['id'])
+            $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua'], ["id", "!=", $data['id']]])->first();
+            if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                     'founded_id' => 'id'
                 ]);
 
+            $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua']])->first();
             if ($findedByData && $findedByData['id'] == $data['id']&& $data['type'] == $findedByData['type'] && $data['img_src'] == $findedByData['img_src'] && $data['body'] == $findedByData['body'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 

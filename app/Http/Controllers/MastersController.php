@@ -40,12 +40,13 @@ class MastersController
         }
 
         try {
-            $findedByData = Master::where(["first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
-            if ($findedByData && $findedByData['id'] != $data['id'])
+            $findedByData = Master::where([["id", "!=", $data['id']],"first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
+            if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                     'founded_id' => 'id'
                 ]);
 
+            $findedByData = Master::where(["first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
             if ($findedByData && $findedByData['id'] == $data['id'] && $data['img_src'] == $findedByData['img_src'] && $data['description'] == $findedByData['description'] && $data['first_name'] == $findedByData['first_name'] && $data['last_name'] == $findedByData['last_name'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 

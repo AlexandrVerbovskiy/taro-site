@@ -39,16 +39,18 @@ class StudiesController
         }
 
         try {
-            $findedByData = StudyTopic::where(["title_ru" => $data['title_ru']], ['id' ,'!=',$data['id']])->first();
+            $findedByData = StudyTopic::where([["id", "!=", $data['id']], "title_ru" => $data['title_ru']], ['id' ,'!=',$data['id']])->first();
             if (!isset($findedByData)) {
-                $findedByData = StudyTopic::where(["title_ua" => $data['title_ua'], ['id' ,'!=',$data['id']]])->first();
+                $findedByData = StudyTopic::where([["id", "!=", $data['id']], "title_ua" => $data['title_ua'], ['id' ,'!=',$data['id']]])->first();
             }
-            if ($findedByData && $findedByData['id'] != $data['id'])
+
+            if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                     'founded_id' => 'id'
                 ]);
 
-            if ($findedByData && $findedByData['id'] == $data['id'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
+            $findedByData = StudyTopic::where(["title_ru" => $data['title_ru']], ['id' ,'!=',$data['id']])->first();
+            if ($findedByData && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 
             $topic = StudyTopic::firstOrNew(['id' => $data['id']]);
