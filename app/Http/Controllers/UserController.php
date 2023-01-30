@@ -17,7 +17,8 @@ class UserController extends Controller
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'phone' => $user->phone,
-            'telegram' => $user->telegram,
+            'social_phone' => $user->social_phone,
+            'social_type' => $user->social_type,
         ]);
     }
 
@@ -30,7 +31,7 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
-            'telegram' => 'required'
+            'social_type' => 'required'
         ]);
 
         if (request()->input('id') != auth()->user()->id)
@@ -45,7 +46,8 @@ class UserController extends Controller
             'first_name' => request()->input('first_name'),
             'last_name' => request()->input('last_name'),
             'phone' => request()->input('phone'),
-            'telegram' => request()->input('telegram'),
+            'social_type' => request()->input('social_type'),
+            'social_phone' => request()->input('social_phone'),
         ));
 
         return redirect()->to('/edit-profile');

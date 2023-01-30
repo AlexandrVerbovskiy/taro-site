@@ -23,10 +23,10 @@ class RegistrationController extends Controller
             'first_name'=> 'required',
             'last_name'=> 'required',
             'phone'=> 'required',
-            'telegram'=> 'required'
+            'social_type'=> 'required'
         ]);
 
-        User::create(request(['first_name','phone','telegram','last_name', 'email', 'password']));
+        User::create(request(['first_name','phone','telegram','last_name', 'email','social_phone', 'social_type', 'password']));
 
         return redirect()->to('/');
     }
