@@ -24,8 +24,13 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="telegram">Telegram:</label>
-            <input type="text" class="form-control" value="{{ old('telegram') }}" id="telegram" name="telegram">
+            <label for="social_type">Social type:</label>
+            <input type="text" class="form-control" value="{{ old('social_type') }}" id="social_type" name="social_type">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="social_phone">Social phone:</label>
+            <input type="text" class="form-control" value="{{ old('social_phone') }}" id="social_phone" name="social_phone">
         </div>
 
         <div class="form-group mb-3">

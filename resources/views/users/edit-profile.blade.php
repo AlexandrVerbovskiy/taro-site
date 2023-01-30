@@ -37,11 +37,19 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="telegram">Telegram:</label>
+            <label for="social_type">Social type:</label>
             <input type="text" class="form-control"
-                   value="{{old('telegram') ? old('telegram') : $telegram }}"
-                   id="telegram"
-                   name="telegram">
+                   value="{{old('social_type') ? old('social_type') : $social_phone }}"
+                   id="social_type"
+                   name="social_type">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="social_phone">Social phone:</label>
+            <input type="text" class="form-control"
+                   value="{{old('social_phone') ? old('social_phone') : $social_phone }}"
+                   id="social_phone"
+                   name="social_phone">
         </div>
 
         <div class="form-group">

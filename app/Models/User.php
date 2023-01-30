@@ -24,7 +24,8 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'phone',
-        'telegram'
+        'social_type',
+        'social_phone'
     ];
 
     /**
