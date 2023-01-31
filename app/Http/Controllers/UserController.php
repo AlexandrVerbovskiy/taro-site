@@ -52,4 +52,33 @@ class UserController extends Controller
 
         return redirect()->to('/edit-profile');
     }
+
+    public function updateAdminStatus(\Illuminate\Http\Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+
+        if(!array_key_exists('id', $data)) $data['id']='-1';
+
+        $id = $data['id'];
+        $status = $data['status'];
+        try {
+            $user = User::where("id", "=", $id)->first();
+            if(!$user){
+                return json_encode(["error" => true, "message" => "User wasn't find"]);
+            }
+            $user->admin = $status;
+            $user->save();
+            return json_encode(["error" => false, "user" => $user]);
+        } catch (\Exception $e) {
+            file_put_contents("log.txt", $e->getMessage());
+            return json_encode(["error" => true, "message" => "Something went wrong"]);
+        }
+    }
+
+    public function usersForAdmin()
+    {
+        $users = User::all("id", "email", "admin")->first();
+        return $users;
+    }
 }
