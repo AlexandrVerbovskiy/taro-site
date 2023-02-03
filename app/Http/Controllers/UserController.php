@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         if (!auth()->check()) return redirect()->to('/');
         $user = auth()->user();
-        return view('users.edit-profile', [
+        return $this->view('users.edit-profile', [
             'id' => $user->id,
             'email' => $user->email,
             'first_name' => $user->first_name,

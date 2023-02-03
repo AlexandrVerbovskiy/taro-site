@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChiefAppointment;
 use Illuminate\Http\Request;
 
-class ChiefAppointmentsController
+class ChiefAppointmentsController extends Controller
 {
     public function save(Request $request)
     {
