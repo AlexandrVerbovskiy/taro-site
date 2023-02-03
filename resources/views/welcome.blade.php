@@ -1,7 +1,7 @@
 @include('layouts.main-header')
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="width: 100%;">
 <div class="shapka text-center col-lg-8">
-    <img class="rounded mx-auto d-block " src=" {{ URL("image/123.jpg") }}" style="width: 100%; height: auto;">
+    <img class="" src=" {{ URL("image/123.jpg") }}" style="width: 100%; height: auto;">
 </div>
 </div>
 <div class="text-center fw-bold" style="font-size: 50px; margin: 20px;">Валерій</div>
@@ -18,6 +18,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     export default {

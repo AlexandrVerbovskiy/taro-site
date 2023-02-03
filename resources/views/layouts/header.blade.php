@@ -22,6 +22,6 @@
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"
             async></script>
 </head>
-<body class="antialiased">
+<body class="antialiased d-flex flex-column min-vh-100">
 
 
