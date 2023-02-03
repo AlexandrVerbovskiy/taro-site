@@ -7,12 +7,12 @@ use App\Models\InfoPost;
 use App\Models\StudyTopic;
 use Illuminate\Http\Request;
 
-class InfosController
+class InfosController extends Controller
 {
     public function createInfo()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        return view('infos.info-edit');
+        return $this->view('infos.info-edit');
     }
 
     public function editInfo(Request $request, $id)
@@ -22,7 +22,7 @@ class InfosController
 
         if (!$info) return abort(404);
 
-        return view('infos.info-edit', [
+        return $this->view('infos.info-edit', [
             'title_ua' => $info->title_ua,
             'title_ru' => $info->title_ru,
             'id' => $info->id
@@ -70,7 +70,7 @@ class InfosController
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $infos = Info::all();
-        return view('infos.post-edit', ['infos' => $infos]);
+        return $this->view('infos.post-edit', ['infos' => $infos]);
     }
 
     public function editPost(Request $request, $id)
@@ -78,7 +78,7 @@ class InfosController
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $infos = Info::all();
         $post = InfoPost::where("id", "=", $id)->first();
-        return view('infos.post-edit', ['infos' => $infos,
+        return $this->view('infos.post-edit', ['infos' => $infos,
             'id' => $post->id,
             'info_id' => $post->info_id,
             'title' => $post->title,

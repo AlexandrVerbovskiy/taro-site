@@ -7,12 +7,12 @@ use App\Models\EventTopic;
 use App\Models\Info;
 use Illuminate\Http\Request;
 
-class EventsController
+class EventsController extends Controller
 {
     public function createTopic()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        return view('events.topic-edit');
+        return $this->view('events.topic-edit');
     }
 
     public function editTopic(Request $request, $id)
@@ -22,7 +22,7 @@ class EventsController
 
         if (!$info) return abort(404);
 
-        return view('events.topic-edit', [
+        return $this->view('events.topic-edit', [
             'title_ua' => $info->title_ua,
             'title_ru' => $info->title_ru,
             'id' => $info->id
@@ -70,7 +70,7 @@ class EventsController
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $topic = EventTopic::all();
-        return view('events.event-edit', ['topics' => $topic]);
+        return $this->view('events.event-edit', ['topics' => $topic]);
     }
 
     public function editPost(Request $request, $id)
@@ -78,7 +78,7 @@ class EventsController
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $topic = EventTopic::all();
         $post = Event::where("id", "=", $id)->first();
-        return view('events.event-edit', ['topics' => $topic,
+        return $this->view('events.event-edit', ['topics' => $topic,
             'id' => $post->id,
             'events_topic_id' => $post->events_topic_id,
             'title' => $post->title,

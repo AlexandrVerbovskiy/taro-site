@@ -6,12 +6,12 @@ use App\Models\CalendarDate;
 use App\Models\CalendarTime;
 use Illuminate\Http\Request;
 
-class CalendarController
+class CalendarController extends Controller
 {
     public function edit(){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $dates = CalendarDate::all();
-        return view('calendar.edit', ['dates'=>$dates]);
+        return $this->view('calendar.edit', ['dates'=>$dates]);
     }
 
     public function saveDateCalendar(Request $request){
