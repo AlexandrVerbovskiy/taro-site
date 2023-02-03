@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MasterAppointment;
 use Illuminate\Http\Request;
 
-class MastersAppointmentsController
+class MastersAppointmentsController extends Controller
 {
     public function save(Request $request)
     {

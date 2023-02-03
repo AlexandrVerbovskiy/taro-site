@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Acivity;
 use Illuminate\Http\Request;
 
-class AreasActivityController
+class AreasActivityController extends Controller
 {
     public function create()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        return view('areas-activities.edit');
+        return $this->view('areas-activities.edit');
     }
 
     public function edit(Request $request, $id)
@@ -20,7 +20,7 @@ class AreasActivityController
 
         if(!$area_activity) return abort(404);
 
-        return view('areas-activities.edit', [
+        return $this->view('areas-activities.edit', [
             'title_ua'=>$area_activity->title_ua,
             'title_ru'=>$area_activity->title_ru,
             'id'=>$area_activity->id,
@@ -78,6 +78,6 @@ class AreasActivityController
     public function topic(Request $request, $id){
         $activity = Acivity::where('id', "=", $id)->first();
         if(!$activity) return abort(404);
-        return view('areas-activities.index', ['activity'=>$activity]);
+        return $this->view('areas-activities.index', ['activity'=>$activity]);
     }
 }
