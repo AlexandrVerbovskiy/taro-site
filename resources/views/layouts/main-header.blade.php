@@ -12,7 +12,7 @@
     <div class="p-2 bd-highlight">HOME</div>
     <div class="p-2 bd-highlight">LANG</div>
 </header>
-<div class="collapse navbar-collapse" id="navbarNav" style="position: fixed; background-color: #a9c6ff;">
+<div class="collapse navbar-collapse" id="navbarNav" style="position: absolute; background-color: #a9c6ff; margin-top: 70px;">
     <ul class="nav flex-column" id="nav_accordion">
         <li class="nav-item">
             <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Напрямки

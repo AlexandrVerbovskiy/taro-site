@@ -63,7 +63,7 @@
 </script>
 
 
-<footer class="d-flex flex-column justify-content-center text-center footer" style="background-color: #a9c6ff;">
+<footer class="d-flex flex-column justify-content-center text-center footer mt-auto" style="background-color: #a9c6ff;">
     <div class="p-2">Контакти</div>
     <div class="p-2 d-flex flex-row justify-content-center">
         <div><a href="#"><img src="{{ URL("image/instagram.png") }}" class="footer-image"></a></div>

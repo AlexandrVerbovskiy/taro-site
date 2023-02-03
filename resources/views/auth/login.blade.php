@@ -1,4 +1,4 @@
-@include('layouts.header')
+@include('layouts.main-header')
 <div class="container py-4">
     <h2>Log In</h2>
 
