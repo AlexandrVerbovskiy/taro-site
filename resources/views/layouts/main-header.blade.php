@@ -117,7 +117,7 @@
                 <h5 class="modal-title" id="exampleModalLongTitle">Register</h5>
             </div>
             <form method="POST" action="{{url('/registration')}}">
-            <div class="modal-body">
+                <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="form-group mb-3">
                         <label for="first_name">First name:</label>
@@ -163,11 +163,11 @@
                     @if($errors->any())
                         <h4>{{$errors->first()}}</h4>
                     @endif
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>
@@ -180,25 +180,25 @@
                 <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
             </div>
             <form method="POST" action="{{url('/login')}}">
-            <div class="modal-body">
-                        {{ csrf_field() }}
-                        <div class="form-group mb-3">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                        <a href="{{url("forget-password")}}">Forget password</a>
-                        @if($errors->any())
-                            <h4>{{$errors->first()}}</h4>
-                        @endif
+                <div class="modal-body">
+                    {{ csrf_field() }}
+                    <div class="form-group mb-3">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <a href="{{url("forget-password")}}">Forget password</a>
+                    @if($errors->any())
+                        <h4>{{$errors->first()}}</h4>
+                    @endif
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button style="cursor:pointer" type="submit" class="btn btn-primary">Login</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button style="cursor:pointer" type="submit" class="btn btn-primary">Login</button>
+                </div>
             </form>
         </div>
     </div>
