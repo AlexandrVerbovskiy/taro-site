@@ -1,18 +1,38 @@
 @include('layouts.header')
-<header class="d-flex justify-content-between align-items-center" style="background-color: #a9c6ff; height: 70px;">
-    <div class="p-2">
+<!--<header class="d-flex justify-content-between align-items-center" style="background-color: #a9c6ff; height: 70px;">
+    <div class="">
         <div class="container-fluid">
-            <button class="navbar-toggler collapsed d-flex flex-column justify-content-around" type="button"
+            <a class="navbar-toggler collapsed d-flex flex-column justify-content-around link-dark text-decoration-none text-reset" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">B</span>
-            </button>
+            </a>
         </div>
     </div>
-    <div class="p-2 bd-highlight">HOME</div>
-    <div class="p-2 bd-highlight">LANG</div>
+    <div class="bd-highlight">HOME</div>
+    <div class="bd-highlight">LANG</div>
+</header>-->
+<header class="align-items-center" style="background-color: #a9c6ff; height: 80px; z-index: 10000000000">
+    <div class="row align-items-center" style="width: 100%; margin: 0; height: 80px;">
+        <div class="col">
+            <div class="container-fluid d-flex justify-content-start" style="padding: 0px;">
+                <a class="navbar-toggler collapsed d-flex flex-column justify-content-around link-dark text-decoration-none text-reset" type="button"
+                   data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                   aria-expanded="false" aria-label="Toggle navigation">
+                    <img class="img_menu" src="{{ URL("image/menu.png")}}">
+                </a>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="bd-highlight text-center header_name" style="">Lorem ipsum chtototam text</div>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a class="link-dark text-decoration-none lang_button">UA</a>
+            <a class="link-dark text-decoration-none lang_button" style="margin-left: 20px">RUS</a>
+        </div>
+    </div>
 </header>
-<div class="collapse navbar-collapse" id="navbarNav" style="position: absolute; background-color: #a9c6ff; margin-top: 70px;">
+<div class="collapse navbar-collapse" id="navbarNav" style="position: absolute; background-color: #a9c6ff; margin-top: 79px; width: 240px; box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);">
     <ul class="nav flex-column" id="nav_accordion">
         <li class="nav-item">
             <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Напрямки

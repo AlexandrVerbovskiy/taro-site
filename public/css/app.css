@@ -1,9 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
+
+a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
+    font-family: 'Roboto', sans-serif;
+}
+.nav-item>.nav-link{
+    padding: 12px 28px;
+}
+#menu_item1>li>a{
+    padding-left: 4px;
+}
+#menu_item1{
+    padding: 0 46px;
+}
 .footer-image {
     height: 30px;
     width: 30px;
-    margin: 5px;
+    margin: 5px 25px 20px;
 }
-
+.footer_text{
+    font-size: 24px;
+    margin: 15px 0 10px 0
+}
 .master {
     background-color: #a9c6ff;
     border-radius: 20px;
@@ -14,4 +31,100 @@
 .master-image {
     width: 150px;
     height: auto;
+}
+.img_menu{
+    width: 30px;
+    padding: 0;
+}
+.header_name{
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+}
+.lang_button{
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    margin: 0 10px;
+}
+.button_for_valera{
+    margin-top: 40px;
+    padding: 12px 45px;
+    font-size: 18px;
+    color: black;
+    background-color: #a9c6ff;
+    border-radius: 20px;
+    border: 0;
+}
+@media only screen and (max-width: 996px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 28px;
+    }
+}
+@media only screen and (max-width: 747px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 18px;
+        margin: 0 0px;
+    }
+    .img_menu{
+        width: 30px;
+        padding: 0;
+    }
+    .footer_text{
+        font-size: 20px;
+        margin: 15px 0 10px 0
+    }
+    .footer-image {
+        height: 25px;
+        width: 25px;
+        margin: 5px 25px 20px;
+    }
+}
+@media only screen and (max-width: 368px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+        margin: 0 0px;
+    }
+    .img_menu{
+        width: 20px;
+        padding: 0;
+    }
+    .footer_text{
+        font-size: 18px;
+        margin: 15px 0 10px 0
+    }
+    .footer-image {
+        height: 20px;
+        width: 20px;
+        margin: 5px 25px 20px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 17px;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+        margin: 0 0px;
+    }
+    .footer_text{
+        font-size: 16px;
+        margin: 15px 0 10px 0
+    }
+    .footer-image {
+        height: 20px;
+        width: 20px;
+        margin: 5px 25px 20px;
+    }
 }
