@@ -24,7 +24,11 @@
             </div>
         </div>
         <div class="col-5">
-            <div class="bd-highlight text-center header_name" style="">Lorem ipsum chtototam text</div>
+            <div class="bd-highlight  text-center " style="">
+                <a class="link-dark header_name"href="/">
+                    Lorem ipsum chtototam text</a>
+
+            </div>
         </div>
         <div class="col d-flex justify-content-end">
             <a class="link-dark text-decoration-none lang_button">UA</a>

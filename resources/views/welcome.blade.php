@@ -1,6 +1,6 @@
 @include('layouts.main-header')
 <div class="row justify-content-center" style="width: 100%; margin: 0px">
-<div class="shapka text-center col-lg-8" style="padding: 0px">
+<div class="shapka text-center col-lg-8" style="padding: 0; margin-top: 80px">
     <img class="" src=" {{ URL("image/123.jpg") }}" style="width: 100%; height: auto;">
 </div>
 </div>

@@ -36,13 +36,35 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
 .master {
     background-color: #a9c6ff;
     border-radius: 20px;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 50px;
+    height: 240px;
 }
-
+.master_sec_button{
+    width: 200px;
+    background-color: white;
+    border-radius: 35px;
+    border: 0;
+    color: black;
+    padding: 6px 10px;
+    font-size: 16px
+}
+.master_name{
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.master_description{
+    font-size: 16px;
+}
 .master-image {
-    width: 150px;
-    height: auto;
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.master_sec_div{
+    width: 100%;
+    height: 200px;
 }
 .img_menu{
     width: 30px;
@@ -51,6 +73,8 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
 .header_name{
     font-family: 'Oswald', sans-serif;
     font-size: 30px;
+    color: black;
+    text-decoration: none;
 }
 .lang_button{
     font-family: 'Oswald', sans-serif;
@@ -115,11 +139,24 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     .main_text{
         padding: 0 10px;
     }
+    .master_sec_button{
+        width: 180px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 16px
+    }
 }
 @media only screen and (max-width: 767px) {
     .header_name{
         font-family: 'Oswald', sans-serif;
         font-size: 28px;
+    }
+    .master_name{
+        font-size: 24px;
+    }
+    .master_description{
+        font-size: 16px;
     }
 
 }
@@ -148,6 +185,12 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     }
     .main_text{
         padding: 0 30px;
+    }
+    .master_name{
+        font-size: 20px;
+    }
+    .master_description{
+        font-size: 15px;
     }
 }
 @media only screen and (max-width: 500px) {
@@ -229,6 +272,19 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     .form_header{
         margin: 14px 0;
     }
+    .master_sec_button{
+        width: 160px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .master_name{
+        font-size: 18px;
+    }
+    .master_description{
+        font-size: 14px;
+    }
 }
 @media only screen and (max-width: 400px) {
     .modal-title{
@@ -268,6 +324,32 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     }
     .form_header{
         margin: 14px 0;
+    }
+    .master_sec_button{
+        width: 140px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 12px
+    }
+    .master_name{
+        font-size: 16px;
+    }
+    .master_description{
+        font-size: 12px;
+    }
+    .master-image {
+        width: 140px;
+        height: 175px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 175px;
+    }
+    .master{
+        height: 215px;
     }
 }
 @media only screen and (max-width: 368px) {
@@ -326,6 +408,32 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     .form_header{
         margin: 14px 0;
     }
+    .master_sec_button{
+        width: 120px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 4px 0;
+        font-size: 10px
+    }
+    .master_name{
+        font-size: 13px;
+    }
+    .master_description{
+        font-size: 10px;
+    }
+    .master-image {
+        width: 120px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 150px;
+    }
+    .master{
+        height: 190px;
+    }
 }
 @media only screen and (max-width: 320px) {
     .header_name{
@@ -378,5 +486,34 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     }
     .form_header{
         margin: 0px 0;
+    }
+    .master_sec_button{
+        width: 90px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 4px 0;
+        font-size: 9px
+    }
+    .master_name{
+        font-size: 12px;
+        max-width: 90px;
+        margin-bottom: 4px;
+    }
+    .master_description{
+        font-size: 8.5px;
+        max-width: 90px;
+    }
+    .master-image {
+        width: 100px;
+        height: 125px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 125px;
+    }
+    .master{
+        height: 165px;
     }
 }
