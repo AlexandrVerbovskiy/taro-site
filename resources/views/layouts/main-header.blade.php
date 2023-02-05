@@ -12,8 +12,8 @@
     <div class="bd-highlight">HOME</div>
     <div class="bd-highlight">LANG</div>
 </header>-->
-<header class="align-items-center" style="background-color: #a9c6ff; height: 80px; z-index: 10000000000">
-    <div class="row align-items-center" style="width: 100%; margin: 0; height: 80px;">
+<header class="align-items-center" style="background-color: #a9c6ff; height: 80px; z-index: 10; width: 100%; position: fixed">
+    <div class="row align-items-center" style="width: 100%; margin: 0; height: 80px; ">
         <div class="col">
             <div class="container-fluid d-flex justify-content-start" style="padding: 0px;">
                 <a class="navbar-toggler collapsed d-flex flex-column justify-content-around link-dark text-decoration-none text-reset" type="button"
@@ -32,7 +32,7 @@
         </div>
     </div>
 </header>
-<div class="collapse navbar-collapse" id="navbarNav" style="position: absolute; background-color: #a9c6ff; margin-top: 79px; width: 240px; box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);">
+<div class="collapse navbar-collapse menu" id="navbarNav" style="">
     <ul class="nav flex-column" id="nav_accordion">
         <li class="nav-item">
             <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Напрямки
@@ -110,94 +110,93 @@
     </ul>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="register" aria-hidden="true">
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="register" aria-hidden="true" style="backdrop-filter: blur(15px);">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Register</h5>
+        <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
+            <div class="modal-header d-flex justify-content-center form_header" style="">
+                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Реєстрація</p>
             </div>
             <form method="POST" action="{{url('/registration')}}">
-                <div class="modal-body">
+                <div class="modal-body padding_for_form">
                     {{ csrf_field() }}
                     <div class="form-group mb-3">
-                        <label for="first_name">First name:</label>
-                        <input type="text" class="form-control" value="{{ old('first_name') }}" id="first_name" name="first_name">
+                        <input type="text" class="form-control input_form" value="{{ old('first_name') }}" id="first_name" name="first_name" placeholder="Ім'я">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="last_name">Last name:</label>
-                        <input type="text" class="form-control" value="{{ old('last_name') }}" id="last_name" name="last_name">
+                        <input type="text" class="form-control input_form" value="{{ old('last_name') }}" id="last_name" name="last_name" placeholder="Прізвище">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" value="{{ old('email') }}" id="email" name="email">
+                        <input type="email" class="form-control input_form" value="{{ old('email') }}" id="email" name="email" placeholder="Пошта">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="phone">Phone:</label>
-                        <input type="text" class="form-control" value="{{ old('phone') }}" id="phone" name="phone">
+                        <input type="text" class="form-control input_form" value="{{ old('phone') }}" id="phone" name="phone" placeholder="Телефон">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="social_type">Social type:</label>
-                        <input type="text" class="form-control" value="{{ old('social_type') }}" id="social_type" name="social_type">
+                        <input type="text" class="form-control input_form" value="{{ old('social_type') }}" id="social_type" name="social_type" placeholder="Оберіть соц. мережу">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="social_phone">Social phone:</label>
-                        <input type="text" class="form-control" value="{{ old('social_phone') }}" id="social_phone" name="social_phone">
+                        <input type="text" class="form-control input_form" value="{{ old('social_phone') }}" id="social_phone" name="social_phone" placeholder="Телефон соц. мережі">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control input_form" id="password" name="password" placeholder="Пароль">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="password_confirmation">Password Confirmation:</label>
-                        <input type="password" class="form-control" id="password_confirmation"
-                               name="password_confirmation">
+                        <input type="password" class="form-control input_form" id="password_confirmation"
+                               name="password_confirmation" placeholder="Повторіть пароль">
                     </div>
-
-                    @if($errors->any())
-                        <h4>{{$errors->first()}}</h4>
-                    @endif
+                    <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
+                        @if($errors->any())
+                            <p style="font-size: 12px; color: red; margin-bottom: 0">{{$errors->first()}}</p>
+                        @endif
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
+                <div class="modal-footer padding_for_form" style="border: 0; margin-top: -24px">
+                    <div class="d-flex justify-content-center" style="width: 100%">
+                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button">Зареєструватися</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true" style="backdrop-filter: blur(15px);">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+        <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
+            <div class="modal-header d-flex justify-content-center" style="border: 0; margin: 18px 0; padding-bottom: 0">
+                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Вхід</p>
             </div>
             <form method="POST" action="{{url('/login')}}">
-                <div class="modal-body">
+                <div class="modal-body padding_for_form">
                     {{ csrf_field() }}
                     <div class="form-group mb-3">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email">
+                        <input type="email" class="form-control input_form" id="email" value="{{old('email')}}" name="email" placeholder="Пошта">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control input_form" id="password" name="password" placeholder="Пароль">
                     </div>
-                    <a href="{{url("forget-password")}}">Forget password</a>
+                    <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
                     @if($errors->any())
-                        <h4>{{$errors->first()}}</h4>
+                            <p style="font-size: 12px; color: red; margin-bottom: 0">{{$errors->first()}}</p>
                     @endif
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button style="cursor:pointer" type="submit" class="btn btn-primary">Login</button>
+                <div class="modal-footer padding_for_form" style="border: 0; margin-top: -24px">
+                    <div class="d-flex justify-content-center" style="width: 100%">
+                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button">Увійти</button>
+                    </div>
+                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 d-flex justify-content-between" style="width: 100%">
+                        <a class="btn btn-primary form_sec_button col @if(Request::segment(1) == 'registration') active @endif" href="{{url("/registration")}} "
+                           type="submit" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Реєстрація</a>
+                        <a type="button" class="btn btn-primary form_sec_button col" href="{{url("forget-password")}}">Забули пароль?</a>
+                    </div>
                 </div>
             </form>
         </div>
