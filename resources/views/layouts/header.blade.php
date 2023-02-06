@@ -23,5 +23,49 @@
             async></script>
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
+<script>
+
+    function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
+    const buildModal = (type, title, body, trigger, onClick) => {
+        const id = "id_" + makeid(5).toLowerCase();
+        trigger.setAttribute('data-bs-toggle', 'modal');
+        trigger.setAttribute('data-bs-target', `#${id}`);
+
+        document.body.insertAdjacentHTML("beforeend", ` <!-- Modal -->
+            <div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    ${body}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn close btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn accept btn-${type}">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>`);
+
+        document.querySelector(`#${id} .accept`).addEventListener("click", () => {
+            onClick();
+            document.querySelector(`#${id} .close`).click();
+        });
+    }
+</script>
 
 

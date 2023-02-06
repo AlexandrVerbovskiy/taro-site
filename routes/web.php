@@ -25,6 +25,8 @@ use \App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class, 'home']);
+Route::get('/admin', [MainController::class, 'admin']);
+Route::get('/admin/masters', [MainController::class, 'masters']);
 
 Route::post('/file-save', [MediaController::class, 'save']);
 
@@ -51,11 +53,11 @@ Route::post("/save-activity", [AreasActivityController::class, 'save']);
 Route::get("/titles", [AreasActivityController::class, 'titles']);
 Route::get("/topic/{id}", [AreasActivityController::class, 'topic']);
 
-Route::get("/create-master", [MastersController::class, 'create']);
-Route::get("/edit-master/{id}", [MastersController::class, 'edit']);
-Route::post("/save-master", [MastersController::class, 'save']);
 Route::get("/masters", [MastersController::class, 'masters']);
 Route::get("/master/{id}", [MastersController::class, 'master']);
+Route::get("/admin/create-master", [MastersController::class, 'create']);
+Route::get("/admin/edit-master/{id}", [MastersController::class, 'edit']);
+Route::post("/admin/save-master", [MastersController::class, 'save']);
 
 Route::get("/create-study-topic", [StudiesController::class, 'createTopic']);
 Route::get("/edit-study-topic/{id}", [StudiesController::class, 'editTopic']);

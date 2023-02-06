@@ -9,23 +9,23 @@ class MastersController extends Controller
 {
     public function create()
     {
-        if (!auth()->check() || !auth()->user()->admin) return redirect()->to('/');
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view('masters.edit');
     }
 
     public function edit(Request $request, $id)
     {
-        if (!auth()->check() || !auth()->user()->admin) return redirect()->to('/');
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $master = Master::where('id', '=', $id)->first();
 
-        if(!$master) return abort(404);
+        if (!$master) return abort(404);
 
         return $this->view('masters.edit', [
-            'first_name'=>$master->first_name,
-            'last_name'=>$master->last_name,
-            'id'=>$master->id,
-            'description'=>$master->description,
-            'img_src'=>$master->img_src,
+            'first_name' => $master->first_name,
+            'last_name' => $master->last_name,
+            'id' => $master->id,
+            'description' => $master->description,
+            'img_src' => $master->img_src,
         ]);
     }
 
@@ -35,12 +35,12 @@ class MastersController extends Controller
 
         $data = $request->input();
 
-        if(!array_key_exists('id', $data)) {
+        if (!array_key_exists('id', $data)) {
             $data['id'] = '-1';
         }
 
         try {
-            $findedByData = Master::where([["id", "!=", $data['id']],"first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
+            $findedByData = Master::where([["id", "!=", $data['id']], "first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
             if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                     'founded_id' => 'id'
@@ -58,7 +58,7 @@ class MastersController extends Controller
             $master->last_name = $data['last_name'];
             $master->save();
 
-            return redirect()->to('/');
+            return redirect()->to('/admin/edit-master/' . $master->id);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -67,18 +67,20 @@ class MastersController extends Controller
         }
     }
 
-    public function masters(){
+    public function masters()
+    {
         $masters = Master::all();
-        return $this->view('masters.all', ['masters'=>$masters]);
+        return $this->view('masters.all', ['masters' => $masters]);
     }
 
-    public function master(Request $request, $id){
+    public function master(Request $request, $id)
+    {
         $master = Master::where('id', "=", $id)->first();
 
-        if(!$master) {
+        if (!$master) {
             var_dump("error");
             die;
         }
-        return $this->view('masters.index', ['master'=>$master]);
+        return $this->view('masters.index', ['master' => $master]);
     }
 }
