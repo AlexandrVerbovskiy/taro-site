@@ -73,6 +73,31 @@ class MastersController extends Controller
         return $this->view('masters.all', ['masters' => $masters]);
     }
 
+    public function delete(Request $request){
+        //if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
+
+        try {
+            Master::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Deleted success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function changeVisible(Request $request){
+        //if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
+
+        try {
+            return json_encode(["error" => false, "message" => 'Success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
     public function master(Request $request, $id)
     {
         $master = Master::where('id', "=", $id)->first();

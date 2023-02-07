@@ -58,6 +58,8 @@ Route::get("/master/{id}", [MastersController::class, 'master']);
 Route::get("/admin/create-master", [MastersController::class, 'create']);
 Route::get("/admin/edit-master/{id}", [MastersController::class, 'edit']);
 Route::post("/admin/save-master", [MastersController::class, 'save']);
+Route::post("/admin/master-change-visible", [MastersController::class, 'changeVisible']);
+Route::post("/admin/master-delete", [MastersController::class, 'delete']);
 
 Route::get("/create-study-topic", [StudiesController::class, 'createTopic']);
 Route::get("/edit-study-topic/{id}", [StudiesController::class, 'editTopic']);

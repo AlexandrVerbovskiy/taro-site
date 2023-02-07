@@ -23,7 +23,7 @@
             <tbody>
 
             @foreach ($masters as $master)
-                <tr>
+                <tr data-id="{{$master->id}}">
                     <th scope="row">{{$master->id}}</th>
                     <td>{{$master->first_name}}</td>
                     <td>{{$master->last_name}}</td>
@@ -36,7 +36,7 @@
                             </svg>
                         </a>
 
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="btn change-visible btn-success" data-id="{{$master->id}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-eye" viewBox="0 0 16 16">
                                 <path
@@ -63,24 +63,59 @@
     </div>
     <button id="trash-modal" style="display: none;">Trash</button>
     <script>
-        let trashId = null;
-
-        const acceptDelete = () => {
-            console.log(trashId);
+        const post = (url, data, callback) => {
+            fetch(url, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
+                },
+                method: 'POST',
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(callback).catch(e => {
+                alert("error");
+                console.log(e.message)
+            });
         }
 
-        const handleTrashClick = (e) => {
+        const btnFromEvent = e => {
             let elem = e.target;
             if (elem.tagName != "BUTTON") {
                 elem = elem.closest('button');
             }
-            trashId = elem.dataset.id;
+            return elem;
+        }
+
+        let trashId = null;
+
+        const acceptDelete = () => {
+            console.log(trashId);
+            post('{{url('/admin/master-delete')}}', {id: trashId}, res => {
+                console.log(`tr[data-id='${trashId}']`)
+                document.querySelector(`tr[data-id='${trashId}']`).remove();
+                console.log(res)
+            });
+        }
+
+        const handleChangeVisibleClick = (e) => {
+            const btn = btnFromEvent(e);
+            const id = btn.dataset.id;
+            post('{{url('/admin/master-change-visible')}}', {id}, res => {
+                if (!res.error) {
+                    btn.classList.toggle("btn-danger");
+                    btn.classList.toggle("btn-success");
+                }
+                console.log(res);
+            });
+        }
+
+        const handleTrashClick = (e) => {
+            trashId = btnFromEvent(e).dataset.id;
             document.querySelector("#trash-modal").click();
         }
 
-        document.querySelectorAll(".trash").forEach(trash => {
-            trash.addEventListener("click", handleTrashClick)
-        })
+        document.querySelectorAll(".trash").forEach(trash => trash.addEventListener("click", handleTrashClick));
+        document.querySelectorAll(".change-visible").forEach(btn => btn.addEventListener("click", handleChangeVisibleClick));
 
         buildModal("danger", "Removing the master", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
     </script>
