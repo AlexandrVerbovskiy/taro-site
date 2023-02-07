@@ -38,10 +38,18 @@
 </header>
 <div class="collapse navbar-collapse menu" id="navbarNav" style="">
     <ul class="nav flex-column" id="nav_accordion">
+
+        @if(auth()->user()->admin)
+            <li class="nav-item">
+                <a class="nav-link link-dark" href="{{url('/admin')}}"> Адмін </a>
+            </li>
+        @endif
+
         <li class="nav-item">
             <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Напрямки
                 діяльності <i class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item1" class="submenu collapse" data-bs-parent="#nav_accordion">
+
                 <li>
                     <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item3" href="#">
                         Основні <i class="bi small bi-caret-down-fill"></i> </a>

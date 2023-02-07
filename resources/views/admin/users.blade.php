@@ -25,6 +25,7 @@
 
             </tbody>
         </table>
+        <div class="loader hidden"></div>
     </div>
     <button id="trash-modal" style="display: none;">Trash</button>
 
@@ -33,31 +34,61 @@
         const count = 20;
         const canShow = "{{$count}}";
 
-        const changeAdmin = (id) => {
+        const changeAdmin = (id, elem) => {
+            console.log(elem);
             get("{{url('/admin/change-admin-users')}}" + "?id=" + id, data => {
+
                 console.log(data);
+                if (data.error) return;
+
+                elem.classList.toggle("btn-danger");
+                elem.classList.toggle("btn-success");
+
+                if (elem.classList.contains("btn-success")) {
+                    elem.innerHTML = "Admin";
+                } else {
+                    elem.innerHTML = "User";
+                }
             })
         }
 
         const getNewUser = () => {
-            if (showed >= canShow) return;
-
+            document.querySelector(".loader").classList.remove('hidden');
+            if (showed >= canShow) return document.querySelector(".loader").remove();
             get("{{url('/admin/get-users')}}" + "?start=" + showed + "&count=" + count, data => {
+                document.querySelector(".loader").classList.add('hidden');
                 if (data.error) return;
                 let rows = "";
+                showed += data.users.length;
                 data.users.forEach(user =>
                     rows += `
+                       <tr>
                         <th scope="row">${user["id"]}</th>
                         <td>${user["email"]}</td>
                         <td>${user["first_name"]}</td>
                         <td>${user["last_name"]}</td>
-                        <td><button onclick="changeAdmin(${user["id"]})">change</button></td>
-                    `)
-
+                        <td><button class="btn ${user["admin"] ? 'btn-success' : 'btn-danger'}" onclick="changeAdmin(${user["id"]}, this)">${user["admin"] ? 'Admin' : 'User'}</button></td>
+                    </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
             });
         }
 
         getNewUser();
+
+        $(document).ready(function () {
+            var windowHeight = $(window).height();
+            $(document).on('scroll', function () {
+                $('.loader').each(function () {
+                    var self = $(this),
+                        height = self.offset().top + self.height();
+                    if ($(document).scrollTop() + windowHeight >= height) {
+                        if (self.hasClass('hidden')) {
+                            getNewUser();
+                        }
+                    }
+                });
+            });
+        });
+
     </script>
 @stop
