@@ -1,13 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
 
-a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
+a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     font-family: 'Roboto', sans-serif;
+}
+.nav-link:hover{
+    background-color: #CEDFFF;
 }
 .nav-item>.nav-link{
     padding: 12px 28px;
+    font-size: 20px;
+}
+.menu{
+    position: fixed;
+    background-color: #a9c6ff;
+    margin-top: 79px;
+    width: 300px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
 }
 #menu_item1>li>a{
     padding-left: 4px;
+    font-size: 20px;
 }
 #menu_item1{
     padding: 0 46px;
@@ -24,13 +36,35 @@ a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
 .master {
     background-color: #a9c6ff;
     border-radius: 20px;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 50px;
+    height: 240px;
 }
-
+.master_sec_button{
+    width: 200px;
+    background-color: white;
+    border-radius: 35px;
+    border: 0;
+    color: black;
+    padding: 6px 10px;
+    font-size: 16px
+}
+.master_name{
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.master_description{
+    font-size: 16px;
+}
 .master-image {
-    width: 150px;
-    height: auto;
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.master_sec_div{
+    width: 100%;
+    height: 200px;
 }
 .img_menu{
     width: 30px;
@@ -39,6 +73,8 @@ a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
 .header_name{
     font-family: 'Oswald', sans-serif;
     font-size: 30px;
+    color: black;
+    text-decoration: none;
 }
 .lang_button{
     font-family: 'Oswald', sans-serif;
@@ -54,11 +90,75 @@ a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
     border-radius: 20px;
     border: 0;
 }
+.main_text{
+    padding: 0 0;
+}
+
+.modal-title{
+    font-size: 30px;
+}
+.padding_for_form{
+    padding: 16px 28px;
+}
+.input_form{
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 0;
+    font-size: 16px;
+}
+.form_main_button{
+    margin: 6px 0;
+    width: 100%;
+    background-color: white;
+    border-radius: 35px;
+    border: 0;
+    color: black;
+    padding: 6px 0;
+    font-size: 16px
+}
+.form_sec_button{
+    margin: 6px 0;
+    width: 180px;
+    background-color: white;
+    border-radius: 35px;
+    border: 0;
+    color: black;
+    padding: 6px 0;
+    font-size: 16px
+}
+.form_header{
+    border: 0;
+    margin: 18px 0;
+    padding-bottom: 0;
+}
 @media only screen and (max-width: 996px) {
     .header_name{
         font-family: 'Oswald', sans-serif;
         font-size: 28px;
     }
+    .main_text{
+        padding: 0 10px;
+    }
+    .master_sec_button{
+        width: 180px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 16px
+    }
+}
+@media only screen and (max-width: 767px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 28px;
+    }
+    .master_name{
+        font-size: 24px;
+    }
+    .master_description{
+        font-size: 16px;
+    }
+
 }
 @media only screen and (max-width: 747px) {
     .header_name{
@@ -82,6 +182,174 @@ a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
         height: 25px;
         width: 25px;
         margin: 5px 25px 20px;
+    }
+    .main_text{
+        padding: 0 30px;
+    }
+    .master_name{
+        font-size: 20px;
+    }
+    .master_description{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 150px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 16px 0;
+    }
+}
+@media only screen and (max-width: 430px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 140px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 14px 0;
+    }
+    .master_sec_button{
+        width: 160px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .master_name{
+        font-size: 18px;
+    }
+    .master_description{
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 123px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 14px 0;
+    }
+    .master_sec_button{
+        width: 140px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 12px
+    }
+    .master_name{
+        font-size: 16px;
+    }
+    .master_description{
+        font-size: 12px;
+    }
+    .master-image {
+        width: 140px;
+        height: 175px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 175px;
+    }
+    .master{
+        height: 215px;
     }
 }
 @media only screen and (max-width: 368px) {
@@ -107,6 +375,65 @@ a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
         width: 20px;
         margin: 5px 25px 20px;
     }
+    .nav-item>.nav-link{
+        padding: 12px 28px;
+        font-size: 18px;
+    }
+    #menu_item1>li>a{
+        padding-left: 4px;
+        font-size: 18px;
+    }
+    .main_text{
+        padding: 0 20px;
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 115px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 12px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 14px 0;
+    }
+    .master_sec_button{
+        width: 120px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 4px 0;
+        font-size: 10px
+    }
+    .master_name{
+        font-size: 13px;
+    }
+    .master_description{
+        font-size: 10px;
+    }
+    .master-image {
+        width: 120px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 150px;
+    }
+    .master{
+        height: 190px;
+    }
 }
 @media only screen and (max-width: 320px) {
     .header_name{
@@ -127,4 +454,93 @@ a, div, li, button, span, p, label, h2, h3, h4, h5, h6{
         width: 20px;
         margin: 5px 25px 20px;
     }
+    .nav-item>.nav-link{
+        padding: 12px 28px;
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        padding-left: 4px;
+        font-size: 16px;
+    }
+    .main_text{
+        padding: 0 20px;
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 13px;
+    }
+    #menu_item1>li>a{
+        font-size: 13px;
+    }
+    .menu{
+        width: 200px;
+    }
+    .form_header{
+        margin: 0px 0;
+    }
+    .master_sec_button{
+        width: 90px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 4px 0;
+        font-size: 9px
+    }
+    .master_name{
+        font-size: 12px;
+        max-width: 90px;
+        margin-bottom: 4px;
+    }
+    .master_description{
+        font-size: 8.5px;
+        max-width: 90px;
+    }
+    .master-image {
+        width: 100px;
+        height: 125px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 125px;
+    }
+    .master{
+        height: 165px;
+    }
+}
+
+.switch {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: fit-content;
+    display: inline-block;
+    background: white;
+}
+
+.element {
+    display: inline-block;
+    transition: 1s;
+}
+
+.switch-button {
+    display: none;
+}
+
+.switch-button:checked + label {
+    background: #a8c4fe;
+}
+
+.switch-image {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
 }
