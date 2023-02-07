@@ -156,7 +156,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Navbar</a>
         <button class="hamburger d-lg-none">&#9776;</button>
         <button class="cross d-lg-none">&#735;</button>
     </div>
@@ -164,20 +164,23 @@
 
 <div class="menu" style="position: relative;">
     <ul>
-        <a href="#">
-            <li>LINK ONE</li>
+        <a href="{{url("/admin/user")}}">
+            <li>USERS</li>
         </a>
-        <a href="#">
-            <li>LINK TWO</li>
+        <a href="{{url("/admin/activities")}}">
+            <li>ACTIVITIES</li>
         </a>
-        <a href="#">
-            <li>LINK THREE</li>
+        <a href="{{url("/admin/masters")}}">
+            <li>MASTERS</li>
         </a>
-        <a href="#">
-            <li>LINK FOUR</li>
+        <a href="{{url("/admin/infos")}}">
+            <li>INFOS</li>
         </a>
-        <a href="#">
-            <li>LINK FIVE</li>
+        <a href="{{url("/admin/studies-topics")}}">
+            <li>STUDIES TOPICS</li>
+        </a>
+        <a href="{{url("/admin/events-topics")}}">
+            <li>EVENTS TOPICS</li>
         </a>
     </ul>
 </div>
@@ -186,20 +189,23 @@
     <main class="row" style="width:100%">
         <div class="admin-menu d-none d-lg-block col-lg-3">
             <ul>
-                <a href="#">
-                    <li>LINK ONE</li>
+                <a href="{{url("/admin/user")}}">
+                    <li>USERS</li>
                 </a>
-                <a href="#">
-                    <li>LINK TWO</li>
+                <a href="{{url("/admin/activities")}}">
+                    <li>ACTIVITIES</li>
                 </a>
-                <a href="#">
-                    <li>LINK THREE</li>
+                <a href="{{url("/admin/masters")}}">
+                    <li>MASTERS</li>
                 </a>
-                <a href="#">
-                    <li>LINK FOUR</li>
+                <a href="{{url("/admin/infos")}}">
+                    <li>INFOS</li>
                 </a>
-                <a href="#">
-                    <li>LINK FIVE</li>
+                <a href="{{url("/admin/studies-topics")}}">
+                    <li>STUDIES TOPICS</li>
+                </a>
+                <a href="{{url("/admin/events-topics")}}">
+                    <li>EVENTS TOPICS</li>
                 </a>
             </ul>
         </div>

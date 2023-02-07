@@ -27,6 +27,14 @@ use \App\Http\Controllers\MainController;
 Route::get('/', [MainController::class, 'home']);
 Route::get('/admin', [MainController::class, 'admin']);
 Route::get('/admin/masters', [MainController::class, 'masters']);
+Route::get("/admin/activities", [MainController::class, 'activities']);
+Route::get("/admin/infos", [MainController::class, 'infos']);
+Route::get("/admin/studies-topics", [MainController::class, 'studiesTopics']);
+Route::get("/admin/events-topics", [MainController::class, 'eventsTopics']);
+Route::get("/admin/users", [UserController::class, 'users']);
+
+Route::get("/admin/get-users", [UserController::class, 'asyncUsers']);
+Route::get("/admin/change-admin-users", [UserController::class, 'changeUsers']);
 
 Route::post('/file-save', [MediaController::class, 'save']);
 
@@ -46,9 +54,11 @@ Route::post('/forget-password', [PasswordController::class, 'submitForgetPasswor
 Route::get('/reset-password/{token}', [PasswordController::class, 'showResetPasswordForm']);
 Route::post('/reset-password', [PasswordController::class, 'submitResetPasswordForm']);
 
-Route::get("/create-activity", [AreasActivityController::class, 'create']);
-Route::get("/edit-activity/{id}", [AreasActivityController::class, 'edit']);
-Route::post("/save-activity", [AreasActivityController::class, 'save']);
+Route::get("/admin/create-activity", [AreasActivityController::class, 'create']);
+Route::get("/admin/edit-activity/{id}", [AreasActivityController::class, 'edit']);
+Route::post("/admin/save-activity", [AreasActivityController::class, 'save']);
+Route::post("/admin/activity-change-visible", [AreasActivityController::class, 'changeVisible']);
+Route::post("/admin/activity-delete", [AreasActivityController::class, 'delete']);
 
 Route::get("/titles", [AreasActivityController::class, 'titles']);
 Route::get("/topic/{id}", [AreasActivityController::class, 'topic']);
@@ -61,9 +71,11 @@ Route::post("/admin/save-master", [MastersController::class, 'save']);
 Route::post("/admin/master-change-visible", [MastersController::class, 'changeVisible']);
 Route::post("/admin/master-delete", [MastersController::class, 'delete']);
 
-Route::get("/create-study-topic", [StudiesController::class, 'createTopic']);
-Route::get("/edit-study-topic/{id}", [StudiesController::class, 'editTopic']);
-Route::post("/save-study-topic", [StudiesController::class, 'saveTopic']);
+Route::get("/admin/create-study-topic", [StudiesController::class, 'createTopic']);
+Route::get("/admin/edit-study-topic/{id}", [StudiesController::class, 'editTopic']);
+Route::post("/admin/save-study-topic", [StudiesController::class, 'saveTopic']);
+Route::post("/admin/study-topic-change-visible", [StudiesController::class, 'changeVisibleTopic']);
+Route::post("/admin/study-topic-delete", [StudiesController::class, 'deleteTopic']);
 
 Route::get("/create-study", [StudiesController::class, 'createStudy']);
 Route::get("/edit-study/{id}", [StudiesController::class, 'editStudy']);
@@ -76,16 +88,24 @@ Route::get("/calendar-times/{id}", [CalendarController::class, 'getTimes']);
 Route::post("/calendar-date-edit", [CalendarController::class, 'saveDateCalendar']);
 Route::post("/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
 
-Route::get("/create-info", [InfosController::class, 'createInfo']);
-Route::get("/edit-info/{id}", [InfosController::class, 'editInfo']);
-Route::post("/save-info", [InfosController::class, 'saveInfo']);
+Route::get("/admin/create-info", [InfosController::class, 'createInfo']);
+Route::get("/admin/edit-info/{id}", [InfosController::class, 'editInfo']);
+Route::post("/admin/save-info", [InfosController::class, 'saveInfo']);
+Route::post("/admin/info-change-visible", [InfosController::class, 'changeVisible']);
+Route::post("/admin/info-delete", [InfosController::class, 'delete']);
+
 Route::get("/create-info-post", [InfosController::class, 'createPost']);
 Route::get("/edit-info-post/{id}", [InfosController::class, 'editPost']);
 Route::post("/save-info-post", [InfosController::class, 'savePost']);
 
-Route::get('/create-topic-event', [EventsController::class, 'createTopic']);
-Route::get('/edit-topic-event/{id}', [EventsController::class, 'editTopic']);
-Route::post('/save-topic-event', [EventsController::class, 'saveTopic']);
+
+Route::get('/admin/create-topic-event', [EventsController::class, 'createTopic']);
+Route::get('/admin/edit-topic-event/{id}', [EventsController::class, 'editTopic']);
+Route::post('/admin/save-topic-event', [EventsController::class, 'saveTopic']);
+Route::post("/admin/topic-event-change-visible", [EventsController::class, 'changeVisibleTopic']);
+Route::post("/admin/topic-event-delete", [EventsController::class, 'deleteTopic']);
+
 Route::get('/create-event', [EventsController::class, 'createPost']);
+Route::get('/event-posts/{id}', [EventsController::class, 'events']);
 Route::get('/edit-event/{id}', [EventsController::class, 'editPost']);
 Route::post('/save-event', [EventsController::class, 'savePost']);

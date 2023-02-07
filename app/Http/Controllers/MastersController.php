@@ -74,7 +74,7 @@ class MastersController extends Controller
     }
 
     public function delete(Request $request){
-        //if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
 
@@ -87,7 +87,7 @@ class MastersController extends Controller
     }
 
     public function changeVisible(Request $request){
-        //if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
 

@@ -25,6 +25,42 @@
 <body class="antialiased d-flex flex-column min-vh-100">
 <script>
 
+    const get = (url, callback) => {
+        fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
+            }
+        }).then(res => res.json()).then(callback).catch(e => {
+            alert("error");
+            console.log(e.message)
+        });
+    }
+
+    const post = (url, data, callback) => {
+        fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
+            },
+            method: 'POST',
+            body: JSON.stringify(data)
+        }).then(res => res.json()).then(callback).catch(e => {
+            alert("error");
+            console.log(e.message)
+        });
+    }
+
+    const btnFromEvent = e => {
+        let elem = e.target;
+        if (elem.tagName != "BUTTON") {
+            elem = elem.closest('button');
+        }
+        return elem;
+    }
+
     function makeid(length) {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

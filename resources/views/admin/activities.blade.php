@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
-            <a href="{{url("/admin/create-master")}}" class="btn btn-primary">
+            <a href="{{url("/admin/create-activity")}}" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-pencil" viewBox="0 0 16 16">
                     <path
@@ -15,20 +15,18 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
+                <th scope="col">Title</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
 
-            @foreach ($masters as $master)
-                <tr data-id="{{$master->id}}">
-                    <th scope="row">{{$master->id}}</th>
-                    <td>{{$master->first_name}}</td>
-                    <td>{{$master->last_name}}</td>
+            @foreach ($activities as $activity)
+                <tr data-id="{{$activity->id}}">
+                    <th scope="row">{{$activity->id}}</th>
+                    <td>{{$activity->title_ua}}</td>
                     <td>
-                        <a href="{{url("/admin/edit-master/".$master->id)}}" type="button" class="btn btn-primary">
+                        <a href="{{url("/admin/edit-activity/".$activity->id)}}" type="button" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-pencil" viewBox="0 0 16 16">
                                 <path
@@ -36,7 +34,7 @@
                             </svg>
                         </a>
 
-                        <button type="button" class="btn change-visible btn-success" data-id="{{$master->id}}">
+                        <button type="button" class="btn change-visible btn-success" data-id="{{$activity->id}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-eye" viewBox="0 0 16 16">
                                 <path
@@ -46,7 +44,7 @@
                             </svg>
                         </button>
 
-                        <button type="button" class="btn trash btn-danger" data-id="{{$master->id}}">
+                        <button type="button" class="btn trash btn-danger" data-id="{{$activity->id}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-trash" viewBox="0 0 16 16">
                                 <path
@@ -67,7 +65,7 @@
 
         const acceptDelete = () => {
             console.log(trashId);
-            post('{{url('/admin/master-delete')}}', {id: trashId}, res => {
+            post('{{url('/admin/activity-delete')}}', {id: trashId}, res => {
                 console.log(`tr[data-id='${trashId}']`)
                 document.querySelector(`tr[data-id='${trashId}']`).remove();
                 console.log(res)
@@ -77,7 +75,7 @@
         const handleChangeVisibleClick = (e) => {
             const btn = btnFromEvent(e);
             const id = btn.dataset.id;
-            post('{{url('/admin/master-change-visible')}}', {id}, res => {
+            post('{{url('/admin/activity-change-visible')}}', {id}, res => {
                 if (!res.error) {
                     btn.classList.toggle("btn-danger");
                     btn.classList.toggle("btn-success");
@@ -94,6 +92,6 @@
         document.querySelectorAll(".trash").forEach(trash => trash.addEventListener("click", handleTrashClick));
         document.querySelectorAll(".change-visible").forEach(btn => btn.addEventListener("click", handleChangeVisibleClick));
 
-        buildModal("danger", "Removing the master", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Removing the activity", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
     </script>
 @stop
