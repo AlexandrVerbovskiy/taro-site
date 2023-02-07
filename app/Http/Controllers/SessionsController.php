@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
 
-class SessionsController
+class SessionsController extends Controller
 {
     public function create()
     {
         if (auth()->check()) return abort(404);
-        return view('auth.login');
+        return $this->view('auth.login');
     }
 
     public function store()

@@ -6,12 +6,12 @@ use App\Models\Study;
 use App\Models\StudyTopic;
 use Illuminate\Http\Request;
 
-class StudiesController
+class StudiesController extends Controller
 {
     public function createTopic()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        return view('studies.topic-edit');
+        return $this->view('studies.topic-edit');
     }
 
     public function editTopic(Request $request, $id)
@@ -21,7 +21,7 @@ class StudiesController
 
         if(!$topic) return abort(404);
 
-        return view('studies.topic-edit', [
+        return $this->view('studies.topic-edit', [
             'title_ua' => $topic->title_ua,
             'title_ru' => $topic->title_ru,
             'id' => $topic->id
@@ -71,7 +71,7 @@ class StudiesController
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $studies = StudyTopic::all();
-        return view('studies.study-edit', ['studies' => $studies]);
+        return $this->view('studies.study-edit', ['studies' => $studies]);
     }
 
     public function editStudy(Request $request, $id)
@@ -82,7 +82,7 @@ class StudiesController
 
         if (!$study) return abort(404);
 
-        return view('studies.study-edit', [
+        return $this->view('studies.study-edit', [
             'studies' => $studies,
             'id' => $study->id,
             'body' => $study->body,

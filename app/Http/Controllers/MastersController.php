@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Master;
 use Illuminate\Http\Request;
 
-class MastersController
+class MastersController extends Controller
 {
     public function create()
     {
         if (!auth()->check() || !auth()->user()->admin) return redirect()->to('/');
-        return view('masters.edit');
+        return $this->view('masters.edit');
     }
 
     public function edit(Request $request, $id)
@@ -20,7 +20,7 @@ class MastersController
 
         if(!$master) return abort(404);
 
-        return view('masters.edit', [
+        return $this->view('masters.edit', [
             'first_name'=>$master->first_name,
             'last_name'=>$master->last_name,
             'id'=>$master->id,
@@ -69,8 +69,7 @@ class MastersController
 
     public function masters(){
         $masters = Master::all();
-        var_dump($masters);
-        die;
+        return $this->view('masters.all', ['masters'=>$masters]);
     }
 
     public function master(Request $request, $id){
@@ -80,6 +79,6 @@ class MastersController
             var_dump("error");
             die;
         }
-        return view('masters.index', ['master'=>$master]);
+        return $this->view('masters.index', ['master'=>$master]);
     }
 }

@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class PasswordController
+class PasswordController extends Controller
 {
 
     public function showForgetPasswordForm()
     {
         if (auth()->check()) return abort(404);
-        return view('auth.forget-password');
+        return $this->view('auth.forget-password');
     }
 
 
@@ -53,7 +53,7 @@ class PasswordController
     public function showResetPasswordForm($token)
     {
         if (auth()->check()) return abort(404);
-        return view('auth.forget-password-link', ['token' => $token]);
+        return $this->view('auth.forget-password-link', ['token' => $token]);
     }
 
 

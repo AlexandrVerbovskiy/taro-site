@@ -10,7 +10,7 @@ class RegistrationController extends Controller
     public function create()
     {
         if (auth()->check()) return abort(404);
-        return view('auth.registration');
+        return $this->view('auth.registration');
     }
 
     public function store()

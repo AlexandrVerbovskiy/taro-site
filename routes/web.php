@@ -12,7 +12,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\EventsController;
-
+use \App\Http\Controllers\MainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +24,7 @@ use App\Http\Controllers\EventsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'home']);
 
 Route::post('/file-save', [MediaController::class, 'save']);
 
