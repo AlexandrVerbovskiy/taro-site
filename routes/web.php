@@ -109,6 +109,8 @@ Route::post("/admin/topic-event-delete", [EventsController::class, 'deleteTopic'
 Route::get('/admin/create-event', [EventsController::class, 'createPost']);
 Route::get('/admin/edit-event/{id}', [EventsController::class, 'editPost']);
 Route::post('/admin/save-event', [EventsController::class, 'savePost']);
+Route::post('/admin/event-post-delete', [EventsController::class, 'deletePost']);
+Route::post('/admin/event-post-change-visible', [EventsController::class, 'changeVisiblePost']);
 Route::get('/event-posts/{id}', [EventsController::class, 'events']);
 Route::get('/get-events', [EventsController::class, 'getPosts']);
 
