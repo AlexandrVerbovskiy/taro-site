@@ -33,6 +33,8 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     font-size: 24px;
     margin: 15px 0 10px 0
 }
+
+
 .master {
     background-color: #a9c6ff;
     border-radius: 20px;
@@ -50,7 +52,7 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     font-size: 16px
 }
 .master_name{
-    font-size: 28px;
+    font-size: 22px;
     margin-bottom: 8px;
 }
 .master_description{
@@ -64,8 +66,9 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
 }
 .master_sec_div{
     width: 100%;
-    height: 200px;
 }
+
+
 .img_menu{
     width: 30px;
     padding: 0;
@@ -147,7 +150,7 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
         font-size: 16px
     }
 }
-@media only screen and (max-width: 767px) {
+/*@media only screen and (max-width: 767px) {
     .header_name{
         font-family: 'Oswald', sans-serif;
         font-size: 28px;
@@ -158,8 +161,15 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     .master_description{
         font-size: 16px;
     }
-
+    .master-image {
+        position: absolute;
+        width: 300px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
 }
+
 @media only screen and (max-width: 747px) {
     .header_name{
         font-family: 'Oswald', sans-serif;
@@ -193,6 +203,71 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
         font-size: 15px;
     }
 }
+
+@media only screen and (max-width: 540px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 150px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 16px 0;
+    }
+    .master_name{
+        font-size: 13px;
+    }
+    .master_description{
+        font-size: 10px;
+    }
+    .master-image {
+        width: 120px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .master_sec_div{
+        width: 100%;
+        height: 150px;
+    }
+    .master{
+        height: 190px;
+    }
+}
+
+
+
+
+
 @media only screen and (max-width: 500px) {
     .modal-title{
         font-size: 26px;
@@ -517,6 +592,8 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
         height: 165px;
     }
 }
+*/
+
 
 .switch {
     border: 1px solid black;
@@ -543,4 +620,383 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     width: 40px;
     height: 40px;
     padding: 5px;
+}
+
+.masterDescHeight{
+    height: 164px;
+}
+.masterSaniaZaebalEdition {
+    background-color: #a9c6ff;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 0 50px 0;
+    /*margin-bottom: 50px;*/
+    height: auto;
+}
+.master_sec_buttonSaniaZaebalEdition{
+    width: 200px;
+    background-color: white;
+    border-radius: 35px;
+    border: 0;
+    color: black;
+    padding: 6px 10px;
+    font-size: 16px;
+}
+.master_nameSaniaZaebalEdition{
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+.master_descriptionSaniaZaebalEdition{
+    font-size: 16px;
+}
+.master-imageSaniaZaebalEdition {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.master_sec_divSaniaZaebalEdition{
+    width: 100%;
+}
+master_margin_sm{
+    margin: 0 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 28px;
+    }
+    .master_nameSaniaZaebalEdition{
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+    .master_descriptionSaniaZaebalEdition{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 26px;
+    }
+    .master_nameSaniaZaebalEdition{
+        font-size: 24px;
+        margin: 10px 0;
+    }
+    .master_descriptionSaniaZaebalEdition{
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .master-imageSaniaZaebalEdition {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    .masterDescHeight{
+        height: auto;
+    }
+    .master_sec_buttonSaniaZaebalEdition{
+        width: 100%;
+        padding: 10px 10px;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 26px;
+    }
+    .master_name{
+        font-size: 24px;
+    }
+    .master_description{
+        font-size: 16px;
+    }
+    .master-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+}
+@media only screen and (max-width: 540px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 150px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 18px;
+    }
+    #menu_item1>li>a{
+        font-size: 18px;
+    }
+    .menu{
+        width: 260px;
+    }
+    .form_header{
+        margin: 16px 0;
+    }
+}
+@media only screen and (max-width: 430px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 140px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 14px 0;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+        margin: 0 0px;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+    .modal-title{
+        font-size: 26px;
+    }
+    .input_form{
+        font-size: 14px;
+    }
+    .form_main_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 123px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 18px;
+        margin: 0 0px;
+    }
+    .img_menu{
+        width: 25px;
+        height: 25px;
+    }
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 22px;
+    }
+    .form_header{
+        margin: 14px 0;
+    }
+    .master_sec_buttonSaniaZaebalEdition{
+        padding: 8px 0;
+    }
+    .master_nameSaniaZaebalEdition{
+        font-size: 20px;
+    }
+    .master_descriptionSaniaZaebalEdition{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 368px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+        margin: 0 0px;
+    }
+    .img_menu{
+        width: 20px;
+        padding: 0;
+    }
+    .footer_text{
+        font-size: 18px;
+        margin: 15px 0 10px 0
+    }
+    .footer-image {
+        height: 20px;
+        width: 20px;
+        margin: 5px 25px 20px;
+    }
+    .nav-item>.nav-link{
+        padding: 12px 28px;
+        font-size: 18px;
+    }
+    #menu_item1>li>a{
+        padding-left: 4px;
+        font-size: 18px;
+    }
+    .main_text{
+        padding: 0 20px;
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 115px;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 12px
+    }
+    .nav-item>.nav-link{
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        font-size: 16px;
+    }
+    .menu{
+        width: 240px;
+    }
+    .form_header{
+        margin: 14px 0;
+    }
+
+    .master_nameSaniaZaebalEdition{
+        font-size: 18px;
+    }
+    .master_descriptionSaniaZaebalEdition{
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 17px;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+        margin: 0 0px;
+    }
+    .footer_text{
+        font-size: 16px;
+        margin: 15px 0 10px 0
+    }
+    .footer-image {
+        height: 20px;
+        width: 20px;
+        margin: 5px 25px 20px;
+    }
+    .nav-item>.nav-link{
+        padding: 12px 28px;
+        font-size: 16px;
+    }
+    #menu_item1>li>a{
+        padding-left: 4px;
+        font-size: 16px;
+    }
+    .main_text{
+        padding: 0 20px;
+    }
+    .form_sec_button{
+        margin: 6px 0;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        border: 0;
+        color: black;
+        padding: 6px 0;
+        font-size: 14px
+    }
+    .nav-item>.nav-link{
+        font-size: 13px;
+    }
+    #menu_item1>li>a{
+        font-size: 13px;
+    }
+    .menu{
+        width: 200px;
+    }
+    .form_header{
+        margin: 0px 0;
+    }
+    .master_sec_buttonSaniaZaebalEdition{
+        padding: 6px 0;
+    }
+    .master_nameSaniaZaebalEdition{
+        font-size: 18px;
+
+    }
+    .master_descriptionSaniaZaebalEdition{
+        font-size: 13px;
+    }
+    .masterSaniaZaebalEdition{
+        padding: 15px;
+    }
 }
