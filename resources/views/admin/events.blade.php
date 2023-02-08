@@ -31,6 +31,32 @@
         let showed = 0;
         const count = 20;
         const canShow = "{{$count}}";
+        let trashId = null;
+
+        const acceptDelete = () => {
+            console.log(trashId);
+            post('{{url('/admin/event-post-delete')}}', {id: trashId}, res => {
+                console.log(`tr[data-id='${trashId}']`)
+                document.querySelector(`tr[data-id='${trashId}']`).remove();
+                console.log(res)
+            });
+        }
+
+        const handleTrashClick = (e) => {
+            trashId = e.dataset.id;
+            document.querySelector("#trash-modal").click();
+        }
+
+        const handleChangeVisibleClick = (e) => {
+            const id = e.dataset.id;
+            post('{{url('/admin/event-post-change-visible')}}', {id}, res => {
+                if (!res.error) {
+                    e.classList.toggle("btn-danger");
+                    e.classList.toggle("btn-success");
+                }
+                console.log(res);
+            });
+        }
 
         const getNewEvents = () => {
             console.log(showed, count)
@@ -43,10 +69,10 @@
                 showed += data.events.length;
                 data.events.forEach(event =>
                     rows += `
-                       <tr>
+                       <tr data-id=${event["id"]}>
                         <th scope="row">${event["id"]}</th>
                         <td>${event["title"]}</td>
-                        <td></td>
+                        <td>${getBtns('{{url("/admin/edit-event")}}', event["id"])}</td>
                     </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
             });
@@ -69,5 +95,6 @@
             });
         });
 
+        buildModal("danger", "Removing the activity", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
     </script>
 @stop
