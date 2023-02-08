@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acivity;
+use App\Models\Master;
 use Illuminate\Http\Request;
 
 class AreasActivityController extends Controller
@@ -60,12 +61,37 @@ class AreasActivityController extends Controller
             $acivity->title_ru = $data['title_ru'];
             $acivity->save();
 
-            return redirect()->to('/');
+            return redirect()->to('/admin/edit-activity/' . $acivity->id);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function delete(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Acivity wasn\'t find']);
+
+        try {
+            Acivity::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Deleted success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function changeVisible(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Acivity wasn\'t find']);
+
+        try {
+            return json_encode(["error" => false, "message" => 'Success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
 

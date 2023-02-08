@@ -1,7 +1,7 @@
 @include('layouts.header')
 <div class="container py-4">
     <h2>Info</h2>
-    <form class='form' method="POST" action="{{url('/save-info')}}">
+    <form class='form' method="POST" action="{{url('/admin/save-info')}}">
         {{ csrf_field() }}
 
         @if(isset($id))

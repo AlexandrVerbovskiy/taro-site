@@ -58,13 +58,13 @@ class UserController extends Controller
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
 
-        if(!array_key_exists('id', $data)) $data['id']='-1';
+        if (!array_key_exists('id', $data)) $data['id'] = '-1';
 
         $id = $data['id'];
         $status = $data['status'];
         try {
             $user = User::where("id", "=", $id)->first();
-            if(!$user){
+            if (!$user) {
                 return json_encode(["error" => true, "message" => "User wasn't find"]);
             }
             $user->admin = $status;
@@ -76,9 +76,31 @@ class UserController extends Controller
         }
     }
 
-    public function usersForAdmin()
+    public function asyncUsers()
     {
-        $users = User::all("id", "email", "admin")->first();
-        return $users;
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+
+        if(!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "users" =>[]]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+
+        return json_encode(["error" => false, "users" => User::skip($start)->take($count)->get()]);
+    }
+
+    public function changeUsers()
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $id = intval($_GET['id']);
+
+        if($id==auth()->user()->id||$id=="1"){
+            return json_encode(["error" => true, "message" => "You can't change this user"]);
+        }
+
+        $user = User::where("id", "=", $id)->first();
+        if (!$user) return json_encode(["error" => true, "message" => "User wasn't find"]);
+        $user->admin = !$user->admin;
+        $user->save();
+        return json_encode(["error" => false, "status" => $user->admin]);
     }
 }

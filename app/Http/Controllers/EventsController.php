@@ -40,9 +40,9 @@ class EventsController extends Controller
         }
 
         try {
-            $findedByData = EventTopic::where(["title_ua" => $data['title_ua'], ['id' ,'!=',$data['id']]])->first();
+            $findedByData = EventTopic::where(["title_ua" => $data['title_ua'], ['id', '!=', $data['id']]])->first();
             if (is_null($findedByData)) {
-                $findedByData = EventTopic::where(["title_ru" => $data['title_ru'], ['id' ,'!=',$data['id']]])->first();
+                $findedByData = EventTopic::where(["title_ru" => $data['title_ru'], ['id', '!=', $data['id']]])->first();
             }
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -57,7 +57,7 @@ class EventsController extends Controller
             $topic->title_ru = $data['title_ru'];
             $topic->save();
 
-            return redirect()->to('/');
+            return redirect()->to('/admin/edit-topic-event/' . $topic->id);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -65,6 +65,34 @@ class EventsController extends Controller
             ]);
         }
     }
+
+    public function deleteTopic(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+
+        try {
+            EventTopic::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Deleted success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function changeVisibleTopic(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+
+        try {
+            return json_encode(["error" => false, "message" => 'Success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
 
     public function createPost()
     {
@@ -112,7 +140,7 @@ class EventsController extends Controller
             $post->body = $data['body'];
             $post->save();
 
-            return redirect()->to('/');
+            return redirect()->to('/admin/edit-event/' . $post->id);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -120,4 +148,50 @@ class EventsController extends Controller
             ]);
         }
     }
+
+    public function events(Request $request, $id)
+    {
+        $posts_count = Event::where("events_topic_id", $id)->count();
+        return $this->view("events.index", ['count' => $posts_count, 'topic_id'=>$id]);
+    }
+
+    public function getPosts()
+    {
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+
+        if (array_key_exists('topic', $_GET) && is_numeric($_GET['topic']))
+            return json_encode(["error" => false, "events" => Event::where("events_topic_id", $_GET['topic'])->skip($start)->take($count)->get()]);
+        else
+            return json_encode(["error" => false, "events" => Event::skip($start)->take($count)->get()]);
+
+    }
+
+    public function deletePost(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+
+        try {
+            Event::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Deleted success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function changeVisiblePost(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+
+        try {
+            return json_encode(["error" => false, "message" => 'Success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
 }
