@@ -31,7 +31,8 @@ Route::get("/admin/activities", [MainController::class, 'activities']);
 Route::get("/admin/infos", [MainController::class, 'infos']);
 Route::get("/admin/studies-topics", [MainController::class, 'studiesTopics']);
 Route::get("/admin/events-topics", [MainController::class, 'eventsTopics']);
-Route::get("/admin/users", [UserController::class, 'users']);
+Route::get("/admin/users", [MainController::class, 'users']);
+Route::get("/admin/events", [MainController::class, 'events']);
 
 Route::get("/admin/get-users", [UserController::class, 'asyncUsers']);
 Route::get("/admin/change-admin-users", [UserController::class, 'changeUsers']);
@@ -105,7 +106,9 @@ Route::post('/admin/save-topic-event', [EventsController::class, 'saveTopic']);
 Route::post("/admin/topic-event-change-visible", [EventsController::class, 'changeVisibleTopic']);
 Route::post("/admin/topic-event-delete", [EventsController::class, 'deleteTopic']);
 
-Route::get('/create-event', [EventsController::class, 'createPost']);
+Route::get('/admin/create-event', [EventsController::class, 'createPost']);
+Route::get('/admin/edit-event/{id}', [EventsController::class, 'editPost']);
+Route::post('/admin/save-event', [EventsController::class, 'savePost']);
 Route::get('/event-posts/{id}', [EventsController::class, 'events']);
-Route::get('/edit-event/{id}', [EventsController::class, 'editPost']);
-Route::post('/save-event', [EventsController::class, 'savePost']);
+Route::get('/get-events', [EventsController::class, 'getPosts']);
+

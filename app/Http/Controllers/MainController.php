@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acivity;
+use App\Models\Event;
 use App\Models\EventTopic;
 use App\Models\Info;
 use App\Models\Master;
 use App\Models\StudyTopic;
+use App\Models\User;
 
 class MainController extends Controller
 {
@@ -17,7 +19,7 @@ class MainController extends Controller
 
     public function admin()
     {
-        //if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return view("admin.main");
     }
 
@@ -51,5 +53,17 @@ class MainController extends Controller
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $topics = EventTopic::all();
         return view("admin.events-topics", ['topics' => $topics]);
+    }
+
+    public function users()
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        return view("admin.users", ['count' => User::all()->count()]);
+    }
+
+    public function events()
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        return $this->view("admin.events", ['count' => Event::all()->count()]);
     }
 }
