@@ -33,6 +33,7 @@ Route::get("/admin/studies-topics", [MainController::class, 'studiesTopics']);
 Route::get("/admin/events-topics", [MainController::class, 'eventsTopics']);
 Route::get("/admin/users", [MainController::class, 'users']);
 Route::get("/admin/events", [MainController::class, 'events']);
+Route::get("/admin/infos-posts", [MainController::class, 'infosPosts']);
 
 Route::get("/admin/get-users", [UserController::class, 'asyncUsers']);
 Route::get("/admin/change-admin-users", [UserController::class, 'changeUsers']);
@@ -95,10 +96,10 @@ Route::post("/admin/save-info", [InfosController::class, 'saveInfo']);
 Route::post("/admin/info-change-visible", [InfosController::class, 'changeVisible']);
 Route::post("/admin/info-delete", [InfosController::class, 'delete']);
 
-Route::get("/create-info-post", [InfosController::class, 'createPost']);
-Route::get("/edit-info-post/{id}", [InfosController::class, 'editPost']);
-Route::post("/save-info-post", [InfosController::class, 'savePost']);
-
+Route::get("/admin/create-info-post", [InfosController::class, 'createPost']);
+Route::get("/admin/edit-info-post/{id}", [InfosController::class, 'editPost']);
+Route::post("/admin/save-info-post", [InfosController::class, 'savePost']);
+Route::get('/get-infos-posts', [InfosController::class, 'getPosts']);
 
 Route::get('/admin/create-topic-event', [EventsController::class, 'createTopic']);
 Route::get('/admin/edit-topic-event/{id}', [EventsController::class, 'editTopic']);
