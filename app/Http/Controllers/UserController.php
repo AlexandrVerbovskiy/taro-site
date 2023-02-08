@@ -84,8 +84,14 @@ class UserController extends Controller
 
         $start = intval($_GET['start']);
         $count = intval($_GET['count']);
+        $search = $_GET['search']??"";
 
-        return json_encode(["error" => false, "users" => User::skip($start)->take($count)->get()]);
+        return json_encode(["error" => false, "users" => User::where('first_name', 'like', '%'.$search.'%')
+            ->orWhere('last_name', 'like', '%'.$search.'%')
+            ->orWhere('email', 'like', '%'.$search.'%')
+            ->skip($start)
+            ->take($count)
+            ->get()]);
     }
 
     public function changeUsers()

@@ -10,6 +10,8 @@
                 </svg>
                 Add
             </a>
+            <input type="text" name="search" placeholder="Search..."/>
+            <button id="search" type="button" class="btn btn-danger">Search</button>
         </div>
         <table class="table table-responsive table-responsive-sm">
             <thead>
@@ -33,6 +35,14 @@
         let showed = 0;
         const count = 20;
         const canShow = "{{$count}}";
+        let search = "";
+
+        document.querySelector("#search").addEventListener("click", () => {
+            search = document.querySelector("input[name=search]").value;
+            showed = 0;
+            document.querySelector("table tbody").innerHTML="";
+            getNewUser();
+        })
 
         const changeAdmin = (id, elem) => {
             console.log(elem);
@@ -54,8 +64,8 @@
 
         const getNewUser = () => {
             document.querySelector(".loader").classList.remove('hidden');
-            if (showed >= canShow) return document.querySelector(".loader").remove();
-            get("{{url('/admin/get-users')}}" + "?start=" + showed + "&count=" + count, data => {
+            if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
+            get("{{url('/admin/get-users')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
                 if (data.error) return;
                 let rows = "";
