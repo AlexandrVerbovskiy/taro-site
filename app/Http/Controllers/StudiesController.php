@@ -167,7 +167,7 @@ class StudiesController extends Controller
     public function studies(Request $request, $topic_id)
     {
         $studies = Study::where(['topic_id' => $topic_id])->get();
-        return $studies;
+        return $this->view("studies.index", ['studies'=>$studies]);
     }
 
     public function study(Request $request, $study_id)
