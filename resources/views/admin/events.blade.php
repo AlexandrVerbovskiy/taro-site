@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
-            <a href="{{url("/admin/create-info")}}" class="btn btn-primary">
+            <a href="{{url("/admin/create-event")}}" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-pencil" viewBox="0 0 16 16">
                     <path
@@ -15,9 +15,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Email</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
+                <th scope="col">Title</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -34,46 +32,27 @@
         const count = 20;
         const canShow = "{{$count}}";
 
-        const changeAdmin = (id, elem) => {
-            console.log(elem);
-            get("{{url('/admin/change-admin-users')}}" + "?id=" + id, data => {
-
-                console.log(data);
-                if (data.error) return;
-
-                elem.classList.toggle("btn-danger");
-                elem.classList.toggle("btn-success");
-
-                if (elem.classList.contains("btn-success")) {
-                    elem.innerHTML = "Admin";
-                } else {
-                    elem.innerHTML = "User";
-                }
-            })
-        }
-
-        const getNewUser = () => {
+        const getNewEvents = () => {
+            console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
             if (showed >= canShow) return document.querySelector(".loader").remove();
-            get("{{url('/admin/get-users')}}" + "?start=" + showed + "&count=" + count, data => {
+            get("{{url('/get-events')}}" + "?start=" + showed + "&count=" + count, data => {
                 document.querySelector(".loader").classList.add('hidden');
                 if (data.error) return;
                 let rows = "";
-                showed += data.users.length;
-                data.users.forEach(user =>
+                showed += data.events.length;
+                data.events.forEach(event =>
                     rows += `
                        <tr>
-                        <th scope="row">${user["id"]}</th>
-                        <td>${user["email"]}</td>
-                        <td>${user["first_name"]}</td>
-                        <td>${user["last_name"]}</td>
-                        <td><button class="btn ${user["admin"] ? 'btn-success' : 'btn-danger'}" onclick="changeAdmin(${user["id"]}, this)">${user["admin"] ? 'Admin' : 'User'}</button></td>
+                        <th scope="row">${event["id"]}</th>
+                        <td>${event["title"]}</td>
+                        <td></td>
                     </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
             });
         }
 
-        getNewUser();
+        getNewEvents();
 
         $(document).ready(function () {
             var windowHeight = $(window).height();
@@ -83,7 +62,7 @@
                         height = self.offset().top + self.height();
                     if ($(document).scrollTop() + windowHeight >= height) {
                         if (self.hasClass('hidden')) {
-                            getNewUser();
+                            getNewEvents();
                         }
                     }
                 });

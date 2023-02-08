@@ -1,7 +1,7 @@
 @include('layouts.header')
 <div class="container py-4">
     <h2>Event</h2>
-    <form class='form' method="POST" action="{{url('/save-event')}}">
+    <form class='form' method="POST" action="{{url('/admin/save-event')}}">
         {{ csrf_field() }}
 
         @if(isset($id))

@@ -152,6 +152,11 @@
     a {
         color: #336699;
     }
+
+    .loader.hidden{
+        display: none;
+    }
+
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -164,7 +169,7 @@
 
 <div class="menu" style="position: relative;">
     <ul>
-        <a href="{{url("/admin/user")}}">
+        <a href="{{url("/admin/users")}}">
             <li>USERS</li>
         </a>
         <a href="{{url("/admin/activities")}}">
@@ -182,6 +187,9 @@
         <a href="{{url("/admin/events-topics")}}">
             <li>EVENTS TOPICS</li>
         </a>
+        <a href="{{url("/admin/events")}}">
+            <li>EVENTS</li>
+        </a>
     </ul>
 </div>
 
@@ -189,7 +197,7 @@
     <main class="row" style="width:100%">
         <div class="admin-menu d-none d-lg-block col-lg-3">
             <ul>
-                <a href="{{url("/admin/user")}}">
+                <a href="{{url("/admin/users")}}">
                     <li>USERS</li>
                 </a>
                 <a href="{{url("/admin/activities")}}">
@@ -206,6 +214,9 @@
                 </a>
                 <a href="{{url("/admin/events-topics")}}">
                     <li>EVENTS TOPICS</li>
+                </a>
+                <a href="{{url("/admin/events")}}">
+                    <li>EVENTS</li>
                 </a>
             </ul>
         </div>

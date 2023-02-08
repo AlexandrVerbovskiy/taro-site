@@ -76,20 +76,15 @@ class UserController extends Controller
         }
     }
 
-    public function users()
-    {
-        if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        //$users = User::all("id", "email", "admin")->first();
-        //return $users;
-        return view("admin.users", ['count' => User::all("id", "email", "admin")->count()]);
-    }
-
     public function asyncUsers()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
 
+        if(!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "users" =>[]]);
+
         $start = intval($_GET['start']);
         $count = intval($_GET['count']);
+
         return json_encode(["error" => false, "users" => User::skip($start)->take($count)->get()]);
     }
 
@@ -97,6 +92,11 @@ class UserController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $id = intval($_GET['id']);
+
+        if($id==auth()->user()->id||$id=="1"){
+            return json_encode(["error" => true, "message" => "You can't change this user"]);
+        }
+
         $user = User::where("id", "=", $id)->first();
         if (!$user) return json_encode(["error" => true, "message" => "User wasn't find"]);
         $user->admin = !$user->admin;
