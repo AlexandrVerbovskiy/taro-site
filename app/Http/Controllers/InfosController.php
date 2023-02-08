@@ -140,12 +140,56 @@ class InfosController extends Controller
             $post->body = $data['body'];
             $post->save();
 
-            return redirect()->to('/');
+            return redirect()->to('/admin/edit-info-post/' . $post->id);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function getPosts()
+    {
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+        $search = $_GET['search']??"";
+
+        if (array_key_exists('topic', $_GET) && is_numeric($_GET['topic']))
+            return json_encode(["error" => false, "posts" => InfoPost::where("info_id", $_GET['topic'])
+                ->where("title", 'like', '%'.$search.'%')
+                ->skip($start)
+                ->take($count)
+                ->get()]);
+        else
+            return json_encode(["error" => false, "posts" => InfoPost::where("title", 'like', '%'.$search.'%')->skip($start)->take($count)->get()]);
+
+    }
+
+    public function deletePost(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Info post wasn\'t find']);
+
+        try {
+            InfoPost::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Deleted success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function changeVisiblePost(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Info post wasn\'t find']);
+
+        try {
+            return json_encode(["error" => false, "message" => 'Success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
 }
