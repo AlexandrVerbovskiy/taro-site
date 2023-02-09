@@ -142,14 +142,14 @@ class StudiesController extends Controller
             if ($findedByData && $data['body'] == $findedByData['body'] && $data['title'] == $findedByData['title'] && $findedByData['id'] == $data['id'] && $data['date'] == $findedByData['date'] && $data['id_studies_topic'] == $findedByData['id_studies_topic'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 
-            $topic = Study::firstOrNew(['id' => $data['id']]);
-            $topic->body = $data['body'];
-            $topic->title = $data['title'];
-            $topic->topic_id = $data['topic_id'];
-            $topic->date = $data['date'];
-            $topic->save();
+            $study = Study::firstOrNew(['id' => $data['id']]);
+            $study->body = $data['body'];
+            $study->title = $data['title'];
+            $study->topic_id = $data['topic_id'];
+            $study->date = $data['date'];
+            $study->save();
 
-            return redirect()->to('/');
+            return redirect()->to('/admin/edit-study/' .$study->id);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -164,15 +164,53 @@ class StudiesController extends Controller
         return $topics;
     }
 
-    public function studies(Request $request, $topic_id)
+    public function studies(Request $request, $id)
     {
-        $studies = Study::where(['topic_id' => $topic_id])->get();
-        return $this->view("studies.index", ['studies'=>$studies]);
+        $posts_count = Study::where("topic_id", $id)->count();
+        return $this->view("studies.index", ['count' => $posts_count, 'topic_id'=>$id]);
     }
 
-    public function study(Request $request, $study_id)
+    public function getStudies()
     {
-        $study = Study::where(['id' => $study_id])->first();
-        return $study;
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+        $search = $_GET['search']??"";
+
+        if (array_key_exists('topic', $_GET) && is_numeric($_GET['topic']))
+            return json_encode(["error" => false, "studies" => Study::where("topic_id", $_GET['topic'])
+                ->where("title", 'like', '%'.$search.'%')
+                ->skip($start)
+                ->take($count)
+                ->get()]);
+        else
+            return json_encode(["error" => false, "studies" => Study::where("title", 'like', '%'.$search.'%')->skip($start)->take($count)->get()]);
+
+    }
+
+    public function deleteStudy(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+
+        try {
+            Study::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Deleted success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function changeVisibleStudy(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+
+        try {
+            return json_encode(["error" => false, "message" => 'Success']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
     }
 }

@@ -34,6 +34,7 @@ Route::get("/admin/events-topics", [MainController::class, 'eventsTopics']);
 Route::get("/admin/users", [MainController::class, 'users']);
 Route::get("/admin/events", [MainController::class, 'events']);
 Route::get("/admin/infos-posts", [MainController::class, 'infosPosts']);
+Route::get("/admin/studies", [MainController::class, 'studies']);
 
 Route::get("/admin/get-users", [UserController::class, 'asyncUsers']);
 Route::get("/admin/change-admin-users", [UserController::class, 'changeUsers']);
@@ -79,11 +80,14 @@ Route::post("/admin/save-study-topic", [StudiesController::class, 'saveTopic']);
 Route::post("/admin/study-topic-change-visible", [StudiesController::class, 'changeVisibleTopic']);
 Route::post("/admin/study-topic-delete", [StudiesController::class, 'deleteTopic']);
 
-Route::get("/create-study", [StudiesController::class, 'createStudy']);
-Route::get("/edit-study/{id}", [StudiesController::class, 'editStudy']);
-Route::post("/edit-study", [StudiesController::class, 'saveStudy']);
+Route::get("/admin/create-study", [StudiesController::class, 'createStudy']);
+Route::get("/admin/edit-study/{id}", [StudiesController::class, 'editStudy']);
+Route::post("/admin/edit-study", [StudiesController::class, 'saveStudy']);
+Route::post('/admin/study-change-visible', [EventsController::class, 'changeVisibleStudy']);
+Route::post('/admin/study-delete', [EventsController::class, 'deleteStudy']);
+
+Route::get('/get-studies', [StudiesController::class, 'getStudies']);
 Route::get("/studies/{id}", [StudiesController::class, 'studies']);
-Route::get("/study/{id}", [StudiesController::class, 'study']);
 
 Route::get("/calendar-edit", [CalendarController::class, 'edit']);
 Route::get("/calendar-times/{id}", [CalendarController::class, 'getTimes']);
@@ -100,6 +104,7 @@ Route::get("/admin/create-info-post", [InfosController::class, 'createPost']);
 Route::get("/admin/edit-info-post/{id}", [InfosController::class, 'editPost']);
 Route::post("/admin/save-info-post", [InfosController::class, 'savePost']);
 Route::get('/get-infos-posts', [InfosController::class, 'getPosts']);
+Route::get('/infos-posts/{id}', [InfosController::class, 'infosPosts']);
 
 Route::get('/admin/create-topic-event', [EventsController::class, 'createTopic']);
 Route::get('/admin/edit-topic-event/{id}', [EventsController::class, 'editTopic']);

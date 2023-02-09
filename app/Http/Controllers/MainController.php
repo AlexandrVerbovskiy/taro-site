@@ -8,6 +8,7 @@ use App\Models\EventTopic;
 use App\Models\Info;
 use App\Models\InfoPost;
 use App\Models\Master;
+use App\Models\Study;
 use App\Models\StudyTopic;
 use App\Models\User;
 
@@ -71,5 +72,10 @@ class MainController extends Controller
     public function infosPosts(){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view("admin.infos-posts", ['count' => InfoPost::all()->count()]);
+    }
+
+    public function studies(){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        return $this->view("admin.studies", ['count' => Study::all()->count()]);
     }
 }
