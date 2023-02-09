@@ -192,4 +192,9 @@ class InfosController extends Controller
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
+
+    public function infosPosts(Request $request, $id){
+        $posts_count = InfoPost::where("info_id", $id)->count();
+        return $this->view("infos.index", ['count' => $posts_count, 'topic_id'=>$id]);
+    }
 }

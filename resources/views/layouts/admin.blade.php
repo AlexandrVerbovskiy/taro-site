@@ -187,6 +187,9 @@
         <a href="{{url("/admin/studies-topics")}}">
             <li>STUDIES TOPICS</li>
         </a>
+        <a href="{{url("/admin/studies")}}">
+            <li>STUDIES</li>
+        </a>
         <a href="{{url("/admin/events-topics")}}">
             <li>EVENTS TOPICS</li>
         </a>
@@ -217,6 +220,9 @@
                 </a>
                 <a href="{{url("/admin/studies-topics")}}">
                     <li>STUDIES TOPICS</li>
+                </a>
+                <a href="{{url("/admin/studies")}}">
+                    <li>STUDIES</li>
                 </a>
                 <a href="{{url("/admin/events-topics")}}">
                     <li>EVENTS TOPICS</li>
