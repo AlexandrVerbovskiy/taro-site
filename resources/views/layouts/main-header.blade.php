@@ -27,14 +27,13 @@
         </div>
         <div class="col-5">
             <div class="bd-highlight  text-center " style="">
-                <a class="link-dark header_name" href="/">
-                    Lorem ipsum chtototam text</a>
+                <a id="main_title" class="link-dark header_name" href="/"></a>
 
             </div>
         </div>
         <div class="col d-flex justify-content-end">
-            <a class="link-dark text-decoration-none lang_button">UA</a>
-            <a class="link-dark text-decoration-none lang_button" style="margin-left: 20px">RUS</a>
+            <a data-value="ua" class="link-dark text-decoration-none lang_button">UA</a>
+            <a data-value="ru" class="link-dark text-decoration-none lang_button" style="margin-left: 20px">RUS</a>
         </div>
     </div>
 </header>
@@ -249,3 +248,6 @@
     </div>
 </div>
 
+<script>
+    subscribeOnChangeLanguage("#main_title", "title");
+</script>
