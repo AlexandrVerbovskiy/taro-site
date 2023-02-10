@@ -161,11 +161,16 @@ class EventsController extends Controller
 
         $start = intval($_GET['start']);
         $count = intval($_GET['count']);
+        $search = $_GET['search']??"";
 
         if (array_key_exists('topic', $_GET) && is_numeric($_GET['topic']))
-            return json_encode(["error" => false, "events" => Event::where("events_topic_id", $_GET['topic'])->skip($start)->take($count)->get()]);
+            return json_encode(["error" => false, "events" => Event::where("events_topic_id", $_GET['topic'])
+                ->where("title", 'like', '%'.$search.'%')
+                ->skip($start)
+                ->take($count)
+                ->get()]);
         else
-            return json_encode(["error" => false, "events" => Event::skip($start)->take($count)->get()]);
+            return json_encode(["error" => false, "events" => Event::where("title", 'like', '%'.$search.'%')->skip($start)->take($count)->get()]);
 
     }
 

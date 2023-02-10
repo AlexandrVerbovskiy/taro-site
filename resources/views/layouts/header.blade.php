@@ -23,7 +23,22 @@
             async></script>
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
+
+@include("layouts.vocabulary");
+
 <script>
+
+    const subscriptions = {};
+
+    function subscribeOnChangeLanguage(selector, key) {
+        subscriptions[selector] = key;
+    }
+
+    function changeLanguage(lang) {
+        Object.keys(subscriptions).forEach(selector =>
+            document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang]);
+        localStorage.setItem("language", lang);
+    }
 
     const get = (url, callback) => {
         fetch(url, {
@@ -61,8 +76,8 @@
         return elem;
     }
 
-    const getBtns = (editUrl, id)=> `
-            <a href="${editUrl+'/'+id}" type="button" class="btn btn-primary">
+    const getBtns = (editUrl, id) => `
+            <a href="${editUrl + '/' + id}" type="button" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-pencil" viewBox="0 0 16 16">
                     <path

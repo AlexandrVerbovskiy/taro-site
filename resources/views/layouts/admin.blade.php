@@ -181,8 +181,14 @@
         <a href="{{url("/admin/infos")}}">
             <li>INFOS</li>
         </a>
+        <a href="{{url("/admin/infos-posts")}}">
+            <li>INFOS POSTS</li>
+        </a>
         <a href="{{url("/admin/studies-topics")}}">
             <li>STUDIES TOPICS</li>
+        </a>
+        <a href="{{url("/admin/studies")}}">
+            <li>STUDIES</li>
         </a>
         <a href="{{url("/admin/events-topics")}}">
             <li>EVENTS TOPICS</li>
@@ -209,8 +215,14 @@
                 <a href="{{url("/admin/infos")}}">
                     <li>INFOS</li>
                 </a>
+                <a href="{{url("/admin/infos-posts")}}">
+                    <li>INFOS POSTS</li>
+                </a>
                 <a href="{{url("/admin/studies-topics")}}">
                     <li>STUDIES TOPICS</li>
+                </a>
+                <a href="{{url("/admin/studies")}}">
+                    <li>STUDIES</li>
                 </a>
                 <a href="{{url("/admin/events-topics")}}">
                     <li>EVENTS TOPICS</li>
@@ -247,3 +259,5 @@
 
     });
 </script>
+
+@include('layouts.footer')

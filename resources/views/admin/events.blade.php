@@ -10,6 +10,8 @@
                 </svg>
                 Add
             </a>
+            <input type="text" name="search" placeholder="Search..."/>
+            <button id="search" type="button" class="btn btn-danger">Search</button>
         </div>
         <table class="table table-responsive table-responsive-sm">
             <thead>
@@ -32,6 +34,14 @@
         const count = 20;
         const canShow = "{{$count}}";
         let trashId = null;
+        let search = "";
+
+        document.querySelector("#search").addEventListener("click", () => {
+            search = document.querySelector("input[name=search]").value;
+            showed = 0;
+            document.querySelector("table tbody").innerHTML="";
+            getNewEvents();
+        })
 
         const acceptDelete = () => {
             console.log(trashId);
@@ -61,8 +71,8 @@
         const getNewEvents = () => {
             console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
-            if (showed >= canShow) return document.querySelector(".loader").remove();
-            get("{{url('/get-events')}}" + "?start=" + showed + "&count=" + count, data => {
+            if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
+            get("{{url('/get-events')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
                 if (data.error) return;
                 let rows = "";

@@ -13,16 +13,16 @@
         console.log(showed, count)
         document.querySelector(".loader").classList.remove('hidden');
         if (showed >= canShow) return document.querySelector(".loader").remove();
-        get("{{url('/get-studies')}}" + "?start=" + showed + "&count=" + count + "&topic=" + topicId, data => {
+        get("{{url('/get-infos-posts')}}" + "?start=" + showed + "&count=" + count + "&topic=" + topicId, data => {
             document.querySelector(".loader").classList.add('hidden');
             if (data.error) return;
             let rows = "";
-            showed += data.studies.length;
-            data.studies.forEach(study =>
+            showed += data.posts.length;
+            data.posts.forEach(post =>
                 rows += `
                        <div>
-                        <div>Id: ${study["id"]}</div>
-                        <div>Title: ${study["title"]}</div>
+                        <div>Id: ${post["id"]}</div>
+                        <div>Title: ${post["title"]}</div>
                     </div>`)
             document.querySelector(".loader").insertAdjacentHTML('beforebegin', rows);
         });
