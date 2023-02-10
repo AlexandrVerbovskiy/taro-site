@@ -1,8 +1,7 @@
 <div class="collapse navbar-collapse menu" id="navbarNav" style="">
     <ul class="nav flex-column" id="nav_accordion">
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Напрямки
-                діяльності <i class="bi small bi-caret-down-fill"></i> </a>
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#" id="menu_areas"><i class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item1" class="submenu collapse" data-bs-parent="#nav_accordion">
                 <li>
                     <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item3" href="#">
@@ -33,10 +32,10 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" href="/masters"> Майстри </a>
+            <a class="nav-link link-dark" href="/masters" id="menu_masters"></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item2" href="#"> Навчання <i
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item2" href="#" id="menu_studies"><i
                     class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item2" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($studies_topics as $study_topic)
@@ -46,10 +45,10 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" href="#"> Корисна інформація </a>
+            <a class="nav-link link-dark" href="#" id="menu_info"></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item5" href="#"> Події <i
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item5" href="#" id="menu_events"><i
                     class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item5" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($events_topics as $event_topic)
@@ -61,16 +60,16 @@
         @if (!auth()->check())
             <li class="nav-item link-dark">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'registration') active @endif" href="{{url("/registration")}} "
-                   type="submit" data-bs-toggle="modal" data-bs-target="#register">Registration</a>
+                   type="submit" data-bs-toggle="modal" data-bs-target="#register" id="menu_register"></a>
             </li>
             <li class="nav-item link-dark">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'login') active @endif" href="{{url("/login")}}"
-                   type="submit" data-bs-toggle="modal" data-bs-target="#login">Login</a>
+                   type="submit" data-bs-toggle="modal" data-bs-target="#login" id="menu_login"></a>
             </li>
         @else
             <li class="nav-item link-secondary">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'logout') active @endif" href="{{url("/logout")}} "
-                   type="submit">Logout</a>
+                   type="submit" id="menu_logout"></a>
             </li>
         @endif
     </ul>
@@ -179,3 +178,7 @@
         </div>
     </div>
 </div>
+
+<script>
+
+</script>

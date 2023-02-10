@@ -83,7 +83,9 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
     margin: 0 10px;
+    cursor: pointer;
 }
+
 .button_for_valera{
     margin-top: 40px;
     padding: 12px 45px;
