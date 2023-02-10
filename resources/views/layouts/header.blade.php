@@ -24,7 +24,7 @@
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
 
-@include("layouts.vocabulary");
+@include("layouts.vocabulary")
 
 <script>
 

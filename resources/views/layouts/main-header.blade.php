@@ -56,7 +56,7 @@
                         Основні <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul id="menu_item3" class="submenu collapse" data-bs-parent="#menu_item1">
                         @foreach ($activities_topics as $activity_topic)
-                            @if($activity_topic['title']=="basic")
+                            @if($activity_topic['type']=="basic")
                                 <li><a class="nav-link link-dark"
                                        href="#{{$activity_topic['id']}}">{{$activity_topic['title_ua']}} </a>
                                 </li>
@@ -69,7 +69,7 @@
                         Додаткові <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul id="menu_item4" class="submenu collapse" data-bs-parent="#menu_item1">
                         @foreach ($activities_topics as $activity_topic)
-                            @if($activity_topic['title']=="additional")
+                            @if($activity_topic['type']=="additional")
                                 <li><a class="nav-link link-dark"
                                        href="#{{$activity_topic['id']}}">{{$activity_topic['title_ua']}} </a>
                                 </li>

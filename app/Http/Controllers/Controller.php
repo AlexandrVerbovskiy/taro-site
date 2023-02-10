@@ -25,7 +25,7 @@ class Controller extends BaseController
 
         $events_topics = EventTopic::all();
         $studies_topics = StudyTopic::all();
-        $activities = Acivity::all(["id", "title_ua", "title_ru", "type"]);
+        $activities = Acivity::where("hidden", false)->get(["id", "title_ua", "title_ru", "type"]);
         $temp = ["events_topics"=>$events_topics, "studies_topics"=>$studies_topics, "activities_topics"=>$activities];
         $data = array_merge($data, $temp);
 

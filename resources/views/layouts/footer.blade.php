@@ -26,6 +26,7 @@
     });
 
     function setFile(body, callback) {
+        console.log("send")
         fetch('{{url('/file-save')}}', {
             headers: {
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
