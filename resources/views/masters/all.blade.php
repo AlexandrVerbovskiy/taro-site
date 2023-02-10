@@ -1,5 +1,5 @@
 @include('layouts.main-header')
-<h3 class="text-center title_margin" style="margin: 110px 0 30px">Майстри</h3>
+<h3 class="text-center title_margin" style="margin: 80px 0 30px">Майстри</h3>
 <!--@foreach($masters as $master)
     <div class="row justify-content-center" style="width: 100%; margin: 0;">
             <div class="master col-lg-9 col-md-12">

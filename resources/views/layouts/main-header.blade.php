@@ -32,8 +32,9 @@
             </div>
         </div>
         <div class="col d-flex justify-content-end">
-            <a data-value="ua" class="link-dark lang_button text-decoration-none">UA</a>
-            <a data-value="ru" class="link-dark lang_button text-decoration-none" style="margin-left: 20px">RUS</a>
+            <a data-value="ua" class="lang_button link-dark" id="lang_but" style="">UA</a>
+            <a data-value="ru" class="link-dark lang_button" id="lang_but" style="margin-left: 20px">RUS</a>
+
         </div>
     </div>
 </header>
@@ -49,5 +50,7 @@
     subscribeOnChangeLanguage("#menu_register", "menu_register");
     subscribeOnChangeLanguage("#menu_login", "menu_login");
     subscribeOnChangeLanguage("#menu_logout", "menu_logout");
+
+
 
 </script>

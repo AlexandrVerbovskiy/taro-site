@@ -101,18 +101,18 @@
                         <input type="text" class="form-control input_form" value="{{ old('phone') }}" id="phone" name="phone" placeholder="Телефон">
                     </div>
 
-                    <div class="form-group mb-3">
-                        <input type="text" class="form-control input_form" value="{{ old('social_type') }}" id="social_type" name="social_type" placeholder="Оберіть соц. мережу">
-                        <div class="switch">
-                            <div class="element">
-                                <input type="radio" name="radio" class="switch-button" id="button1">
-                                <label for="button1"><img src="{{ URL("image/telegram.png")}}" class="switch-image"></label>
+                    <div class="form-group mb-3 d-flex flex-row div_form_social" style="">
+                        <input type="text" class="form-control input_form input_form_social" style="" value="{{ old('social_type') }}" id="social_type" name="social_type" placeholder="Оберіть соц. мережу">
+
+                            <div class="element text-center" style="border: none; border-radius: 10px 0 0 10px; background: white; width: 43px;">
+                                <input type="radio" name="radio" class="switch-button" id="button1" >
+                                <label for="button1" style="border: none; border-radius: 10px 0 0 10px; width: 43px"><img src="{{ URL("image/telegram.png")}}" class="switch-image" style="padding: 5px 5px 5px 5px;"></label>
                             </div>
-                            <div class="element">
+                            <div class="element text-center" style="border: none; border-radius: 0 10px 10px 0; background: white; width: 43px;">
                                 <input type="radio" name="radio" class="switch-button" id="button2">
-                                <label for="button2"><img src="{{ URL("image/viber.png")}}" class="switch-image"></label>
+                                <label for="button2" style="border: none; border-radius: 0 10px 10px 0; width: 43px"><img src="{{ URL("image/viber.png")}}" class="switch-image" style="padding: 5px 6px 5px 4px;"></label>
                             </div>
-                        </div>
+
                     </div>
 
                     <div class="form-group mb-3">

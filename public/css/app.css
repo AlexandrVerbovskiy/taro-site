@@ -17,12 +17,12 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     width: 300px;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
 }
-#menu_item1>li>a{
+ul>li>a{
     padding-left: 4px;
     font-size: 20px;
 }
 #menu_item1{
-    padding: 0 46px;
+    padding: 0 0 0 46px;
 }
 .footer-image {
     height: 30px;
@@ -84,7 +84,15 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
     font-size: 20px;
     margin: 0 10px;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
+
+lang_button_change{
+    text-decoration: underline;
+    color: #336699;
+}
+
 
 .button_for_valera{
     margin-top: 40px;
@@ -596,14 +604,21 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
 }
 */
 
+.input_form_social{
+    height: 36px;
+    margin-right: 20px;
+}
+.div_form_social{
+    height: 36px;
+}
 
 .switch {
-    border: 1px solid black;
-    border-radius: 20px;
-    width: fit-content;
+    width: 100px;
     display: inline-block;
-    background: white;
+    background: none;
+
 }
+
 
 .element {
     display: inline-block;
@@ -612,16 +627,17 @@ a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
 
 .switch-button {
     display: none;
+
 }
 
 .switch-button:checked + label {
-    background: #a8c4fe;
+    background: #3378FF;
 }
 
 .switch-image {
-    width: 40px;
-    height: 40px;
-    padding: 5px;
+    width: 36px;
+    height: 36px;
+
 }
 
 .masterDescHeight{
@@ -753,7 +769,7 @@ master_margin_sm{
     .nav-item>.nav-link{
         font-size: 18px;
     }
-    #menu_item1>li>a{
+    ul>li>a{
         font-size: 18px;
     }
     .menu{
@@ -761,6 +777,17 @@ master_margin_sm{
     }
     .form_header{
         margin: 16px 0;
+    }
+    .input_form_social{
+        height: 33px;
+        margin-right: 15px;
+    }
+    .div_form_social{
+        height: 33px;
+    }
+    .switch-image{
+        width: 33px;
+        height: 33px;
     }
 }
 @media only screen and (max-width: 430px) {
@@ -793,11 +820,11 @@ master_margin_sm{
     .nav-item>.nav-link{
         font-size: 16px;
     }
-    #menu_item1>li>a{
+    ul>li>a{
         font-size: 16px;
     }
     .menu{
-        width: 240px;
+        width: 260px;
     }
     .form_header{
         margin: 14px 0;
@@ -901,7 +928,7 @@ master_margin_sm{
     }
     #menu_item1>li>a{
         padding-left: 4px;
-        font-size: 18px;
+        font-size: 12px;
     }
     .main_text{
         padding: 0 20px;
@@ -982,6 +1009,9 @@ master_margin_sm{
     #menu_item1>li>a{
         font-size: 13px;
     }
+    ul>li>a{
+        font-size: 13px;
+    }
     .menu{
         width: 200px;
     }
@@ -1000,5 +1030,9 @@ master_margin_sm{
     }
     .masterSaniaZaebalEdition{
         padding: 15px;
+    }
+    .input_form_social{
+        font-size: 12px;
+        margin-right: 15px;
     }
 }
