@@ -102,14 +102,16 @@
                     </div>
 
                     <div class="form-group mb-3 d-flex flex-row div_form_social" style="">
-                        <input type="text" class="form-control input_form input_form_social" style="" value="{{ old('social_type') }}" id="social_type" name="social_type" placeholder="Оберіть соц. мережу">
+                        <input type="text" class="form-control input_form input_form_social" readonly style="" value="{{ old('social_type') }}" id="social_type" name="social_type" placeholder="Оберіть соц. мережу">
 
                             <div class="element text-center" style="border: none; border-radius: 10px 0 0 10px; background: white; width: 43px;">
-                                <input type="radio" name="radio" class="switch-button" id="button1" >
-                                <label for="button1" style="border: none; border-radius: 10px 0 0 10px; width: 43px"><img src="{{ URL("image/telegram.png")}}" class="switch-image" style="padding: 5px 5px 5px 5px;"></label>
+                                <input type="radio" name="radio" class="switch-button" id="button1" onclick="insert2('Telegram')">
+                                <label for="button1" style="border: none; border-radius: 10px 0 0 10px; width: 43px">
+                                    <img src="{{ URL("image/telegram.png")}}" class="switch-image" style="padding: 5px 5px 5px 5px;">
+                                </label>
                             </div>
                             <div class="element text-center" style="border: none; border-radius: 0 10px 10px 0; background: white; width: 43px;">
-                                <input type="radio" name="radio" class="switch-button" id="button2">
+                                <input type="radio" name="radio" class="switch-button" id="button2" onclick="insert2('Viber')">
                                 <label for="button2" style="border: none; border-radius: 0 10px 10px 0; width: 43px"><img src="{{ URL("image/viber.png")}}" class="switch-image" style="padding: 5px 6px 5px 4px;"></label>
                             </div>
 
@@ -127,11 +129,13 @@
                         <input type="password" class="form-control input_form" id="password_confirmation"
                                name="password_confirmation" placeholder="Повторіть пароль">
                     </div>
-                    <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
+
                         @if($errors->any())
+                        <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
                             <p style="font-size: 12px; color: red; margin-bottom: 0">{{$errors->first()}}</p>
+                        </div>
                         @endif
-                    </div>
+
                 </div>
                 <div class="modal-footer padding_for_form" style="border: 0; margin-top: -24px">
                     <div class="d-flex justify-content-center" style="width: 100%">
@@ -180,5 +184,7 @@
 </div>
 
 <script>
-
+    function insert2(word){
+        document.getElementById("social_type").value = word;
+    }
 </script>

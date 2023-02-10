@@ -75,6 +75,20 @@
 
 
 </script>
+<script>
+    //ne rabotaet
+    /*document.getElementsByClassName('lang_button').onclick = function() {
+        document.getElementById('lang_but').classList.add('lang_button_change');
+    }*/
 
+    function insert (word) {
+        let inp = document.querySelector('input');
+        let start = inp.selectionStart;
+        inp.value = inp.value.substring(0, start) + word +
+            inp.value.substring(inp.selectionEnd, inp.value.length)
+        inp.focus();
+        inp.setSelectionRange(start, start + word.length)
+    }
+</script>
 </body>
 </html>
