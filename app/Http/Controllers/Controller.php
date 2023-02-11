@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Acivity;
 use App\Models\EventTopic;
+use App\Models\Info;
 use App\Models\StudyTopic;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -23,10 +24,11 @@ class Controller extends BaseController
             return $factory;
         }
 
-        $events_topics = EventTopic::all();
-        $studies_topics = StudyTopic::all();
+        $events_topics = EventTopic::where("hidden", false)->get();
+        $studies_topics = StudyTopic::where("hidden", false)->get();
+        $infos = Info::where("hidden", false)->get();
         $activities = Acivity::where("hidden", false)->get(["id", "title_ua", "title_ru", "type"]);
-        $temp = ["events_topics"=>$events_topics, "studies_topics"=>$studies_topics, "activities_topics"=>$activities];
+        $temp = ["events_topics" => $events_topics, "infos" => $infos, "studies_topics" => $studies_topics, "activities_topics" => $activities];
         $data = array_merge($data, $temp);
 
         return $factory->make($view, $data, $mergeData);

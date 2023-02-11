@@ -36,6 +36,10 @@ Route::get("/admin/events", [MainController::class, 'events']);
 Route::get("/admin/infos-posts", [MainController::class, 'infosPosts']);
 Route::get("/admin/studies", [MainController::class, 'studies']);
 
+Route::get('/admin/get-infos-posts', [MainController::class, 'getInfosPosts']);
+Route::get('/admin/get-events', [MainController::class, 'getEvents']);
+Route::get('/admin/get-studies', [MainController::class, 'getStudies']);
+
 Route::get("/admin/get-users", [UserController::class, 'asyncUsers']);
 Route::get("/admin/change-admin-users", [UserController::class, 'changeUsers']);
 
@@ -62,9 +66,7 @@ Route::get("/admin/edit-activity/{id}", [AreasActivityController::class, 'edit']
 Route::post("/admin/save-activity", [AreasActivityController::class, 'save']);
 Route::post("/admin/activity-change-visible", [AreasActivityController::class, 'changeVisible']);
 Route::post("/admin/activity-delete", [AreasActivityController::class, 'delete']);
-
-Route::get("/titles", [AreasActivityController::class, 'titles']);
-Route::get("/topic/{id}", [AreasActivityController::class, 'topic']);
+Route::get("/area-activity/{id}", [AreasActivityController::class, 'topic']);
 
 Route::get("/masters", [MastersController::class, 'masters']);
 Route::get("/master/{id}", [MastersController::class, 'master']);
@@ -83,8 +85,8 @@ Route::post("/admin/study-topic-delete", [StudiesController::class, 'deleteTopic
 Route::get("/admin/create-study", [StudiesController::class, 'createStudy']);
 Route::get("/admin/edit-study/{id}", [StudiesController::class, 'editStudy']);
 Route::post("/admin/edit-study", [StudiesController::class, 'saveStudy']);
-Route::post('/admin/study-change-visible', [EventsController::class, 'changeVisibleStudy']);
-Route::post('/admin/study-delete', [EventsController::class, 'deleteStudy']);
+Route::post('/admin/study-change-visible', [StudiesController::class, 'changeVisibleStudy']);
+Route::post('/admin/study-delete', [StudiesController::class, 'deleteStudy']);
 
 Route::get('/get-studies', [StudiesController::class, 'getStudies']);
 Route::get("/studies/{id}", [StudiesController::class, 'studies']);
@@ -103,6 +105,8 @@ Route::post("/admin/info-delete", [InfosController::class, 'delete']);
 Route::get("/admin/create-info-post", [InfosController::class, 'createPost']);
 Route::get("/admin/edit-info-post/{id}", [InfosController::class, 'editPost']);
 Route::post("/admin/save-info-post", [InfosController::class, 'savePost']);
+Route::post("/admin/info-post-change-visible", [InfosController::class, 'changeVisiblePost']);
+Route::post("/admin/info-post-delete", [InfosController::class, 'deletePost']);
 Route::get('/get-infos-posts', [InfosController::class, 'getPosts']);
 Route::get('/infos-posts/{id}', [InfosController::class, 'infosPosts']);
 

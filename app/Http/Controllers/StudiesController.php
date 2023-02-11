@@ -86,7 +86,10 @@ class StudiesController extends Controller
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
 
         try {
-            return json_encode(["error" => false, "message" => 'Success']);
+            $model = StudyTopic::where("id", $data["id"])->first();
+            $model->hidden = !$model->hidden;
+            $model->save();
+            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -158,15 +161,12 @@ class StudiesController extends Controller
         }
     }
 
-    public function topics()
-    {
-        $topics = StudyTopic::all();
-        return $topics;
-    }
-
     public function studies(Request $request, $id)
     {
-        $posts_count = Study::where("topic_id", $id)->count();
+        $event = StudyTopic::where('id', $id)->where("hidden", false)->first();
+        if (!$event) return abort(404);
+
+        $posts_count = Study::where("topic_id", $id)->where('hidden', false)->count();
         return $this->view("studies.index", ['count' => $posts_count, 'topic_id'=>$id]);
     }
 
@@ -180,13 +180,12 @@ class StudiesController extends Controller
 
         if (array_key_exists('topic', $_GET) && is_numeric($_GET['topic']))
             return json_encode(["error" => false, "studies" => Study::where("topic_id", $_GET['topic'])
+                ->where('hidden', false)
                 ->where("title", 'like', '%'.$search.'%')
                 ->skip($start)
                 ->take($count)
                 ->get()]);
-        else
-            return json_encode(["error" => false, "studies" => Study::where("title", 'like', '%'.$search.'%')->skip($start)->take($count)->get()]);
-
+        abort(404);
     }
 
     public function deleteStudy(Request $request){
@@ -208,7 +207,10 @@ class StudiesController extends Controller
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
 
         try {
-            return json_encode(["error" => false, "message" => 'Success']);
+            $model = Study::where("id", $data["id"])->first();
+            $model->hidden = !$model->hidden;
+            $model->save();
+            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }

@@ -63,19 +63,60 @@ class MainController extends Controller
         return view("admin.users", ['count' => User::all()->count()]);
     }
 
+    public function infosPosts(){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        return $this->view("admin.infos-posts", ['count' => InfoPost::all()->count()]);
+    }
+
+    public function getInfosPosts()
+    {
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+        $search = $_GET['search'] ?? "";
+
+        return json_encode(["error" => false, "posts" => InfoPost::where("title", 'like', '%' . $search . '%')
+            ->skip($start)
+            ->take($count
+            )->get()]);
+    }
+
     public function events()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view("admin.events", ['count' => Event::all()->count()]);
     }
 
-    public function infosPosts(){
-        if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        return $this->view("admin.infos-posts", ['count' => InfoPost::all()->count()]);
+    public function getEvents()
+    {
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+        $search = $_GET['search'] ?? "";
+
+        return json_encode(["error" => false, "events" => Event::where("title", 'like', '%'.$search.'%')
+            ->skip($start)
+            ->take($count)
+            ->get()]);
     }
 
     public function studies(){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view("admin.studies", ['count' => Study::all()->count()]);
+    }
+
+    public function getStudies(){
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
+
+        $start = intval($_GET['start']);
+        $count = intval($_GET['count']);
+        $search = $_GET['search']??"";
+
+        return json_encode(["error" => false, "studies" => Study::where("title", 'like', '%'.$search.'%')
+            ->skip($start)
+            ->take($count)
+            ->get()]);
     }
 }

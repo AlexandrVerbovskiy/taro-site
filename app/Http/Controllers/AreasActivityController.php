@@ -103,7 +103,7 @@ class AreasActivityController extends Controller
 
     public function titles()
     {
-        $activities = Acivity::where('hidden', false)->all(['id', 'title_ua', 'title_ru']);
+        $activities = Acivity::where('hidden', false)->get(['id', 'title_ua', 'title_ru']);
         var_dump($activities);
         die;
     }

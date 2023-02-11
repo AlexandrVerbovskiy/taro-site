@@ -69,7 +69,7 @@ class MastersController extends Controller
 
     public function masters()
     {
-        $masters = Master::all();
+        $masters = Master::where('hidden', false)->get();
         return $this->view('masters.all', ['masters' => $masters]);
     }
 
@@ -92,7 +92,10 @@ class MastersController extends Controller
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
 
         try {
-            return json_encode(["error" => false, "message" => 'Success']);
+            $master = Master::where("id", $data["id"])->first();
+            $master->hidden = !$master->hidden;
+            $master->save();
+            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $master->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -100,12 +103,8 @@ class MastersController extends Controller
 
     public function master(Request $request, $id)
     {
-        $master = Master::where('id', "=", $id)->first();
-
-        if (!$master) {
-            var_dump("error");
-            die;
-        }
+        $master = Master::where('id', "=", $id)->where('hidden', false)->first();
+        if (!$master) return abort(404);
         return $this->view('masters.index', ['master' => $master]);
     }
 }

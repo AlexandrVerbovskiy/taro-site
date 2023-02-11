@@ -60,11 +60,14 @@
         const handleChangeVisibleClick = (e) => {
             const id = e.dataset.id;
             post('{{url('/admin/event-post-change-visible')}}', {id}, res => {
-                if (!res.error) {
-                    e.classList.toggle("btn-danger");
-                    e.classList.toggle("btn-success");
+                if (res.error) return;
+                if(res.hidden){
+                    e.classList.add("btn-danger");
+                    e.classList.remove("btn-success");
+                }else{
+                    e.classList.remove("btn-danger");
+                    e.classList.add("btn-success");
                 }
-                console.log(res);
             });
         }
 
@@ -72,7 +75,7 @@
             console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
             if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
-            get("{{url('/get-events')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
+            get("{{url('/admin/get-events')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
                 if (data.error) return;
                 let rows = "";
@@ -82,7 +85,7 @@
                        <tr data-id=${event["id"]}>
                         <th scope="row">${event["id"]}</th>
                         <td>${event["title"]}</td>
-                        <td>${getBtns('{{url("/admin/edit-event")}}', event["id"])}</td>
+                        <td>${getBtns('{{url("/admin/edit-event")}}', event["id"], event["hidden"])}</td>
                     </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
             });

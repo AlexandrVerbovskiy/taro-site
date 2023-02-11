@@ -65,11 +65,7 @@
 
         const acceptDelete = () => {
             console.log(trashId);
-            post('{{url('/admin/activity-delete')}}', {id: trashId}, res => {
-                console.log(`tr[data-id='${trashId}']`)
-                document.querySelector(`tr[data-id='${trashId}']`).remove();
-                console.log(res)
-            });
+            post('{{url('/admin/activity-delete')}}', {id: trashId}, res => document.querySelector(`tr[data-id='${trashId}']`).remove(););
         }
 
         const handleChangeVisibleClick = (e) => {
@@ -84,7 +80,6 @@
                     btn.classList.remove("btn-danger");
                     btn.classList.add("btn-success");
                 }
-                console.log(res);
             });
         }
 

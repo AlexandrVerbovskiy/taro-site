@@ -76,7 +76,7 @@
         return elem;
     }
 
-    const getBtns = (editUrl, id) => `
+    const getBtns = (editUrl, id, hidden = false) => `
             <a href="${editUrl + '/' + id}" type="button" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-pencil" viewBox="0 0 16 16">
@@ -85,7 +85,7 @@
                 </svg>
             </a>
 
-            <button type="button" class="btn change-visible btn-success" data-id="${id}" onclick="handleChangeVisibleClick(this)">
+            <button type="button" class="btn change-visible ${hidden ? 'btn-danger' : 'btn-success'}" data-id="${id}" onclick="handleChangeVisibleClick(this)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-eye" viewBox="0 0 16 16">
                     <path
