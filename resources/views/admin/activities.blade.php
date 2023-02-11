@@ -65,7 +65,7 @@
 
         const acceptDelete = () => {
             console.log(trashId);
-            post('{{url('/admin/activity-delete')}}', {id: trashId}, res => document.querySelector(`tr[data-id='${trashId}']`).remove(););
+            post('{{url('/admin/activity-delete')}}', {id: trashId}, res => document.querySelector(`tr[data-id='${trashId}']`).remove());
         }
 
         const handleChangeVisibleClick = (e) => {

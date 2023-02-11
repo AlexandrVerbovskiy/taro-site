@@ -26,7 +26,7 @@
 
         <div class="form-group mb-3">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" required
+            <textarea class="form-control" id="editor" name="description" required
             >{{old('description')?old('description'):(isset($description)?$description:'')}}</textarea>
         </div>
 

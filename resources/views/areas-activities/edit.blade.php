@@ -40,8 +40,9 @@
 
         <div class="form-group mb-3">
             <label for="body">Body:</label>
-            <textarea class="form-control" id="body" name="body"
+            <textarea class="form-control" id="editor" name="body"
                       required>{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
+
         </div>
 
         <input type="hidden" name="img_src"
@@ -64,6 +65,7 @@
 
 
 </div>
+
 <script>
 
     $(document).ready(function () {

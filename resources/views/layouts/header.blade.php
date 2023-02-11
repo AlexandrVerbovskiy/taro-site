@@ -105,6 +105,20 @@
                 </svg>
             </button>`;
 
+    function parseYoutubeUrl(link){
+        if(link.includes("https://www.youtube.com")&&link.includes("watch")){
+            console.log(link)
+            link = link.split("watch?v=")[1];
+            link=link.split("&")[0];
+
+            link = "https://www.youtube.com/embed/"+link;
+        }else if("https://youtu.be"){
+            link = link.split("https://youtu.be/")[1];
+            link = "https://www.youtube.com/embed/"+link;
+        }
+        console.log(link);
+        return link;
+    }
 
     function makeid(length) {
         let result = '';
