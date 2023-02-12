@@ -62,11 +62,27 @@
             </select>
         </div>
 
-        <div class="form-group mb-3">
+        <div class="form-group mb-3 youtube" style="display: none">
             <label for="url">Url:</label>
             <input type="text" class="form-control" id="url"
                    value="{{old('url')?old('url'):(isset($url)?$url:'')}}"
                    name="url" required>
+            <iframe id="youtube_media_view"></iframe>
+        </div>
+
+        <div class="form-group mb-3 image" style="display: none">
+            <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
+        </div>
+
+        <div class="form-group mb-3 video" style="display: none">
+            <video style="max-width:100%; max-height:400px;" controls id="video_media_view"></video><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
+        </div>
+
+        <div class="form-group mb-3 audio " style="display: none">
+            <audio style="max-width:100%; max-height:400px;" controls id="audio_media_view"></audio><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
         </div>
 
         <div class="form-group mb-3">
@@ -84,27 +100,57 @@
         @endif
     </form>
 
-    <input type="file" name="file" id="file_input">
+    <input style="display: none;" type="file" name="file" id="file_input">
 
 </div>
 
 <script>
-    function onChangeMediaType() {
-        if (document.querySelector('#media_type').value == 'youtube') {
-            document.querySelector("#url").style.display = "block";
-            document.querySelector("#file_input").style.display = "none";
-        } else {
-            document.querySelector("#url").style.display = "none";
-            document.querySelector("#file_input").style.display = "block";
-            //change accept file_input for audio/image/video
-        }
+    function hideAllBlocks(media) {
+        document.querySelector(".youtube").style.display = "none";
+        document.querySelector(".video").style.display = "none";
+        document.querySelector(".audio").style.display = "none";
+        document.querySelector(".image").style.display = "none";
+        document.querySelector("#image_media_view").src="";
+        document.querySelector("#video_media_view").src="";
+        document.querySelector("#youtube_media_view").src="";
+        document.querySelector("#audio_media_view").src="";
+        document.querySelector("." + media).style.display = "block";
     }
 
-    document.querySelector("#media_type").addEventListener("change", ()=> {
+    function setInputFileAccepts(type) {
+        if (type == "audio") return document.querySelector("#file_input").accept = "audio/mp3"
+        if (type != "youtube") document.querySelector("#file_input").accept = type + "/*";
+    }
+
+    function onChangeMediaType() {
+        document.querySelector("#file_input").value = "";
+        hideAllBlocks(document.querySelector('#media_type').value);
+        setInputFileAccepts(document.querySelector('#media_type').value);
+    }
+
+    document.querySelector("#media_type").addEventListener("change", () => {
         document.querySelector("#url").value = "";
         onChangeMediaType();
     });
+
+    document.querySelector("#url").addEventListener("change", e => {
+        let src = document.querySelector("#url").value;
+        if(document.querySelector('#media_type').value=="youtube"){
+            src = parseYoutubeUrl(src);
+        }else{
+            src = "{{Storage::url("")}}"+document.querySelector('#media_type').value+"s/"+src;
+        }
+        document.querySelector("#" + document.querySelector('#media_type').value + "_media_view").src = src;
+    })
+
     onChangeMediaType();
+    document.querySelector("#url").dispatchEvent(new Event("change", {
+        bubbles: !0,
+        cancelable: !1
+    }));
+
+    document.querySelectorAll(".media-changer").forEach(btn=>btn.addEventListener("click", e=>document.querySelector("#file_input").click()))
+
 </script>
 
 @include('layouts.footer')

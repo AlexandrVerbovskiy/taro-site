@@ -72,15 +72,18 @@
         </div>
 
         <div class="form-group mb-3 image" style="display: none">
-            <img style="max-width:100%; max-height:400px;" id="image_media_view">
+            <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
         </div>
 
         <div class="form-group mb-3 video" style="display: none">
-            <video style="max-width:100%; max-height:400px;" controls id="video_media_view"></video>
+            <video style="max-width:100%; max-height:400px;" controls id="video_media_view"></video><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
         </div>
 
         <div class="form-group mb-3 audio " style="display: none">
-            <audio style="max-width:100%; max-height:400px;" controls id="audio_media_view"></audio>
+            <audio style="max-width:100%; max-height:400px;" controls id="audio_media_view"></audio><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
         </div>
 
         <div class="form-group mb-3">
@@ -98,12 +101,11 @@
         @endif
     </form>
 
-    <input type="file" name="file" id="file_input">
+    <input style="display: none;" type="file" name="file" id="file_input">
 
 </div>
 
 <script>
-
     function hideAllBlocks(media) {
         document.querySelector(".youtube").style.display = "none";
         document.querySelector(".video").style.display = "none";
@@ -123,11 +125,6 @@
 
     function onChangeMediaType() {
         document.querySelector("#file_input").value = "";
-        if (document.querySelector('#media_type').value == 'youtube') {
-            document.querySelector("#file_input").style.display = "none";
-        } else {
-            document.querySelector("#file_input").style.display = "block";
-        }
         hideAllBlocks(document.querySelector('#media_type').value);
         setInputFileAccepts(document.querySelector('#media_type').value);
     }
@@ -153,6 +150,7 @@
         cancelable: !1
     }));
 
+    document.querySelectorAll(".media-changer").forEach(btn=>btn.addEventListener("click", e=>document.querySelector("#file_input").click()))
 </script>
 
 @include('layouts.footer')

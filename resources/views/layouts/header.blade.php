@@ -21,6 +21,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"
             async></script>
+    <style>
+        #audio_media_view[src=""], #video_media_view[src=""], #image_media_view[src=""], #youtube_media_view[src=""],
+        #audio_media_view[src=""]+br, #video_media_view[src=""]+br, #image_media_view[src=""]+br, #youtube_media_view[src=""]+br{
+            display: none;
+        }
+    </style>
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
 
@@ -105,16 +111,16 @@
                 </svg>
             </button>`;
 
-    function parseYoutubeUrl(link){
-        if(link.includes("https://www.youtube.com")&&link.includes("watch")){
+    function parseYoutubeUrl(link) {
+        if (link.includes("https://www.youtube.com") && link.includes("watch")) {
             console.log(link)
             link = link.split("watch?v=")[1];
-            link=link.split("&")[0];
+            link = link.split("&")[0];
 
-            link = "https://www.youtube.com/embed/"+link;
-        }else if("https://youtu.be"){
+            link = "https://www.youtube.com/embed/" + link;
+        } else if ("https://youtu.be") {
             link = link.split("https://youtu.be/")[1];
-            link = "https://www.youtube.com/embed/"+link;
+            link = "https://www.youtube.com/embed/" + link;
         }
         console.log(link);
         return link;
