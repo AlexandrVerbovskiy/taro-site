@@ -1,4 +1,4 @@
-<div class="collapse navbar-collapse menu" id="navbarNav" style="">
+<div class="collapse navbar-collapse menu_2" id="navbarNav" style="">
     <ul class="nav flex-column" id="nav_accordion">
 
         @if(auth()->check() && auth()->user()->admin)
