@@ -34,7 +34,7 @@
                             </svg>
                         </a>
 
-                        <button type="button" class="btn change-visible btn-success" data-id="{{$topic->id}}">
+                        <button type="button" class="btn change-visible @if($topic->hidden) btn-danger @else btn-success @endif" data-id="{{$topic->id}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-eye" viewBox="0 0 16 16">
                                 <path
@@ -64,23 +64,21 @@
         let trashId = null;
 
         const acceptDelete = () => {
-            console.log(trashId);
-            post('{{url('/admin/topic-event-delete')}}', {id: trashId}, res => {
-                console.log(`tr[data-id='${trashId}']`)
-                document.querySelector(`tr[data-id='${trashId}']`).remove();
-                console.log(res)
-            });
+            post('{{url('/admin/topic-event-delete')}}', {id: trashId}, res => document.querySelector(`tr[data-id='${trashId}']`).remove());
         }
 
         const handleChangeVisibleClick = (e) => {
             const btn = btnFromEvent(e);
             const id = btn.dataset.id;
             post('{{url('/admin/topic-event-change-visible')}}', {id}, res => {
-                if (!res.error) {
-                    btn.classList.toggle("btn-danger");
-                    btn.classList.toggle("btn-success");
+                if (res.error) return;
+                if(res.hidden){
+                    btn.classList.add("btn-danger");
+                    btn.classList.remove("btn-success");
+                }else{
+                    btn.classList.remove("btn-danger");
+                    btn.classList.add("btn-success");
                 }
-                console.log(res);
             });
         }
 

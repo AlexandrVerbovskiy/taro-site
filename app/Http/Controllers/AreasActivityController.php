@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Acivity;
 use App\Models\Master;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Array_;
 
 class AreasActivityController extends Controller
 {
@@ -19,15 +20,15 @@ class AreasActivityController extends Controller
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $area_activity = Acivity::where('id', '=', $id)->first();
 
-        if(!$area_activity) return abort(404);
+        if (!$area_activity) return abort(404);
 
         return $this->view('areas-activities.edit', [
-            'title_ua'=>$area_activity->title_ua,
-            'title_ru'=>$area_activity->title_ru,
-            'id'=>$area_activity->id,
-            'body'=>$area_activity->body,
-            'img_src'=>$area_activity->img_src,
-            'type'=>$area_activity->type
+            'title_ua' => $area_activity->title_ua,
+            'title_ru' => $area_activity->title_ru,
+            'id' => $area_activity->id,
+            'body' => $area_activity->body,
+            'img_src' => $area_activity->img_src,
+            'type' => $area_activity->type
         ]);
     }
 
@@ -37,7 +38,7 @@ class AreasActivityController extends Controller
 
         $data = $request->input();
 
-        if(!array_key_exists('id', $data)) {
+        if (!array_key_exists('id', $data)) {
             $data['id'] = '-1';
         }
 
@@ -49,7 +50,7 @@ class AreasActivityController extends Controller
                 ]);
 
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua']])->first();
-            if ($findedByData && $findedByData['id'] == $data['id']&& $data['type'] == $findedByData['type'] && $data['img_src'] == $findedByData['img_src'] && $data['body'] == $findedByData['body'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
+            if ($findedByData && $findedByData['id'] == $data['id'] && $data['type'] == $findedByData['type'] && $data['img_src'] == $findedByData['img_src'] && $data['body'] == $findedByData['body'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
 
 
@@ -70,7 +71,8 @@ class AreasActivityController extends Controller
         }
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Acivity wasn\'t find']);
@@ -83,27 +85,33 @@ class AreasActivityController extends Controller
         }
     }
 
-    public function changeVisible(Request $request){
+    public function changeVisible(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Acivity wasn\'t find']);
 
         try {
-            return json_encode(["error" => false, "message" => 'Success']);
+            $activity = Acivity::where("id", $data["id"])->first();
+            $activity->hidden = !$activity->hidden;
+            $activity->save();
+            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $activity->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
 
-    public function titles(){
-        $activities = Acivity::all(['id', 'title_ua', 'title_ru']);
+    public function titles()
+    {
+        $activities = Acivity::where('hidden', false)->get(['id', 'title_ua', 'title_ru']);
         var_dump($activities);
         die;
     }
 
-    public function topic(Request $request, $id){
-        $activity = Acivity::where('id', "=", $id)->first();
-        if(!$activity) return abort(404);
-        return $this->view('areas-activities.index', ['activity'=>$activity]);
+    public function topic(Request $request, $id)
+    {
+        $activity = Acivity::where('id', "=", $id)->where('hidden', false)->first();
+        if (!$activity) return abort(404);
+        return $this->view('areas-activities.index', ['activity' => $activity]);
     }
 }

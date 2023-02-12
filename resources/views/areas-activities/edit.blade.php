@@ -28,20 +28,21 @@
             <label for="title_ru">Type:</label>
             <select id="type" name="type" required>
                 <?php $saved_type = old('type') ? old('type') : (isset($type) ? $type : 'normal')?>
-                @if($saved_type=='normal')
-                    <option value="normal" selected>Normal</option>
-                    <option value="dop">Dop</option>
+                @if($saved_type=='basic')
+                    <option value="basic" selected>Normal</option>
+                    <option value="additional">Dop</option>
                 @else
-                    <option value="normal">Normal</option>
-                    <option value="dop" selected>Dop</option>
+                    <option value="basic">Normal</option>
+                    <option value="additional" selected>Dop</option>
                 @endif
             </select>
         </div>
 
         <div class="form-group mb-3">
             <label for="body">Body:</label>
-            <textarea class="form-control" id="body" name="body"
+            <textarea class="form-control" id="editor" name="body"
                       required>{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
+
         </div>
 
         <input type="hidden" name="img_src"
@@ -64,6 +65,7 @@
 
 
 </div>
+
 <script>
 
     $(document).ready(function () {
@@ -91,10 +93,6 @@
             document.querySelector("[name='img_src']").value = data.filename;
         });
     }
-
-    $("#img_input").on("change", function () {
-        setimage();
-    })
 
     $("#save_changes_fake").on("click", function () {
         if (document.querySelector("[name='img_src']").value) {

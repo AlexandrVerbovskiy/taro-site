@@ -40,9 +40,9 @@ class InfosController extends Controller
         }
 
         try {
-            $findedByData = Info::where(["title_ru" => $data['title_ru'], ['id' ,'!=',$data['id']]])->first();
+            $findedByData = Info::where(["title_ru" => $data['title_ru'], ['id', '!=', $data['id']]])->first();
             if (!isset($findedByData)) {
-                $findedByData = Info::where(["title_ua" => $data['title_ua'], ['id' ,'!=',$data['id']]])->first();
+                $findedByData = Info::where(["title_ua" => $data['title_ua'], ['id', '!=', $data['id']]])->first();
             }
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -66,7 +66,8 @@ class InfosController extends Controller
         }
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
@@ -79,19 +80,21 @@ class InfosController extends Controller
         }
     }
 
-    public function changeVisible(Request $request){
+    public function changeVisible(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
 
         try {
-            return json_encode(["error" => false, "message" => 'Success']);
+            $info = Info::where("id", $data["id"])->first();
+            $info->hidden = !$info->hidden;
+            $info->save();
+            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $info->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
-
-
 
 
     public function createPost()
@@ -153,22 +156,23 @@ class InfosController extends Controller
     {
         if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
 
+        if (!array_key_exists('topic', $_GET) || !is_numeric($_GET['topic'])) abort(404);
+
         $start = intval($_GET['start']);
         $count = intval($_GET['count']);
-        $search = $_GET['search']??"";
+        $search = $_GET['search'] ?? "";
 
-        if (array_key_exists('topic', $_GET) && is_numeric($_GET['topic']))
-            return json_encode(["error" => false, "posts" => InfoPost::where("info_id", $_GET['topic'])
-                ->where("title", 'like', '%'.$search.'%')
-                ->skip($start)
-                ->take($count)
-                ->get()]);
-        else
-            return json_encode(["error" => false, "posts" => InfoPost::where("title", 'like', '%'.$search.'%')->skip($start)->take($count)->get()]);
+        return json_encode(["error" => false, "posts" => InfoPost::where("info_id", $_GET['topic'])
+            ->where('hidden', false)
+            ->where("title", 'like', '%' . $search . '%')
+            ->skip($start)
+            ->take($count)
+            ->get()]);
 
     }
 
-    public function deletePost(Request $request){
+    public function deletePost(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Info post wasn\'t find']);
@@ -181,20 +185,28 @@ class InfosController extends Controller
         }
     }
 
-    public function changeVisiblePost(Request $request){
+    public function changeVisiblePost(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Info post wasn\'t find']);
 
         try {
-            return json_encode(["error" => false, "message" => 'Success']);
+            $model = InfoPost::where("id", $data["id"])->first();
+            $model->hidden = !$model->hidden;
+            $model->save();
+            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
 
-    public function infosPosts(Request $request, $id){
-        $posts_count = InfoPost::where("info_id", $id)->count();
-        return $this->view("infos.index", ['count' => $posts_count, 'topic_id'=>$id]);
+    public function infosPosts(Request $request, $id)
+    {
+        $info = Info::where('id', $id)->where("hidden", false)->first();
+        if (!$info) return abort(404);
+
+        $posts_count = InfoPost::where("info_id", $id)->where('hidden', false)->count();
+        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id]);
     }
 }

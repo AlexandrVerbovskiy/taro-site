@@ -56,9 +56,9 @@
                         Основні <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul id="menu_item3" class="submenu collapse" data-bs-parent="#menu_item1">
                         @foreach ($activities_topics as $activity_topic)
-                            @if($activity_topic['title']=="basic")
+                            @if($activity_topic['type']=="basic")
                                 <li><a class="nav-link link-dark"
-                                       href="#{{$activity_topic['id']}}">{{$activity_topic['title_ua']}} </a>
+                                       href="{{url('/area-activity/'.$activity_topic['id'])}}">{{$activity_topic['title_ua']}} </a>
                                 </li>
                             @endif
                         @endforeach
@@ -69,9 +69,9 @@
                         Додаткові <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul id="menu_item4" class="submenu collapse" data-bs-parent="#menu_item1">
                         @foreach ($activities_topics as $activity_topic)
-                            @if($activity_topic['title']=="additional")
+                            @if($activity_topic['type']=="additional")
                                 <li><a class="nav-link link-dark"
-                                       href="#{{$activity_topic['id']}}">{{$activity_topic['title_ua']}} </a>
+                                       href="{{url('/area-activity/'.$activity_topic['id'])}}">{{$activity_topic['title_ua']}} </a>
                                 </li>
                             @endif
                         @endforeach
@@ -87,20 +87,26 @@
                     class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item2" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($studies_topics as $study_topic)
-                    <li><a class="nav-link link-dark" href="#{{$study_topic['id']}}">{{$study_topic['title_ua']}} </a>
+                    <li><a class="nav-link link-dark" href="{{url("/studies/".$study_topic['id'])}}">{{$study_topic['title_ua']}} </a>
                     </li>
                 @endforeach
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" href="#"> Корисна інформація </a>
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item_infos" href="#"> Корисна інформація </a>
+            <ul id="menu_item_infos" class="submenu collapse" data-bs-parent="#nav_accordion">
+                @foreach ($infos as $info)
+                    <li><a class="nav-link link-dark" href="{{url("/infos-posts/".$info['id'])}}">{{$info['title_ua']}} </a>
+                    </li>
+                @endforeach
+            </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item5" href="#"> Події <i
                     class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item5" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($events_topics as $event_topic)
-                    <li><a class="nav-link link-dark" href="#{{$event_topic['id']}}">{{$event_topic['title_ua']}} </a>
+                    <li><a class="nav-link link-dark" href="{{url("/event-posts/".$event_topic['id'])}}">{{$event_topic['title_ua']}} </a>
                     </li>
                 @endforeach
             </ul>

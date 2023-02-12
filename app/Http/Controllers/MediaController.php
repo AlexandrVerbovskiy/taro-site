@@ -9,9 +9,14 @@ class MediaController
 {
     public function save(Request $request)
     {
-        $file = $request->file("file");
-        $filename = time() ."_". $file->getClientOriginalName();
-        Storage::putFileAs('public/'.$request->input('type').'s/', $file, $filename);
-        return json_encode(["filename" => $filename]);
+        try {
+            $file = $request->file("file");
+            if (is_null($file)) return json_encode(["filename" => 'null']);
+            $filename = time() . "_" . $file->getClientOriginalName();
+            Storage::putFileAs('public/' . $request->input('type') . 's/', $file, $filename);
+            return json_encode(["filename" => $filename]);
+        }catch(\Exception $e){
+            return json_encode(["filename" => 'null']);
+        }
     }
 }
