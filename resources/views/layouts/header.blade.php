@@ -116,7 +116,8 @@
                 </svg>
             </button>`;
 
-    function parseYoutubeUrl(link) {
+    function parseYoutubeUrl(link="") {
+        if(!link) return "";
         if (link.includes("https://www.youtube.com") && link.includes("watch")) {
             console.log(link)
             link = link.split("watch?v=")[1];
