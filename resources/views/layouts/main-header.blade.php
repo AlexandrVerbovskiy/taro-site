@@ -47,9 +47,9 @@
     subscribeOnChangeLanguage("#menu_studies", "menu_studies");
     subscribeOnChangeLanguage("#menu_info", "menu_info");
     subscribeOnChangeLanguage("#menu_events", "menu_events");
-    subscribeOnChangeLanguage("#menu_register", "menu_register");
-    subscribeOnChangeLanguage("#menu_login", "menu_login");
-    subscribeOnChangeLanguage("#menu_logout", "menu_logout");
+    if(document.querySelector("#menu_register")) subscribeOnChangeLanguage("#menu_register", "menu_register");
+    if(document.querySelector("#menu_login")) subscribeOnChangeLanguage("#menu_login", "menu_login");
+    if(document.querySelector("#menu_logout")) subscribeOnChangeLanguage("#menu_logout", "menu_logout");
 
 
 

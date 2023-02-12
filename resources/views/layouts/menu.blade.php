@@ -8,7 +8,7 @@
         @endif
 
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Напрямки
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#" id="menu_areas"> Напрямки
                 діяльності <i class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item1" class="submenu collapse" data-bs-parent="#nav_accordion">
 
@@ -41,10 +41,10 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" href="/masters"> Майстри </a>
+            <a class="nav-link link-dark" href="/masters" id="menu_masters"> Майстри </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item2" href="#"> Навчання <i
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item2" href="#" id="menu_studies"> Навчання <i
                     class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item2" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($studies_topics as $study_topic)
@@ -54,7 +54,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item_infos" href="#"> Корисна інформація </a>
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item_infos" href="#" id="menu_info"> Корисна інформація </a>
             <ul id="menu_item_infos" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($infos as $info)
                     <li><a class="nav-link link-dark" href="{{url("/infos-posts/".$info['id'])}}">{{$info['title_ua']}} </a>
@@ -63,7 +63,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item5" href="#"> Події <i
+            <a class="nav-link link-dark" data-bs-toggle="collapse" data-bs-target="#menu_item5" href="#" id="menu_events"> Події <i
                     class="bi small bi-caret-down-fill"></i> </a>
             <ul id="menu_item5" class="submenu collapse" data-bs-parent="#nav_accordion">
                 @foreach ($events_topics as $event_topic)
@@ -76,16 +76,17 @@
             <li class="nav-item link-dark">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'registration') active @endif"
                    href="{{url("/registration")}} "
-                   type="submit" data-bs-toggle="modal" data-bs-target="#register">Registration</a>
+                   type="submit" data-bs-toggle="modal" data-bs-target="#register" id="menu_register">Registration</a>
             </li>
             <li class="nav-item link-dark">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'login') active @endif" href="{{url("/login")}}"
-                   type="submit" data-bs-toggle="modal" data-bs-target="#login">Login</a>
+                   type="submit" data-bs-toggle="modal" data-bs-target="#login" id="menu_login">Login</a>
             </li>
         @else
             <li class="nav-item link-secondary">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'logout') active @endif"
                    href="{{url("/logout")}} "
+                   id="menu_logout"
                    type="submit">Logout</a>
             </li>
         @endif

@@ -41,8 +41,13 @@
     }
 
     function changeLanguage(lang) {
-        Object.keys(subscriptions).forEach(selector =>
-            document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang]);
+        Object.keys(subscriptions).forEach(selector => {
+            console.log( document.querySelector(selector));
+            console.log(subscriptions[selector]);
+            console.log(vocabulary[subscriptions[selector]]);
+            console.log(vocabulary[subscriptions[selector]][lang]);
+            document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
+        });
         localStorage.setItem("language", lang);
     }
 
