@@ -22,7 +22,21 @@ class MainController extends Controller
     public function admin()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        return view("admin.main");
+        $statistic = [];
+        $statistic['count_all_users'] = User::count();
+        $statistic['count_users'] = User::where("admin", false)->count();
+        $statistic['count_admins'] = User::where("admin", true)->count();
+        $statistic['count_events'] = Event::count();
+        $statistic['count_showed_events'] = Event::where("hidden", false)->count();
+        $statistic['count_masters'] = Master::count();
+        $statistic['count_showed_master'] = Master::where("hidden", false)->count();
+        $statistic['count_activities'] = Acivity::count();
+        $statistic['count_showed_activities'] = Acivity::where("hidden", false)->count();
+        $statistic['count_infos_posts'] = InfoPost::count();
+        $statistic['count_showed_infos_posts'] = InfoPost::where("hidden", false)->count();
+        $statistic['count_studies'] = Study::count();
+        $statistic['count_showed_studies'] = Study::where("hidden", false)->count();
+        return view("admin.main", ["statistic"=>$statistic]);
     }
 
     public function masters()
