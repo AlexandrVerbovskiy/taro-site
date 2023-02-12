@@ -17,7 +17,7 @@
 </div>
 <div>
     <div class="container">
-        {{$master->description}}
+        {!!$master->description!!}
     </div>
     <div class="container">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

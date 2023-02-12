@@ -36,7 +36,7 @@
                             </svg>
                         </a>
 
-                        <button type="button" class="btn change-visible btn-success" data-id="{{$master->id}}">
+                        <button type="button" class="btn change-visible @if($master->hidden) btn-danger @else btn-success @endif" data-id="{{$master->id}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-eye" viewBox="0 0 16 16">
                                 <path
@@ -78,11 +78,14 @@
             const btn = btnFromEvent(e);
             const id = btn.dataset.id;
             post('{{url('/admin/master-change-visible')}}', {id}, res => {
-                if (!res.error) {
-                    btn.classList.toggle("btn-danger");
-                    btn.classList.toggle("btn-success");
+                if (res.error) return;
+                if(res.hidden){
+                    btn.classList.add("btn-danger");
+                    btn.classList.remove("btn-success");
+                }else{
+                    btn.classList.remove("btn-danger");
+                    btn.classList.add("btn-success");
                 }
-                console.log(res);
             });
         }
 

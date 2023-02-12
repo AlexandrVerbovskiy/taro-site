@@ -41,7 +41,7 @@
 
         <div class="form-group mb-3">
             <label for="body">Description:</label>
-            <textarea class="form-control" id="body" name="body" required
+            <textarea class="form-control" id="editor" name="body" required
             >{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
         </div>
 

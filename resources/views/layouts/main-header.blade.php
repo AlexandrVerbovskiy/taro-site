@@ -38,7 +38,7 @@
         </div>
     </div>
 </header>
-@include('layouts.menu')
+
 
 <script>
     subscribeOnChangeLanguage("#main_title", "title");

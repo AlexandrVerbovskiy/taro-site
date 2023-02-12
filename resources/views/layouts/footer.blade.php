@@ -6,8 +6,15 @@
         <div><a href="#"><img src="{{ URL("image/facebook.png") }}" class="footer-image"></a></div>
     </div>
 </footer>
-<script>
 
+<script src="https://cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+<script>
+    if (document.querySelector("#editor")) {
+        CKEDITOR.replace('editor');
+    }
+</script>
+
+<script>
     if (document.querySelector(".lang_button"))
         document.querySelectorAll(".lang_button").forEach(elem => elem.addEventListener("click", e => changeLanguage(e.target.dataset.value)));
 
@@ -26,6 +33,7 @@
     });
 
     function setFile(body, callback) {
+        console.log("send")
         fetch('{{url('/file-save')}}', {
             headers: {
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
@@ -51,15 +59,22 @@
         const type = $("#media_type");
         const fd = new FormData;
 
+        if(input.prop('files').length<1) return;
+
         fd.append('file', input.prop('files')[0]);
         fd.append('type', type.prop('value'));
 
         setFile(fd,
             url => {
+                console.log(url)
                 document.querySelector("#url").value = url;
+                console.log(document.querySelector("#url").value);
+                document.querySelector("#url").dispatchEvent(new Event("change", {
+                    bubbles: !0,
+                    cancelable: !1
+                }));
             })
     }
-
 
     if ($("#img_input").length > 0) {
         $("#img_input").on("change", function () {

@@ -45,11 +45,7 @@
 
         const acceptDelete = () => {
             console.log(trashId);
-            post('{{url('/admin/info-post-delete')}}', {id: trashId}, res => {
-                console.log(`tr[data-id='${trashId}']`)
-                document.querySelector(`tr[data-id='${trashId}']`).remove();
-                console.log(res)
-            });
+            post('{{url('/admin/info-post-delete')}}', {id: trashId}, res => document.querySelector(`tr[data-id='${trashId}']`).remove());
         }
 
         const handleTrashClick = (e) => {
@@ -59,12 +55,16 @@
 
         const handleChangeVisibleClick = (e) => {
             const id = e.dataset.id;
+            const btn = e;
             post('{{url('/admin/info-post-change-visible')}}', {id}, res => {
-                if (!res.error) {
-                    e.classList.toggle("btn-danger");
-                    e.classList.toggle("btn-success");
+                if (res.error) return;
+                if(res.hidden){
+                    btn.classList.add("btn-danger");
+                    btn.classList.remove("btn-success");
+                }else{
+                    btn.classList.remove("btn-danger");
+                    btn.classList.add("btn-success");
                 }
-                console.log(res);
             });
         }
 
@@ -72,7 +72,7 @@
             console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
             if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
-            get("{{url('/get-infos-posts')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
+            get("{{url('/admin/get-infos-posts')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
                 if (data.error) return;
                 let rows = "";
@@ -82,7 +82,7 @@
                        <tr data-id=${post["id"]}>
                         <th scope="row">${post["id"]}</th>
                         <td>${post["title"]}</td>
-                        <td>${getBtns('{{url("/admin/edit-info-post")}}', post["id"])}</td>
+                        <td>${getBtns('{{url("/admin/edit-info-post")}}', post["id"], post['hidden'])}</td>
                     </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
             });

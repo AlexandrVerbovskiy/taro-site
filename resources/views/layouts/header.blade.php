@@ -21,10 +21,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"
             async></script>
+    <style>
+        #audio_media_view[src=""], #video_media_view[src=""], #image_media_view[src=""], #youtube_media_view[src=""],
+        #audio_media_view[src=""]+br, #video_media_view[src=""]+br, #image_media_view[src=""]+br, #youtube_media_view[src=""]+br{
+            display: none;
+        }
+    </style>
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
 
-@include("layouts.vocabulary");
+@include("layouts.vocabulary")
 
 <script>
 
@@ -76,7 +82,7 @@
         return elem;
     }
 
-    const getBtns = (editUrl, id) => `
+    const getBtns = (editUrl, id, hidden = false) => `
             <a href="${editUrl + '/' + id}" type="button" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-pencil" viewBox="0 0 16 16">
@@ -85,7 +91,7 @@
                 </svg>
             </a>
 
-            <button type="button" class="btn change-visible btn-success" data-id="${id}" onclick="handleChangeVisibleClick(this)">
+            <button type="button" class="btn change-visible ${hidden ? 'btn-danger' : 'btn-success'}" data-id="${id}" onclick="handleChangeVisibleClick(this)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-eye" viewBox="0 0 16 16">
                     <path
@@ -105,6 +111,20 @@
                 </svg>
             </button>`;
 
+    function parseYoutubeUrl(link) {
+        if (link.includes("https://www.youtube.com") && link.includes("watch")) {
+            console.log(link)
+            link = link.split("watch?v=")[1];
+            link = link.split("&")[0];
+
+            link = "https://www.youtube.com/embed/" + link;
+        } else if ("https://youtu.be") {
+            link = link.split("https://youtu.be/")[1];
+            link = "https://www.youtube.com/embed/" + link;
+        }
+        console.log(link);
+        return link;
+    }
 
     function makeid(length) {
         let result = '';

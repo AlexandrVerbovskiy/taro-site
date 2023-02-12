@@ -167,7 +167,7 @@
     </div>
 </nav>
 
-<div class="menu" style="position: relative;">
+<div class="menu d-lg-none " style="position: relative;">
     <ul>
         <a href="{{url("/admin/users")}}">
             <li>USERS</li>
