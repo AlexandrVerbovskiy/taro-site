@@ -1,6 +1,7 @@
-@include('layouts.header')
+@extends('layouts.admin')
+@section('content')
 <div class="container py-4">
-    <h2>Topic Event</h2>
+    <h2 style="margin-bottom: 24px">Категорія події</h2>
     <form class='form' method="POST" action="{{url('/admin/save-topic-event')}}">
         {{ csrf_field() }}
 
@@ -25,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
 
         @if($errors->any())
@@ -33,4 +34,4 @@
         @endif
     </form>
 </div>
-@include('layouts.footer')
+@stop

@@ -1,6 +1,7 @@
-@include('layouts.header')
+@extends('layouts.admin')
+@section('content')
 <div class="container py-4">
-    <h2>Topic</h2>
+    <h2 style="margin-bottom: 24px">Напрям діяльності</h2>
     <form class='form' method="POST" action="{{url('/admin/save-activity')}}">
         {{ csrf_field() }}
 
@@ -11,35 +12,35 @@
         @endif
 
         <div class="form-group mb-3">
-            <label for="title_ua">Topic name(ua):</label>
+            <label for="title_ua">Заголовок напрямка(ua):</label>
             <input type="text" class="form-control" id="title_ua"
                    value="{{old('title_ua')?old('title_ua'):(isset($title_ua)?$title_ua:'')}}"
                    name="title_ua" required>
         </div>
 
         <div class="form-group mb-3">
-            <label for="title_ru">Topic name(ru):</label>
+            <label for="title_ru">Заголовок напрямка(ru):</label>
             <input type="text" class="form-control" id="title_ru"
                    value="{{old('title_ru')?old('title_ru'):(isset($title_ru)?$title_ru:'')}}"
                    name="title_ru" required>
         </div>
 
         <div class="form-group mb-3">
-            <label for="title_ru">Type:</label>
+            <label for="title_ru">Тип:</label>
             <select id="type" name="type" required>
                 <?php $saved_type = old('type') ? old('type') : (isset($type) ? $type : 'normal')?>
                 @if($saved_type=='basic')
-                    <option value="basic" selected>Normal</option>
-                    <option value="additional">Dop</option>
+                    <option value="basic" selected>Основний</option>
+                    <option value="additional">Додатковий</option>
                 @else
-                    <option value="basic">Normal</option>
-                    <option value="additional" selected>Dop</option>
+                    <option value="basic">Основний</option>
+                    <option value="additional" selected>Додатковий</option>
                 @endif
             </select>
         </div>
 
         <div class="form-group mb-3">
-            <label for="body">Body:</label>
+            <label for="body">Опис:</label>
             <textarea class="form-control" id="editor" name="body"
                       required>{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
 
@@ -48,9 +49,10 @@
         <input type="hidden" name="img_src"
                value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
                required>
+        <input accept="image/*" type="file" name="img" id="img_input">
 
-        <div class="form-group">
-            <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Save</button>
+        <div class="form-group" style="margin-top: 15px;">
+            <button style="cursor:pointer; width: 100px;" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти</button>
             <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">
                 Save
             </button>
@@ -61,7 +63,7 @@
         @endif
     </form>
 
-    <input accept="image/*" type="file" name="img" id="img_input">
+
 
 
 </div>
@@ -103,4 +105,4 @@
     })
 
 </script>
-@include('layouts.footer')
+@stop
