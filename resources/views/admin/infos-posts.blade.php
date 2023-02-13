@@ -20,7 +20,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" style="width: 100px;">Actions</th>
                 </tr>
                 </thead>
                 <tbody>

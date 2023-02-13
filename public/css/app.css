@@ -21,7 +21,7 @@ ul>li>a{
     padding-left: 4px;
     font-size: 20px;
 }
-#menu_item1{
+#menu_item1, #menu_item2, #menu_item3, #menu_item4, #menu_item5, #menu_item6, #menu_item7, #menu_item8, #menu_item9, #menu_item_infos{
     padding: 0 0 0 46px;
 }
 .footer-image {
@@ -679,10 +679,20 @@ ul>li>a{
 master_margin_sm{
     margin: 0 30px;
 }
+.youtube_media{
+    width: 100%;
+    height: 600px;
+    margin-top: 20px;
+}
 @media only screen and (max-width: 1920px) {
     .scroll_table{
         width: auto;
         height: 840px;
+        overflow: auto;
+    }
+    .scroll_form{
+        width: auto;
+        height: 860px;
         overflow: auto;
     }
 }
@@ -692,6 +702,16 @@ master_margin_sm{
         height: 780px;
         overflow: auto;
     }
+    .scroll_form{
+        width: auto;
+        height: 820px;
+        overflow: auto;
+    }
+    .youtube_media{
+        width: 100%;
+        height: 500px;
+        margin-top: 20px;
+    }
 }
 @media only screen and (max-width: 1366px) {
     .scroll_table{
@@ -699,11 +719,21 @@ master_margin_sm{
         height: 780px;
         overflow: auto;
     }
+    .scroll_form{
+        width: auto;
+        height: 800px;
+        overflow: auto;
+    }
 }
 @media only screen and (max-width: 1280px) {
     .scroll_table{
         width: auto;
         height: 540px;
+        overflow: auto;
+    }
+    .scroll_form{
+        width: auto;
+        height: 620px;
         overflow: auto;
     }
 }
@@ -719,6 +749,14 @@ master_margin_sm{
     .master_descriptionSaniaZaebalEdition{
         font-size: 15px;
     }
+    .youtube_media{
+        height: 400px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 420px;
+        overflow: auto;
+    }
 }
 @media only screen and (max-width: 1024px) {
     .scroll_table{
@@ -733,11 +771,21 @@ master_margin_sm{
         height: 820px;
         overflow: auto;
     }
+    .scroll_form{
+        width: auto;
+        height: 860px;
+        overflow: auto;
+    }
 }
 @media only screen and (max-width: 768px) {
     .scroll_table{
         width: auto;
         height: 700px;
+        overflow: auto;
+    }
+    .scroll_form{
+        width: auto;
+        height: 720px;
         overflow: auto;
     }
 }
@@ -772,6 +820,11 @@ master_margin_sm{
         height: 400px;
         overflow: auto;
     }
+    .scroll_form{
+        width: auto;
+        height: 420px;
+        overflow: auto;
+    }
 }
 @media only screen and (max-width: 576px) {
     .header_name{
@@ -795,7 +848,9 @@ master_margin_sm{
         height: 400px;
         overflow: auto;
     }
-
+    .youtube_media{
+        height: 280px;
+    }
 }
 @media only screen and (max-width: 540px) {
     .modal-title{
@@ -860,6 +915,14 @@ master_margin_sm{
         height: 400px;
         overflow: auto;
     }
+    .scroll_form{
+        width: auto;
+        height: 420px;
+        overflow: auto;
+    }
+    .youtube_media{
+        height: 260px;
+    }
 }
 @media only screen and (max-width: 430px) {
     .modal-title{
@@ -908,6 +971,14 @@ master_margin_sm{
     .scroll_table{
         width: auto;
         height: 580px;
+        overflow: auto;
+    }
+    .youtube_media{
+        height: 180px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 630px;
         overflow: auto;
     }
 }
@@ -988,11 +1059,28 @@ master_margin_sm{
         height: 535px;
         overflow: auto;
     }
+    .youtube_media{
+        height: 180px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 630px;
+        overflow: auto;
+    }
+
 }
 @media only screen and (max-width: 385px) {
     .scroll_table{
         width: auto;
         height: 460px;
+        overflow: auto;
+    }
+    .youtube_media{
+        height: 160px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 480px;
         overflow: auto;
     }
 }
@@ -1061,6 +1149,14 @@ master_margin_sm{
     .scroll_table{
         width: auto;
         height: 430px;
+        overflow: auto;
+    }
+    .youtube_media{
+        height: 160px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 450px;
         overflow: auto;
     }
 }
@@ -1203,6 +1299,14 @@ master_margin_sm{
         height: 415px;
         overflow: auto;
     }
+    .youtube_media{
+        height: 150px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 430px;
+        overflow: auto;
+    }
 }
 
 @media only screen and (max-width: 319px) {
@@ -1231,6 +1335,14 @@ master_margin_sm{
     .scroll_table{
         width: auto;
         height: 415px;
+        overflow: auto;
+    }
+    .youtube_media{
+        height: 120px;
+    }
+    .scroll_form{
+        width: auto;
+        height: 430px;
         overflow: auto;
     }
 }
