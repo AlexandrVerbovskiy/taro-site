@@ -1067,7 +1067,16 @@ master_margin_sm{
         height: 630px;
         overflow: auto;
     }
-
+    .master_sec_button{
+        width: 150px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 16px
+    }
+    .date_study{
+        font-size: 16px;
+    }
 }
 @media only screen and (max-width: 385px) {
     .scroll_table{
@@ -1082,6 +1091,16 @@ master_margin_sm{
         width: auto;
         height: 480px;
         overflow: auto;
+    }
+    .master_sec_button{
+        width: 150px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 16px
+    }
+    .date_study{
+        font-size: 16px;
     }
 }
 @media only screen and (max-width: 368px) {
@@ -1158,6 +1177,16 @@ master_margin_sm{
         width: auto;
         height: 450px;
         overflow: auto;
+    }
+    .master_sec_button{
+        width: 150px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 6px 0;
+        font-size: 16px
+    }
+    .date_study{
+        font-size: 16px;
     }
 }
 @media only screen and (max-width: 320px) {
@@ -1344,5 +1373,15 @@ master_margin_sm{
         width: auto;
         height: 430px;
         overflow: auto;
+    }
+    .master_sec_button{
+        width: 90px;
+        border-radius: 35px;
+        margin-top: 10px;
+        padding: 4px 0;
+        font-size: 14px
+    }
+    .date_study{
+        font-size: 14px;
     }
 }
