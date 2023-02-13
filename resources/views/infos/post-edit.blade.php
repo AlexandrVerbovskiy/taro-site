@@ -136,10 +136,12 @@
 
     document.querySelector("#url").addEventListener("change", e => {
         let src = document.querySelector("#url").value;
-        if(document.querySelector('#media_type').value=="youtube"){
-            src = parseYoutubeUrl(src);
-        }else{
-            src = "{{Storage::url("")}}"+document.querySelector('#media_type').value+"s/"+src;
+        if(src) {
+            if (document.querySelector('#media_type').value == "youtube") {
+                src = parseYoutubeUrl(src);
+            } else {
+                src = "{{Storage::url("")}}" + document.querySelector('#media_type').value + "s/" + src;
+            }
         }
        document.querySelector("#" + document.querySelector('#media_type').value + "_media_view").src = src;
     })

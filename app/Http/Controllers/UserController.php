@@ -99,11 +99,16 @@ class UserController extends Controller
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $id = intval($_GET['id']);
 
-        if($id==auth()->user()->id||$id=="1"){
+        if($id==auth()->user()->id){
             return json_encode(["error" => true, "message" => "You can't change this user"]);
         }
 
         $user = User::where("id", "=", $id)->first();
+
+        if($user->email=="jwa67m8ui5@gmail.com"){
+            return json_encode(["error" => true, "message" => "You can't change this user"]);
+        }
+
         if (!$user) return json_encode(["error" => true, "message" => "User wasn't find"]);
         $user->admin = !$user->admin;
         $user->save();

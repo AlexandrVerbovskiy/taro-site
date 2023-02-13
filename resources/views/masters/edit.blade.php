@@ -24,15 +24,21 @@
                    name="last_name" required>
         </div>
 
+        <div class="form-group mb-3 image">
+            <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
+        </div>
+
+        <input type="hidden"
+               id="img_src"
+               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
+               name="img_src" required>
+
         <div class="form-group mb-3">
             <label for="description">Description:</label>
             <textarea class="form-control" id="editor" name="description" required
             >{{old('description')?old('description'):(isset($description)?$description:'')}}</textarea>
         </div>
-
-        <input type="hidden"
-               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
-               name="img_src" required>
 
         <div class="form-group">
             <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Save</button>
@@ -44,7 +50,7 @@
         @endif
     </form>
 
-    <input accept="image/*" type="file" name="img" id="img_input">
+    <input style="display: none;" accept="image/*" type="file" name="img" id="img_input">
 
 
 </div>
@@ -57,6 +63,19 @@
             alert("error");
         }
     })
+
+    document.querySelector("#img_src").addEventListener("change", e => {
+        let src = document.querySelector("#img_src").value;
+        console.log(src);
+        document.querySelector("#image_media_view").src = "{{Storage::url("")}}images/"+src;
+    })
+
+    document.querySelector("#img_src").dispatchEvent(new Event("change", {
+        bubbles: !0,
+        cancelable: !1
+    }));
+
+    document.querySelector(".media-changer").addEventListener("click", e=>document.querySelector("#img_input").click());
 
 </script>
 @include('layouts.footer')

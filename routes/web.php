@@ -50,7 +50,6 @@ Route::post('/registration', [RegistrationController::class, 'store']);
 Route::get('/edit-profile', [UserController::class, 'editProfile']);
 Route::post('/edit-profile', [UserController::class, 'saveProfile']);
 Route::get('/users-admins', [UserController::class, 'usersForAdmin']);
-Route::post('/update-admin-status', [UserController::class, 'updateAdminStatus']);
 
 Route::get('/login', [SessionsController::class, 'create']);
 Route::post('/login', [SessionsController::class, 'store']);
