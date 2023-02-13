@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row justify-content-center" style="width: 100%; margin: 0">
         <div class="col-lg-3 col-md-6 col-sm-8">
-            <img src="{{ asset($activity->img_src) }}"
+            <img src="{{Storage::url("/images/$activity->img_src")}}"
                  style="width: 100%; height: auto;">
         </div>
         <div style=" margin: 20px 0;">
-            {{$activity->body}}
+            {!!$activity->body!!}
         </div>
     </div>
 </div>
