@@ -687,24 +687,24 @@ master_margin_sm{
 @media only screen and (max-width: 1920px) {
     .scroll_table{
         width: auto;
-        height: 840px;
+        height: 600px;
         overflow: auto;
     }
     .scroll_form{
         width: auto;
-        height: 860px;
+        height: 700px;
         overflow: auto;
     }
 }
 @media only screen and (max-width: 1440px) {
     .scroll_table{
         width: auto;
-        height: 780px;
+        height: 560px;
         overflow: auto;
     }
     .scroll_form{
         width: auto;
-        height: 820px;
+        height: 600px;
         overflow: auto;
     }
     .youtube_media{
@@ -716,24 +716,24 @@ master_margin_sm{
 @media only screen and (max-width: 1366px) {
     .scroll_table{
         width: auto;
-        height: 780px;
+        height: 520px;
         overflow: auto;
     }
     .scroll_form{
         width: auto;
-        height: 800px;
+        height: 580px;
         overflow: auto;
     }
 }
 @media only screen and (max-width: 1280px) {
     .scroll_table{
         width: auto;
-        height: 540px;
+        height: 480px;
         overflow: auto;
     }
     .scroll_form{
         width: auto;
-        height: 620px;
+        height: 550px;
         overflow: auto;
     }
 }
