@@ -26,9 +26,9 @@ class SessionsController extends Controller
 
     public function destroy()
     {
-        if (!auth()->check()) return redirect()->to('/login');
+        if (!auth()->check()) return redirect()->to('/');
         auth()->logout();
 
-        return redirect()->to('/login');
+        return redirect()->to('/');
     }
 }

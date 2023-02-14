@@ -199,7 +199,7 @@
                         <a class="btn btn-primary form_sec_button col @if(Request::segment(1) == 'registration') active @endif"
                            href="{{url("/registration")}} "
                            type="submit" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Реєстрація</a>
-                        <a type="button" class="btn btn-primary form_sec_button col" href="{{url("forget-password")}}">Забули
+                        <a type="button" onclick="exitLogin()" class="btn btn-primary form_sec_button col" href="{{url("forget-password")}}" data-bs-toggle="modal" data-bs-target="#forget_password">Забули
                             пароль?</a>
                     </div>
                 </div>
@@ -208,7 +208,44 @@
     </div>
 </div>
 
+<div class="modal fade" id="forget_password" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true"
+     style="backdrop-filter: blur(15px);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
+            <div class="modal-header d-flex justify-content-center"
+                 style="border: 0; margin: 18px 0; padding-bottom: 0">
+                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Забули пароль?</p>
+            </div>
+            <div class="modal-body padding_for_form">
+            <div class="card-body">
+                @if (Session::has('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('message') }}
+                    </div>
+                @endif
+
+                <form action="{{ url('forget-password') }}" method="POST">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="form-group mb-3">
+                            <input class="form-control input_form" type="text" id="email_address" value="{{old('email')}}" name="email" placeholder="Пошта" required autofocus>
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button">Відправити</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+
     function insert2(word){
         document.getElementById("social_type").value = word;
     }

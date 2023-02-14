@@ -1,4 +1,6 @@
-@include('layouts.header')
+@include('layouts.main-header')
+<div class="container">
+    <br><br><br><br><br><br>
 <main class="login-form">
     <div class="cotainer">
         <div class="row justify-content-center">
@@ -54,4 +56,5 @@
         </div>
     </div>
 </main>
+</div>
 @include('layouts.footer')
