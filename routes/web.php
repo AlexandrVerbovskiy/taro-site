@@ -36,8 +36,10 @@ Route::get("/admin/events", [MainController::class, 'events']);
 Route::get("/admin/infos-posts", [MainController::class, 'infosPosts']);
 Route::get("/admin/studies", [MainController::class, 'studies']);
 Route::get("/admin/main-settings", [MainController::class, 'mainPageSettings']);
+Route::get("/admin/comments", [MainController::class, 'comments']);
 
 Route::post("/admin/save-main", [MainController::class, 'saveMain']);
+Route::post("/admin/get-comments", [MainController::class, 'getComments']);
 
 Route::get('/admin/get-infos-posts', [MainController::class, 'getInfosPosts']);
 Route::get('/admin/get-events', [MainController::class, 'getEvents']);

@@ -13,6 +13,7 @@ use App\Models\Study;
 use App\Models\StudyTopic;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
@@ -167,5 +168,31 @@ class MainController extends Controller
         $main_img->save();
         $main_body->save();
         return redirect()->to('/admin/main-settings/');
+    }
+
+    public function comments(){
+        return view("admin.comments");
+    }
+
+    public function getComments(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('search', $data) || !array_key_exists('count', $data) || !array_key_exists('start', $data)) return abort(404);
+
+        $comments = DB::table('masters_comments')
+            ->join('masters', 'masters.id', '=', 'masters_comments.master_id')
+            ->join('users', 'users.id', '=', 'masters_comments.author_id')
+            ->where("body",'like', "%{$data['search']}%")
+            ->skip($data['start'])
+            ->take($data['count'])
+            ->select('masters_comments.id as id', 'masters_comments.body as body',
+                'masters.id as master_id', 'masters.first_name as master_first_name',
+                'masters.last_name as master_last_name',
+                'users.first_name as user_first_name',
+                'users.last_name as user_last_name',
+            )
+            ->get();
+        return json_encode($comments);
     }
 }

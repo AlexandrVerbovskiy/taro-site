@@ -199,6 +199,9 @@
         <a href="{{url("/admin/main-settings")}}">
             <li>Main</li>
         </a>
+        <a href="{{url("/admin/comments")}}">
+            <li>Comments</li>
+        </a>
     </ul>
 </div>
 
@@ -235,6 +238,9 @@
                 </a>
                 <a href="{{url("/admin/main-settings")}}">
                     <li>Main</li>
+                </a>
+                <a href="{{url("/admin/comments")}}">
+                    <li>Comments</li>
                 </a>
             </ul>
         </div>

@@ -6,18 +6,21 @@
 <script>
     let showed = 0;
     const count = 20;
-    const canShow = "{{$count}}";
+    let canShow = {{$count}}>0;
     const topicId = "{{$topic_id}}"
 
     const getNewEvents = () => {
         console.log(showed, count)
         document.querySelector(".loader").classList.remove('hidden');
-        if (showed >= canShow) return document.querySelector(".loader").remove();
+        if (!canShow) return document.querySelector(".loader").remove();
         get("{{url('/get-events')}}" + "?start=" + showed + "&count=" + count + "&topic=" + topicId, data => {
             document.querySelector(".loader").classList.add('hidden');
-            if (data.error) return;
+            if (data.error) return canShow = false;
             let rows = "";
             showed += data.events.length;
+
+            if(data.events.length != count) canShow = false;
+
             data.events.forEach(event =>
                 rows += `
                        <div>
