@@ -35,6 +35,9 @@ Route::get("/admin/users", [MainController::class, 'users']);
 Route::get("/admin/events", [MainController::class, 'events']);
 Route::get("/admin/infos-posts", [MainController::class, 'infosPosts']);
 Route::get("/admin/studies", [MainController::class, 'studies']);
+Route::get("/admin/main-settings", [MainController::class, 'mainPageSettings']);
+
+Route::post("/admin/save-main", [MainController::class, 'saveMain']);
 
 Route::get('/admin/get-infos-posts', [MainController::class, 'getInfosPosts']);
 Route::get('/admin/get-events', [MainController::class, 'getEvents']);

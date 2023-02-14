@@ -153,7 +153,7 @@
         color: #336699;
     }
 
-    .loader.hidden{
+    .loader.hidden {
         display: none;
     }
 
@@ -196,6 +196,9 @@
         <a href="{{url("/admin/events")}}">
             <li>EVENTS</li>
         </a>
+        <a href="{{url("/admin/main-settings")}}">
+            <li>Main</li>
+        </a>
     </ul>
 </div>
 
@@ -229,6 +232,9 @@
                 </a>
                 <a href="{{url("/admin/events")}}">
                     <li>EVENTS</li>
+                </a>
+                <a href="{{url("/admin/main-settings")}}">
+                    <li>Main</li>
                 </a>
             </ul>
         </div>
