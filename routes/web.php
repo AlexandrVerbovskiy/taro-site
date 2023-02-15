@@ -12,7 +12,8 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\EventsController;
-use \App\Http\Controllers\MainController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\MastersCommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +75,8 @@ Route::get("/area-activity/{id}", [AreasActivityController::class, 'topic']);
 
 Route::get("/masters", [MastersController::class, 'masters']);
 Route::get("/master/{id}", [MastersController::class, 'master']);
+Route::post("/get-master-comments", [MastersCommentsController::class, 'getForMaster']);
+Route::post("/create-master-comments", [MastersCommentsController::class, 'create']);
 Route::get("/admin/create-master", [MastersController::class, 'create']);
 Route::get("/admin/edit-master/{id}", [MastersController::class, 'edit']);
 Route::post("/admin/save-master", [MastersController::class, 'save']);
