@@ -217,7 +217,10 @@
                 <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Забули пароль?</p>
             </div>
             <div class="modal-body padding_for_form">
-            <div class="card-body">
+            <div class="card-body" style="padding: 0; margin-top: -10px">
+                <div>
+                    <p class="text-center" style="font-size: 14px">На вказану вами пошту прийде лист для скидання паролю. Якщо ви не побачите листа, то перевірте будь-ласка спам.</p>
+                </div>
                 @if (Session::has('message'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('message') }}
@@ -235,7 +238,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-3">
-                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button">Відправити</button>
+                        <button style="cursor:pointer; margin: 0 0 -16px 0" type="submit" class="btn btn-primary form_main_button">Відправити</button>
                     </div>
                 </form>
             </div>
