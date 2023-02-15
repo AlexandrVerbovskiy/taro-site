@@ -40,7 +40,9 @@ Route::get("/admin/main-settings", [MainController::class, 'mainPageSettings']);
 Route::get("/admin/comments", [MainController::class, 'comments']);
 
 Route::post("/admin/save-main", [MainController::class, 'saveMain']);
-Route::post("/admin/get-comments", [MainController::class, 'getComments']);
+Route::get("/admin/comments", [MainController::class, 'comments']);
+Route::get("/admin/get-comments", [MainController::class, 'getComments']);
+Route::post("/admin/master-comment-delete", [MastersCommentsController::class, 'delete']);
 
 Route::get('/admin/get-infos-posts', [MainController::class, 'getInfosPosts']);
 Route::get('/admin/get-events', [MainController::class, 'getEvents']);

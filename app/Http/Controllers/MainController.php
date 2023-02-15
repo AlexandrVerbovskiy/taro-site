@@ -177,22 +177,30 @@ class MainController extends Controller
     public function getComments(Request $request)
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('search', $data) || !array_key_exists('count', $data) || !array_key_exists('start', $data)) return abort(404);
+        if (!array_key_exists('search', $_GET) || !array_key_exists('count', $_GET) || !array_key_exists('start', $_GET)) return abort(404);
 
-        $comments = DB::table('masters_comments')
-            ->join('masters', 'masters.id', '=', 'masters_comments.master_id')
-            ->join('users', 'users.id', '=', 'masters_comments.author_id')
-            ->where("body",'like', "%{$data['search']}%")
-            ->skip($data['start'])
-            ->take($data['count'])
-            ->select('masters_comments.id as id', 'masters_comments.body as body',
-                'masters.id as master_id', 'masters.first_name as master_first_name',
-                'masters.last_name as master_last_name',
-                'users.first_name as user_first_name',
-                'users.last_name as user_last_name',
-            )
-            ->get();
-        return json_encode($comments);
+        try {
+            $comments = DB::table('masters_comments')
+                ->join('masters', 'masters.id', '=', 'masters_comments.master_id')
+                ->join('users', 'users.id', '=', 'masters_comments.author_id')
+                ->where("body", 'like', "%{$_GET['search']}%")
+                ->orWhere("masters.first_name", 'like', "%{$_GET['search']}%")
+                ->orWhere("masters.last_name", 'like', "%{$_GET['search']}%")
+                ->orWhere("users.first_name", 'like', "%{$_GET['search']}%")
+                ->orWhere("users.last_name", 'like', "%{$_GET['search']}%")
+                ->skip($_GET['start'])
+                ->take($_GET['count'])
+                ->select('masters_comments.id as id', 'masters_comments.body as body',
+                    'masters.id as master_id', 'masters.first_name as master_first_name',
+                    'masters.last_name as master_last_name',
+                    'users.first_name as user_first_name',
+                    'users.last_name as user_last_name',
+                )
+                ->get();
+            return json_encode(["error" => false, "comments" => $comments]);
+        } catch (\Exception $e) {
+            file_put_contents("log.txt", $e->getMessage());
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
     }
 }
