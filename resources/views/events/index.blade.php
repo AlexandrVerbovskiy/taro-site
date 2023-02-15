@@ -1,6 +1,9 @@
-@include('layouts.header')
+@include('layouts.main-header')
 <div class="container">
-    <div class="loader hidden"></div>
+    <h3 class="text-center title_margin" style="margin: 110px 0 30px">ТОПИК</h3>
+    <div class="loader hidden">
+
+    </div>
 </div>
 
 <script>
@@ -20,10 +23,18 @@
             showed += data.events.length;
             data.events.forEach(event =>
                 rows += `
-                       <div>
-                        <div>Id: ${event["id"]}</div>
-                        <div>Title: ${event["title"]}</div>
-                    </div>`)
+<div class="row justify-content-center" style="width: 100%; margin: 0;">
+    <div class="col-lg-9 col-md-12" style="background-color: #a9c6ff; border-radius: 20px; padding: 20px; margin-bottom: 50px; height: auto;">
+        <div class="d-flex flex-column">
+            <div><h3>${event["title"]}</h3></div>
+            <div style="margin: 0 0 40px 0;">${event["id"]}</div>
+            <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
+            </div>
+        </div>
+    </div>
+</div>
+                       `
+            )
             document.querySelector(".loader").insertAdjacentHTML('beforebegin', rows);
         });
     }
@@ -47,3 +58,4 @@
 
 
 </script>
+@include('layouts.footer')
