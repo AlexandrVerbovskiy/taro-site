@@ -26,7 +26,7 @@
                 let mediaContent;
                 switch(post["media_type"]) {
                     case "youtube":
-                        mediaContent = `<iframe id="youtube_media_view" class="youtube_media" style="" src="${post['url']}"></iframe>`
+                        mediaContent = `<iframe id="youtube_media_view" class="youtube_media" style="" src="${parseYoutubeUrl(post['url'])}"></iframe>`
                         break;
                     case "audio":
                         mediaContent = `<audio style="max-width:100%; max-height:400px; margin-bottom: 20px" controls="" id="audio_media_view" src="/storage/${post['url']}"></audio>`
