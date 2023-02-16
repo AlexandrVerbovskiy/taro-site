@@ -68,7 +68,9 @@
             <input type="text" class="form-control" id="url"
                    value="{{old('url')?old('url'):(isset($url)?$url:'')}}"
                    name="url" required>
-            <iframe id="youtube_media_view"></iframe>
+            <iframe id="youtube_media_view" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
         </div>
 
         <div class="form-group mb-3 image" style="display: none">
@@ -77,12 +79,14 @@
         </div>
 
         <div class="form-group mb-3 video" style="display: none">
-            <video style="max-width:100%; max-height:400px;" controls id="video_media_view"></video><br>
+            <video style="max-width:100%; max-height:400px;" controls id="video_media_view"></video>
+            <br>
             <button type="button" class="btn btn-primary media-changer">Change</button>
         </div>
 
         <div class="form-group mb-3 audio " style="display: none">
-            <audio style="max-width:100%; max-height:400px;" controls id="audio_media_view"></audio><br>
+            <audio style="max-width:100%; max-height:400px;" controls id="audio_media_view"></audio>
+            <br>
             <button type="button" class="btn btn-primary media-changer">Change</button>
         </div>
 
@@ -111,10 +115,10 @@
         document.querySelector(".video").style.display = "none";
         document.querySelector(".audio").style.display = "none";
         document.querySelector(".image").style.display = "none";
-        document.querySelector("#image_media_view").src="";
-        document.querySelector("#video_media_view").src="";
-        document.querySelector("#youtube_media_view").src="";
-        document.querySelector("#audio_media_view").src="";
+        document.querySelector("#image_media_view").src = "";
+        document.querySelector("#video_media_view").src = "";
+        document.querySelector("#youtube_media_view").src = "";
+        document.querySelector("#audio_media_view").src = "";
         document.querySelector("." + media).style.display = "block";
     }
 
@@ -136,12 +140,14 @@
 
     document.querySelector("#url").addEventListener("change", e => {
         let src = document.querySelector("#url").value;
-        if(document.querySelector('#media_type').value=="youtube"){
-            src = parseYoutubeUrl(src);
-        }else{
-            src = "{{Storage::url("")}}"+document.querySelector('#media_type').value+"s/"+src;
+        if (src) {
+            if (document.querySelector('#media_type').value == "youtube") {
+                src = parseYoutubeUrl(src);
+            } else {
+                src = "{{Storage::url("")}}" + document.querySelector('#media_type').value + "s/" + src;
+            }
         }
-       document.querySelector("#" + document.querySelector('#media_type').value + "_media_view").src = src;
+        document.querySelector("#" + document.querySelector('#media_type').value + "_media_view").src = src;
     })
 
     onChangeMediaType();
@@ -150,7 +156,7 @@
         cancelable: !1
     }));
 
-    document.querySelectorAll(".media-changer").forEach(btn=>btn.addEventListener("click", e=>document.querySelector("#file_input").click()))
+    document.querySelectorAll(".media-changer").forEach(btn => btn.addEventListener("click", e => document.querySelector("#file_input").click()))
 </script>
 
 @include('layouts.footer')

@@ -32,7 +32,7 @@
     <script>
         let showed = 0;
         const count = 20;
-        const canShow = "{{$count}}";
+        let canShow = {{$count}}>0;
         let trashId = null;
         let search = "";
 
@@ -74,12 +74,15 @@
         const getNewEvents = () => {
             console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
-            if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
+            if (!canShow) return document.querySelector(".loader").classList.add('hidden');
             get("{{url('/admin/get-events')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
-                if (data.error) return;
+                if (data.error) return canShow = false;
+
                 let rows = "";
                 showed += data.events.length;
+                if(data.events.length != count) canShow = false;
+
                 data.events.forEach(event =>
                     rows += `
                        <tr data-id=${event["id"]}>

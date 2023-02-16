@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Master;
+use App\Models\MasterComment;
 use Illuminate\Http\Request;
 
 class MastersController extends Controller
@@ -105,6 +106,7 @@ class MastersController extends Controller
     {
         $master = Master::where('id', "=", $id)->where('hidden', false)->first();
         if (!$master) return abort(404);
-        return $this->view('masters.index', ['master' => $master]);
+        $comments = MasterComment::where("master_id", $id)->where("author_id", "=", auth()->user()->id)->get();
+        return $this->view('masters.index', ['master' => $master, 'comments'=>$comments]);
     }
 }
