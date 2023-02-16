@@ -17,6 +17,7 @@
         height: 60px;
         line-height: 60px;
         border-bottom: 1px solid #dddddd;
+
     }
 
     .admin-menu {
@@ -24,10 +25,21 @@
         font-size: 0.8em;
         background-color: #CEDFFF;
         text-align: center;
-        height: calc(100vh - 56px);
+        height: calc(100vh);
+        max-height: 20000px;
         padding: 0;
-    }
+        width: 400px;
+        /*position: fixed;
+        margin: 0;*/
 
+    }
+    .admin-background{
+        width: 400px;
+        height: 100%;
+        position: fixed;
+        background-color: #CEDFFF;
+        z-index: -1;
+    }
     .admin-menu a {
         text-decoration: none;
         color: black;
@@ -38,6 +50,8 @@
         padding: 0;
         list-style-type: none;
         list-style-image: none;
+        position: fixed;
+        width: 400px;
     }
 
     .admin-menu li {
@@ -158,10 +172,50 @@
     .loader.hidden{
         display: none;
     }
-
+    @media only screen and (max-width: 1440px) {
+        .admin-menu{
+            width: 330px;
+        }
+        .admin-menu ul{
+            width: 330px;
+        }
+        .admin-background{
+            width: 330px;
+        }
+    }
+    @media only screen and (max-width: 1280px) {
+        .admin-menu{
+            width: 280px;
+        }
+        .admin-menu ul{
+            width: 280px;
+        }
+        .admin-background{
+            width: 280px;
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .admin-menu{
+            width: 200px;
+        }
+        .admin-menu ul{
+            width: 200px;
+        }
+        .admin-background{
+            width: 200px;
+        }
+        .admin-menu ul a li{
+            font-size: 11px;
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        .admin-background{
+            background: none;
+        }
+    }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%; position: fixed">
     <div class="container-fluid" style="">
         <a class="navbar-brand" style="font-family: 'Oswald', sans-serif; font-size: 24px; padding: 2px 0" href="/">Адмін панель</a>
         <button class="hamburger d-lg-none">&#9776;</button>
@@ -200,12 +254,12 @@
         </a>
     </ul>
 </div>
-
-<div class="container" style="padding: 0; margin: 0; max-width: 100%;">
-    <main class="row" style="width:100%; padding: 0; margin: 0">
-        <div class="admin-menu d-none d-lg-block col-lg-3">
+<div class="admin-background" style=""></div>
+<div class="container" style="padding: 0; margin: 0;  max-width: 100%;">
+    <main class="row" style="width:100%; padding: 0; margin: 0;">
+        <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
             <ul>
-                <a href="{{url("/admin/users")}}">
+                <a href="{{url("/admin/users")}}" >
                     <li>USERS</li>
                 </a>
                 <a href="{{url("/admin/activities")}}">

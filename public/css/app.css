@@ -684,6 +684,17 @@ master_margin_sm{
     height: 600px;
     margin-top: 20px;
 }
+.admin_button_SaniaZaebalEdition{
+    padding: 6px 12px;
+    margin: 1px;
+
+}
+.admin_button_img_SaniaZaebalEdition {
+    width: 16px;
+    height: 16px;
+}
+.admin_master_table_sm{ }
+.admin_3_table_sm{ }
 @media only screen and (max-width: 1920px) {
     .scroll_table{
         width: auto;
@@ -1317,6 +1328,12 @@ master_margin_sm{
     .admin_button2{
         width: 80px;
     }
+    .admin_master_table_sm{
+        width: 500px;
+    }
+    .admin_3_table_sm{
+        width: 400px;
+    }
 
 }
 @media only screen and (max-width: 334px) {
@@ -1384,4 +1401,20 @@ master_margin_sm{
     .date_study{
         font-size: 14px;
     }
+    .admin_button_SaniaZaebalEdition{
+        padding: 3px 7px;
+        margin: 1px;
+
+    }
+    .admin_button_img_SaniaZaebalEdition {
+        width: 12px;
+        height: 12px;
+    }
+    .admin_master_table_sm{
+        width: 320px;
+    }
+    .admin_3_table_sm{
+        width: 300px;
+    }
 }
+

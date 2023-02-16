@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h3 class="text-center title_margin" style="margin: 30px 0 30px">Навчання</h3>
+        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Навчання</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
             <a href="{{url("/admin/create-study")}}" class="btn btn-primary admin_button_add">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -14,13 +14,13 @@
             <input type="text" class="admin_search" name="search" placeholder="Search..."/>
             <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
         </div>
-        <div class="table table-responsive table-responsive-sm scroll_table">
-            <table class="table ">
+        <div class="table table-responsive table-responsive-sm">
+            <table class="table admin_3_table_sm">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col" style="width: 100px;">Actions</th>
+                    <th scope="col" style="min-width: 150px;">Title</th>
+                    <th scope="col" style="width: 160px;">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
