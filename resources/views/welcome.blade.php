@@ -41,7 +41,7 @@
 
 
 <script>
-    export default {
+    /*export default {
         data() {
             return {
                 value: '',
@@ -53,6 +53,6 @@
                 this.context = ctx
             }
         }
-    }
+    }*/
 </script>
 @include('layouts.footer')
