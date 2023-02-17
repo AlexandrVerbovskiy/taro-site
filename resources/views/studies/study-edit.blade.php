@@ -52,4 +52,4 @@
 
     </form>
 </div>
-
+@include("layouts.footer")

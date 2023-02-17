@@ -35,7 +35,6 @@
                id="img_src"
                value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
                name="img_src" required>
-        <input accept="image/*" type="file" name="img" id="img_input">
 
         <div class="form-group mb-3">
             <label for="description">Опис:</label>
@@ -44,13 +43,12 @@
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer; width: 100px;" id="save_changes_fake" type="button" class="btn btn-primary">Save</button>
-            <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer; width: 100px;" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти</button>
+            <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
     </form>
 
     <input style="display: none;" accept="image/*" type="file" name="img" id="img_input">
-
 
 </div>
 <script>
@@ -65,7 +63,6 @@
 
     document.querySelector("#img_src").addEventListener("change", e => {
         let src = document.querySelector("#img_src").value;
-        console.log(src);
         document.querySelector("#image_media_view").src = "{{Storage::url("")}}images/"+src;
     })
 
@@ -77,3 +74,4 @@
     document.querySelector(".media-changer").addEventListener("click", e=>document.querySelector("#img_input").click());
 
 </script>
+@include("layouts.footer")

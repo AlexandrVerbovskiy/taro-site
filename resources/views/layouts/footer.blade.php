@@ -16,11 +16,11 @@
 
 <script>
 
-{{--    @if ($errors->any())--}}
-{{--    $(window).on('load', function() {--}}
-{{--        $('#login').modal('show');--}}
-{{--    });--}}
-{{--    @endif>--}}
+    {{--    @if ($errors->any())--}}
+    {{--    $(window).on('load', function() {--}}
+    {{--        $('#login').modal('show');--}}
+    {{--    });--}}
+    {{--    @endif>--}}
     function exitLogin() {
         $('#login').modal('toggle');
     }
