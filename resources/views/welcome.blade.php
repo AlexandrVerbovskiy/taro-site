@@ -37,22 +37,4 @@
 
 </div>
 
-
-
-
-<script>
-    /*export default {
-        data() {
-            return {
-                value: '',
-                context: null
-            }
-        },
-        methods: {
-            onContext(ctx) {
-                this.context = ctx
-            }
-        }
-    }*/
-</script>
 @include('layouts.footer')
