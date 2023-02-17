@@ -155,7 +155,7 @@
         color: #336699;
     }
 
-    .loader.hidden{
+    .loader.hidden {
         display: none;
     }
 
@@ -198,11 +198,17 @@
         <a href="{{url("/admin/events")}}">
             <li>EVENTS</li>
         </a>
+        <a href="{{url("/admin/main-settings")}}">
+            <li>Main</li>
+        </a>
+        <a href="{{url("/admin/comments")}}">
+            <li>Comments</li>
+        </a>
     </ul>
 </div>
 
 <div class="container" style="padding: 0; margin: 0; max-width: 100%;">
-    <main class="row" style="width:100%; padding: 0; margin: 0">
+    <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3">
             <ul>
                 <a href="{{url("/admin/users")}}">
@@ -232,9 +238,21 @@
                 <a href="{{url("/admin/events")}}">
                     <li>EVENTS</li>
                 </a>
+                <a href="{{url("/admin/main-settings")}}">
+                    <li>Main</li>
+                </a>
+                <a href="{{url("/admin/comments")}}">
+                    <li>Comments</li>
+                </a>
             </ul>
         </div>
-        <div class="col-12 col-lg-9">
+        <div class="col-12 col-lg-9 message-parent" style="padding: 0; margin: 0;">
+            @if($errors->any())
+                <div style="border-radius: 0 0 10px 10px;" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$errors->first()}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             @yield('content')
         </div>
     </main>

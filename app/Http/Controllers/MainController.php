@@ -8,15 +8,23 @@ use App\Models\EventTopic;
 use App\Models\Info;
 use App\Models\InfoPost;
 use App\Models\Master;
+use App\Models\StaticModel;
 use App\Models\Study;
 use App\Models\StudyTopic;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
     public function home()
     {
-        return $this->view("welcome");
+        $main_img = StaticModel::where("key", "main_image")->first();
+        $main_img = $main_img? $main_img->value:"";
+
+        $main_body = StaticModel::where("key", "main_body")->first();
+        $main_body = $main_body? $main_body->value:"";
+        return $this->view("welcome", ['main_img'=>$main_img, 'main_body'=>$main_body]);
     }
 
     public function admin()
@@ -132,5 +140,67 @@ class MainController extends Controller
             ->skip($start)
             ->take($count)
             ->get()]);
+    }
+
+    public function mainPageSettings(){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+
+        $main_img = StaticModel::where("key", "main_image")->first();
+        $main_img = $main_img? $main_img->value:"";
+
+        $main_body = StaticModel::where("key", "main_body")->first();
+        $main_body = $main_body? $main_body->value:"";
+        return $this->view("admin.main-settings", ['main_img'=>$main_img, 'main_body'=>$main_body]);
+    }
+
+    public function saveMain(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+
+        $data = $request->input();
+        if (!array_key_exists('main_img', $data) || !array_key_exists('main_body', $data)){
+            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+        }
+
+        $main_img = StaticModel::where("key", "main_image")->first();
+        $main_img->value = $data['main_img'];
+        $main_body = StaticModel::where("key", "main_body")->first();
+        $main_body->value = $data['main_body'];
+        $main_img->save();
+        $main_body->save();
+        return redirect()->to('/admin/main-settings/')->with('success', 'Дані збережено успішно!');
+    }
+
+    public function comments(){
+        return view("admin.comments");
+    }
+
+    public function getComments(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        if (!array_key_exists('search', $_GET) || !array_key_exists('count', $_GET) || !array_key_exists('start', $_GET)) return abort(404);
+
+        try {
+            $comments = DB::table('masters_comments')
+                ->join('masters', 'masters.id', '=', 'masters_comments.master_id')
+                ->join('users', 'users.id', '=', 'masters_comments.author_id')
+                ->where("body", 'like', "%{$_GET['search']}%")
+                ->orWhere("masters.first_name", 'like', "%{$_GET['search']}%")
+                ->orWhere("masters.last_name", 'like', "%{$_GET['search']}%")
+                ->orWhere("users.first_name", 'like', "%{$_GET['search']}%")
+                ->orWhere("users.last_name", 'like', "%{$_GET['search']}%")
+                ->skip($_GET['start'])
+                ->take($_GET['count'])
+                ->select('masters_comments.id as id', 'masters_comments.body as body',
+                    'masters.id as master_id', 'masters.first_name as master_first_name',
+                    'masters.last_name as master_last_name',
+                    'users.first_name as user_first_name',
+                    'users.last_name as user_last_name',
+                )
+                ->get();
+            return json_encode(["error" => false, "comments" => $comments]);
+        } catch (\Exception $e) {
+            file_put_contents("log.txt", $e->getMessage());
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
     }
 }

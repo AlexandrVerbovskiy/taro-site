@@ -1,6 +1,6 @@
-@extends('layouts.admin')
-@section('content')
-<div class="container py-4">
+@include('layouts.header')
+<div class="container py-4 message-parent">
+    @include("layouts.error-message")
     <h2 style="margin-bottom: 24px">Напрям діяльності</h2>
     <form class='form' method="POST" action="{{url('/admin/save-activity')}}">
         {{ csrf_field() }}
@@ -39,6 +39,15 @@
             </select>
         </div>
 
+        <div class="form-group mb-3 image">
+            <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
+            <button type="button" class="btn btn-primary media-changer">Change</button>
+        </div>
+
+        <input type="hidden" name="img_src" id="img_src"
+               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
+               required>
+
         <div class="form-group mb-3">
             <label for="body">Опис:</label>
             <textarea class="form-control" id="editor" name="body"
@@ -46,23 +55,16 @@
 
         </div>
 
-        <input type="hidden" name="img_src"
-               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
-               required>
-        <input accept="image/*" type="file" name="img" id="img_input">
 
-        <div class="form-group" style="margin-top: 15px;">
-            <button style="cursor:pointer; width: 100px;" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти</button>
+        <div class="form-group">
+            <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти</button>
             <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">
                 Save
             </button>
         </div>
-
-        @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif
     </form>
 
+    <input style="display: none;" accept="image/*" type="file" name="img" id="img_input">
 
 
 
@@ -79,23 +81,6 @@
         });
     });
 
-    function setimage() {
-        const input = $("#img_input");
-        const fd = new FormData;
-
-        fd.append('img', input.prop('files')[0]);
-
-        fetch('{{url('/file-save')}}', {
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('[name=_token]').getAttribute('value')
-            },
-            method: 'POST',
-            body: fd
-        }).then(res => res.json()).then(data => {
-            document.querySelector("[name='img_src']").value = data.filename;
-        });
-    }
-
     $("#save_changes_fake").on("click", function () {
         if (document.querySelector("[name='img_src']").value) {
             $("#save_changes").click();
@@ -103,6 +88,18 @@
             alert("error");
         }
     })
+
+    document.querySelector("#img_src").addEventListener("change", e => {
+        let src = document.querySelector("#img_src").value;
+        document.querySelector("#image_media_view").src = "{{Storage::url("")}}images/"+src;
+    })
+
+    document.querySelector("#img_src").dispatchEvent(new Event("change", {
+        bubbles: !0,
+        cancelable: !1
+    }));
+
+    document.querySelector(".media-changer").addEventListener("click", e=>document.querySelector("#img_input").click());
 
 </script>
 @stop
