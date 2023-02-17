@@ -2,7 +2,7 @@
 
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2>Post</h2>
+    <h2 style="margin-bottom: 24px">Пост(корисна інформація)</h2>
     <form class='form' method="POST" action="{{url('/admin/save-info-post')}}">
         {{ csrf_field() }}
 
@@ -13,14 +13,14 @@
         @endif
 
         <div class="form-group mb-3">
-            <label for="title">Title:</label>
+            <label for="title">Заголовок:</label>
             <input type="text" class="form-control" id="title"
                    value="{{old('title')?old('title'):(isset($title)?$title:'')}}"
                    name="title" required>
         </div>
 
         <div class="form-group mb-3">
-            <label for="info_id">Topic: </label>
+            <label for="info_id">Розділ: </label>
             <select name="info_id" id="info_id">
                 <?php foreach ($infos as $info) :
                 $saved_id = old('info_id') ? old('info_id') : (isset($info_id) ? $info_id : '-1')?>
@@ -35,38 +35,38 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="media_type">Media type: </label>
+            <label for="media_type">Тип файлу: </label>
             <select name="media_type" id="media_type">
                 <?php $saved_id = old('media_type') ? old('media_type') : (isset($media_type) ? $media_type : 'youtube')?>
                 @if($saved_id=='youtube')
-                    <option value="youtube" selected>Youtube</option>
+                    <option value="youtube" selected>Ютуб</option>
                 @else
-                    <option value="youtube">Youtube</option>
+                    <option value="youtube">Ютуб</option>
                 @endif
 
                 @if($saved_id=='audio')
-                    <option value="audio" selected>Audio</option>
+                    <option value="audio" selected>Аудіо</option>
                 @else
-                    <option value="audio">Audio</option>
+                    <option value="audio">Аудіо</option>
                 @endif
 
                 @if($saved_id=='video')
-                    <option value="video" selected>Video</option>
+                    <option value="video" selected>Відео</option>
                 @else
-                    <option value="video">Video</option>
+                    <option value="video">Відео</option>
                 @endif
 
                 @if($saved_id=='image')
-                    <option value="image" selected>Image</option>
+                    <option value="image" selected>Фото</option>
                 @else
-                    <option value="image">Image</option>
+                    <option value="image">Фото</option>
                 @endif
             </select>
         </div>
 
         <div class="form-group mb-3 youtube" style="display: none">
-            <label for="url">Url:</label>
-            <input type="text" class="form-control" id="url"
+            <label for="url">Посилання:</label>
+            <input type="text" placeholder="Укажіть посилання на ютуб"  class="form-control" id="url"
                    value="{{old('url')?old('url'):(isset($url)?$url:'')}}"
                    name="url" required>
             <iframe id="youtube_media_view" frameborder="0"
@@ -75,30 +75,30 @@
         </div>
 
         <div class="form-group mb-3 image" style="display: none">
-            <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
-            <button type="button" class="btn btn-primary media-changer">Change</button>
+            <img style="max-width:100%; max-height:400px;margin-bottom: 20px;" id="image_media_view"><br>
+            <button type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 
         <div class="form-group mb-3 video" style="display: none">
-            <video style="max-width:100%; max-height:400px;" controls id="video_media_view"></video>
+            <video style="max-width:100%; max-height:400px;margin-bottom: 20px;" controls id="video_media_view"></video>
             <br>
-            <button type="button" class="btn btn-primary media-changer">Change</button>
+            <button type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 
         <div class="form-group mb-3 audio " style="display: none">
-            <audio style="max-width:100%; max-height:400px;" controls id="audio_media_view"></audio>
+            <audio style="max-width:100%; max-height:400px;margin-bottom: 20px;" controls id="audio_media_view"></audio>
             <br>
-            <button type="button" class="btn btn-primary media-changer">Change</button>
+            <button type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 
         <div class="form-group mb-3">
-            <label for="body">Description:</label>
+            <label for="body">Опис:</label>
             <textarea class="form-control" id="editor" name="body" required
             >{{old('body')?old('body'):(isset($body)?$body:'')}}</textarea>
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
     </form>
 
@@ -155,5 +155,4 @@
 
     document.querySelectorAll(".media-changer").forEach(btn => btn.addEventListener("click", e => document.querySelector("#file_input").click()))
 </script>
-
-@include('layouts.footer')
+@include("layouts.footer")

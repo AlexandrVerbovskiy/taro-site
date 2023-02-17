@@ -15,6 +15,16 @@
 </script>
 
 <script>
+
+    {{--    @if ($errors->any())--}}
+    {{--    $(window).on('load', function() {--}}
+    {{--        $('#login').modal('show');--}}
+    {{--    });--}}
+    {{--    @endif>--}}
+    function exitLogin() {
+        $('#login').modal('toggle');
+    }
+
     if (document.querySelector(".lang_button"))
         document.querySelectorAll(".lang_button").forEach(elem => elem.addEventListener("click", e => changeLanguage(e.target.dataset.value)));
 

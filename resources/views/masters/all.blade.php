@@ -1,5 +1,5 @@
 @include('layouts.main-header')
-<h3 class="text-center title_margin" style="margin: 80px 0 30px">Майстри</h3>
+<h3 class="text-center title_margin" style="margin: 110px 0 30px">Майстри</h3>
 <!--@foreach($masters as $master)
     <div class="row justify-content-center" style="width: 100%; margin: 0;">
             <div class="master col-lg-9 col-md-12">
@@ -32,7 +32,7 @@
                         <div class="col-md-auto">
                             <div style="">
                                 <img class="master-imageSaniaZaebalEdition"
-                                     src="https://images.unsplash.com/photo-1675453442429-1ea5b9652743?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80">
+                                     src="{{Storage::url("/images/$master->img_src")}}">
                             </div>
                         </div>
                         <div class="col col-lg-8">
@@ -40,7 +40,7 @@
                                 <p class="master_nameSaniaZaebalEdition">{{$master['last_name']}} {{$master['first_name']}}</p>
                                 <div class="master_descriptionSaniaZaebalEdition" style="">
                                     <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non faucibus dui, eget malesuada est. Aliquam risus ligula, molestie vel risus ac, euismod ultrices orci. Praesent finibus libero vitae magna congue interdum. asdasdsadasdasdasdasdasdasdadss -->
-                                    {{$master['description']}}
+                                    {!!$master['description']!!}
                                 </div>
                             </div>
                             <div class="align-items-end" style="padding: 0 0px; bottom: 0; ">
@@ -76,4 +76,12 @@
             </div>
         </div>
     </div>
+    <script>
+        (function(){
+            var cut = document.getElementsByClassName('master_descriptionSaniaZaebalEdition');
+            for( var i = 0; i < cut.length; i++ ){
+                cut[i].innerText = cut[i].innerText.slice(0,255) + '...';
+            }
+        })();
+    </script>
     @include('layouts.footer')

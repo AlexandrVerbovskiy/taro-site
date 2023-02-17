@@ -1,7 +1,7 @@
 @include('layouts.header')
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2>Topic</h2>
+    <h2>Навчання</h2>
     <form class='form' method="POST" action="{{url('/admin/edit-study')}}">
         {{ csrf_field() }}
 
@@ -29,13 +29,13 @@
             <label for="topic_id">Topic: </label>
             <select name="topic_id" id="topic_id">
                 <?php foreach ($studies as $study) :
-                    $saved_id=old('topic_id')?old('topic_id'):(isset($topic_id)?$topic_id:'-1')?>
-                    @if($saved_id==$study->id)
-                        <option value="{{$study->id}}" selected>{{$study->title_ua}}</option>
-                    @else
-                        <option value="{{$study->id}}">{{$study->title_ua}}</option>
-                    @endif
-                    <!--<option value="{{$study->id}}">{{$study->title_ru}}</option>-->
+                $saved_id = old('topic_id') ? old('topic_id') : (isset($topic_id) ? $topic_id : '-1')?>
+                @if($saved_id==$study->id)
+                    <option value="{{$study->id}}" selected>{{$study->title_ua}}</option>
+                @else
+                    <option value="{{$study->id}}">{{$study->title_ua}}</option>
+                @endif
+            <!--<option value="{{$study->id}}">{{$study->title_ru}}</option>-->
                 <?php endforeach; ?>
             </select>
         </div>
@@ -47,8 +47,9 @@
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
+
     </form>
 </div>
-@include('layouts.footer')
+@include("layouts.footer")

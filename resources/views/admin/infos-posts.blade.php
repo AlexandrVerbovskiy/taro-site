@@ -1,30 +1,33 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
+        <h3 class="text-center title_margin" style="margin: 30px 0 30px">Пости</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
-            <a href="{{url("/admin/create-info-post")}}" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-pencil" viewBox="0 0 16 16">
+            <a href="{{url("/admin/create-info-post")}}" class="btn btn-primary admin_button_add">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                     class="bi bi-pencil admin_add_img" viewBox="0 0 16 16">
                     <path
                         d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
                 </svg>
                 Add
             </a>
-            <input type="text" name="search" placeholder="Search..."/>
-            <button id="search" type="button" class="btn btn-danger">Search</button>
+            <input type="text" class="admin_search" name="search" placeholder="Search..."/>
+            <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
         </div>
-        <table class="table table-responsive table-responsive-sm">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="table table-responsive table-responsive-sm scroll_table">
+            <table class="table ">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col" style="width: 100px;">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
         <div class="loader hidden"></div>
     </div>
     <button id="trash-modal" style="display: none;">Trash</button>

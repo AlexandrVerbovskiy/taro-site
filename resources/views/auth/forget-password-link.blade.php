@@ -1,51 +1,54 @@
-@include('layouts.header')
+@include('layouts.main-header')
+<div class="container">
+    <br><br><br><br><br><br>
 <main class="login-form">
     <div class="cotainer">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Reset Password</div>
-                    <div class="card-body">
+            <div class="col-lg-6">
+                <div class="card" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
+                    <div class="modal-header d-flex justify-content-center"
+                         style="border: 0; margin: 18px 0; padding-bottom: 0">
+                        <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Скинути пароль</p>
+                    </div>
+                    <div class="card-body" style="padding: 0">
 
                         <form action="{{ url('reset-password') }}" method="POST">
+
                             @csrf
-                            <input type="hidden" name="token" value="{{ $token }}">
+                            <div class="modal-body padding_for_form">
+                                <input type="hidden" name="token" value="{{ $token }}">
 
-                            <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                                <div class="col-md-6">
-                                    <input type="text" id="email_address" class="form-control" name="email" required autofocus>
-                                    @if ($errors->has('email'))
-                                        <span class="text-danger">{{ $errors->first('email') }}</span>
-                                    @endif
+                                <div class="" >
+
+                                        <input type="text" id="email_address" placeholder="Пошта" class="form-control input_form" name="email" required autofocus>
+                                        @if ($errors->has('email'))
+                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                        @endif
+
+                                </div>
+
+                                <div class="">
+                                        <input type="password" id="password" class="form-control input_form" placeholder="Пароль" name="password" required autofocus>
+                                        @if ($errors->has('password'))
+                                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                                        @endif
+                                </div>
+
+                                <div class="">
+                                        <input type="password" id="password-confirm" class="form-control input_form" placeholder="Повторіть пароль" name="password_confirmation" required autofocus>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                        @endif
+
+                                </div>
+
+                                <div class="">
+                                    <button type="submit" class="btn btn-primary form_main_button">
+                                        Reset Password
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required autofocus>
-                                    @if ($errors->has('password'))
-                                        <span class="text-danger">{{ $errors->first('password') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
-                                <div class="col-md-6">
-                                    <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autofocus>
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
-                                </button>
-                            </div>
                         </form>
 
                     </div>
@@ -54,4 +57,5 @@
         </div>
     </div>
 </main>
+</div>
 @include('layouts.footer')

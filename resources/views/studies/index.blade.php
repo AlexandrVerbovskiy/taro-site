@@ -1,6 +1,6 @@
 @include('layouts.main-header')
 <div class="container">
-    <h3 class="text-center title_margin" style="margin: 80px 0 30px">Навчання</h3>
+    <h3 class="text-center title_margin" style="margin: 110px 0 30px">Навчання</h3>
     <div class="loader hidden row justify-content-center" style="width: 100%; margin: 0;">
 
     </div>
@@ -31,7 +31,7 @@
                                     <div><h3>${study["title"]}</h3></div>
                                     <div style="margin: 0 0 40px 0;">${study["body"]}</div>
                                     <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
-                                        <label>Дата: ${study["date"].split(' ')[0]}</label>
+                                        <label class="date_study">Дата: ${study["date"].split(' ')[0]}</label>
                                         <a class="btn btn-light master_sec_button">Запис</a>
                                     </div>
                                 </div>

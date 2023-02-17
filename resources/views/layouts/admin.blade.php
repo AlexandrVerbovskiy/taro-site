@@ -22,7 +22,7 @@
     .admin-menu {
         font-weight: bold;
         font-size: 0.8em;
-        background: #f1f1f1;
+        background-color: #CEDFFF;
         text-align: center;
         height: calc(100vh - 56px);
         padding: 0;
@@ -30,7 +30,7 @@
 
     .admin-menu a {
         text-decoration: none;
-        color: #666;
+        color: black;
     }
 
     .admin-menu ul {
@@ -46,7 +46,7 @@
     }
 
     .admin-menu li:hover {
-        background: #ffffff;
+        background: #a9c6ff;
     }
 
     .hamburger {
@@ -56,7 +56,7 @@
         right: 0;
         line-height: 45px;
         padding: 5px 15px 0px 15px;
-        color: #999;
+        color: black;
         border: 0;
         font-size: 1.4em;
         font-weight: bold;
@@ -71,7 +71,7 @@
         top: 0px;
         right: 0;
         padding: 7px 15px 0px 15px;
-        color: #999;
+        color: black;
         border: 0;
         font-size: 3em;
         line-height: 65px;
@@ -81,56 +81,58 @@
         z-index: 10000000000000;
     }
 
-    .menu {
+    .menu_2 {
         z-index: 1000000;
         font-weight: bold;
         font-size: 0.8em;
         width: 100%;
-        background: #f1f1f1;
+        background: #a9c6ff;
         position: absolute;
         text-align: center;
         font-size: 12px;
+        margin: 0;
     }
 
-    .menu ul {
+    .menu_2 ul {
         margin: 0;
         padding: 0;
         list-style-type: none;
         list-style-image: none;
+        background: #a9c6ff;
     }
 
-    .menu li {
+    .menu_2 li {
         display: block;
         padding: 15px 0 15px 0;
-        border-bottom: #dddddd 1px solid;
+        /*border-bottom: #dddddd 1px solid;*/
     }
 
-    .menu li:hover {
+    .menu_2 li:hover {
         display: block;
-        background: #ffffff;
+        background: #CEDFFF;
         padding: 15px 0 15px 0;
-        border-bottom: #dddddd 1px solid;
+        /*border-bottom: #dddddd 1px solid;*/
     }
 
-    .menu ul li a {
+    .menu_2 ul li a {
         text-decoration: none;
         margin: 0px;
-        color: #666;
+        color: black;
     }
 
-    .menu ul li a:hover {
-        color: #666;
+    .menu_2 ul li a:hover {
+        color: black;
         text-decoration: none;
     }
 
-    .menu a {
+    .menu_2 a {
         text-decoration: none;
-        color: #666;
+        color: black;
     }
 
-    .menu a:hover {
+    .menu_2 a:hover {
         text-decoration: none;
-        color: #666;
+        color: black;
     }
 
     .glyphicon-home {
@@ -159,16 +161,16 @@
 
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%;">
+    <div class="container-fluid" style="">
+        <a class="navbar-brand" style="font-family: 'Oswald', sans-serif; font-size: 24px; padding: 2px 0" href="/">Адмін панель</a>
         <button class="hamburger d-lg-none">&#9776;</button>
         <button class="cross d-lg-none">&#735;</button>
     </div>
 </nav>
 
-<div class="menu d-lg-none " style="position: relative;">
-    <ul>
+<div class="menu_2 d-lg-none " style="position: absolute; margin: 55px 0 0 0">
+    <ul style="background: #a9c6ff;">
         <a href="{{url("/admin/users")}}">
             <li>USERS</li>
         </a>
@@ -254,22 +256,23 @@
             @yield('content')
         </div>
     </main>
+
 </div>
 
 <script>
     $(document).ready(function () {
 
         $(".cross").hide();
-        $(".menu").hide();
+        $(".menu_2").hide();
         $(".hamburger").click(function () {
-            $(".menu").slideToggle("slow", function () {
+            $(".menu_2").slideToggle("slow", function () {
                 $(".hamburger").hide();
                 $(".cross").show();
             });
         });
 
         $(".cross").click(function () {
-            $(".menu").slideToggle("slow", function () {
+            $(".menu_2").slideToggle("slow", function () {
                 $(".cross").hide();
                 $(".hamburger").show();
             });

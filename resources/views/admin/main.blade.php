@@ -1,5 +1,17 @@
 @extends('layouts.admin')
 @section('content')
+    <style>
+        .row{
+            margin: 20px 20px 20px 0;
+        }
+        .card{
+            margin: 10px;
+            border: 0;
+            border-radius: 25px;
+            background: #a9c6ff;
+            /*height: 110px;*/
+        }
+    </style>
 <div class="container">
     <div class="row">
         <div class="col-sm card">

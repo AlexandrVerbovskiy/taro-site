@@ -1,7 +1,7 @@
 @include('layouts.header')
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2>Topic Event</h2>
+    <h2 style="margin-bottom: 24px">Категорія події</h2>
     <form class='form' method="POST" action="{{url('/admin/save-topic-event')}}">
         {{ csrf_field() }}
 
@@ -26,8 +26,8 @@
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
     </form>
 </div>
-@include('layouts.footer')
+@include("layouts.footer")

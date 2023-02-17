@@ -1,7 +1,7 @@
 @include('layouts.header')
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2>Topic</h2>
+    <h2 style="margin-bottom: 24px">Категорія навчення</h2>
     <form class='form' method="POST" action="{{url('/admin/save-study-topic')}}">
         {{ csrf_field() }}
 
@@ -12,22 +12,22 @@
         @endif
 
         <div class="form-group mb-3">
-            <label for="title_ua">Name(ua):</label>
+            <label for="title_ua">Назва(ua):</label>
             <input type="text" class="form-control" id="title_ua"
                    value="{{old('title_ua')?old('title_ua'):(isset($title_ua)?$title_ua:'')}}"
                    name="title_ua" required>
         </div>
 
         <div class="form-group mb-3">
-            <label for="title_ru">Name(ru):</label>
+            <label for="title_ru">Назва(ru):</label>
             <input type="text" class="form-control" id="title_ru"
                    value="{{old('title_ru')?old('title_ru'):(isset($title_ru)?$title_ru:'')}}"
                    name="title_ru" required>
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
     </form>
 </div>
-@include('layouts.footer')
+@include("layouts.footer")
