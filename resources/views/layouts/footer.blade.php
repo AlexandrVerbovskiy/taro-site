@@ -100,11 +100,6 @@
 
 
 </script>
-<script>
-    //ne rabotaet
-    /*document.getElementsByClassName('lang_button').onclick = function() {
-        document.getElementById('lang_but').classList.add('lang_button_change');
-    }*/
-</script>
+
 </body>
 </html>

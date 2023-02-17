@@ -49,6 +49,10 @@
             document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
         });
         localStorage.setItem("language", lang);
+
+        for(let langButton of document.querySelectorAll('.lang_button')) {
+            langButton.style.textDecoration = langButton.dataset.value === lang ? 'underline' : 'none';
+        }
     }
 
     const get = (url, callback) => {

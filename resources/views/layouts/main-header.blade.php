@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class="col d-flex justify-content-end">
-            <a data-value="ua" class="lang_button link-dark" id="lang_but" style="">UA</a>
-            <a data-value="ru" class="link-dark lang_button" id="lang_but" style="margin-left: 20px">RUS</a>
+            <a data-value="ua" class="lang_button" id="ua_lang" style="">UA</a>
+            <a data-value="ru" class="lang_button" id="ru_lang" style="margin-left: 20px">RUS</a>
 
         </div>
     </div>

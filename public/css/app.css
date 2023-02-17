@@ -87,6 +87,9 @@ ul>li>a{
     text-decoration: none;
     color: black;
 }
+.lang_button:hover {
+    color: black;
+}
 
 .lang_button_change{
     text-decoration: underline;
