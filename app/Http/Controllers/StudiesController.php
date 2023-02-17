@@ -46,7 +46,7 @@ class StudiesController extends Controller
 
             if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'founded_id' => 'id'
+                    'error' => 'Розділ навчань з такими даними уже існує: <a href="' . url("/admin/edit-study-topic/" . $findedByData->id) . '">' . $data['title_ua'] . '</a>'
                 ]);
 
             $findedByData = StudyTopic::where(["title_ru" => $data['title_ru']], ['id' ,'!=',$data['id']])->first();
@@ -58,7 +58,7 @@ class StudiesController extends Controller
             $topic->title_ru = $data['title_ru'];
             $topic->save();
 
-            return redirect()->to('/admin/edit-study-topic/' . $topic->id);
+            return redirect()->to('/admin/edit-study-topic/' . $topic->id)->with('success', 'Розділ збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -70,11 +70,11 @@ class StudiesController extends Controller
     public function deleteTopic(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Розділ навчань не знайдено!']);
 
         try {
             StudyTopic::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Розділ навчань успішно видалено!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -83,13 +83,17 @@ class StudiesController extends Controller
     public function changeVisibleTopic(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Розділ навчань успішно видалено!']);
 
         try {
             $model = StudyTopic::where("id", $data["id"])->first();
             $model->hidden = !$model->hidden;
             $model->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
+
+            $message = "Розділ успішно приховано";
+            if(!$model->hidden)$message = "Розділ успішно відновлено";
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -137,10 +141,6 @@ class StudiesController extends Controller
 
         try {
             $findedByData = Study::where(["title" => $data['title'], "date" => $data['date'], "topic_id" => $data['topic_id']])->first();
-            if ($findedByData && $findedByData['id'] != $data['id'])
-                return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'founded_id' => 'id'
-                ]);
 
             if ($findedByData && $data['body'] == $findedByData['body'] && $data['title'] == $findedByData['title'] && $findedByData['id'] == $data['id'] && $data['date'] == $findedByData['date'] && $data['id_studies_topic'] == $findedByData['id_studies_topic'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''));
@@ -152,7 +152,7 @@ class StudiesController extends Controller
             $study->date = $data['date'];
             $study->save();
 
-            return redirect()->to('/admin/edit-study/' .$study->id);
+            return redirect()->to('/admin/edit-study/' .$study->id)->with('success', 'Пост опубліковано успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -191,11 +191,11 @@ class StudiesController extends Controller
     public function deleteStudy(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Пост не знайдено!']);
 
         try {
             Study::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Пост видалено успішно!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -204,13 +204,17 @@ class StudiesController extends Controller
     public function changeVisibleStudy(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Пост не знайдено!']);
 
         try {
             $model = Study::where("id", $data["id"])->first();
             $model->hidden = !$model->hidden;
             $model->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
+
+            $message = "Пост успішно приховано";
+            if(!$model->hidden)$message = "Пост успішно відновлено";
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }

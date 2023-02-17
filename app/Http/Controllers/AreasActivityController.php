@@ -46,7 +46,7 @@ class AreasActivityController extends Controller
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua'], ["id", "!=", $data['id']]])->first();
             if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'error' => 'Напрям діяльності з такими даними уже існує: <a href="' . url("/admin/edit-activity/" . $findedByData->id) . '">' . $findedByData->last_name . ' ' . $findedByData->first_name . '</a>'
+                    'error' => 'Напрям діяльності з такими даними уже існує: <a href="' . url("/admin/edit-activity/" . $findedByData->id) . '">' . $data['title_ua'] . '</a>'
                 ]);
 
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua']])->first();
@@ -62,7 +62,7 @@ class AreasActivityController extends Controller
             $acivity->title_ru = $data['title_ru'];
             $acivity->save();
 
-            return redirect()->to('/admin/edit-activity/' . $acivity->id)->with('success', 'Напрямок діяльності збережено успішно!');;
+            return redirect()->to('/admin/edit-activity/' . $acivity->id)->with('success', 'Напрямок діяльності збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
