@@ -29,7 +29,9 @@
         document.querySelectorAll(".lang_button").forEach(elem => elem.addEventListener("click", e => changeLanguage(e.target.dataset.value)));
 
     const lang = localStorage.getItem("language") ?? "ua";
+
     changeLanguage(lang);
+
 
     $(document).ready(function () {
         if ($(".form").length > 0) {
@@ -101,10 +103,8 @@
 
 </script>
 <script>
-    //ne rabotaet
-    /*document.getElementsByClassName('lang_button').onclick = function() {
-        document.getElementById('lang_but').classList.add('lang_button_change');
-    }*/
+
+
 </script>
 </body>
 </html>
