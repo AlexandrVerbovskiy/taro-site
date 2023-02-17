@@ -1,5 +1,6 @@
 @include('layouts.header')
-<div class="container py-4">
+<div class="container py-4 message-parent">
+    @include("layouts.error-message")
     <h2>Register</h2>
     <form method="POST" action="{{url('/edit-profile')}}">
         {{ csrf_field() }}
@@ -55,10 +56,6 @@
         <div class="form-group">
             <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
         </div>
-
-        @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif
     </form>
 </div>
 @include('layouts.footer')

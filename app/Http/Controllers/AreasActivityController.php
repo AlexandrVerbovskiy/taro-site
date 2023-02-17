@@ -46,7 +46,7 @@ class AreasActivityController extends Controller
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua'], ["id", "!=", $data['id']]])->first();
             if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'founded_id' => 'id'
+                    'error' => 'Напрям діяльності з такими даними уже існує: <a href="' . url("/admin/edit-activity/" . $findedByData->id) . '">' . $data['title_ua'] . '</a>'
                 ]);
 
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua']])->first();
@@ -62,7 +62,7 @@ class AreasActivityController extends Controller
             $acivity->title_ru = $data['title_ru'];
             $acivity->save();
 
-            return redirect()->to('/admin/edit-activity/' . $acivity->id);
+            return redirect()->to('/admin/edit-activity/' . $acivity->id)->with('success', 'Напрямок діяльності збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -75,11 +75,11 @@ class AreasActivityController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Acivity wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Напрямок діяльності не знайдено']);
 
         try {
             Acivity::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Напрямок діяльності видалено успішно!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -89,13 +89,17 @@ class AreasActivityController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Acivity wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Напрямок діяльності не знайдено']);
 
         try {
             $activity = Acivity::where("id", $data["id"])->first();
             $activity->hidden = !$activity->hidden;
             $activity->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $activity->hidden]);
+
+            $message = 'Напрямок діяльності бльше не відображається у користувачів!';
+            if(!$activity->hidden) $message = 'Напрямок діяльності знову відображається у користувачів!';
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $activity->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Request;
 
 class SessionsController extends Controller
@@ -18,7 +17,8 @@ class SessionsController extends Controller
         if (auth()->check()) return abort(404);
         if (auth()->attempt(request(['email', 'password'])) == false) {
             return back()->withInput(Request::except('password'))->withErrors([
-                'message' => 'The email or password is incorrect, please try again'
+                'message' => 'The email or password is incorrect, please try again',
+                'login' => true
             ]);
         }
         return redirect()->to('/');

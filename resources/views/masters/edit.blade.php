@@ -1,5 +1,6 @@
 @include('layouts.header')
-<div class="container py-4">
+<div class="container py-4 message-parent">
+    @include("layouts.error-message")
     <h2>Master</h2>
     <form class='form' method="POST" action="{{url('/admin/save-master')}}">
         {{ csrf_field() }}
@@ -44,10 +45,6 @@
             <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Save</button>
             <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
         </div>
-
-        @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif
     </form>
 
     <input style="display: none;" accept="image/*" type="file" name="img" id="img_input">

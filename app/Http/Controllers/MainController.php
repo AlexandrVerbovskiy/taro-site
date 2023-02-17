@@ -158,7 +158,7 @@ class MainController extends Controller
 
         $data = $request->input();
         if (!array_key_exists('main_img', $data) || !array_key_exists('main_body', $data)){
-            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Any property can'r be empty!");
+            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
         }
 
         $main_img = StaticModel::where("key", "main_image")->first();
@@ -167,7 +167,7 @@ class MainController extends Controller
         $main_body->value = $data['main_body'];
         $main_img->save();
         $main_body->save();
-        return redirect()->to('/admin/main-settings/');
+        return redirect()->to('/admin/main-settings/')->with('success', 'Дані збережено успішно!');
     }
 
     public function comments(){

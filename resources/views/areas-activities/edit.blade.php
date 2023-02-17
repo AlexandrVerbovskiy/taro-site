@@ -1,5 +1,6 @@
 @include('layouts.header')
-<div class="container py-4">
+<div class="container py-4 message-parent">
+    @include("layouts.error-message")
     <h2>Topic</h2>
     <form class='form' method="POST" action="{{url('/admin/save-activity')}}">
         {{ csrf_field() }}
@@ -60,10 +61,6 @@
                 Save
             </button>
         </div>
-
-        @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif
     </form>
 
     <input style="display: none;" accept="image/*" type="file" name="img" id="img_input">
