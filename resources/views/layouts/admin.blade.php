@@ -171,6 +171,12 @@
 
 <div class="menu_2 d-lg-none " style="position: absolute; margin: 55px 0 0 0">
     <ul style="background: #a9c6ff;">
+        <a href="{{url("/admin/calendar")}}">
+            <li>Calendar</li>
+        </a>
+        <a href="{{url("/admin/main-settings")}}">
+            <li>Main</li>
+        </a>
         <a href="{{url("/admin/users")}}">
             <li>USERS</li>
         </a>
@@ -198,9 +204,6 @@
         <a href="{{url("/admin/events")}}">
             <li>EVENTS</li>
         </a>
-        <a href="{{url("/admin/main-settings")}}">
-            <li>Main</li>
-        </a>
         <a href="{{url("/admin/comments")}}">
             <li>Comments</li>
         </a>
@@ -211,6 +214,9 @@
     <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3">
             <ul>
+                <a href="{{url("/admin/calendar")}}">
+                    <li>Calendar</li>
+                </a>
                 <a href="{{url("/admin/users")}}">
                     <li>USERS</li>
                 </a>
@@ -237,9 +243,6 @@
                 </a>
                 <a href="{{url("/admin/events")}}">
                     <li>EVENTS</li>
-                </a>
-                <a href="{{url("/admin/main-settings")}}">
-                    <li>Main</li>
                 </a>
                 <a href="{{url("/admin/comments")}}">
                     <li>Comments</li>

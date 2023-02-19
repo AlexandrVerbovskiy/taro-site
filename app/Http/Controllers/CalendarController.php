@@ -5,40 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CalendarDate;
 use App\Models\CalendarTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CalendarController extends Controller
 {
-    public function edit(){
-        if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        $dates = CalendarDate::all();
-        return $this->view('calendar.edit', ['dates'=>$dates]);
-    }
-
-    public function saveDateCalendar(Request $request){
-        if (!auth()->check() || !auth()->user()->admin) return abort(404);
-        $data = json_decode($request->getContent(), true);
-
-        if(!array_key_exists('id', $data)) $data['id']='-1';
-
-        try {
-            $findedByData = CalendarDate::where(["date" => $data['date']])->first();
-            if ($findedByData && $findedByData['id'] != $data['id']) {
-                return json_encode(["error" => true, "found_id" => $findedByData['id']]);
-            } else if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["date"] == $data['date']) {
-                return json_encode(["error" => false, "message" => ""]);
-            }
-
-            $date = CalendarDate::firstOrNew(['id' => $data['id']]);
-            $date->date = $data['date'];
-            $date->save();
-
-            return json_encode(["error" => false, "data" => $date]);
-        } catch (\Exception $e) {
-            file_put_contents("log.txt", $e->getMessage());
-            return json_encode(["error" => true, "message" => "Something went wrong"]);
-        }
-    }
-
     public function saveTimeCalendar(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
@@ -46,16 +16,17 @@ class CalendarController extends Controller
         if(!array_key_exists('id', $data)) $data['id']='-1';
 
         try {
-            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'], 'calendar_date_id'=>$data['calendar_date_id']])->first();
+            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'], "date" => $data['date']])->first();
             if ($findedByData) return json_encode(["error" => true, "found_id" => $findedByData['id']]);
 
-            $findedByData = CalendarTime::where(["time" => $data['time'], 'calendar_date_id'=>$data['calendar_date_id']])->first();
+            $findedByData = CalendarTime::where(["time" => $data['time'], "date" => $data['date']])->first();
             if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["calendar_date_id"] == $data['calendar_date_id'] && $findedByData["time"] == $data['time'])
                 return json_encode(["error" => false, "message" => ""]);
 
 
             $date = CalendarTime::firstOrNew(['id' => $data['id']]);
             $date->time = $data['time'];
+            $date->date = $data['date'];
             $date->calendar_date_id = $data['calendar_date_id'];
             $date->save();
 
@@ -66,8 +37,26 @@ class CalendarController extends Controller
         }
     }
 
-    public function getTimes(Request $request, $date_id){
-        $times = CalendarTime::where('calendar_date_id', '=', $date_id)->get();
-        return json_encode($times);
+    public function getTimes(Request $request, $date){
+       try{
+        $times = CalendarTime::where('date', '=', $date)->get();
+        return json_encode(["error" => false, "data" => $times]);
+       } catch (\Exception $e) {
+           file_put_contents("log.txt", $e->getMessage());
+           return json_encode(["error" => true, "message" => $e->getMessage()]);
+       }
+    }
+
+    public function delete(Request $request){
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Час прийому не знайдено!']);
+
+        try {
+            CalendarTime::where("id", $data['id'])->delete();
+            return json_encode(["error" => false, "message" => 'Час прийому видалено успішно!']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
     }
 }

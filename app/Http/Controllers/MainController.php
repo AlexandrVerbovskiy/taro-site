@@ -203,4 +203,8 @@ class MainController extends Controller
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
+
+    public function calendar(){
+        return $this->view("admin.calendar");
+    }
 }

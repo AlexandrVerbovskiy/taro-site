@@ -12,6 +12,7 @@ class CalendarTime extends Model
 
     protected $fillable = [
         'calendar_date_id',
+        'date',
         'time'
     ];
 }
