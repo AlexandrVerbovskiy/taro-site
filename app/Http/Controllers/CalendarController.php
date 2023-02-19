@@ -37,8 +37,7 @@ class CalendarController extends Controller
     }
 
     public function getTimes(Request $request, $date){
-       try{
-        $times = CalendarTime::where('date', '=', $date)->orderBy("time")->get();
+       try{        $times = CalendarTime::where('date', '=', $date)->orderBy("time")->get();
         return json_encode(["error" => false, "date"=>$date,  "times" => $times]);
        } catch (\Exception $e) {
            file_put_contents("log.txt", $e->getMessage());
