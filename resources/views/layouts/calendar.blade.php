@@ -1,5 +1,6 @@
 @php
-    if(!isset($onlyActive)) $onlyActive = true;
+    if(!isset($all)) $all = false;
+    if(!isset($dates)) $dates = [];
 @endphp
 
 <style>
@@ -46,10 +47,12 @@
         font-weight: bold;
     }
 
-    .calendar-day.disabled {
-        color: #ccc;
+    @if(!$all)
+    .calendar-day:not(.active) {
+        color: #dadada;
         cursor: default;
     }
+    @endif
 
     .calendar-days {
         display: grid;
@@ -72,6 +75,10 @@
     .calendar-day.active {
         background-color: #1e88e5;
         color: white;
+    }
+
+    .calendar-day.selected {
+        background-color: #fc7434;
     }
 
     .calendar-day.disabled {
@@ -109,7 +116,7 @@
                 this.month = this.date.getMonth();
                 this.year = this.date.getFullYear();
                 this.days = [];
-                this.activeDates = ['2023-02-19'];
+                this.activeDates = @json($dates);
                 this.render();
                 this.listeners();
             },
@@ -174,7 +181,7 @@
                     this.month--;
                     if (this.month < 0) {
                         this.month = 11;
-                        this.year--;
+                        this.year--
                     }
                     this.render();
                 });
@@ -190,14 +197,20 @@
 
                 calendarDays.addEventListener('click', (event) => {
                     const dayEl = event.target;
-                    if (dayEl.classList.contains('disabled')) {
-                        return;
-                    }
+                    if (dayEl.classList.contains('disabled')) return;
+
+                    @if(!$all)
+                        if (!dayEl.classList.contains('active')) return;
+                    @endif
+
+                    const findElem = document.querySelector(".selected");
+                    if(findElem==dayEl) return;
+
+                    if(findElem) findElem.classList.remove("selected");
                     const selectedDate = new Date(this.year, this.month, dayEl.innerHTML);
-
-                    console.log(event.target.dataset.date)
-
-                    get("/calendar-times/{date}", res => {
+                    dayEl.classList.add("selected");
+                    document.querySelector(".time-list").innerHTML="";
+                    get("/calendar-times/"+event.target.dataset.date, res => {
                         onGetDate(res);
                     })
                 });

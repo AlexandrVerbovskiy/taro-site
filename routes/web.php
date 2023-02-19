@@ -103,7 +103,8 @@ Route::get('/get-studies', [StudiesController::class, 'getStudies']);
 Route::get("/studies/{id}", [StudiesController::class, 'studies']);
 
 Route::get("/calendar-times/{date}", [CalendarController::class, 'getTimes']);
-Route::post("/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
+Route::post("/admin/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
+Route::post("/admin/calendar-time-delete", [CalendarController::class, 'delete']);
 
 Route::get("/admin/create-info", [InfosController::class, 'createInfo']);
 Route::get("/admin/edit-info/{id}", [InfosController::class, 'editInfo']);

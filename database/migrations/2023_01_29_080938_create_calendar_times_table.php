@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('calendar_times', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('calendar_date_id');
             $table->date('date');
             $table->time('time');
             $table->timestamps();

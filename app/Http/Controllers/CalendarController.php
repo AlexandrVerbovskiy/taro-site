@@ -16,18 +16,17 @@ class CalendarController extends Controller
         if(!array_key_exists('id', $data)) $data['id']='-1';
 
         try {
-            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'], "date" => $data['date']])->first();
-            if ($findedByData) return json_encode(["error" => true, "found_id" => $findedByData['id']]);
+            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'].":00", "date" => $data['date']])->first();
+            if ($findedByData) return json_encode(["error" => true, "message" => "Ви не можете додати запис на цей час, так як він уже існує!"]);
 
             $findedByData = CalendarTime::where(["time" => $data['time'], "date" => $data['date']])->first();
-            if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["calendar_date_id"] == $data['calendar_date_id'] && $findedByData["time"] == $data['time'])
+            if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["date"] == $data['date'] && $findedByData["time"] == $data['time'])
                 return json_encode(["error" => false, "message" => ""]);
 
 
             $date = CalendarTime::firstOrNew(['id' => $data['id']]);
             $date->time = $data['time'];
             $date->date = $data['date'];
-            $date->calendar_date_id = $data['calendar_date_id'];
             $date->save();
 
             return json_encode(["error" => false, "data" => $date]);
@@ -39,8 +38,8 @@ class CalendarController extends Controller
 
     public function getTimes(Request $request, $date){
        try{
-        $times = CalendarTime::where('date', '=', $date)->get();
-        return json_encode(["error" => false, "data" => $times]);
+        $times = CalendarTime::where('date', '=', $date)->orderBy("time")->get();
+        return json_encode(["error" => false, "date"=>$date,  "times" => $times]);
        } catch (\Exception $e) {
            file_put_contents("log.txt", $e->getMessage());
            return json_encode(["error" => true, "message" => $e->getMessage()]);

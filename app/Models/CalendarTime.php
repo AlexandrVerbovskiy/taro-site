@@ -11,7 +11,6 @@ class CalendarTime extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'calendar_date_id',
         'date',
         'time'
     ];

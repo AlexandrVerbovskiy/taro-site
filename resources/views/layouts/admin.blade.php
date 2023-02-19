@@ -217,6 +217,9 @@
                 <a href="{{url("/admin/calendar")}}">
                     <li>Calendar</li>
                 </a>
+                <a href="{{url("/admin/main-settings")}}">
+                    <li>Main</li>
+                </a>
                 <a href="{{url("/admin/users")}}">
                     <li>USERS</li>
                 </a>
