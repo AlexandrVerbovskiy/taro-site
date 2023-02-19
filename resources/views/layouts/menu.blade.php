@@ -175,7 +175,7 @@
                                name="password_confirmation" placeholder="Повторіть пароль">
                     </div>
 
-                    @if($errors->any())
+                    @if($errors->any() && (!Session::has('login')|| !Session::get('login')))
                         <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
                             <p style="font-size: 12px; color: red; margin-bottom: 0">{{$errors->first()}}</p>
                         </div>
@@ -214,7 +214,7 @@
                                placeholder="Пароль">
                     </div>
                     <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
-                        @if($errors->any())
+                        @if($errors->any() && Session::has('login') && Session::get('login'))
                             <p style="font-size: 12px; color: red; margin-bottom: 0">{{$errors->first()}}</p>
                         @endif
                     </div>
