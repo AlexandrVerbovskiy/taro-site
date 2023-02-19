@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Master;
+use App\Models\MasterComment;
 use Illuminate\Http\Request;
 
 class MastersController extends Controller
@@ -43,7 +44,7 @@ class MastersController extends Controller
             $findedByData = Master::where([["id", "!=", $data['id']], "first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
             if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'founded_id' => 'id'
+                    'error' => 'Майстр з такими даними уже існує: <a href="' . url("/admin/edit-master/" . $findedByData->id) . '">' . $findedByData->last_name . ' ' . $findedByData->first_name . '</a>'
                 ]);
 
             $findedByData = Master::where(["first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
@@ -58,7 +59,7 @@ class MastersController extends Controller
             $master->last_name = $data['last_name'];
             $master->save();
 
-            return redirect()->to('/admin/edit-master/' . $master->id);
+            return redirect()->to('/admin/edit-master/' . $master->id)->with('success', 'Майстра збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -73,29 +74,37 @@ class MastersController extends Controller
         return $this->view('masters.all', ['masters' => $masters]);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Майстра не знайдено!']);
 
         try {
             Master::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Майстра видалено успішно!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
 
-    public function changeVisible(Request $request){
+    public function changeVisible(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Master wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Майстра не знайдено!']);
 
         try {
             $master = Master::where("id", $data["id"])->first();
             $master->hidden = !$master->hidden;
             $master->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $master->hidden]);
+
+            $full_namme = $master->first_name." ".$master->last_name;
+
+            $message = 'Майстер бльше не відображається у користувачів!';
+            if(!$master->hidden) $message = 'Майстер знову відображається у користувачів!';
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $master->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -105,6 +114,7 @@ class MastersController extends Controller
     {
         $master = Master::where('id', "=", $id)->where('hidden', false)->first();
         if (!$master) return abort(404);
-        return $this->view('masters.index', ['master' => $master]);
+        $comments = MasterComment::where("master_id", $id)->where("author_id", "=", auth()->user()->id)->get();
+        return $this->view('masters.index', ['master' => $master, 'comments' => $comments]);
     }
 }

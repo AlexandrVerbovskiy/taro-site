@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h3 class="text-center title_margin" style="margin: 30px 0 30px">Події</h3>
+        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Події</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
             <a href="{{url("/admin/create-event")}}" class="btn btn-primary admin_button_add">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -9,7 +9,7 @@
                     <path
                         d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
                 </svg>
-                Add
+                Додати
             </a>
             <input type="text" class="admin_search" name="search" placeholder="Search..."/>
             <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
@@ -36,7 +36,7 @@
     <script>
         let showed = 0;
         const count = 20;
-        const canShow = "{{$count}}";
+        let canShow = {{$count}}>0;
         let trashId = null;
         let search = "";
 
@@ -78,12 +78,15 @@
         const getNewEvents = () => {
             console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
-            if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
+            if (!canShow) return document.querySelector(".loader").classList.add('hidden');
             get("{{url('/admin/get-events')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
-                if (data.error) return;
+                if (data.error) return canShow = false;
+
                 let rows = "";
                 showed += data.events.length;
+                if(data.events.length != count) canShow = false;
+
                 data.events.forEach(event =>
                     rows += `
                        <tr data-id=${event["id"]}>

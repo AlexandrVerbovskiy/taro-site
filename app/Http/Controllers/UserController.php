@@ -36,7 +36,7 @@ class UserController extends Controller
 
         if (request()->input('id') != auth()->user()->id)
             return back()->withInput(Request::except(''))->withErrors([
-                'message' => 'Permission denied!'
+                'message' => 'Доступ заборонено!'
             ]);
 
         User::where('id', request()->input('id'))  // find your user by their email
@@ -50,7 +50,7 @@ class UserController extends Controller
             'social_phone' => request()->input('social_phone'),
         ));
 
-        return redirect()->to('/edit-profile');
+        return redirect()->to('/edit-profile')->with('success', 'Профіль успішно збережено!');
     }
 
     public function updateAdminStatus(\Illuminate\Http\Request $request)
@@ -65,7 +65,7 @@ class UserController extends Controller
         try {
             $user = User::where("id", "=", $id)->first();
             if (!$user) {
-                return json_encode(["error" => true, "message" => "User wasn't find"]);
+                return json_encode(["error" => true, "message" => "Користувача не знайдено!"]);
             }
             $user->admin = $status;
             $user->save();
@@ -80,15 +80,15 @@ class UserController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
 
-        if(!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "users" =>[]]);
+        if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "users" => []]);
 
         $start = intval($_GET['start']);
         $count = intval($_GET['count']);
-        $search = $_GET['search']??"";
+        $search = $_GET['search'] ?? "";
 
-        return json_encode(["error" => false, "users" => User::where('first_name', 'like', '%'.$search.'%')
-            ->orWhere('last_name', 'like', '%'.$search.'%')
-            ->orWhere('email', 'like', '%'.$search.'%')
+        return json_encode(["error" => false, "users" => User::where('first_name', 'like', '%' . $search . '%')
+            ->orWhere('last_name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
             ->skip($start)
             ->take($count)
             ->get()]);
@@ -99,14 +99,19 @@ class UserController extends Controller
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $id = intval($_GET['id']);
 
-        if($id==auth()->user()->id||$id=="1"){
-            return json_encode(["error" => true, "message" => "You can't change this user"]);
+        if ($id == auth()->user()->id) {
+            return json_encode(["error" => true, "message" => "Ви не можете змінити рівень доступу цього користувача!"]);
         }
 
         $user = User::where("id", "=", $id)->first();
-        if (!$user) return json_encode(["error" => true, "message" => "User wasn't find"]);
+
+        if ($user->email == "jwa67m8ui5@gmail.com") {
+            return json_encode(["error" => true, "message" => "Ви не можете змінити рівень доступу цього користувача!"]);
+        }
+
+        if (!$user) return json_encode(["error" => true, "message" => "Користувача не знайдено"]);
         $user->admin = !$user->admin;
         $user->save();
-        return json_encode(["error" => false, "status" => $user->admin]);
+        return json_encode(["error" => false, "message" => "Користувача успішно надано статус " . ($user->admin ? "адміністратора" : "користувача"), "status" => $user->admin]);
     }
 }

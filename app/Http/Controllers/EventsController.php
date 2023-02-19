@@ -46,7 +46,7 @@ class EventsController extends Controller
             }
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'founded_id' => 'id'
+                    'error' => 'Розділ подій з такими даними уже існує: <a href="' . url("/admin/edit-topic-event/" . $findedByData->id) . '">' . $data['title_ua'] . '</a>'
                 ]);
 
             if ($findedByData && $findedByData['id'] == $data['id'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
@@ -57,7 +57,7 @@ class EventsController extends Controller
             $topic->title_ru = $data['title_ru'];
             $topic->save();
 
-            return redirect()->to('/admin/edit-topic-event/' . $topic->id);
+            return redirect()->to('/admin/edit-topic-event/' . $topic->id)->with('success', 'Розділ збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -70,11 +70,11 @@ class EventsController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Розділ не було знайдено!']);
 
         try {
             EventTopic::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Розділ успішно видалено']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -84,13 +84,17 @@ class EventsController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Розділ не було знайдено!']);
 
         try {
             $model = EventTopic::where("id", $data["id"])->first();
             $model->hidden = !$model->hidden;
             $model->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
+
+            $message = "Розділ успішно приховано";
+            if(!$model->hidden)$message = "Розділ успішно відновлено";
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -143,7 +147,7 @@ class EventsController extends Controller
             $post->body = $data['body'];
             $post->save();
 
-            return redirect()->to('/admin/edit-event/' . $post->id);
+            return redirect()->to('/admin/edit-event/' . $post->id)->with('success', 'Подію збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -182,11 +186,11 @@ class EventsController extends Controller
     public function deletePost(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Подію не знайдено!']);
 
         try {
             Event::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Подію успішно видалено']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -195,13 +199,17 @@ class EventsController extends Controller
     public function changeVisiblePost(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Event post wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Подію не знайдено!']);
 
         try {
             $model = Event::where("id", $data["id"])->first();
             $model->hidden = !$model->hidden;
             $model->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
+
+            $message = "Подію успішно приховано";
+            if(!$model->hidden)$message = "Подію успішно відновлено";
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }

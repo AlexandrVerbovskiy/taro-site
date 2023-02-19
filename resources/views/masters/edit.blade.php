@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container py-4">
-    <h2 style="margin-bottom: 24px">Майстер</h2>
+<div class="container py-4 message-parent">
+    @include("layouts.error-message")
+    <h2 style="margin-bottom: 24px; margin-top: 56px;">Майстер</h2>
     <form class='form' method="POST" action="{{url('/admin/save-master')}}">
         {{ csrf_field() }}
 
@@ -25,29 +26,30 @@
                    name="last_name" required>
         </div>
 
+
+        <div class="form-group mb-3 image">
+            <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
+            <button type="button" class="btn btn-primary media-changer" style="margin-top: 10px">Змінити</button>
+        </div>
+
+        <input type="hidden"
+               id="img_src"
+               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
+               name="img_src" required>
+
         <div class="form-group mb-3">
             <label for="description">Опис:</label>
             <textarea class="form-control" id="editor" name="description" required
             >{{old('description')?old('description'):(isset($description)?$description:'')}}</textarea>
         </div>
 
-        <input type="hidden"
-               value="{{old('img_src')?old('img_src'):(isset($img_src)?$img_src:'')}}"
-               name="img_src" required>
-        <input accept="image/*" type="file" name="img" id="img_input">
-
-        <div class="form-group" style="margin-top: 15px">
+        <div class="form-group">
             <button style="cursor:pointer; width: 100px;" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти</button>
-            <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
-
-        @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif
     </form>
 
-
-
+    <input style="display: none;" accept="image/*" type="file" name="img" id="img_input">
 
 </div>
 <script>
@@ -59,6 +61,18 @@
             alert("error");
         }
     })
+
+    document.querySelector("#img_src").addEventListener("change", e => {
+        let src = document.querySelector("#img_src").value;
+        document.querySelector("#image_media_view").src = "{{Storage::url("")}}images/"+src;
+    })
+
+    document.querySelector("#img_src").dispatchEvent(new Event("change", {
+        bubbles: !0,
+        cancelable: !1
+    }));
+
+    document.querySelector(".media-changer").addEventListener("click", e=>document.querySelector("#img_input").click());
 
 </script>
 @stop

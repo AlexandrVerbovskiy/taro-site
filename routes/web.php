@@ -12,7 +12,8 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\EventsController;
-use \App\Http\Controllers\MainController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\MastersCommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,13 @@ Route::get("/admin/users", [MainController::class, 'users']);
 Route::get("/admin/events", [MainController::class, 'events']);
 Route::get("/admin/infos-posts", [MainController::class, 'infosPosts']);
 Route::get("/admin/studies", [MainController::class, 'studies']);
+Route::get("/admin/main-settings", [MainController::class, 'mainPageSettings']);
+Route::get("/admin/comments", [MainController::class, 'comments']);
+
+Route::post("/admin/save-main", [MainController::class, 'saveMain']);
+Route::get("/admin/comments", [MainController::class, 'comments']);
+Route::get("/admin/get-comments", [MainController::class, 'getComments']);
+Route::post("/admin/master-comment-delete", [MastersCommentsController::class, 'delete']);
 
 Route::get('/admin/get-infos-posts', [MainController::class, 'getInfosPosts']);
 Route::get('/admin/get-events', [MainController::class, 'getEvents']);
@@ -50,7 +58,6 @@ Route::post('/registration', [RegistrationController::class, 'store']);
 Route::get('/edit-profile', [UserController::class, 'editProfile']);
 Route::post('/edit-profile', [UserController::class, 'saveProfile']);
 Route::get('/users-admins', [UserController::class, 'usersForAdmin']);
-Route::post('/update-admin-status', [UserController::class, 'updateAdminStatus']);
 
 Route::get('/login', [SessionsController::class, 'create']);
 Route::post('/login', [SessionsController::class, 'store']);
@@ -70,6 +77,8 @@ Route::get("/area-activity/{id}", [AreasActivityController::class, 'topic']);
 
 Route::get("/masters", [MastersController::class, 'masters']);
 Route::get("/master/{id}", [MastersController::class, 'master']);
+Route::post("/get-master-comments", [MastersCommentsController::class, 'getForMaster']);
+Route::post("/create-master-comments", [MastersCommentsController::class, 'create']);
 Route::get("/admin/create-master", [MastersController::class, 'create']);
 Route::get("/admin/edit-master/{id}", [MastersController::class, 'edit']);
 Route::post("/admin/save-master", [MastersController::class, 'save']);

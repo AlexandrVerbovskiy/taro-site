@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container py-4">
-    <h2 style="margin-bottom: 24px">Категорія навчення</h2>
+<div class="container py-4 message-parent">
+    @include("layouts.error-message")
+    <h2 style="margin-bottom: 24px; margin-top: 56px">Категорія навчення</h2>
     <form class='form' method="POST" action="{{url('/admin/save-study-topic')}}">
         {{ csrf_field() }}
 
@@ -28,10 +29,6 @@
         <div class="form-group">
             <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
-
-        @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif
     </form>
 </div>
 @stop

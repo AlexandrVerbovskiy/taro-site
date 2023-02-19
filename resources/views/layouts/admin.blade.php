@@ -169,7 +169,7 @@
         color: #336699;
     }
 
-    .loader.hidden{
+    .loader.hidden {
         display: none;
     }
     @media only screen and (max-width: 1440px) {
@@ -193,6 +193,18 @@
         .admin-background{
             width: 280px;
         }
+    }
+    @media only screen and (max-width: 1120px) {
+        .admin-menu{
+            width: 240px;
+        }
+        .admin-menu ul{
+            width: 240px;
+        }
+        .admin-background{
+            width: 240px;
+        }
+
     }
     @media only screen and (max-width: 1024px) {
         .admin-menu{
@@ -223,7 +235,7 @@
     </div>
 </nav>
 
-<div class="menu_2 d-lg-none " style="position: absolute; margin: 55px 0 0 0">
+<div class="menu_2 d-lg-none " style="position: fixed; margin: 55px 0 0 0">
     <ul style="background: #a9c6ff;">
         <a href="{{url("/admin/users")}}">
             <li>USERS</li>
@@ -252,10 +264,17 @@
         <a href="{{url("/admin/events")}}">
             <li>EVENTS</li>
         </a>
+        <a href="{{url("/admin/main-settings")}}">
+            <li>Main</li>
+        </a>
+        <a href="{{url("/admin/comments")}}">
+            <li>Comments</li>
+        </a>
     </ul>
 </div>
+
 <div class="admin-background" style=""></div>
-<div class="container" style="padding: 0; margin: 0;  max-width: 100%;">
+<div class="container" style="padding: 0; margin: 0; max-width: 100%;">
     <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
             <ul>
@@ -286,9 +305,21 @@
                 <a href="{{url("/admin/events")}}">
                     <li>EVENTS</li>
                 </a>
+                <a href="{{url("/admin/main-settings")}}">
+                    <li>Main</li>
+                </a>
+                <a href="{{url("/admin/comments")}}">
+                    <li>Comments</li>
+                </a>
             </ul>
         </div>
-        <div class="col-12 col-lg-9">
+        <div class="col-12 col-lg-9 message-parent" style="padding: 0; margin: 0;">
+            @if($errors->any())
+                <div style="border-radius: 0 0 10px 10px;" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$errors->first()}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             @yield('content')
         </div>
     </main>
