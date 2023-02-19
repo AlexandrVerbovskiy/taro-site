@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acivity;
+use App\Models\CalendarTime;
 use App\Models\Event;
 use App\Models\EventTopic;
 use App\Models\Info;
@@ -24,7 +25,21 @@ class MainController extends Controller
 
         $main_body = StaticModel::where("key", "main_body")->first();
         $main_body = $main_body? $main_body->value:"";
-        return $this->view("welcome", ['main_img'=>$main_img, 'main_body'=>$main_body]);
+
+        $dates = DB::table("calendar_times")
+            ->leftJoin("chief_appointments", "chief_appointments.time_id", "=", "calendar_times.id")
+            ->whereRaw("cast(concat(date, ' ', time) as datetime) > CURRENT_TIMESTAMP()")
+            ->where("chief_appointments.id", null)
+            ->select("calendar_times.date")
+            ->groupBy('calendar_times.date')
+            ->get();
+
+        $filtered_dates = [];
+        foreach ($dates as $date){
+            $filtered_dates[] = $date->date;
+        }
+
+        return $this->view("welcome", ['main_img'=>$main_img, 'main_body'=>$main_body, "dates"=>$filtered_dates]);
     }
 
     public function admin()
@@ -202,5 +217,9 @@ class MainController extends Controller
             file_put_contents("log.txt", $e->getMessage());
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
+    }
+
+    public function calendar(){
+        return $this->view("admin.calendar");
     }
 }

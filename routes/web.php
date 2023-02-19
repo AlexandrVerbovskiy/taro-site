@@ -44,6 +44,8 @@ Route::get("/admin/comments", [MainController::class, 'comments']);
 Route::get("/admin/get-comments", [MainController::class, 'getComments']);
 Route::post("/admin/master-comment-delete", [MastersCommentsController::class, 'delete']);
 
+Route::get("/admin/calendar", [MainController::class, 'calendar']);
+
 Route::get('/admin/get-infos-posts', [MainController::class, 'getInfosPosts']);
 Route::get('/admin/get-events', [MainController::class, 'getEvents']);
 Route::get('/admin/get-studies', [MainController::class, 'getStudies']);
@@ -100,10 +102,9 @@ Route::post('/admin/study-delete', [StudiesController::class, 'deleteStudy']);
 Route::get('/get-studies', [StudiesController::class, 'getStudies']);
 Route::get("/studies/{id}", [StudiesController::class, 'studies']);
 
-Route::get("/calendar-edit", [CalendarController::class, 'edit']);
-Route::get("/calendar-times/{id}", [CalendarController::class, 'getTimes']);
-Route::post("/calendar-date-edit", [CalendarController::class, 'saveDateCalendar']);
-Route::post("/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
+Route::get("/calendar-times/{date}", [CalendarController::class, 'getTimes']);
+Route::post("/admin/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
+Route::post("/admin/calendar-time-delete", [CalendarController::class, 'delete']);
 
 Route::get("/admin/create-info", [InfosController::class, 'createInfo']);
 Route::get("/admin/edit-info/{id}", [InfosController::class, 'editInfo']);
