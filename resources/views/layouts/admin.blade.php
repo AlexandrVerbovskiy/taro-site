@@ -371,5 +371,4 @@
 
     });
 </script>
-Test
 @include('layouts.footer')
