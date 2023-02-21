@@ -16,11 +16,11 @@
 
 <script>
 
-{{--    @if ($errors->any())--}}
-{{--    $(window).on('load', function() {--}}
-{{--        $('#login').modal('show');--}}
-{{--    });--}}
-{{--    @endif>--}}
+    {{--    @if ($errors->any())--}}
+    {{--    $(window).on('load', function() {--}}
+    {{--        $('#login').modal('show');--}}
+    {{--    });--}}
+    {{--    @endif>--}}
     function exitLogin() {
         $('#login').modal('toggle');
     }
@@ -45,7 +45,6 @@
     });
 
     function setFile(body, callback) {
-        console.log("send")
         fetch('{{url('/file-save')}}', {
             headers: {
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
@@ -59,11 +58,19 @@
         const input = $("#img_input");
         const fd = new FormData;
 
+        if (input.prop('files').length < 1) return;
+
         fd.append('file', input.prop('files')[0]);
         fd.append('type', 'image');
 
         setFile(fd,
-            url => document.querySelector("[name=img_src]").value = url);
+            url => {
+                document.querySelector("#img_src").value = url;
+                document.querySelector("#img_src").dispatchEvent(new Event("change", {
+                    bubbles: !0,
+                    cancelable: !1
+                }));
+            });
     }
 
     function setUrl() {
@@ -71,16 +78,14 @@
         const type = $("#media_type");
         const fd = new FormData;
 
-        if(input.prop('files').length<1) return;
+        if (input.prop('files').length < 1) return;
 
         fd.append('file', input.prop('files')[0]);
         fd.append('type', type.prop('value'));
 
         setFile(fd,
             url => {
-                console.log(url)
                 document.querySelector("#url").value = url;
-                console.log(document.querySelector("#url").value);
                 document.querySelector("#url").dispatchEvent(new Event("change", {
                     bubbles: !0,
                     cancelable: !1

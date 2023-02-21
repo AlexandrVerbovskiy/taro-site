@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CalendarTime extends Model
+class MasterComment extends Model
 {
-    protected $table = 'calendar_times';
+    protected $table = 'masters_comments';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'date',
-        'time'
+        'author_id',
+        'master_id',
+        'body'
     ];
 }

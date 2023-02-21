@@ -36,7 +36,7 @@
     <script>
         let showed = 0;
         const count = 20;
-        const canShow = "{{$count}}";
+        let canShow = {{$count}}>0;
         let trashId = null;
         let search = "";
 
@@ -78,10 +78,12 @@
         const getNewStudies = () => {
             console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
-            if (showed >= canShow) return document.querySelector(".loader").classList.add('hidden');
+            if (!canShow) return document.querySelector(".loader").classList.add('hidden');
             get("{{url('/admin/get-studies')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
                 document.querySelector(".loader").classList.add('hidden');
-                if (data.error) return;
+                if (data.error) return canShow = false;
+                if(data.studies.length != count) canShow = false;
+
                 let rows = "";
                 showed += data.studies.length;
                 data.studies.forEach(study =>

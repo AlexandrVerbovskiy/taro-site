@@ -13,11 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('calendar_dates', function (Blueprint $table) {
-            $table->id();
-            $table->date('date');
-            $table->timestamps();
-        });
+        DB::table('users')->insert(
+            array(
+                'first_name'=>'admin',
+                'last_name'=>'admin',
+                'phone'=>'admin_phone',
+                'email' => 'jwa67m8ui5@gmail.com',
+                'password' => bcrypt('qw1reet34qw31'),
+                'admin'=>true
+            )
+        );
     }
 
     /**
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calendar_dates');
+        //
     }
 };

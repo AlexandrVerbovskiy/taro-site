@@ -39,6 +39,12 @@ class InfosController extends Controller
             $data['id'] = '-1';
         }
 
+        if (!array_key_exists('title_ru', $data) || !array_key_exists('title_ua', $data)
+            || !$data['title_ru'] || strlen($data['title_ru']) < 1
+            || !$data['title_ua'] || strlen($data['title_ua']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+
         try {
             $findedByData = Info::where(["title_ru" => $data['title_ru'], ['id', '!=', $data['id']]])->first();
             if (!isset($findedByData)) {
@@ -46,7 +52,7 @@ class InfosController extends Controller
             }
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
-                    'founded_id' => 'id'
+                    'error' => 'Розділ корисної інформації з такими даними уже існує: <a href="' . url("/admin/edit-info/" . $findedByData->id) . '">' . $data['title_ua'] . '</a>'
                 ]);
 
             if ($findedByData && $findedByData['id'] == $data['id'] && $data['title_ua'] == $findedByData['title_ua'] && $data['title_ru'] == $findedByData['title_ru'])
@@ -57,7 +63,7 @@ class InfosController extends Controller
             $topic->title_ru = $data['title_ru'];
             $topic->save();
 
-            return redirect()->to('/admin/edit-info/' . $topic->id);
+            return redirect()->to('/admin/edit-info/' . $topic->id)->with('success', 'Розділ збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -70,11 +76,11 @@ class InfosController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Розділ корисної інформації не знайдено!']);
 
         try {
             Info::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Розділ корисної інформації виддалено успішно!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -84,13 +90,18 @@ class InfosController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Topic wasn\'t find']);
+
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Розділ корисної інформації не знайдено!']);
 
         try {
             $info = Info::where("id", $data["id"])->first();
             $info->hidden = !$info->hidden;
             $info->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $info->hidden]);
+
+            $message = "Розділ успішно приховано";
+            if(!$info->hidden)$message = "Розділ успішно відновлено";
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $info->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -129,6 +140,15 @@ class InfosController extends Controller
             $data['id'] = '-1';
         }
 
+        if (!array_key_exists('title', $data) || !array_key_exists('media_type', $data)
+            ||!array_key_exists('url', $data) || !array_key_exists('body', $data)
+            || !$data['title'] || strlen($data['title']) < 1
+            || !$data['media_type'] || strlen($data['media_type']) < 1
+            || !$data['url'] || strlen($data['url']) < 1
+            || !$data['body'] || strlen($data['body']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+
         try {
             $findedByData = InfoPost::where(["id" => $data['id']])->first();
 
@@ -143,7 +163,7 @@ class InfosController extends Controller
             $post->body = $data['body'];
             $post->save();
 
-            return redirect()->to('/admin/edit-info-post/' . $post->id);
+            return redirect()->to('/admin/edit-info-post/' . $post->id)->with('success', 'Пост корисної інформації збережено успішно!');
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -155,7 +175,6 @@ class InfosController extends Controller
     public function getPosts()
     {
         if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
-
         if (!array_key_exists('topic', $_GET) || !is_numeric($_GET['topic'])) abort(404);
 
         $start = intval($_GET['start']);
@@ -175,11 +194,11 @@ class InfosController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Info post wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Пост корисної інформації не знайдено!']);
 
         try {
             InfoPost::where("id", $data['id'])->delete();
-            return json_encode(["error" => false, "message" => 'Deleted success']);
+            return json_encode(["error" => false, "message" => 'Пост корисної інформації видалено успішно!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -189,13 +208,17 @@ class InfosController extends Controller
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
-        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Info post wasn\'t find']);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Пост корисної інформації не знайдено!']);
 
         try {
             $model = InfoPost::where("id", $data["id"])->first();
             $model->hidden = !$model->hidden;
             $model->save();
-            return json_encode(["error" => false, "message" => 'Success', 'hidden' => $model->hidden]);
+
+            $message = "Пост успішно приховано";
+            if(!$model->hidden)$message = "Пост успішно відновлено";
+
+            return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
@@ -207,6 +230,6 @@ class InfosController extends Controller
         if (!$info) return abort(404);
 
         $posts_count = InfoPost::where("info_id", $id)->where('hidden', false)->count();
-        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id]);
+        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id, 'topic_title_ru' => $info->title_ru, 'topic_title_ua' => $info->title_ua]);
     }
 }

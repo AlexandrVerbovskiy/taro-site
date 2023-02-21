@@ -1,1 +1,1 @@
-Undefined array key "info_id"
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'description' cannot be null (SQL: insert into `masters` (`img_src`, `description`, `first_name`, `last_name`, `updated_at`, `created_at`) values (1677000879_dynamo.png, ?, test, test, 2023-02-21 17:34:52, 2023-02-21 17:34:52))

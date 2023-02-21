@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,12 +12,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('calendar_times', function (Blueprint $table) {
+        Schema::create('static', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('time');
+            $table->string('key');
+            $table->text('value');
             $table->timestamps();
         });
+
+        DB::table('static')->insert(
+            [['key' => 'main_image', 'value' => ''], ['key' => 'main_body', 'value' => '']]
+        );
     }
 
     /**
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calendar_times');
+        Schema::dropIfExists('static');
     }
 };

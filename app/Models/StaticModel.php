@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CalendarDate extends Model
+class StaticModel extends Model
 {
-    protected $table = 'calendar_dates';
+    protected $table = 'static';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'date'
+        'key',
+        'value'
     ];
 }

@@ -9,16 +9,18 @@
 <script>
     let showed = 0;
     const count = 20;
-    const canShow = "{{$count}}";
+    let canShow = {{$count}}>0;
     const topicId = "{{$topic_id}}"
 
     const getNewPosts = () => {
         console.log(showed, count)
         document.querySelector(".loader").classList.remove('hidden');
-        if (showed >= canShow) return document.querySelector(".loader").remove();
+        if (!canShow) return document.querySelector(".loader").remove();
         get("{{url('/get-studies')}}" + "?start=" + showed + "&count=" + count + "&topic=" + topicId, data => {
             document.querySelector(".loader").classList.add('hidden');
-            if (data.error) return;
+            if (data.error) return canShow = false;
+            if(data.studies.length != count) canShow = false;
+
             let rows = "";
             showed += data.studies.length;
             data.studies.forEach(study =>

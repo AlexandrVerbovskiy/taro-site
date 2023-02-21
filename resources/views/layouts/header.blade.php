@@ -23,10 +23,11 @@
             async></script>
     <style>
         #audio_media_view[src=""], #video_media_view[src=""], #image_media_view[src=""], #youtube_media_view[src=""],
-        #audio_media_view[src=""]+br, #video_media_view[src=""]+br, #image_media_view[src=""]+br, #youtube_media_view[src=""]+br{
+        #audio_media_view[src=""] + br, #video_media_view[src=""] + br, #image_media_view[src=""] + br, #youtube_media_view[src=""] + br {
             display: none;
         }
     </style>
+
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
 
@@ -40,31 +41,39 @@
         subscriptions[selector] = key;
     }
 
+    function subscribeOnChangeLanguageCustomWords(selector, key, obj) {
+        vocabulary[key] = obj;
+        subscriptions[selector] = key;
+    }
+
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
-            console.log( document.querySelector(selector));
-            console.log(subscriptions[selector]);
-            console.log(vocabulary[subscriptions[selector]]);
-            console.log(vocabulary[subscriptions[selector]][lang]);
+            console.log(document.querySelector(selector));
+            console.log(selector);
             document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
         });
         localStorage.setItem("language", lang);
     }
 
-    const get = (url, callback) => {
+    const get = (url, callback, ignoreSuccess = true) => {
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
             }
-        }).then(res => res.json()).then(callback).catch(e => {
-            alert("error");
-            console.log(e.message)
-        });
+        }).then(res => res.json()).then(res => {
+            if (typeof (res) == "object") {
+                if (res.message) {
+                    if (!ignoreSuccess && res.error) showError(res.message);
+                    if (!res.error) showSuccess(res.message);
+                }
+            }
+            callback(res);
+        }).catch(e => showError(e.message));
     }
 
-    const post = (url, data, callback) => {
+    const post = (url, data, callback, ignoreSuccess = false) => {
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
@@ -73,10 +82,15 @@
             },
             method: 'POST',
             body: JSON.stringify(data)
-        }).then(res => res.json()).then(callback).catch(e => {
-            alert("error");
-            console.log(e.message)
-        });
+        }).then(res => res.json()).then(res => {
+            if (typeof (res) == "object") {
+                if (res.message) {
+                    if (!ignoreSuccess && res.error) showError(res.message);
+                    if (!res.error) showSuccess(res.message);
+                }
+            }
+            callback(res);
+        }).catch(e => showError(e.message));
     }
 
     const btnFromEvent = e => {
@@ -116,7 +130,8 @@
                 </svg>
             </button>`;
 
-    function parseYoutubeUrl(link) {
+    function parseYoutubeUrl(link = "") {
+        if (!link) return "";
         if (link.includes("https://www.youtube.com") && link.includes("watch")) {
             console.log(link)
             link = link.split("watch?v=")[1];
@@ -172,6 +187,34 @@
             document.querySelector(`#${id} .close`).click();
         });
     }
+
+    function closeMessageTimerStart() {
+        setTimeout(() => {
+            document.querySelectorAll(".alert.show .btn-close").forEach(elem => {
+                elem.click();
+            })
+        }, 5000)
+    }
+
+    function showError(message) {
+        document.querySelector(".message-parent").insertAdjacentHTML("afterbegin", `
+             <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`);
+        closeMessageTimerStart();
+    }
+
+    function showSuccess(message) {
+        document.querySelector(".message-parent").insertAdjacentHTML("afterbegin", `
+             <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`);
+        closeMessageTimerStart();
+    }
+
+    closeMessageTimerStart();
 </script>
 
 
