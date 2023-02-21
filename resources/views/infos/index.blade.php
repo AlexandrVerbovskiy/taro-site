@@ -52,8 +52,6 @@
             <div><h3>${post["title"]}</h3></div>
             <div class="text-center">${mediaContent}</div>
             <div>${post["body"]}</div>
-            <!--<div style="margin: 0 0 40px 0;">${post["id"]}</div>-->
-
             <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
                 <label>Дата: ${post["created_at"].split('T')[0]}</label>
             </div>
