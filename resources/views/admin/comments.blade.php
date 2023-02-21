@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h3 class="text-center title_margin" style="margin: 30px 0 30px">Майстри</h3>
+        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Коментарі до майстрів</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
-            <input type="text" name="search" placeholder="Search..."/>
-            <button id="search" type="button" class="btn btn-danger">Search</button>
+            <input type="text" class="admin_search" name="search" placeholder="Search..."/>
+            <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
         </div>
         <div class="table table-responsive table-responsive-sm scroll_table" style="">
             <table class="table ">

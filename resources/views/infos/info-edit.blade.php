@@ -1,7 +1,8 @@
-@include('layouts.header')
+@extends('layouts.admin')
+@section('content')
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2 style="margin-bottom: 24px">Розділ корисної інформації</h2>
+    <h2 style="margin-bottom: 24px; margin-top: 56px">Розділ корисної інформації</h2>
     <form class='form' method="POST" action="{{url('/admin/save-info')}}">
         {{ csrf_field() }}
 

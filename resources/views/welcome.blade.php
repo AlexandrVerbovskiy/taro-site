@@ -1,7 +1,3 @@
-@php
-
-    @endphp
-
 @include('layouts.main-header')
 
 <div class="row justify-content-center" style="width: 100%; margin: 0px">

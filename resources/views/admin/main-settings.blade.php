@@ -1,13 +1,13 @@
-@include('layouts.header')
-<div class="container py-4 message-parent">
-@include("layouts.error-message")
-    <h2>Основна сторінка</h2>
+@extends('layouts.admin')
+@section('content')
+<div class="container py-4">
+    <h2 style="margin-top: 56px">Головна сторінка</h2>
     <form class='form' method="POST" action="{{url('/admin/save-main')}}">
         {{ csrf_field() }}
 
         <div class="form-group mb-3 image">
             <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
-            <button type="button" class="btn btn-primary media-changer">Change</button>
+            <button style="margin-top: 10px" type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 
         <input type="hidden"
@@ -16,13 +16,13 @@
                name="main_img" required>
 
         <div class="form-group mb-3">
-            <label for="description">Description:</label>
+            <label for="description">Опис:</label>
             <textarea class="form-control" id="editor" name="main_body" required
             >{{old('main_body')?old('main_body'):(isset($main_body)?$main_body:'')}}</textarea>
         </div>
 
         <div class="form-group">
-            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Save</button>
+            <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
         </div>
     </form>
 
@@ -44,4 +44,4 @@
     document.querySelector(".media-changer").addEventListener("click", e=>document.querySelector("#img_input").click());
 </script>
 
-@include('layouts.footer')
+@stop

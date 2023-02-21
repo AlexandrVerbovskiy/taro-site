@@ -194,6 +194,18 @@
             width: 280px;
         }
     }
+    @media only screen and (max-width: 1120px) {
+        .admin-menu{
+            width: 240px;
+        }
+        .admin-menu ul{
+            width: 240px;
+        }
+        .admin-background{
+            width: 240px;
+        }
+
+    }
     @media only screen and (max-width: 1024px) {
         .admin-menu{
             width: 200px;
@@ -223,7 +235,7 @@
     </div>
 </nav>
 
-<div class="menu_2 d-lg-none " style="position: absolute; margin: 55px 0 0 0">
+<div class="menu_2 d-lg-none " style="position: fixed; margin: 55px 0 0 0">
     <ul style="background: #a9c6ff;">
         <a href="{{url("/admin/calendar")}}">
             <li>Calendar</li>
@@ -258,6 +270,9 @@
         <a href="{{url("/admin/events")}}">
             <li>EVENTS</li>
         </a>
+        <a href="{{url("/admin/main-settings")}}">
+            <li>Main</li>
+        </a>
         <a href="{{url("/admin/comments")}}">
             <li>Comments</li>
         </a>
@@ -270,6 +285,10 @@
     </ul>
 </div>
 
+<<<<<<< HEAD
+=======
+<div class="admin-background" style=""></div>
+>>>>>>> c301c9a50390171f2b36027e6ae4cb495acee08c
 <div class="container" style="padding: 0; margin: 0; max-width: 100%;">
     <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
@@ -306,6 +325,9 @@
                 </a>
                 <a href="{{url("/admin/events")}}">
                     <li>EVENTS</li>
+                </a>
+                <a href="{{url("/admin/main-settings")}}">
+                    <li>Main</li>
                 </a>
                 <a href="{{url("/admin/comments")}}">
                     <li>Comments</li>
