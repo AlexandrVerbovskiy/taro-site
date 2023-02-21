@@ -13,6 +13,7 @@ class MasterAppointment extends Model
     protected $fillable = [
         'time_id',
         'master_id',
+        'user_id',
         'status'
     ];
 }

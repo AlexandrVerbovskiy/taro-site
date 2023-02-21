@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StudyAppointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudiesAppointmentsController extends Controller
 {
@@ -81,8 +82,27 @@ class StudiesAppointmentsController extends Controller
         return $this->view('admin.notes-studies');
     }
 
-    public function getNotes(){
+    public function getNotes(Request $request){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('search', $data) || !array_key_exists('count', $data) || !array_key_exists('start', $data)) return abort(404);
+        $start = intval($data['start']);
+        $count = intval($data['count']);
+        $search = $data['search'] ?? "";
 
+        return json_encode(["error" => false, "notes" => DB::table('studies_appointments')
+            ->join("studies", "studies_appointments.study_id", "=","studies.id")
+            ->join("users", "studies_appointments.user_id", "=","users.id")
+            ->where("users.first_name", 'like', '%' . $search . '%')
+            ->orWhere("users.last_name", 'like', '%' . $search . '%')
+            ->orWhere("studies.title", 'like', '%' . $search . '%')
+            ->skip($start)
+            ->take($count)
+            ->select('users.first_name as user_first_name', 'users.last_name as user_last_name',
+                'users.email as user_email', 'users.phone as user_phone',
+                'studies_appointments.id as id',
+                'studies.title as study_title'
+            )
+            ->get()]);
     }
 }
