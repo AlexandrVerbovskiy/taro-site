@@ -14,6 +14,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MastersCommentsController;
+use App\Http\Controllers\ChiefAppointmentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +104,7 @@ Route::get('/get-studies', [StudiesController::class, 'getStudies']);
 Route::get("/studies/{id}", [StudiesController::class, 'studies']);
 
 Route::get("/calendar-times/{date}", [CalendarController::class, 'getTimes']);
+Route::get("/admin/calendar-times/{date}", [MainController::class, 'getTimes']);
 Route::post("/admin/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
 Route::post("/admin/calendar-time-delete", [CalendarController::class, 'delete']);
 
@@ -134,3 +136,6 @@ Route::post('/admin/event-post-change-visible', [EventsController::class, 'chang
 Route::get('/event-posts/{id}', [EventsController::class, 'events']);
 Route::get('/get-events', [EventsController::class, 'getPosts']);
 
+Route::post('/note-to-boss', [ChiefAppointmentsController::class, 'save']);
+Route::post('/admin/note-reject', [ChiefAppointmentsController::class, 'reject']);
+Route::post('/admin/note-accept', [ChiefAppointmentsController::class, 'accept']);

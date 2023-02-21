@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\DB;
 
 class CalendarController extends Controller
 {
-    public function saveTimeCalendar(Request $request){
+    public function saveTimeCalendar(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
 
-        if(!array_key_exists('id', $data)) $data['id']='-1';
+        if (!array_key_exists('id', $data)) $data['id'] = '-1';
 
         try {
-            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'].":00", "date" => $data['date']])->first();
+            $findedByData = CalendarTime::where([["id", "!=", $data['id']], "time" => $data['time'] . ":00", "date" => $data['date']])->first();
             if ($findedByData) return json_encode(["error" => true, "message" => "Ви не можете додати запис на цей час, так як він уже існує!"]);
 
             $findedByData = CalendarTime::where(["time" => $data['time'], "date" => $data['date']])->first();
@@ -36,16 +37,23 @@ class CalendarController extends Controller
         }
     }
 
-    public function getTimes(Request $request, $date){
-       try{        $times = CalendarTime::where('date', '=', $date)->orderBy("time")->get();
-        return json_encode(["error" => false, "date"=>$date,  "times" => $times]);
-       } catch (\Exception $e) {
-           file_put_contents("log.txt", $e->getMessage());
-           return json_encode(["error" => true, "message" => $e->getMessage()]);
-       }
+    public function getTimes(Request $request, $date)
+    {
+        try {
+            $times = DB::table("calendar_times")
+                ->leftJoin("chief_appointments", "chief_appointments.time_id", "=", "calendar_times.id")
+                ->whereRaw("date='$date' AND (chief_appointments.id is NULL or chief_appointments.status='rejected') and cast(concat(date, ' ', time) as datetime) > CURRENT_TIMESTAMP()")
+                ->orderBy("time")
+                ->get();
+            return json_encode(["error" => false, "date" => $date, "times" => $times]);
+        } catch (\Exception $e) {
+            file_put_contents("log.txt", $e->getMessage());
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $data = json_decode($request->getContent(), true);
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Час прийому не знайдено!']);

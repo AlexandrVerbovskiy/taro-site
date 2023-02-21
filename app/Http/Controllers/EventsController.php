@@ -39,6 +39,12 @@ class EventsController extends Controller
             $data['id'] = '-1';
         }
 
+        if (!array_key_exists('title_ua', $data) || !array_key_exists('title_ru', $data)
+            || !$data['title_ua'] || strlen($data['title_ua']) < 1
+            || !$data['title_ru'] || strlen($data['title_ru']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+
         try {
             $findedByData = EventTopic::where(["title_ua" => $data['title_ua'], ['id', '!=', $data['id']]])->first();
             if (is_null($findedByData)) {
@@ -132,6 +138,15 @@ class EventsController extends Controller
         if (!array_key_exists('id', $data)) {
             $data['id'] = '-1';
         }
+
+        if (!array_key_exists('title', $data) || !array_key_exists('media_type', $data)
+            || !array_key_exists('url', $data) || !array_key_exists('body', $data)
+            || !$data['title'] || strlen($data['title']) < 1
+            || !$data['media_type'] || strlen($data['media_type']) < 1
+            || !$data['url'] || strlen($data['url']) < 1
+            || !$data['body'] || strlen($data['body']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
 
         try {
             $findedByData = Event::where(["id" => $data['id']])->first();

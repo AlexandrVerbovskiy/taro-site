@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -32,5 +33,15 @@ class Controller extends BaseController
         $data = array_merge($data, $temp);
 
         return $factory->make($view, $data, $mergeData);
+    }
+
+    public function getActualUserNotesToBoss(){
+        if(!auth()->user()) return null;
+        $findedByData = DB::table('chief_appointments')
+            ->join("calendar_times", "calendar_times.id", "=", "chief_appointments.time_id")
+            ->whereRaw("chief_appointments.user_id = " . auth()->user()->id . " AND (status = 'wait_accept' or status = 'accepted') AND cast(concat(calendar_times.date, ' ', calendar_times.time) as datetime) > CURRENT_TIMESTAMP()")
+            ->select("calendar_times.*", "chief_appointments.*")
+            ->first();
+        return $findedByData;
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CalendarTime;
 use App\Models\ChiefAppointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChiefAppointmentsController extends Controller
 {
@@ -12,27 +14,70 @@ class ChiefAppointmentsController extends Controller
         if (!auth()->check()) return abort(404);
         $data = json_decode($request->getContent(), true);
 
-        if(!array_key_exists('id', $data)) $data['id']='-1';
+        if (!array_key_exists('id', $data)) $data['id'] = '-1';
 
         try {
-            $findedByData = ChiefAppointment::where([["id", "!=", $data['id']],"time_id" => $data['time_id']])->first();
+
+            $date = CalendarTime::whereRaw("id" . "=" . $data['time_id'] . " AND cast(concat(calendar_times.date, ' ', calendar_times.time) as datetime) > CURRENT_TIMESTAMP()")->first();
+            if (!$date)
+                return json_encode(["error" => true, "message" => "Дату не знайдено!"]);
+
+
+            $findedByData = $this->getActualUserNotesToBoss();
             if ($findedByData)
-                return json_encode(["error" => true, "found_id" => $findedByData['id']]);
+                return json_encode(["error" => true, "message" => "Ви вже зробили запис на <b>" . $findedByData->date . " " . $findedByData->time . "</b>! Для запису на наступну дату, дочекайтесь вказаної дати або відхилення запису адміністратором!"]);
+
+            $findedByData = ChiefAppointment::where([["id", "!=", auth()->user()->id], "time_id" => $data['time_id']])->first();
+            if ($findedByData)
+                return json_encode(["error" => true, "message" => "Запис на вибраний час зробити не можна!"]);
+
 
             $findedByData = ChiefAppointment::where(["time_id" => $data['time_id']])->first();
-            if($findedByData && $findedByData['id'] == $data['id'] && $findedByData["time_id"] == $data['time_id'] && $findedByData["status"] == $data['status'])
+            if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["time_id"] == $data['time_id'] && $findedByData["status"] == $data['status'])
                 return json_encode(["error" => false, "message" => ""]);
 
             $date = ChiefAppointment::firstOrNew(['id' => $data['id']]);
             $date->time_id = $data['time_id'];
-            $date->user_id = $data['user_id'];
-            $date->status = $data['status'];
+            $date->user_id = auth()->user()->id;
+            $date->status = "wait_accept";
             $date->save();
 
-            return json_encode(["error" => false, "data" => $date]);
+            return json_encode(["error" => false, "message" => "Ви успішно записались на прийом до Валерія! Адміністратор зв'яжеться з Вами для підтвердження дати та часу!", "data" => $date]);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return json_encode(["error" => true, "message" => "Something went wrong"]);
+        }
+    }
+
+    public function accept(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Запит на запис не знайдено!']);
+
+        try {
+            $appointment = ChiefAppointment::where("id", $data['id'])->first();
+            $appointment->status = "accepted";
+            $appointment->save();
+            return json_encode(["error" => false, "message" => 'Час прийому прийнято успішно!']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function reject(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        $data = json_decode($request->getContent(), true);
+        if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Запит на запис не знайдено!']);
+
+        try {
+            $appointment = ChiefAppointment::where("id", $data['id'])->first();
+            $appointment->status = "rejected";
+            $appointment->save();
+            return json_encode(["error" => false, "message" => 'Час прийому відхилено успішно!']);
+        } catch (\Exception $e) {
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
 }

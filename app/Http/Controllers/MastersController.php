@@ -40,6 +40,14 @@ class MastersController extends Controller
             $data['id'] = '-1';
         }
 
+        if (!array_key_exists('first_name', $data) || !array_key_exists('last_name', $data)
+            || !array_key_exists('description', $data) || !array_key_exists('img_src', $data)
+            || !$data['first_name'] || strlen($data['first_name']) < 1
+            || !$data['last_name'] || strlen($data['last_name']) < 1
+            || !$data['description'] || strlen($data['description']) < 1
+            || !$data['img_src'] || strlen($data['img_src']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
         try {
             $findedByData = Master::where([["id", "!=", $data['id']], "first_name" => $data['first_name'], "last_name" => $data['last_name']])->first();
             if ($findedByData)
@@ -99,10 +107,10 @@ class MastersController extends Controller
             $master->hidden = !$master->hidden;
             $master->save();
 
-            $full_namme = $master->first_name." ".$master->last_name;
+            $full_namme = $master->first_name . " " . $master->last_name;
 
             $message = 'Майстер бльше не відображається у користувачів!';
-            if(!$master->hidden) $message = 'Майстер знову відображається у користувачів!';
+            if (!$master->hidden) $message = 'Майстер знову відображається у користувачів!';
 
             return json_encode(["error" => false, "message" => $message, 'hidden' => $master->hidden]);
         } catch (\Exception $e) {
