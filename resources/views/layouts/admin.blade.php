@@ -290,7 +290,7 @@
     <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
             <ul>
-                <a href="{{url("/admin/calendar")}}" >
+                <a href="{{url("/admin/calendar")}}">
                     <li>Calendar</li>
                 </a>
                 <a href="{{url("/admin/main-settings")}}">
@@ -371,5 +371,5 @@
 
     });
 </script>
-
+Test
 @include('layouts.footer')

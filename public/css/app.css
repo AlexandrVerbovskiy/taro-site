@@ -91,6 +91,11 @@ ul>li>a{
     color: black;
 }
 
+.lang_button:hover{
+    color: black;
+    text-decoration: underline;
+}
+
 .lang_button_change{
     text-decoration: underline;
     color: #336699;
@@ -1007,7 +1012,7 @@ master_margin_sm{
     }
     .lang_button{
         font-family: 'Oswald', sans-serif;
-        font-size: 20px;
+        font-size: 30px;
         margin: 0 0px;
     }
     .scroll_table{
