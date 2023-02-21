@@ -29,18 +29,18 @@
                 let mediaContent;
                 switch(post["media_type"]) {
                     case "youtube":
-                        mediaContent = `<iframe id="youtube_media_view" class="youtube_media" style="margin: 0; border-radius: 15px; margin-bottom: 10px" src="${parseYoutubeUrl(post['url'])}"></iframe>`
+                        mediaContent = `<iframe id="youtube_media_view" class="youtube_media" style="border-radius: 15px; margin-bottom: 10px; margin-top: 10px" src="${parseYoutubeUrl(post['url'])}"></iframe>`
                         break;
                     case "audio":
                         mediaContent = `<audio style="max-width:100%; max-height:400px; margin-bottom: 20px" controls="" id="audio_media_view" src="/storage/${post['url']}"></audio>`
                         break;
                     case "video":
-                        mediaContent = `<video style="max-width:100%; max-height:600px; margin: 20px 0; border-radius: 15px;" controls="" id="video_media_view" src="/storage/videos/${post['url']}"></video>`;
+                        mediaContent = `<video style="max-width:100%; max-height:620px; margin: 10px 0 20px; border-radius: 15px;" controls="" id="video_media_view" src="/storage/videos/${post['url']}"></video>`;
                         break;
                     case "image":
                         mediaContent=`<div class="row justify-content-center" style="width: 100%; margin: 0;">
-                                        <div class="col-lg-6 col-md-8 col-sm-8" style="padding: 0">
-                                            <img style="max-width:100%; max-height:400px; margin-bottom: 20px" id="image_media_view" src="/storage/images/${post['url']}">
+                                        <div class="col-lg-8" style="padding: 0">
+                                            <img style="max-width:100%; max-height:400px; margin-bottom: 20px; margin-top: 10px" id="image_media_view" src="/storage/images/${post['url']}">
                                         </div>
                                       </div>`;
                         break;
@@ -50,7 +50,7 @@
     <div class="col-lg-9 col-md-12" style="background-color: #a9c6ff; border-radius: 25px; padding: 20px; margin-bottom: 50px; height: auto;">
         <div class="d-flex flex-column">
             <div><h3>${post["title"]}</h3></div>
-            <div>${mediaContent}</div>
+            <div class="text-center">${mediaContent}</div>
             <div>${post["body"]}</div>
             <!--<div style="margin: 0 0 40px 0;">${post["id"]}</div>-->
 
