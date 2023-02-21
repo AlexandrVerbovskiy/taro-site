@@ -122,7 +122,11 @@ class MastersController extends Controller
     {
         $master = Master::where('id', "=", $id)->where('hidden', false)->first();
         if (!$master) return abort(404);
-        $comments = MasterComment::where("master_id", $id)->where("author_id", "=", auth()->user()->id)->get();
+        if(auth()->user()) {
+            $comments = MasterComment::where("master_id", $id)->where("author_id", "=", auth()->user()->id)->get();
+        }else{
+            $comments = [];
+        }
         return $this->view('masters.index', ['master' => $master, 'comments' => $comments]);
     }
 }

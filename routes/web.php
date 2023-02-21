@@ -3,8 +3,10 @@
 use App\Http\Controllers\AreasActivityController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\InfosController;
+use App\Http\Controllers\MastersAppointmentsController;
 use App\Http\Controllers\MastersController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\StudiesAppointmentsController;
 use App\Http\Controllers\StudiesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -137,5 +139,17 @@ Route::get('/event-posts/{id}', [EventsController::class, 'events']);
 Route::get('/get-events', [EventsController::class, 'getPosts']);
 
 Route::post('/note-to-boss', [ChiefAppointmentsController::class, 'save']);
-Route::post('/admin/note-reject', [ChiefAppointmentsController::class, 'reject']);
-Route::post('/admin/note-accept', [ChiefAppointmentsController::class, 'accept']);
+Route::post('/admin/note-to-boss-reject', [ChiefAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-boss-accept', [ChiefAppointmentsController::class, 'accept']);
+
+Route::post('/note-to-master', [MastersAppointmentsController::class, 'save']);
+Route::get("/admin/notes-to-masters", [MastersAppointmentsController::class, 'allNotes']);
+Route::get("/admin/get-notes-to-masters", [MastersAppointmentsController::class, 'getNotes']);
+Route::post('/admin/note-to-master-reject', [MastersAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-master-accept', [MastersAppointmentsController::class, 'accept']);
+
+Route::post('/note-to-study', [StudiesAppointmentsController::class, 'save']);
+Route::get("/admin/notes-to-studies", [StudiesAppointmentsController::class, 'allNotes']);
+Route::get("/admin/get-notes-to-studies", [StudiesAppointmentsController::class, 'getNotes']);
+Route::post('/admin/note-to-study', [StudiesAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-study', [StudiesAppointmentsController::class, 'accept']);

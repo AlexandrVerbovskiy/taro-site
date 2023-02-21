@@ -44,7 +44,6 @@ class StudiesController extends Controller
         ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
 
 
-
         try {
             $findedByData = StudyTopic::where([["id", "!=", $data['id']], "title_ru" => $data['title_ru']], ['id', '!=', $data['id']])->first();
             if (!isset($findedByData)) {
@@ -179,7 +178,7 @@ class StudiesController extends Controller
         if (!$event) return abort(404);
 
         $posts_count = Study::where("topic_id", $id)->where('hidden', false)->count();
-        return $this->view("studies.index", ['count' => $posts_count, 'topic_id' => $id]);
+        return $this->view("studies.index", ['count' => $posts_count, 'topic_id' => $id, , 'topic_title_ru' => $event->title_ru, 'topic_title_ua' => $event->title_ua]);
     }
 
     public function getStudies()

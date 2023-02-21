@@ -175,7 +175,6 @@ class InfosController extends Controller
     public function getPosts()
     {
         if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
-
         if (!array_key_exists('topic', $_GET) || !is_numeric($_GET['topic'])) abort(404);
 
         $start = intval($_GET['start']);
@@ -231,6 +230,6 @@ class InfosController extends Controller
         if (!$info) return abort(404);
 
         $posts_count = InfoPost::where("info_id", $id)->where('hidden', false)->count();
-        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id]);
+        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id, 'topic_title_ru' => $info->title_ru, 'topic_title_ua' => $info->title_ua]);
     }
 }

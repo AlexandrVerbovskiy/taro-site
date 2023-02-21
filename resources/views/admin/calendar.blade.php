@@ -28,13 +28,13 @@
         }
 
         const reject = (id) => {
-            post('{{url('/admin/note-reject')}}', {id}, res => {
+            post('{{url('/admin/note-to-boss-reject')}}', {id}, res => {
                 console.log(res);
             });
         }
 
         const accept = (id) => {
-            post('{{url('/admin/note-accept')}}', {id}, res => {
+            post('{{url('/admin/note-to-boss-accept')}}', {id}, res => {
                 console.log(res);
             });
         }
