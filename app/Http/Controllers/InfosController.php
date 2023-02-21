@@ -39,6 +39,12 @@ class InfosController extends Controller
             $data['id'] = '-1';
         }
 
+        if (!array_key_exists('title_ru', $data) || !array_key_exists('title_ua', $data)
+            || !$data['title_ru'] || strlen($data['title_ru']) < 1
+            || !$data['title_ua'] || strlen($data['title_ua']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+
         try {
             $findedByData = Info::where(["title_ru" => $data['title_ru'], ['id', '!=', $data['id']]])->first();
             if (!isset($findedByData)) {
@@ -134,6 +140,15 @@ class InfosController extends Controller
             $data['id'] = '-1';
         }
 
+        if (!array_key_exists('title', $data) || !array_key_exists('media_type', $data)
+            ||!array_key_exists('url', $data) || !array_key_exists('body', $data)
+            || !$data['title'] || strlen($data['title']) < 1
+            || !$data['media_type'] || strlen($data['media_type']) < 1
+            || !$data['url'] || strlen($data['url']) < 1
+            || !$data['body'] || strlen($data['body']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+
         try {
             $findedByData = InfoPost::where(["id" => $data['id']])->first();
 
@@ -160,7 +175,6 @@ class InfosController extends Controller
     public function getPosts()
     {
         if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
-
         if (!array_key_exists('topic', $_GET) || !is_numeric($_GET['topic'])) abort(404);
 
         $start = intval($_GET['start']);
@@ -216,6 +230,6 @@ class InfosController extends Controller
         if (!$info) return abort(404);
 
         $posts_count = InfoPost::where("info_id", $id)->where('hidden', false)->count();
-        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id]);
+        return $this->view("infos.index", ['count' => $posts_count, 'topic_id' => $id, 'topic_title_ru' => $info->title_ru, 'topic_title_ua' => $info->title_ua]);
     }
 }

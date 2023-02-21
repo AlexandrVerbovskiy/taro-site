@@ -237,6 +237,12 @@
 
 <div class="menu_2 d-lg-none " style="position: fixed; margin: 55px 0 0 0">
     <ul style="background: #a9c6ff;">
+        <a href="{{url("/admin/calendar")}}">
+            <li>Calendar</li>
+        </a>
+        <a href="{{url("/admin/main-settings")}}">
+            <li>Main</li>
+        </a>
         <a href="{{url("/admin/users")}}">
             <li>USERS</li>
         </a>
@@ -278,7 +284,13 @@
     <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
             <ul>
-                <a href="{{url("/admin/users")}}" >
+                <a href="{{url("/admin/calendar")}}" >
+                    <li>Calendar</li>
+                </a>
+                <a href="{{url("/admin/main-settings")}}">
+                    <li>Main</li>
+                </a>
+                <a href="{{url("/admin/users")}}">
                     <li>USERS</li>
                 </a>
                 <a href="{{url("/admin/activities")}}">

@@ -23,10 +23,11 @@
             async></script>
     <style>
         #audio_media_view[src=""], #video_media_view[src=""], #image_media_view[src=""], #youtube_media_view[src=""],
-        #audio_media_view[src=""]+br, #video_media_view[src=""]+br, #image_media_view[src=""]+br, #youtube_media_view[src=""]+br{
+        #audio_media_view[src=""] + br, #video_media_view[src=""] + br, #image_media_view[src=""] + br, #youtube_media_view[src=""] + br {
             display: none;
         }
     </style>
+
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
 
@@ -47,36 +48,36 @@
 
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
-            console.log( document.querySelector(selector));
+            console.log(document.querySelector(selector));
             console.log(selector);
             document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
         });
         localStorage.setItem("language", lang);
 
-        for(let langButton of document.querySelectorAll('.lang_button')) {
+        for (let langButton of document.querySelectorAll('.lang_button')) {
             langButton.style.textDecoration = langButton.dataset.value === lang ? 'underline' : 'none';
         }
     }
 
-    const get = (url, callback, ignoreSuccess=true) => {
+    const get = (url, callback, ignoreSuccess = true) => {
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
             }
-        }).then(res => res.json()).then(res=> {
-            if(typeof(res)=="object"){
-                if(res.message){
-                    if(!ignoreSuccess && res.error) showError(res.message);
-                    if(!res.error) showSuccess(res.message);
+        }).then(res => res.json()).then(res => {
+            if (typeof (res) == "object") {
+                if (res.message) {
+                    if (!ignoreSuccess && res.error) showError(res.message);
+                    if (!res.error) showSuccess(res.message);
                 }
             }
             callback(res);
         }).catch(e => showError(e.message));
     }
 
-    const post = (url, data, callback, ignoreSuccess=false) => {
+    const post = (url, data, callback, ignoreSuccess = false) => {
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
@@ -85,11 +86,11 @@
             },
             method: 'POST',
             body: JSON.stringify(data)
-        }).then(res => res.json()).then(res=> {
-            if(typeof(res)=="object"){
-                if(res.message){
-                    if(!ignoreSuccess && res.error) showError(res.message);
-                    if(!res.error) showSuccess(res.message);
+        }).then(res => res.json()).then(res => {
+            if (typeof (res) == "object") {
+                if (res.message) {
+                    if (!ignoreSuccess && res.error) showError(res.message);
+                    if (!res.error) showSuccess(res.message);
                 }
             }
             callback(res);
@@ -133,8 +134,8 @@
                 </svg>
             </button>`;
 
-    function parseYoutubeUrl(link="") {
-        if(!link) return "";
+    function parseYoutubeUrl(link = "") {
+        if (!link) return "";
         if (link.includes("https://www.youtube.com") && link.includes("watch")) {
             console.log(link)
             link = link.split("watch?v=")[1];
@@ -191,15 +192,15 @@
         });
     }
 
-    function closeMessageTimerStart(){
-        setTimeout(()=> {
+    function closeMessageTimerStart() {
+        setTimeout(() => {
             document.querySelectorAll(".alert.show .btn-close").forEach(elem => {
                 elem.click();
             })
-        },5000)
+        }, 5000)
     }
 
-    function showError(message){
+    function showError(message) {
         document.querySelector(".message-parent").insertAdjacentHTML("afterbegin", `
              <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 ${message}
@@ -208,7 +209,7 @@
         closeMessageTimerStart();
     }
 
-    function showSuccess(message){
+    function showSuccess(message) {
         document.querySelector(".message-parent").insertAdjacentHTML("afterbegin", `
              <div class="alert alert-success alert-dismissible fade show" role="alert">
                 ${message}

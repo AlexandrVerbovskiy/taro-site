@@ -155,4 +155,4 @@
 
     document.querySelectorAll(".media-changer").forEach(btn => btn.addEventListener("click", e => document.querySelector("#file_input").click()))
 </script>
-@stop
+@include("layouts.footer")

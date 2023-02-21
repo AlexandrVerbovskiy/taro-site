@@ -81,6 +81,10 @@
             </div>
         </div>
     </div>
+    <div id="comments_list">
+
+    </div>
+    <div class="loader hidden"></div>
 </div>
 
 <script>

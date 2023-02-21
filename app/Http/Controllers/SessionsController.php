@@ -17,9 +17,14 @@ class SessionsController extends Controller
         if (auth()->check()) return abort(404);
         if (auth()->attempt(request(['email', 'password'])) == false) {
             return back()->withInput(Request::except('password'))->withErrors([
+<<<<<<< HEAD
                 'message' => 'The email or password is incorrect, please try again',
                 'login' => true
             ]);
+=======
+                'message' => 'The email or password is incorrect, please try again'
+            ])->with('login', true);
+>>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
         }
         return redirect()->to('/');
     }

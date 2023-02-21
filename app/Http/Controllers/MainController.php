@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acivity;
+use App\Models\CalendarTime;
 use App\Models\Event;
 use App\Models\EventTopic;
 use App\Models\Info;
@@ -20,11 +21,34 @@ class MainController extends Controller
     public function home()
     {
         $main_img = StaticModel::where("key", "main_image")->first();
+<<<<<<< HEAD
         $main_img = $main_img? $main_img->value:"";
 
         $main_body = StaticModel::where("key", "main_body")->first();
         $main_body = $main_body? $main_body->value:"";
         return $this->view("welcome", ['main_img'=>$main_img, 'main_body'=>$main_body]);
+=======
+        $main_img = $main_img ? $main_img->value : "";
+
+        $main_body = StaticModel::where("key", "main_body")->first();
+        $main_body = $main_body ? $main_body->value : "";
+
+        $dates = DB::table("calendar_times")
+            ->leftJoin("chief_appointments", "chief_appointments.time_id", "=", "calendar_times.id")
+            ->whereRaw("(chief_appointments.id is NULL or chief_appointments.status='rejected') and cast(concat(date, ' ', time) as datetime) > CURRENT_TIMESTAMP()")
+            ->select("calendar_times.date")
+            ->groupBy('calendar_times.date')
+            ->get();
+
+        $filtered_dates = [];
+        foreach ($dates as $date) {
+            $filtered_dates[] = $date->date;
+        }
+
+        $findedNoteToBoss = $this->getActualUserNotesToBoss();
+
+        return $this->view("welcome", ['main_img' => $main_img, 'main_body' => $main_body, "finded_note" => $findedNoteToBoss, "dates" => $filtered_dates]);
+>>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
     }
 
     public function admin()
@@ -44,7 +68,7 @@ class MainController extends Controller
         $statistic['count_showed_infos_posts'] = InfoPost::where("hidden", false)->count();
         $statistic['count_studies'] = Study::count();
         $statistic['count_showed_studies'] = Study::where("hidden", false)->count();
-        return view("admin.main", ["statistic"=>$statistic]);
+        return view("admin.main", ["statistic" => $statistic]);
     }
 
     public function masters()
@@ -61,19 +85,22 @@ class MainController extends Controller
         return view("admin.activities", ['activities' => $activities]);
     }
 
-    public function infos(){
+    public function infos()
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $infos = Info::all();
         return view("admin.infos", ['infos' => $infos]);
     }
 
-    public function studiesTopics(){
+    public function studiesTopics()
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $topics = StudyTopic::all();
         return view("admin.studies-topics", ['topics' => $topics]);
     }
 
-    public function eventsTopics(){
+    public function eventsTopics()
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         $topics = EventTopic::all();
         return view("admin.events-topics", ['topics' => $topics]);
@@ -85,7 +112,8 @@ class MainController extends Controller
         return view("admin.users", ['count' => User::all()->count()]);
     }
 
-    public function infosPosts(){
+    public function infosPosts()
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view("admin.infos-posts", ['count' => InfoPost::all()->count()]);
     }
@@ -118,30 +146,33 @@ class MainController extends Controller
         $count = intval($_GET['count']);
         $search = $_GET['search'] ?? "";
 
-        return json_encode(["error" => false, "events" => Event::where("title", 'like', '%'.$search.'%')
+        return json_encode(["error" => false, "events" => Event::where("title", 'like', '%' . $search . '%')
             ->skip($start)
             ->take($count)
             ->get()]);
     }
 
-    public function studies(){
+    public function studies()
+    {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view("admin.studies", ['count' => Study::all()->count()]);
     }
 
-    public function getStudies(){
+    public function getStudies()
+    {
         if (!is_numeric($_GET['start']) || !is_numeric($_GET['count'])) return json_encode(["error" => false, "events" => []]);
 
         $start = intval($_GET['start']);
         $count = intval($_GET['count']);
-        $search = $_GET['search']??"";
+        $search = $_GET['search'] ?? "";
 
-        return json_encode(["error" => false, "studies" => Study::where("title", 'like', '%'.$search.'%')
+        return json_encode(["error" => false, "studies" => Study::where("title", 'like', '%' . $search . '%')
             ->skip($start)
             ->take($count)
             ->get()]);
     }
 
+<<<<<<< HEAD
     public function mainPageSettings(){
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
 
@@ -171,6 +202,48 @@ class MainController extends Controller
     }
 
     public function comments(){
+=======
+    public function mainPageSettings()
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+
+        $main_img = StaticModel::where("key", "main_image")->first();
+        $main_img = $main_img ? $main_img->value : "";
+
+        $main_body = StaticModel::where("key", "main_body")->first();
+        $main_body = $main_body ? $main_body->value : "";
+        return $this->view("admin.main-settings", ['main_img' => $main_img, 'main_body' => $main_body]);
+    }
+
+    public function saveMain(Request $request)
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+
+        $data = $request->input();
+        if (!array_key_exists('main_img', $data) || !array_key_exists('main_body', $data)
+            || !$data['main_body'] || strlen($data['main_body']) < 1
+            || !$data['main_img'] || strlen($data['main_img']) < 1
+        ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+        try {
+            $main_img = StaticModel::where("key", "main_image")->first();
+            $main_img->value = $data['main_img'];
+            $main_body = StaticModel::where("key", "main_body")->first();
+            $main_body->value = $data['main_body'];
+            $main_img->save();
+            $main_body->save();
+            return redirect()->to('/admin/main-settings/')->with('success', 'Дані збережено успішно!');
+        } catch (\Exception $e) {
+            file_put_contents("log.txt", $e->getMessage());
+            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function comments()
+    {
+>>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
         return view("admin.comments");
     }
 
@@ -203,4 +276,29 @@ class MainController extends Controller
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
+<<<<<<< HEAD
+=======
+
+    public function getTimes(Request $request, $date)
+    {
+        try {
+            $times = DB::table("calendar_times")
+                ->leftJoin("chief_appointments", "chief_appointments.time_id", "=", "calendar_times.id")
+                ->leftJoin("users", "chief_appointments.user_id", "=", "users.id")
+                ->whereRaw("date='$date' and (chief_appointments.id is NULL or chief_appointments.status!='rejected')")
+                ->orderBy("time")
+                ->get();
+            return json_encode(["error" => false, "date" => $date, "times" => $times]);
+        } catch (\Exception $e) {
+            file_put_contents("log.txt", $e->getMessage());
+            return json_encode(["error" => true, "message" => $e->getMessage()]);
+        }
+    }
+
+    public function calendar()
+    {
+        if (!auth()->check() || !auth()->user()->admin) return abort(404);
+        return $this->view("admin.calendar");
+    }
+>>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 }
