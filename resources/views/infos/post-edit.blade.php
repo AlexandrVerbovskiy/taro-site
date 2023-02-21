@@ -1,8 +1,8 @@
-@include('layouts.header')
-
+@extends('layouts.admin')
+@section('content')
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2 style="margin-bottom: 24px">Пост(корисна інформація)</h2>
+    <h2 style="margin-bottom: 24px; margin-top: 56px">Пост(корисна інформація)</h2>
     <form class='form' method="POST" action="{{url('/admin/save-info-post')}}">
         {{ csrf_field() }}
 
@@ -66,10 +66,10 @@
 
         <div class="form-group mb-3 youtube" style="display: none">
             <label for="url">Посилання:</label>
-            <input type="text" placeholder="Укажіть посилання на ютуб"  class="form-control" id="url"
+            <input style="margin-bottom: 10px" type="text" placeholder="Укажіть посилання на ютуб"  class="form-control" id="url"
                    value="{{old('url')?old('url'):(isset($url)?$url:'')}}"
                    name="url" required>
-            <iframe id="youtube_media_view" frameborder="0"
+            <iframe id="youtube_media_view" class="youtube_media" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen></iframe>
         </div>

@@ -1,7 +1,8 @@
-@include('layouts.header')
+@extends('layouts.admin')
+@section('content')
 <div class="container py-4 message-parent">
     @include("layouts.error-message")
-    <h2 style="margin-bottom: 24px">Майстер</h2>
+    <h2 style="margin-bottom: 24px; margin-top: 56px;">Майстер</h2>
     <form class='form' method="POST" action="{{url('/admin/save-master')}}">
         {{ csrf_field() }}
 
@@ -28,7 +29,7 @@
 
         <div class="form-group mb-3 image">
             <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
-            <button type="button" class="btn btn-primary media-changer">Change</button>
+            <button type="button" class="btn btn-primary media-changer" style="margin-top: 10px">Змінити</button>
         </div>
 
         <input type="hidden"

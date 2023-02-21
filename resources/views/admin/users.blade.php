@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h3 class="text-center title_margin" style="margin: 30px 0 30px">Користовачі</h3>
+        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Користовачі</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
             <!--<a href="{{url("/admin/create-info")}}" class="btn btn-primary admin_button_add">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -15,7 +15,7 @@
             <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
             <!--<button id="search" type="button" class="btn btn-danger admin_button_search">Search</button>-->
         </div>
-        <div class="table table-responsive table-responsive-sm scroll_table">
+        <div class="table table-responsive table-responsive-sm">
             <table class="table ">
                 <thead>
                 <tr>
@@ -85,6 +85,7 @@
                         <td><button style="margin: 0" class="btn ${user["admin"] ? 'btn-success' : 'btn-danger'} admin_table_button" onclick="changeAdmin(${user["id"]}, this)">${user["admin"] ? 'Admin' : 'User'}</button></td>
                     </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
+
             });
         }
 

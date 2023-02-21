@@ -1,4 +1,4 @@
-<footer class="d-flex flex-column justify-content-center text-center footer mt-auto" style="background-color: #a9c6ff;">
+<footer class="d-flex flex-column justify-content-center text-center footer mt-auto" style="background-color: #a9c6ff; z-index: 2">
     <div class="footer_text">Контакти</div>
     <div class="d-flex flex-row justify-content-center">
         <div><a href="#"><img src="{{ URL("image/instagram.png")}}" class="footer-image"></a></div>
@@ -105,11 +105,6 @@
 
 
 </script>
-<script>
-    //ne rabotaet
-    /*document.getElementsByClassName('lang_button').onclick = function() {
-        document.getElementById('lang_but').classList.add('lang_button_change');
-    }*/
-</script>
+
 </body>
 </html>

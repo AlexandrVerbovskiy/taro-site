@@ -87,6 +87,9 @@ ul>li>a{
     text-decoration: none;
     color: black;
 }
+.lang_button:hover {
+    color: black;
+}
 
 .lang_button_change{
     text-decoration: underline;
@@ -681,8 +684,29 @@ master_margin_sm{
 }
 .youtube_media{
     width: 100%;
-    height: 600px;
+    height: 513px;
     margin-top: 20px;
+}
+.admin_button_SaniaZaebalEdition{
+    padding: 6px 12px;
+    margin: 1px;
+
+}
+.admin_button_img_SaniaZaebalEdition {
+    width: 16px;
+    height: 16px;
+}
+.admin_master_table_sm{ }
+.admin_3_table_sm{ }
+.comment_button{
+    width: 150px;
+    margin: 15px 0 40px;
+    padding: 6px 10px;
+    font-size: 18px;
+    color: black;
+    background-color: #a9c6ff;
+    border-radius: 20px;
+    border: 0;
 }
 @media only screen and (max-width: 1920px) {
     .scroll_table{
@@ -694,6 +718,9 @@ master_margin_sm{
         width: auto;
         height: 700px;
         overflow: auto;
+    }
+    .youtube_media{
+        height: 716px;
     }
 }
 @media only screen and (max-width: 1440px) {
@@ -708,9 +735,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        width: 100%;
-        height: 500px;
-        margin-top: 20px;
+        height: 581px;
     }
 }
 @media only screen and (max-width: 1366px) {
@@ -724,6 +749,9 @@ master_margin_sm{
         height: 580px;
         overflow: auto;
     }
+    .youtube_media{
+        height: 550px;
+    }
 }
 @media only screen and (max-width: 1280px) {
     .scroll_table{
@@ -735,6 +763,11 @@ master_margin_sm{
         width: auto;
         height: 550px;
         overflow: auto;
+    }
+    .youtube_media{
+        width: 100%;
+        height: 513px;
+        margin-top: 20px;
     }
 }
 @media only screen and (max-width: 1200px) {
@@ -750,7 +783,7 @@ master_margin_sm{
         font-size: 15px;
     }
     .youtube_media{
-        height: 400px;
+        height: 479px;
     }
     .scroll_form{
         width: auto;
@@ -764,6 +797,9 @@ master_margin_sm{
         height: 360px;
         overflow: auto;
     }
+    .youtube_media{
+        height: 405px;
+    }
 }
 @media only screen and (max-width: 820px) {
     .scroll_table{
@@ -775,6 +811,9 @@ master_margin_sm{
         width: auto;
         height: 860px;
         overflow: auto;
+    }
+    .youtube_media{
+        height: 378px;
     }
 }
 @media only screen and (max-width: 768px) {
@@ -825,6 +864,9 @@ master_margin_sm{
         height: 420px;
         overflow: auto;
     }
+    .youtube_media{
+        height: 277px;
+    }
 }
 @media only screen and (max-width: 576px) {
     .header_name{
@@ -849,7 +891,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 280px;
+        height: 292px;
     }
 }
 @media only screen and (max-width: 540px) {
@@ -921,7 +963,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 260px;
+        height: 264px;
     }
 }
 @media only screen and (max-width: 430px) {
@@ -974,7 +1016,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 180px;
+        height: 215px;
     }
     .scroll_form{
         width: auto;
@@ -1060,7 +1102,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 180px;
+        height: 196px;
     }
     .scroll_form{
         width: auto;
@@ -1085,7 +1127,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 160px;
+        height: 190px;
     }
     .scroll_form{
         width: auto;
@@ -1171,7 +1213,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 160px;
+        height: 180px;
     }
     .scroll_form{
         width: auto;
@@ -1317,6 +1359,12 @@ master_margin_sm{
     .admin_button2{
         width: 80px;
     }
+    .admin_master_table_sm{
+        width: 500px;
+    }
+    .admin_3_table_sm{
+        width: 400px;
+    }
 
 }
 @media only screen and (max-width: 334px) {
@@ -1329,7 +1377,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 150px;
+        height: 161px;
     }
     .scroll_form{
         width: auto;
@@ -1367,7 +1415,7 @@ master_margin_sm{
         overflow: auto;
     }
     .youtube_media{
-        height: 120px;
+        height: 152px;
     }
     .scroll_form{
         width: auto;
@@ -1383,5 +1431,20 @@ master_margin_sm{
     }
     .date_study{
         font-size: 14px;
+    }
+    .admin_button_SaniaZaebalEdition{
+        padding: 3px 7px;
+        margin: 1px;
+
+    }
+    .admin_button_img_SaniaZaebalEdition {
+        width: 12px;
+        height: 12px;
+    }
+    .admin_master_table_sm{
+        width: 320px;
+    }
+    .admin_3_table_sm{
+        width: 300px;
     }
 }
