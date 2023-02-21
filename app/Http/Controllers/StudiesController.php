@@ -178,7 +178,7 @@ class StudiesController extends Controller
         if (!$event) return abort(404);
 
         $posts_count = Study::where("topic_id", $id)->where('hidden', false)->count();
-        return $this->view("studies.index", ['count' => $posts_count, 'topic_id' => $id, , 'topic_title_ru' => $event->title_ru, 'topic_title_ua' => $event->title_ua]);
+        return $this->view("studies.index", ['count' => $posts_count, 'topic_id' => $id, 'topic_title_ru' => $event->title_ru, 'topic_title_ua' => $event->title_ua]);
     }
 
     public function getStudies()
