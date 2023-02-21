@@ -1,6 +1,7 @@
 @include('layouts.header')
-<div class="container py-4">
-    <h2>Topic</h2>
+<div class="container py-4 message-parent">
+@include("layouts.error-message")
+    <h2>Основна сторінка</h2>
     <form class='form' method="POST" action="{{url('/admin/save-main')}}">
         {{ csrf_field() }}
 

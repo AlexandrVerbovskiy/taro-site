@@ -109,7 +109,7 @@
 </div>
 
 <script>
-    function buildCalendar(onGetDate) {
+    function buildCalendar(onClick) {
         const calendar = {
             init: function () {
                 this.date = new Date();
@@ -210,9 +210,7 @@
                     const selectedDate = new Date(this.year, this.month, dayEl.innerHTML);
                     dayEl.classList.add("selected");
                     document.querySelector(".time-list").innerHTML="";
-                    get("/calendar-times/"+event.target.dataset.date, res => {
-                        onGetDate(res);
-                    })
+                    onClick(event);
                 });
             },
 

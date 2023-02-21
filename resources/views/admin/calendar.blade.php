@@ -27,9 +27,26 @@
             });
         }
 
+        const reject = (id) => {
+            post('{{url('/admin/note-to-boss-reject')}}', {id}, res => {
+                console.log(res);
+            });
+        }
+
+        const accept = (id) => {
+            post('{{url('/admin/note-to-boss-accept')}}', {id}, res => {
+                console.log(res);
+            });
+        }
+
         const buildTimeRow = time => `
                 <div class="time-row" data-id="${time["id"]}">
                     <div>Time:<b>${time['time']}</b></div>
+                    ${time["first_name"]?
+                    `<div>${time["first_name"] + time["last_name"]}</div>
+                        <button onclick="accept(${time["id"]})">Accept</button>
+                        <button onclick="reject(${time["id"]})">Rejected</button>
+                       `:""}
                     <button type="button" class="btn trash btn-danger" data-id="${time["id"]}" onclick="handleTrashClick(this)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-trash" viewBox="0 0 16 16">
@@ -47,7 +64,8 @@
             document.querySelector("#trash-modal").click();
         }
 
-        buildCalendar(res => {
+        const onGetTimes=res=>
+        {
             const timeParent = document.querySelector(".time-list");
             res.times.forEach(time => timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time)));
             timeParent.insertAdjacentHTML("afterbegin", `
@@ -56,17 +74,19 @@
 
             document.querySelector("#add_time").addEventListener("click", e => {
                 const value = document.querySelector("#time").value;
-                if(!value) return;
+                if (!value) return;
                 post("/admin/calendar-time-edit", {
                     time: value,
                     date: res.date
                 }, res => {
-                    if(res.error) return;
+                    if (res.error) return;
                     document.querySelector("#time").value = "";
                     document.querySelector("#add_time").insertAdjacentHTML("afterend", buildTimeRow(res.data));
                 });
             })
-        })
+        }
+
+        buildCalendar((e)=>get("/admin/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
         buildModal("danger", "Removing the master", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);
 

@@ -3,8 +3,10 @@
 use App\Http\Controllers\AreasActivityController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\InfosController;
+use App\Http\Controllers\MastersAppointmentsController;
 use App\Http\Controllers\MastersController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\StudiesAppointmentsController;
 use App\Http\Controllers\StudiesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +16,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MastersCommentsController;
+use App\Http\Controllers\ChiefAppointmentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +106,7 @@ Route::get('/get-studies', [StudiesController::class, 'getStudies']);
 Route::get("/studies/{id}", [StudiesController::class, 'studies']);
 
 Route::get("/calendar-times/{date}", [CalendarController::class, 'getTimes']);
+Route::get("/admin/calendar-times/{date}", [MainController::class, 'getTimes']);
 Route::post("/admin/calendar-time-edit", [CalendarController::class, 'saveTimeCalendar']);
 Route::post("/admin/calendar-time-delete", [CalendarController::class, 'delete']);
 
@@ -134,3 +138,18 @@ Route::post('/admin/event-post-change-visible', [EventsController::class, 'chang
 Route::get('/event-posts/{id}', [EventsController::class, 'events']);
 Route::get('/get-events', [EventsController::class, 'getPosts']);
 
+Route::post('/note-to-boss', [ChiefAppointmentsController::class, 'save']);
+Route::post('/admin/note-to-boss-reject', [ChiefAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-boss-accept', [ChiefAppointmentsController::class, 'accept']);
+
+Route::post('/note-to-master', [MastersAppointmentsController::class, 'save']);
+Route::get("/admin/notes-to-masters", [MastersAppointmentsController::class, 'allNotes']);
+Route::get("/admin/get-notes-to-masters", [MastersAppointmentsController::class, 'getNotes']);
+Route::post('/admin/note-to-master-reject', [MastersAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-master-accept', [MastersAppointmentsController::class, 'accept']);
+
+Route::post('/note-to-study', [StudiesAppointmentsController::class, 'save']);
+Route::get("/admin/notes-to-studies", [StudiesAppointmentsController::class, 'allNotes']);
+Route::get("/admin/get-notes-to-studies", [StudiesAppointmentsController::class, 'getNotes']);
+Route::post('/admin/note-to-study', [StudiesAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-study', [StudiesAppointmentsController::class, 'accept']);

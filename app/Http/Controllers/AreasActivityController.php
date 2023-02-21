@@ -43,6 +43,16 @@ class AreasActivityController extends Controller
         }
 
         try {
+            if (!array_key_exists('title_ua', $data) || !array_key_exists('title_ru', $data)
+                || !array_key_exists('body', $data) || !array_key_exists('img_src', $data)
+                || !$data['title_ua'] || strlen($data['title_ua']) < 1
+                || !$data['title_ru'] || strlen($data['title_ru']) < 1
+                || !$data['body'] || strlen($data['body']) < 1
+                || !$data['img_src'] || strlen($data['img_src']) < 1
+            ) return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
+
+
+
             $findedByData = Acivity::where(["title_ru" => $data['title_ru'], "title_ua" => $data['title_ua'], ["id", "!=", $data['id']]])->first();
             if ($findedByData)
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
