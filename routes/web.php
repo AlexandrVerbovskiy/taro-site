@@ -144,12 +144,12 @@ Route::post('/admin/note-to-boss-accept', [ChiefAppointmentsController::class, '
 
 Route::post('/note-to-master', [MastersAppointmentsController::class, 'save']);
 Route::get("/admin/notes-to-masters", [MastersAppointmentsController::class, 'allNotes']);
-Route::get("/admin/get-notes-to-masters", [MastersAppointmentsController::class, 'getNotes']);
+Route::post("/admin/get-notes-to-masters", [MastersAppointmentsController::class, 'getNotes']);
 Route::post('/admin/note-to-master-reject', [MastersAppointmentsController::class, 'reject']);
 Route::post('/admin/note-to-master-accept', [MastersAppointmentsController::class, 'accept']);
 
 Route::post('/note-to-study', [StudiesAppointmentsController::class, 'save']);
 Route::get("/admin/notes-to-studies", [StudiesAppointmentsController::class, 'allNotes']);
-Route::get("/admin/get-notes-to-studies", [StudiesAppointmentsController::class, 'getNotes']);
-Route::post('/admin/note-to-study', [StudiesAppointmentsController::class, 'reject']);
-Route::post('/admin/note-to-study', [StudiesAppointmentsController::class, 'accept']);
+Route::post("/admin/get-notes-to-studies", [StudiesAppointmentsController::class, 'getNotes']);
+Route::post('/admin/note-to-study-reject', [StudiesAppointmentsController::class, 'reject']);
+Route::post('/admin/note-to-study-accept', [StudiesAppointmentsController::class, 'accept']);

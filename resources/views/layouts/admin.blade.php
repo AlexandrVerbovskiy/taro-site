@@ -261,6 +261,12 @@
         <a href="{{url("/admin/comments")}}">
             <li>Comments</li>
         </a>
+        <a href="{{url("/admin/notes-to-studies")}}">
+            <li>Записи на навчання</li>
+        </a>
+        <a href="{{url("/admin/notes-to-masters")}}">
+            <li>Записи на майстра</li>
+        </a>
     </ul>
 </div>
 
@@ -303,6 +309,12 @@
                 </a>
                 <a href="{{url("/admin/comments")}}">
                     <li>Comments</li>
+                </a>
+                <a href="{{url("/admin/notes-to-studies")}}">
+                    <li>Записи на навчання</li>
+                </a>
+                <a href="{{url("/admin/notes-to-masters")}}">
+                    <li>Записи на майстра</li>
                 </a>
             </ul>
         </div>

@@ -13,6 +13,7 @@ class StudyAppointment extends Model
     protected $fillable = [
         'time_id',
         'study_id',
+        'user_id',
         'status'
     ];
 }
