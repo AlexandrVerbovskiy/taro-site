@@ -98,11 +98,7 @@ class EventsController extends Controller
             $model->save();
 
             $message = "Розділ успішно приховано";
-<<<<<<< HEAD
-            if(!$model->hidden)$message = "Розділ успішно відновлено";
-=======
             if (!$model->hidden) $message = "Розділ успішно відновлено";
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 
             return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
@@ -228,11 +224,7 @@ class EventsController extends Controller
             $model->save();
 
             $message = "Подію успішно приховано";
-<<<<<<< HEAD
-            if(!$model->hidden)$message = "Подію успішно відновлено";
-=======
             if (!$model->hidden) $message = "Подію успішно відновлено";
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 
             return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {

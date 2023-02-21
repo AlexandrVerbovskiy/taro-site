@@ -99,11 +99,7 @@ class StudiesController extends Controller
             $model->save();
 
             $message = "Розділ успішно приховано";
-<<<<<<< HEAD
-            if(!$model->hidden)$message = "Розділ успішно відновлено";
-=======
             if (!$model->hidden) $message = "Розділ успішно відновлено";
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 
             return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {
@@ -167,11 +163,7 @@ class StudiesController extends Controller
             $study->date = $data['date'];
             $study->save();
 
-<<<<<<< HEAD
-            return redirect()->to('/admin/edit-study/' .$study->id)->with('success', 'Пост опубліковано успішно!');
-=======
             return redirect()->to('/admin/edit-study/' . $study->id)->with('success', 'Пост опубліковано успішно!');
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
             return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
@@ -233,11 +225,7 @@ class StudiesController extends Controller
             $model->save();
 
             $message = "Пост успішно приховано";
-<<<<<<< HEAD
-            if(!$model->hidden)$message = "Пост успішно відновлено";
-=======
             if (!$model->hidden) $message = "Пост успішно відновлено";
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 
             return json_encode(["error" => false, "message" => $message, 'hidden' => $model->hidden]);
         } catch (\Exception $e) {

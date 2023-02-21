@@ -21,13 +21,6 @@ class MainController extends Controller
     public function home()
     {
         $main_img = StaticModel::where("key", "main_image")->first();
-<<<<<<< HEAD
-        $main_img = $main_img? $main_img->value:"";
-
-        $main_body = StaticModel::where("key", "main_body")->first();
-        $main_body = $main_body? $main_body->value:"";
-        return $this->view("welcome", ['main_img'=>$main_img, 'main_body'=>$main_body]);
-=======
         $main_img = $main_img ? $main_img->value : "";
 
         $main_body = StaticModel::where("key", "main_body")->first();
@@ -48,7 +41,6 @@ class MainController extends Controller
         $findedNoteToBoss = $this->getActualUserNotesToBoss();
 
         return $this->view("welcome", ['main_img' => $main_img, 'main_body' => $main_body, "finded_note" => $findedNoteToBoss, "dates" => $filtered_dates]);
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
     }
 
     public function admin()
@@ -172,37 +164,6 @@ class MainController extends Controller
             ->get()]);
     }
 
-<<<<<<< HEAD
-    public function mainPageSettings(){
-        if (!auth()->check() || !auth()->user()->admin) return abort(404);
-
-        $main_img = StaticModel::where("key", "main_image")->first();
-        $main_img = $main_img? $main_img->value:"";
-
-        $main_body = StaticModel::where("key", "main_body")->first();
-        $main_body = $main_body? $main_body->value:"";
-        return $this->view("admin.main-settings", ['main_img'=>$main_img, 'main_body'=>$main_body]);
-    }
-
-    public function saveMain(Request $request){
-        if (!auth()->check() || !auth()->user()->admin) return abort(404);
-
-        $data = $request->input();
-        if (!array_key_exists('main_img', $data) || !array_key_exists('main_body', $data)){
-            return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors("Жодне поле не може бути порожнім!");
-        }
-
-        $main_img = StaticModel::where("key", "main_image")->first();
-        $main_img->value = $data['main_img'];
-        $main_body = StaticModel::where("key", "main_body")->first();
-        $main_body->value = $data['main_body'];
-        $main_img->save();
-        $main_body->save();
-        return redirect()->to('/admin/main-settings/')->with('success', 'Дані збережено успішно!');
-    }
-
-    public function comments(){
-=======
     public function mainPageSettings()
     {
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
@@ -243,7 +204,6 @@ class MainController extends Controller
 
     public function comments()
     {
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
         return view("admin.comments");
     }
 
@@ -276,8 +236,6 @@ class MainController extends Controller
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
-<<<<<<< HEAD
-=======
 
     public function getTimes(Request $request, $date)
     {
@@ -300,5 +258,4 @@ class MainController extends Controller
         if (!auth()->check() || !auth()->user()->admin) return abort(404);
         return $this->view("admin.calendar");
     }
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 }

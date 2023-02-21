@@ -107,17 +107,10 @@ class MastersController extends Controller
             $master->hidden = !$master->hidden;
             $master->save();
 
-<<<<<<< HEAD
-            $full_namme = $master->first_name." ".$master->last_name;
-
-            $message = 'Майстер бльше не відображається у користувачів!';
-            if(!$master->hidden) $message = 'Майстер знову відображається у користувачів!';
-=======
             $full_namme = $master->first_name . " " . $master->last_name;
 
             $message = 'Майстер бльше не відображається у користувачів!';
             if (!$master->hidden) $message = 'Майстер знову відображається у користувачів!';
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
 
             return json_encode(["error" => false, "message" => $message, 'hidden' => $master->hidden]);
         } catch (\Exception $e) {
@@ -129,15 +122,11 @@ class MastersController extends Controller
     {
         $master = Master::where('id', "=", $id)->where('hidden', false)->first();
         if (!$master) return abort(404);
-<<<<<<< HEAD
-        $comments = MasterComment::where("master_id", $id)->where("author_id", "=", auth()->user()->id)->get();
-=======
         if(auth()->user()) {
             $comments = MasterComment::where("master_id", $id)->where("author_id", "=", auth()->user()->id)->get();
         }else{
             $comments = [];
         }
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
         return $this->view('masters.index', ['master' => $master, 'comments' => $comments]);
     }
 }
