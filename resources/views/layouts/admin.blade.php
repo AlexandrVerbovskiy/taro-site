@@ -285,10 +285,7 @@
     </ul>
 </div>
 
-<<<<<<< HEAD
-=======
 <div class="admin-background" style=""></div>
->>>>>>> c301c9a50390171f2b36027e6ae4cb495acee08c
 <div class="container" style="padding: 0; margin: 0; max-width: 100%;">
     <main class="row" style="width:100%; padding: 0; margin: 0;">
         <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
