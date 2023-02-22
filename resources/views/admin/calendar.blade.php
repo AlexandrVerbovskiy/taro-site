@@ -4,9 +4,8 @@
         @include("layouts.error-message")
         <div>
             @include("layouts.calendar", ["all"=>true])
-
             <div class="container" style="margin-top: 20px;">
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-6 mx-auto">
                         <div class="time-list">
 

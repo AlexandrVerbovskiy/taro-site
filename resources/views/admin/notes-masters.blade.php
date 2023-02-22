@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h3 class="text-center title_margin" style="margin: 30px 0 30px">Події</h3>
+        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Записи до майстрів</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
             <a href="{{url("/admin/create-event")}}" class="btn btn-primary admin_button_add">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"

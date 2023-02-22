@@ -1,354 +1,277 @@
 @include('layouts.header')
 
 <style>
-    body {
-        font-family: 'Noto Sans', sans-serif;
-        margin: 0;
-        width: 100%;
-        height: 100vh;
-        background: #ffffff;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap');
+
+    a, div, li, button, input, span, p, label, h2, h3, h4, h5, h6{
+        font-family: 'Roboto', sans-serif;
     }
-
-    header {
-        width: 100%;
-        background: #ffffff;
-        height: 60px;
-        line-height: 60px;
-        border-bottom: 1px solid #dddddd;
-
-    }
-
-    .admin-menu {
-        font-weight: bold;
-        font-size: 0.8em;
+    .nav-link:hover{
         background-color: #CEDFFF;
-        text-align: center;
-        height: calc(100vh);
-        max-height: 20000px;
-        padding: 0;
-        width: 400px;
-        /*position: fixed;
-        margin: 0;*/
-
     }
-    .admin-background{
-        width: 400px;
-        height: 100%;
+    .nav-item>.nav-link{
+        padding: 10px 28px;
+        font-size: 20px;
+        color: black;
+    }
+    .menu_3{
         position: fixed;
-        background-color: #CEDFFF;
-        z-index: -1;
+        background-color: #a9c6ff;
+        margin-top: 55px;
+        width: 300px;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
     }
-    .admin-menu a {
-        text-decoration: none;
-        color: black;
+    ul>li>a{
+        padding-left: 4px;
+        font-size: 20px;
+
     }
 
-    .admin-menu ul {
-        margin: 0;
+
+    .img_menu{
+        width: 30px;
         padding: 0;
-        list-style-type: none;
-        list-style-image: none;
-        position: fixed;
-        width: 400px;
     }
-
-    .admin-menu li {
-        display: block;
-        padding: 15px 0 15px 0;
-    }
-
-    .admin-menu li:hover {
-        background: #a9c6ff;
-    }
-
-    .hamburger {
-        background: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        line-height: 45px;
-        padding: 5px 15px 0px 15px;
+    .header_name{
+        font-family: 'Oswald', sans-serif;
+        font-size: 30px;
         color: black;
-        border: 0;
-        font-size: 1.4em;
-        font-weight: bold;
+        text-decoration: none;
+    }
+    .lang_button{
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+        margin: 0 10px;
         cursor: pointer;
-        outline: none;
-        z-index: 10000000000000;
-    }
-
-    .cross {
-        background: none;
-        position: absolute;
-        top: 0px;
-        right: 0;
-        padding: 7px 15px 0px 15px;
-        color: black;
-        border: 0;
-        font-size: 3em;
-        line-height: 65px;
-        font-weight: bold;
-        cursor: pointer;
-        outline: none;
-        z-index: 10000000000000;
-    }
-
-    .menu_2 {
-        z-index: 1000000;
-        font-weight: bold;
-        font-size: 0.8em;
-        width: 100%;
-        background: #a9c6ff;
-        position: absolute;
-        text-align: center;
-        font-size: 12px;
-        margin: 0;
-    }
-
-    .menu_2 ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        list-style-image: none;
-        background: #a9c6ff;
-    }
-
-    .menu_2 li {
-        display: block;
-        padding: 15px 0 15px 0;
-        /*border-bottom: #dddddd 1px solid;*/
-    }
-
-    .menu_2 li:hover {
-        display: block;
-        background: #CEDFFF;
-        padding: 15px 0 15px 0;
-        /*border-bottom: #dddddd 1px solid;*/
-    }
-
-    .menu_2 ul li a {
-        text-decoration: none;
-        margin: 0px;
-        color: black;
-    }
-
-    .menu_2 ul li a:hover {
-        color: black;
-        text-decoration: none;
-    }
-
-    .menu_2 a {
         text-decoration: none;
         color: black;
     }
-
-    .menu_2 a:hover {
-        text-decoration: none;
+    .lang_button:hover {
         color: black;
     }
 
-    .glyphicon-home {
-        color: white;
-        font-size: 1.5em;
-        margin-top: 5px;
-        margin: 0 auto;
+    .lang_button:hover{
+        color: black;
+        text-decoration: underline;
     }
 
-    header {
-        display: inline-block;
-        font-size: 12px;
-    }
-
-    span {
-        padding-left: 20px;
-    }
-
-    a {
+    .lang_button_change{
+        text-decoration: underline;
         color: #336699;
     }
 
-    .loader.hidden {
-        display: none;
+    .switch-button:checked + label {
+        background: #3378FF;
     }
-    @media only screen and (max-width: 1440px) {
-        .admin-menu{
-            width: 330px;
+
+    @media only screen and (max-width: 540px) {
+
+        .nav-item>.nav-link{
+            font-size: 18px;
         }
-        .admin-menu ul{
-            width: 330px;
+        ul>li>a{
+            font-size: 18px;
         }
-        .admin-background{
-            width: 330px;
+        .menu_3{
+            width: 260px;
         }
-    }
-    @media only screen and (max-width: 1280px) {
-        .admin-menu{
-            width: 280px;
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
         }
-        .admin-menu ul{
-            width: 280px;
-        }
-        .admin-background{
-            width: 280px;
-        }
-    }
-    @media only screen and (max-width: 1120px) {
-        .admin-menu{
-            width: 240px;
-        }
-        .admin-menu ul{
-            width: 240px;
-        }
-        .admin-background{
-            width: 240px;
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
         }
 
     }
-    @media only screen and (max-width: 1024px) {
-        .admin-menu{
-            width: 200px;
+    @media only screen and (max-width: 430px) {
+
+        .nav-item>.nav-link{
+            font-size: 16px;
         }
-        .admin-menu ul{
-            width: 200px;
+        ul>li>a{
+            font-size: 16px;
         }
-        .admin-background{
-            width: 200px;
+        .menu_3{
+            width: 260px;
         }
-        .admin-menu ul a li{
-            font-size: 11px;
+
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 17px;
+            margin: 0 0px;
+        }
+
+    }
+
+
+    @media only screen and (max-width: 400px) {
+
+        .nav-item>.nav-link{
+            font-size: 16px;
+        }
+        .menu_3{
+            width: 240px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 17px;
+            margin: 0 0px;
+        }
+        .img_menu{
+            width: 25px;
+            height: 25px;
+        }
+
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+        }
+
+
+    }
+
+    @media only screen and (max-width: 368px) {
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+        }
+        .img_menu{
+            width: 20px;
+            padding: 0;
+        }
+
+        .nav-item>.nav-link{
+            padding: 12px 28px;
+            font-size: 18px;
+        }
+
+        .nav-item>.nav-link{
+            font-size: 16px;
+        }
+
+        .menu_3{
+            width: 240px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            margin: 0 0px;
         }
     }
-    @media only screen and (max-width: 992px) {
-        .admin-background{
-            background: none;
+    @media only screen and (max-width: 320px) {
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 17px;
+        }
+        .nav-item>.nav-link{
+            padding: 8px 20px;
+            font-size: 13px;
+        }
+        ul>li>a{
+            font-size: 13px;
+        }
+        .menu_3{
+            width: 200px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            margin: 0 0px;
         }
     }
+
+
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%; position: fixed">
-    <div class="container-fluid" style="">
-        <a class="navbar-brand" style="font-family: 'Oswald', sans-serif; font-size: 24px; padding: 2px 0" href="/">Адмін панель</a>
-        <button class="hamburger d-lg-none">&#9776;</button>
-        <button class="cross d-lg-none">&#735;</button>
-    </div>
-</nav>
 
-<div class="menu_2 d-lg-none " style="position: fixed; margin: 55px 0 0 0">
-    <ul style="background: #a9c6ff;">
-        <a href="{{url("/admin/calendar")}}">
-            <li>Calendar</li>
-        </a>
-        <a href="{{url("/admin/main-settings")}}">
-            <li>Main</li>
-        </a>
-        <a href="{{url("/admin/users")}}">
-            <li>USERS</li>
-        </a>
-        <a href="{{url("/admin/activities")}}">
-            <li>ACTIVITIES</li>
-        </a>
-        <a href="{{url("/admin/masters")}}">
-            <li>MASTERS</li>
-        </a>
-        <a href="{{url("/admin/infos")}}">
-            <li>INFOS</li>
-        </a>
-        <a href="{{url("/admin/infos-posts")}}">
-            <li>INFOS POSTS</li>
-        </a>
-        <a href="{{url("/admin/studies-topics")}}">
-            <li>STUDIES TOPICS</li>
-        </a>
-        <a href="{{url("/admin/studies")}}">
-            <li>STUDIES</li>
-        </a>
-        <a href="{{url("/admin/events-topics")}}">
-            <li>EVENTS TOPICS</li>
-        </a>
-        <a href="{{url("/admin/events")}}">
-            <li>EVENTS</li>
-        </a>
-        <a href="{{url("/admin/main-settings")}}">
-            <li>Main</li>
-        </a>
-        <a href="{{url("/admin/comments")}}">
-            <li>Comments</li>
-        </a>
-        <a href="{{url("/admin/notes-to-studies")}}">
-            <li>Записи на навчання</li>
-        </a>
-        <a href="{{url("/admin/notes-to-masters")}}">
-            <li>Записи на майстра</li>
-        </a>
+
+
+
+
+
+<header class="align-items-center"
+        style="background-color: #a9c6ff; height: 56px; z-index: 10; width: 100%; position: fixed">
+    <div class="row align-items-center" style="width: 100%; margin: 0; height: 56px; ">
+        <div class="col">
+            <div class="container-fluid d-flex justify-content-start" style="padding: 0px;">
+                <a class="navbar-toggler collapsed d-flex flex-column justify-content-around link-dark text-decoration-none text-reset"
+                   type="button"
+                   data-bs-toggle="collapse" data-bs-target="#navbarNav2" aria-controls="navbarNav2"
+                   aria-expanded="false" aria-label="Toggle navigation">
+                    <img class="img_menu" src="{{ URL("image/menu.png")}}">
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bd-highlight  text-center " style="">
+                <a id="main_title" class="link-dark header_name" href="/">Адмін панель</a>
+
+            </div>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a data-value="ua" class="lang_button" id="ua_lang" style="">UA</a>
+            <a data-value="ru" class="lang_button" id="ru_lang" style="margin-left: 20px">RUS</a>
+
+        </div>
+    </div>
+</header>
+<div class="collapse navbar-collapse menu_3" id="navbarNav2" style="z-index: 3">
+    <ul class="nav flex-column" >
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/calendar")}}">Календар</a>
+        </li>
+        <li class="nav-item text-decoration-none" >
+            <a class="nav-link" href="{{url("/admin/main-settings")}}">Головна</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/users")}}">Користувачі</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/activities")}}">Напрямки діяльності</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/masters")}}">Майстри</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/infos")}}">Корисна інформація (категорії)</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/infos-posts")}}">Корисна інформація (пости)</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/studies-topics")}}">Навчання (категорії)</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/studies")}}">Навчання (пости)</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/events-topics")}}">Події (категорії)</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/events")}}">Події (пости)</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/comments")}}">Коментарі</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/notes-to-studies")}}">Записи на навчання</a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a class="nav-link" href="{{url("/admin/notes-to-masters")}}">Записи на майстра</a>
+        </li>
     </ul>
 </div>
+@yield('content')
 
-<div class="admin-background" style=""></div>
-<div class="container" style="padding: 0; margin: 0; max-width: 100%;">
-    <main class="row" style="width:100%; padding: 0; margin: 0;">
-        <div class="admin-menu d-none d-lg-block col-lg-3" style="margin-top: 56px">
-            <ul>
-                <a href="{{url("/admin/calendar")}}">
-                    <li>Calendar</li>
-                </a>
-                <a href="{{url("/admin/main-settings")}}">
-                    <li>Main</li>
-                </a>
-                <a href="{{url("/admin/users")}}">
-                    <li>USERS</li>
-                </a>
-                <a href="{{url("/admin/activities")}}">
-                    <li>ACTIVITIES</li>
-                </a>
-                <a href="{{url("/admin/masters")}}">
-                    <li>MASTERS</li>
-                </a>
-                <a href="{{url("/admin/infos")}}">
-                    <li>INFOS</li>
-                </a>
-                <a href="{{url("/admin/infos-posts")}}">
-                    <li>INFOS POSTS</li>
-                </a>
-                <a href="{{url("/admin/studies-topics")}}">
-                    <li>STUDIES TOPICS</li>
-                </a>
-                <a href="{{url("/admin/studies")}}">
-                    <li>STUDIES</li>
-                </a>
-                <a href="{{url("/admin/events-topics")}}">
-                    <li>EVENTS TOPICS</li>
-                </a>
-                <a href="{{url("/admin/events")}}">
-                    <li>EVENTS</li>
-                </a>
-                <a href="{{url("/admin/main-settings")}}">
-                    <li>Main</li>
-                </a>
-                <a href="{{url("/admin/comments")}}">
-                    <li>Comments</li>
-                </a>
-                <a href="{{url("/admin/notes-to-studies")}}">
-                    <li>Записи на навчання</li>
-                </a>
-                <a href="{{url("/admin/notes-to-masters")}}">
-                    <li>Записи на майстра</li>
-                </a>
-            </ul>
-        </div>
-        <div class="col-12 col-lg-9 message-parent" style="padding: 0; margin: 0;">
-            @if($errors->any())
-                <div style="border-radius: 0 0 10px 10px;" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{$errors->first()}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @yield('content')
-        </div>
-    </main>
 
-</div>
+
 
 <script>
     $(document).ready(function () {

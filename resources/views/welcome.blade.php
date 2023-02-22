@@ -1,8 +1,8 @@
 @include('layouts.main-header')
 
 <div class="row justify-content-center" style="width: 100%; margin: 0px">
-    <div class="shapka text-center col-lg-8" style="padding: 0; margin-top: 80px">
-        <img class="" src="{{Storage::url("")}}images/{{$main_img}}" style="width: 100%; height: auto;">
+    <div class="shapka text-center col-lg-8" style="padding: 0; ">
+        <img class="" src="{{Storage::url("")}}images/{{$main_img}}" style="width: 100%; height: auto; margin-top: 80px">
     </div>
 </div>
 

@@ -31,4 +31,4 @@
         </div>
     </form>
 </div>
-@include("layouts.footer")
+@stop
