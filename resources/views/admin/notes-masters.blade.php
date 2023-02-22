@@ -35,6 +35,9 @@
         <div class="loader hidden"></div>
     </div>
 
+    <button id="reject-modal" style="display: none;">Reject</button>
+    <button id="accept-modal" style="display: none;">Accept</button>
+
     <script>
         let showed = 0;
         const count = 20;
@@ -42,13 +45,32 @@
         let trashId = null;
         let search = "";
 
-        document.querySelector("#search").addEventListener("click", () => {
-            search = document.querySelector("input[name=search]").value;
-            showed = 0;
-            document.querySelector("table tbody").innerHTML = "";
-            getNewEvents();
-        })
+        let actualModalId = null;
 
+        const handleAcceptAccept = () => {
+            post('{{url('/admin/note-to-master-accept')}}', {id: actualModalId}, res => {
+                document.querySelector("tr[data-id='" + actualModalId + "'] td:has(.actions)").innerHTML = "<span style = 'color:green'>Accepted</span>"
+                actualModalId = null;
+            });
+        }
+
+        const handleRejectAccept = () => {
+            post('{{url('/admin/note-to-master-reject')}}', {id: actualModalId}, res => {
+                document.querySelector("tr[data-id='" + actualModalId + "'] td:has(.actions)").innerHTML = "<span style = 'color:red'>Rejected</span>"
+                actualModalId = null;
+            });
+
+        }
+
+        const handleAcceptClick = id => {
+            actualModalId = id;
+            document.querySelector("#accept-modal").click();
+        }
+
+        const handleRejectClick = id => {
+            actualModalId = id;
+            document.querySelector("#reject-modal").click();
+        }
 
         const getNewNotes = () => {
             document.querySelector(".loader").classList.remove('hidden');
@@ -65,6 +87,8 @@
                 showed += data.notes.length;
                 if (data.notes.length != count) canShow = false;
 
+                console.log(data.notes);
+
                 data.notes.forEach(note =>
                     rows += `
                        <tr data-id=${note["id"]}>
@@ -73,11 +97,23 @@
                         <td>${note["user_first_name"]} ${note["user_last_name"]}</td>
                         <td>${note["user_phone"]}</td>
                         <td>${note["user_email"]}</td>
-                        <td></td>
-                    </tr>`)
+                        <td>${note["status"] === "rejected" ?
+                        "<span style = 'color:red'>Rejected</span>"
+                        : (note["status"] === "accepted" ?
+                            "<span style = 'color:green'>Accepted</span>" :
+                            '<button onclick="handleAcceptClick('+note["id"]+')" class="actions">Accept</button>' +
+                            '<button onclick="handleRejectClick('+note["id"]+')" class="actions">Reject</button>')}
+                        </td></tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);
             });
         }
+
+        document.querySelector("#search").addEventListener("click", () => {
+            search = document.querySelector("input[name=search]").value;
+            showed = 0;
+            document.querySelector("table tbody").innerHTML = "";
+            getNewEvents();
+        })
 
         getNewNotes();
 
@@ -95,6 +131,14 @@
                 });
             });
         });
+
+        buildModal("danger", "Відхилення запиту на запис до майстра",
+            "Ви впевнені, що хочете відхилити запит на запис до майстра?",
+            document.querySelector("#reject-modal"), handleRejectAccept, "Відхилити");
+
+        buildModal("success", "Прийняття запиту на запис до майстра",
+            "Ви впевнені, що хочете прийняти запит на запис до майстра?",
+            document.querySelector("#accept-modal"), handleAcceptAccept, "Прийняти");
 
     </script>
 @stop

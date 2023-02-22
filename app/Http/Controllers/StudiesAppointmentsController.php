@@ -101,7 +101,7 @@ class StudiesAppointmentsController extends Controller
             ->select('users.first_name as user_first_name', 'users.last_name as user_last_name',
                 'users.email as user_email', 'users.phone as user_phone',
                 'studies_appointments.id as id',
-                'studies.title as study_title'
+                'studies.title as study_title',  'studies_appointments.status as status',
             )
             ->get()]);
     }

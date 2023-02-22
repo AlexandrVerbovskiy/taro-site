@@ -96,7 +96,7 @@ class MastersAppointmentsController extends Controller
                 ->take($count)
                 ->select('users.first_name as user_first_name', 'users.last_name as user_last_name',
                     'users.email as user_email', 'users.phone as user_phone',
-                    'masters_appointments.id as id',
+                    'masters_appointments.id as id', 'masters_appointments.status as status',
                     'masters.first_name as master_first_name', 'masters.last_name as master_last_name'
                 )
                 ->get();

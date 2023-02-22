@@ -76,9 +76,7 @@
         const acceptDelete = () => {
             console.log(trashId);
             post('{{url('/admin/master-delete')}}', {id: trashId}, res => {
-                console.log(`tr[data-id='${trashId}']`)
                 document.querySelector(`tr[data-id='${trashId}']`).remove();
-                console.log(res)
             });
         }
 
@@ -105,6 +103,6 @@
         document.querySelectorAll(".trash").forEach(trash => trash.addEventListener("click", handleTrashClick));
         document.querySelectorAll(".change-visible").forEach(btn => btn.addEventListener("click", handleChangeVisibleClick));
 
-        buildModal("danger", "Removing the master", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Removing the master", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete, "Видалити");
     </script>
 @stop

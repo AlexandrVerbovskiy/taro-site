@@ -162,7 +162,7 @@
         return result;
     }
 
-    const buildModal = (type, title, body, trigger, onClick) => {
+    const buildModal = (type, title, body, trigger, onClick, acceptText = "Зберегти", closeText = "Закрити") => {
         const id = "id_" + makeid(5).toLowerCase();
         trigger.setAttribute('data-bs-toggle', 'modal');
         trigger.setAttribute('data-bs-target', `#${id}`);
@@ -179,8 +179,8 @@
                     ${body}
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn close btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn accept btn-${type}">Save changes</button>
+                    <button type="button" class="btn close btn-secondary" data-bs-dismiss="modal">${closeText}</button>
+                    <button type="button" class="btn accept btn-${type}">${acceptText}</button>
                   </div>
                 </div>
               </div>
