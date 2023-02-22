@@ -189,13 +189,6 @@
 
 
 </style>
-
-
-
-
-
-
-
 <header class="align-items-center"
         style="background-color: #a9c6ff; height: 56px; z-index: 10; width: 100%; position: fixed">
     <div class="row align-items-center" style="width: 100%; margin: 0; height: 56px; ">
