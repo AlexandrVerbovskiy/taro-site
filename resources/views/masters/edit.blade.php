@@ -75,4 +75,4 @@
     document.querySelector(".media-changer").addEventListener("click", e=>document.querySelector("#img_input").click());
 
 </script>
-@include("layouts.footer")
+@stop
