@@ -80,4 +80,21 @@ class ChiefAppointmentsController extends Controller
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
     }
+
+    public function userNotes(){
+        if(!auth()->user()) return abort(404);
+
+        $notes = DB::table('chief_appointments')
+            ->join("calendar_times", "chief_appointments.time_id", "=", "calendar_times.id")
+            ->join("users", "chief_appointments.user_id", "=","users.id")
+            ->where("users.id", '=', auth()->user()->id)
+            ->select(
+                'calendar_times.time as time', 'calendar_times.date as date',
+                'chief_appointments.created_at as created_at'
+            )
+            ->get();
+
+
+        return $this->view('admin.all-user-notes', ['notes'=>$notes]);
+    }
 }

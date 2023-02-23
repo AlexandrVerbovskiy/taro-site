@@ -105,4 +105,22 @@ class StudiesAppointmentsController extends Controller
             )
             ->get()]);
     }
+
+    public function userNotes(){
+        if(!auth()->user()) return abort(404);
+
+        $notes = DB::table('studies_appointments')
+            ->join("studies", "studies_appointments.study_id", "=","studies.id")
+            ->join("users", "studies_appointments.user_id", "=","users.id")
+            ->where("users.id", '=', auth()->user()->id)
+            ->select(
+                'studies_appointments.id as id',
+                'studies.title as study_title',  'studies_appointments.status as status',
+                'studies_appointments.created_at as created_at'
+            )
+            ->get();
+
+
+        return $this->view('admin.all-user-notes', ['notes'=>$notes]);
+    }
 }

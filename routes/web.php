@@ -153,3 +153,7 @@ Route::get("/admin/notes-to-studies", [StudiesAppointmentsController::class, 'al
 Route::post("/admin/get-notes-to-studies", [StudiesAppointmentsController::class, 'getNotes']);
 Route::post('/admin/note-to-study-reject', [StudiesAppointmentsController::class, 'reject']);
 Route::post('/admin/note-to-study-accept', [StudiesAppointmentsController::class, 'accept']);
+
+Route::get("/user/notes-to-masters", [StudiesAppointmentsController::class, 'userNotes']);
+Route::get("/user/notes-to-studies", [MastersAppointmentsController::class, 'userNotes']);
+Route::get("/user/notes-to-chief", [ChiefAppointmentsController::class, 'userNotes']);
