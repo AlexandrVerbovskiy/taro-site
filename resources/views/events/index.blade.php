@@ -28,20 +28,20 @@
                 let mediaContent;
                 switch(event["media_type"]) {
                     case "youtube":
-                        mediaContent = `<iframe id="youtube_media_view" class="youtube_media" style="border-radius: 15px; margin-bottom: 10px; margin-top: 10px" src="${parseYoutubeUrl(event['url'])}"></iframe>`
+                        mediaContent = `<div class="text-center"><iframe id="youtube_media_view" class="youtube_media" style="border-radius: 15px; margin-bottom: 10px; margin-top: 10px" src="${parseYoutubeUrl(event['url'])}"></iframe></div>`
                         break;
                     case "audio":
-                        mediaContent = `<audio style="max-width:100%; max-height:400px; margin-bottom: 20px" controls="" id="audio_media_view" src="/storage/${event['url']}"></audio>`
+                        mediaContent = `<audio style="max-width:100%; max-height:400px; margin-bottom: 15px; margin-top: 9px; z-index: 1" controls="" id="audio_media_view" src="/storage/audios/${event['url']}"></audio>`
                         break;
                     case "video":
-                        mediaContent = `<video style="max-width:100%; max-height:620px; margin: 10px 0 20px; border-radius: 15px;" controls="" id="video_media_view" src="/storage/videos/${event['url']}"></video>`;
+                        mediaContent = `<div class="text-center"><video style="max-width:100%; max-height:620px; margin: 10px 0 20px; border-radius: 15px;" controls="" id="video_media_view" src="/storage/videos/${event['url']}"></video></div>`;
                         break;
                     case "image":
-                        mediaContent=`<div class="row justify-content-center" style="width: 100%; margin: 0;">
+                        mediaContent=`<div class="text-center"><div class="row justify-content-center" style="width: 100%; margin: 0;">
                                         <div class="col-lg-8" style="padding: 0">
-                                            <img style="max-width:100%; max-height:400px; margin-bottom: 20px; margin-top: 10px" id="image_media_view" src="/storage/images/${event['url']}">
+                                            <img style="max-width:100%; max-height:400px; margin-bottom: 20px; margin-top: 10px;" id="image_media_view" src="/storage/images/${event['url']}">
                                         </div>
-                                      </div>`;
+                                      </div></div>`;
                         break;
                 }
                 rows += `
@@ -49,7 +49,7 @@
     <div class="col-lg-9 col-md-12" style="background-color: #a9c6ff; border-radius: 25px; padding: 20px; margin-bottom: 50px; height: auto;">
         <div class="d-flex flex-column">
             <div><h3>${event["title"]}</h3></div>
-            <div class="text-center">${mediaContent}</div>
+            <div>${mediaContent}</div>
             <div>${event["body"]}</div>
             <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
                 <label>Дата: ${event["created_at"].split('T')[0]}</label>

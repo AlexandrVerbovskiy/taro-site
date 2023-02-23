@@ -19,6 +19,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        width: 100%;
     }
 
     .calendar-weekdays {
@@ -94,7 +95,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-4 mx-auto">
             <div class="calendar">
                 <div class="calendar-header">
                     <button class="btn btn-primary float-start" id="previous-month">&lt;</button>

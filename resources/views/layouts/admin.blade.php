@@ -63,7 +63,66 @@
     .switch-button:checked + label {
         background: #3378FF;
     }
+    @media only screen and (max-width: 1440px) {
 
+        .nav-item>.nav-link{
+            padding: 8px 20px;
+            font-size: 16px;
+        }
+        .menu_3{
+            width: 260px;
+        }
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
+        }
+
+    }
+    @media only screen and (max-width: 1280px) {
+
+        .nav-item>.nav-link{
+            padding: 7px 20px;
+            font-size: 15px;
+        }
+        .menu_3{
+            width: 260px;
+        }
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
+        }
+
+    }
+    @media only screen and (max-width: 1024px) {
+
+        .nav-item>.nav-link{
+            padding: 7px 20px;
+            font-size: 14px;
+        }
+        .menu_3{
+            width: 260px;
+        }
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
+        }
+
+    }
     @media only screen and (max-width: 540px) {
 
         .nav-item>.nav-link{
