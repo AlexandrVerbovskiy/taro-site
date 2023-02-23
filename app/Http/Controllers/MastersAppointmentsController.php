@@ -113,6 +113,7 @@ class MastersAppointmentsController extends Controller
             ->join("masters", "masters_appointments.master_id", "=", "masters.id")
             ->join("users", "masters_appointments.user_id", "=","users.id")
             ->where("users.id", '=', auth()->user()->id)
+            ->orderBy("masters_appointments.created_at", "desc")
             ->select(
                 'masters_appointments.id as id', 'masters_appointments.status as status',
                 'masters.first_name as master_first_name', 'masters.last_name as master_last_name',
@@ -121,7 +122,7 @@ class MastersAppointmentsController extends Controller
             ->get();
 
 
-        return $this->view('admin.all-user-notes', ['notes'=>$notes]);
+        return $this->view('users.all-user-notes', ['notes'=>$notes]);
     }
 
 }

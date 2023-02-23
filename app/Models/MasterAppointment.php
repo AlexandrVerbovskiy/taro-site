@@ -14,6 +14,7 @@ class MasterAppointment extends Model
         'time_id',
         'master_id',
         'user_id',
-        'status'
+        'status',
+        'created_at'
     ];
 }

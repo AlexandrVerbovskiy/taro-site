@@ -35,6 +35,10 @@
         menu_logout: {
             ru: "Выйти",
             ua: "Вийти"
+        },
+        menu_notes_to_chief:{
+            ru: "Мои записи",
+            ua: "Мої записи"
         }
     }
 </script>

@@ -88,13 +88,16 @@ class ChiefAppointmentsController extends Controller
             ->join("calendar_times", "chief_appointments.time_id", "=", "calendar_times.id")
             ->join("users", "chief_appointments.user_id", "=","users.id")
             ->where("users.id", '=', auth()->user()->id)
+            ->orderBy("chief_appointments.created_at", "desc")
             ->select(
+                'chief_appointments.status as status',
+                'chief_appointments.id as id',
                 'calendar_times.time as time', 'calendar_times.date as date',
                 'chief_appointments.created_at as created_at'
             )
             ->get();
 
 
-        return $this->view('admin.all-user-notes', ['notes'=>$notes]);
+        return $this->view('users.all-user-notes', ['notes'=>$notes]);
     }
 }

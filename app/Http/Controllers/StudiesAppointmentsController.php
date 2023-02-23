@@ -113,6 +113,7 @@ class StudiesAppointmentsController extends Controller
             ->join("studies", "studies_appointments.study_id", "=","studies.id")
             ->join("users", "studies_appointments.user_id", "=","users.id")
             ->where("users.id", '=', auth()->user()->id)
+            ->orderBy("studies_appointments.created_at", "desc")
             ->select(
                 'studies_appointments.id as id',
                 'studies.title as study_title',  'studies_appointments.status as status',
@@ -121,6 +122,6 @@ class StudiesAppointmentsController extends Controller
             ->get();
 
 
-        return $this->view('admin.all-user-notes', ['notes'=>$notes]);
+        return $this->view('users.all-user-notes', ['notes'=>$notes]);
     }
 }

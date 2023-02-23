@@ -96,6 +96,12 @@
             </li>
         @else
             <li class="nav-item link-secondary">
+                <a class="nav-link link-dark @if(Request::segment(1) == 'user' && (Request::segment(2) == 'notes-to-chief')||Request::segment(2) == 'notes-to-masters'||Request::segment(2) == 'notes-to-studies') active @endif"
+                   href="{{url("/user/notes-to-chief")}} "
+                   id="menu_notes_to_chief"
+                   type="submit">Записи</a>
+            </li>
+            <li class="nav-item link-secondary">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'logout') active @endif"
                    href="{{url("/logout")}} "
                    id="menu_logout"
@@ -315,4 +321,6 @@
         "ua": "{{$event_topic["title_ua"]}}",
     });
     @endforeach
+
+    if (document.querySelector("#menu_notes_to_chief")) subscribeOnChangeLanguage("#menu_notes_to_chief", "menu_notes_to_chief");
 </script>
