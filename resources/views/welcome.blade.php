@@ -2,7 +2,8 @@
 
 <div class="row justify-content-center" style="width: 100%; margin: 0px">
     <div class="shapka text-center col-lg-8" style="padding: 0; ">
-        <img class="" src="{{Storage::url("")}}images/{{$main_img}}" style="width: 100%; height: auto; margin-top: 80px">
+        <img class="" src="{{Storage::url("")}}images/{{$main_img}}"
+             style="width: 100%; height: auto; margin-top: 80px">
     </div>
 </div>
 
@@ -26,7 +27,7 @@
 
     @else
         @if(!$finded_note)
-            <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
+        <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
             <h5 class="text-center" style=" margin: 20px 0;">Запис</h5>
             <div class="d-flex flex-column">
                 <div>Оберіть дату та час</div>
@@ -61,18 +62,21 @@
             }, res => console.log(res));
     }
 
-    const buildTimeRow = time => `
+    const buildTimeRow = time => {
+        console.log(time);
+        return `
 <div class="time-row" data-id="${time["id"]}">
     <div>Time:<b>${time['time']}</b></div>
     <button onclick="noteToBoss(${time["id"]})">Записатись</button>
 </div>`;
+    }
 
-    const onGetTimes=res=> {
+    const onGetTimes = res => {
         if (res.error) return;
         res.times.forEach(time => document.querySelector(".time-list").insertAdjacentHTML("beforeend", buildTimeRow(time)));
     }
 
-    buildCalendar((e)=>get("/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
+    if (document.querySelector(".calendar")) buildCalendar((e) => get("/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
     @endif
 </script>
