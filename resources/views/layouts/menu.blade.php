@@ -86,11 +86,6 @@
         </li>
         @if (!auth()->check())
             <li class="nav-item link-dark">
-                <a class="nav-link link-dark @if(Request::segment(1) == 'registration') active @endif"
-                   href="{{url("/registration")}} "
-                   type="submit" data-bs-toggle="modal" data-bs-target="#register" id="menu_register">Registration</a>
-            </li>
-            <li class="nav-item link-dark">
                 <a class="nav-link link-dark @if(Request::segment(1) == 'login') active @endif" href="{{url("/login")}}"
                    type="submit" data-bs-toggle="modal" data-bs-target="#login" id="menu_login">Login</a>
             </li>
@@ -323,4 +318,17 @@
     @endforeach
 
     if (document.querySelector("#menu_notes_to_chief")) subscribeOnChangeLanguage("#menu_notes_to_chief", "menu_notes_to_chief");
+
+    @if ($errors->any()&& (!Session::has('login')|| !Session::get('login')))
+    $(window).on('load', function () {
+        $('#register').modal('show');
+    });
+    @endif
+
+    @if ($errors->any() && Session::has('login') && Session::get('login'))
+    $(window).on('load', function () {
+        $('#login').modal('show');
+    });
+    @endif
+
 </script>

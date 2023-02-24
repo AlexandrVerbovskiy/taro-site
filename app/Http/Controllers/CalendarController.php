@@ -44,6 +44,7 @@ class CalendarController extends Controller
                 ->leftJoin("chief_appointments", "chief_appointments.time_id", "=", "calendar_times.id")
                 ->whereRaw("date='$date' AND (chief_appointments.id is NULL or chief_appointments.status='rejected') and cast(concat(date, ' ', time) as datetime) > CURRENT_TIMESTAMP()")
                 ->orderBy("time")
+                ->select("calendar_times.id as id", "calendar_times.time as time")
                 ->get();
             return json_encode(["error" => false, "date" => $date, "times" => $times]);
         } catch (\Exception $e) {
