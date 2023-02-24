@@ -14,6 +14,7 @@ class StudyAppointment extends Model
         'time_id',
         'study_id',
         'user_id',
-        'status'
+        'status',
+        'created_at'
     ];
 }

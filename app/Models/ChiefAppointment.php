@@ -13,6 +13,7 @@ class ChiefAppointment extends Model
     protected $fillable = [
         'time_id',
         'user_id',
-        'status'
+        'status',
+        'created_at'
     ];
 }

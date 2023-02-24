@@ -96,7 +96,7 @@ class MastersAppointmentsController extends Controller
                 ->take($count)
                 ->select('users.first_name as user_first_name', 'users.last_name as user_last_name',
                     'users.email as user_email', 'users.phone as user_phone',
-                    'masters_appointments.id as id',
+                    'masters_appointments.id as id', 'masters_appointments.status as status',
                     'masters.first_name as master_first_name', 'masters.last_name as master_last_name'
                 )
                 ->get();
@@ -104,6 +104,25 @@ class MastersAppointmentsController extends Controller
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }
+    }
+
+    public function userNotes(){
+        if(!auth()->user()) return abort(404);
+
+        $notes = DB::table('masters_appointments')
+            ->join("masters", "masters_appointments.master_id", "=", "masters.id")
+            ->join("users", "masters_appointments.user_id", "=","users.id")
+            ->where("users.id", '=', auth()->user()->id)
+            ->orderBy("masters_appointments.created_at", "desc")
+            ->select(
+                'masters_appointments.id as id', 'masters_appointments.status as status',
+                'masters.first_name as master_first_name', 'masters.last_name as master_last_name',
+                'masters_appointments.created_at as created_at'
+            )
+            ->get();
+
+
+        return $this->view('users.all-user-notes', ['notes'=>$notes]);
     }
 
 }
