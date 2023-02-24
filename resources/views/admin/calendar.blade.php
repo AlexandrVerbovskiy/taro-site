@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container py-4 message-parent">
+        <h3 class="text-center title_margin" style="margin: 56px 0 0px">Календар</h3>
         @include("layouts.error-message")
         <div>
             @include("layouts.calendar", ["all"=>true])

@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '123123-03-12T12:23' for column 'date' at row 1 (SQL: insert into `studies` (`body`, `title`, `topic_id`, `date`, `updated_at`, `created_at`) values (<p>123123123</p>, 123123123123, 1, 123123-03-12T12:23, 2023-02-21 18:18:38, 2023-02-21 18:18:38))
-=======
-SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'description' cannot be null (SQL: insert into `masters` (`img_src`, `description`, `first_name`, `last_name`, `updated_at`, `created_at`) values (1677000879_dynamo.png, ?, test, test, 2023-02-21 17:34:52, 2023-02-21 17:34:52))
->>>>>>> fa4314e1fa79a775cf1e52aa163e445d19091781
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND cast(concat(calendar_times.date, ' ', calendar_times.time) as datetime) > CU' at line 1 (SQL: select * from `calendar_times` where id= AND cast(concat(calendar_times.date, ' ', calendar_times.time) as datetime) > CURRENT_TIMESTAMP() limit 1)
