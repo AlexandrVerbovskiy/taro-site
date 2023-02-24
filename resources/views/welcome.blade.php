@@ -26,12 +26,12 @@
 
     @else
         @if(!$finded_note)
-            <button type="button" class="btn btn-primary button_for_valera">Записатися</button>
+            <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
+            <h5 class="text-center" style=" margin: 20px 0;">Запис</h5>
             <div class="d-flex flex-column">
-                <br>
                 <div>Оберіть дату та час</div>
                 <div>
-                    Test 2
+                    Доступні дати виділені синім, після натискання будуть відображені години для запису.
                 </div>
             </div>
             @include("layouts.calendar", ["all"=>false, "dates"=>$dates])

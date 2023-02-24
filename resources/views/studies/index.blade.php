@@ -12,13 +12,14 @@
         <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
             <div class="modal-header d-flex justify-content-center"
                  style="border: 0; margin: 18px 0; padding-bottom: 0">
-                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/"><?=auth()->user()->first_name ?></p>
+                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Запис на навчання</p>
             </div>
             <div class="modal-body padding_for_form">
                 <div class="card-body" style="padding: 0; margin-top: -10px">
                     <div>
-                        <p class="text-center" style="font-size: 14px">На вказану вами пошту прийде лист для скидання
-                            паролю. Якщо ви не побачите листа, то перевірте будь-ласка спам.</p>
+                        <p>Запис на ім'я: <?=auth()->user()->first_name ?> <?=auth()->user()->last_name ?></p>
+                        <p>Відслідковувати статус запису на відовідній сторінці, щоб потрапити на неї натисніть на меню та оберіть її</p>
+                        <p>Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
                     </div>
                     @if (Session::has('message'))
                         <div class="alert alert-success" role="alert">

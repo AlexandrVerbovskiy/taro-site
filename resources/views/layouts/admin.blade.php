@@ -63,7 +63,66 @@
     .switch-button:checked + label {
         background: #3378FF;
     }
+    @media only screen and (max-width: 1440px) {
 
+        .nav-item>.nav-link{
+            padding: 8px 20px;
+            font-size: 16px;
+        }
+        .menu_3{
+            width: 260px;
+        }
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
+        }
+
+    }
+    @media only screen and (max-width: 1280px) {
+
+        .nav-item>.nav-link{
+            padding: 7px 20px;
+            font-size: 15px;
+        }
+        .menu_3{
+            width: 260px;
+        }
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
+        }
+
+    }
+    @media only screen and (max-width: 1024px) {
+
+        .nav-item>.nav-link{
+            padding: 7px 20px;
+            font-size: 14px;
+        }
+        .menu_3{
+            width: 260px;
+        }
+        .header_name{
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+        }
+        .lang_button{
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin: 0 0px;
+        }
+
+    }
     @media only screen and (max-width: 540px) {
 
         .nav-item>.nav-link{
@@ -189,13 +248,6 @@
 
 
 </style>
-
-
-
-
-
-
-
 <header class="align-items-center"
         style="background-color: #a9c6ff; height: 56px; z-index: 10; width: 100%; position: fixed">
     <div class="row align-items-center" style="width: 100%; margin: 0; height: 56px; ">
