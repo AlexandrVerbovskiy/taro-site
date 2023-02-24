@@ -53,6 +53,7 @@
         color: #dadada;
         cursor: default;
     }
+
     @endif
 
     .calendar-days {
@@ -94,17 +95,15 @@
 </style>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-            <div class="calendar">
-                <div class="calendar-header">
-                    <button class="btn btn-primary float-start" id="previous-month">&lt;</button>
-                    <h5 id="calendar-month-year"></h5>
-                    <button class="btn btn-primary float-end" id="next-month">&gt;</button>
-                </div>
-                <div class="calendar-weekdays"></div>
-                <div class="calendar-days"></div>
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="calendar">
+            <div class="calendar-header">
+                <button class="btn btn-primary float-start" id="previous-month">&lt;</button>
+                <h5 id="calendar-month-year"></h5>
+                <button class="btn btn-primary float-end" id="next-month">&gt;</button>
             </div>
+            <div class="calendar-weekdays"></div>
+            <div class="calendar-days"></div>
         </div>
     </div>
 </div>
@@ -201,16 +200,16 @@
                     if (dayEl.classList.contains('disabled')) return;
 
                     @if(!$all)
-                        if (!dayEl.classList.contains('active')) return;
+                    if (!dayEl.classList.contains('active')) return;
                     @endif
 
                     const findElem = document.querySelector(".selected");
-                    if(findElem==dayEl) return;
+                    if (findElem == dayEl) return;
 
-                    if(findElem) findElem.classList.remove("selected");
+                    if (findElem) findElem.classList.remove("selected");
                     const selectedDate = new Date(this.year, this.month, dayEl.innerHTML);
                     dayEl.classList.add("selected");
-                    document.querySelector(".time-list").innerHTML="";
+                    document.querySelector(".time-list").innerHTML = "";
                     onClick(event);
                 });
             },
