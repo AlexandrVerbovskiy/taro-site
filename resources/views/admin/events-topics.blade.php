@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Категорії подій</h3>
+        <h3 class="text-center title_margin" style="margin: 24px 0">Категорії подій</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
             <a href="{{url("/admin/create-topic-event")}}" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

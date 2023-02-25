@@ -28,7 +28,7 @@
     @else
         @if(!$finded_note)
         <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
-            <h5 class="text-center" style=" margin: 20px 0;">Запис</h5>
+            <h4 class="text-center" style=" margin: 20px 0;">Запис</h4>
             <div class="d-flex flex-column">
                 <div>Оберіть дату та час</div>
                 <div>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             @include("layouts.calendar", ["all"=>false, "dates"=>$dates])
-
+            <h5 style="margin: 20px 0">Доступні години запису:</h5>
             <div class="time-list"></div>
 
             <div class="container py-4 message-parent">
@@ -44,9 +44,9 @@
             </div>
         @else
             @if($finded_note->status=="wait_accept")
-                Ви вже відправили запит на підтвердженя на {{$finded_note->date}} {{$finded_note->time}}
+                <div style="margin: 8px 0 36px">Ви вже відправили запит на підтвердженя на {{$finded_note->date}} {{$finded_note->time}}</div>
             @else
-                Ви вже записані на {{$finded_note->date}} {{$finded_note->time}}
+                <div style="margin: 8px 0 36px">Ви вже записані на {{$finded_note->date}} {{$finded_note->time}}</div>
             @endif
         @endif
     @endif
@@ -66,8 +66,8 @@
         console.log(time);
         return `
 <div class="time-row" data-id="${time["id"]}">
-    <div>Time:<b>${time['time']}</b></div>
-    <button onclick="noteToBoss(${time["id"]})">Записатись</button>
+    <div>Час: <b>${time['time'].slice(0, 5)}</b><button class="appointment_button" onclick="noteToBoss(${time["id"]})" style="">Записатись</button></div>
+
 </div>`;
     }
 

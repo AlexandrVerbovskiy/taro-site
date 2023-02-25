@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container py-4">
-    <h2 style="margin-top: 56px">Головна сторінка</h2>
+    <h2 style="margin-bottom: 24px">Головна сторінка</h2>
     <form class='form' method="POST" action="{{url('/admin/save-main')}}">
         {{ csrf_field() }}
 

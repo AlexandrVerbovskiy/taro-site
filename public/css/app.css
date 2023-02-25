@@ -34,7 +34,36 @@ ul>li>a{
     margin: 15px 0 10px 0
 }
 
-
+.appointment_button{
+    background-color: #a9c6ff;
+    border: 0;
+    border-radius: 10px;
+    padding: 4px 16px;
+    margin: 0 0 12px 15px;
+}
+.appointment_button_add_time{
+    background-color: #a9c6ff;
+    border: 0;
+    border-radius: 10px;
+    padding: 4px 16px;
+    margin: 0 0 12px 15px;
+}
+.input_calendar_add_time{
+    max-width: 100px;
+    height: 32px;
+    border-radius: 10px;
+    border: 2px solid #a9c6ff;
+    padding: 2px 4px;
+}
+.appointment_button_menu{
+    background-color: #a9c6ff;
+    border: 0;
+    border-radius: 10px;
+    padding: 6px 14px;
+    margin: 0 15px 15px;
+    text-decoration: none;
+    color: black;
+}
 .master {
     background-color: #a9c6ff;
     border-radius: 20px;
@@ -971,6 +1000,14 @@ master_margin_sm{
         height: 264px;
     }
 }
+@media only screen and (max-width: 480px) {
+    .appointment_button_menu{
+        background-color: #a9c6ff;
+        padding: 6px 12px;
+        margin: 0 8px 15px;
+        font-size: 14px;
+    }
+}
 @media only screen and (max-width: 430px) {
     .modal-title{
         font-size: 26px;
@@ -1028,6 +1065,7 @@ master_margin_sm{
         height: 630px;
         overflow: auto;
     }
+
 }
 
 
@@ -1123,6 +1161,12 @@ master_margin_sm{
     }
     .date_study{
         font-size: 16px;
+    }
+    .appointment_button_menu{
+        background-color: #a9c6ff;
+        padding: 6px 12px;
+        margin: 0 6px 15px;
+        font-size: 12px;
     }
 }
 @media only screen and (max-width: 385px) {
@@ -1235,6 +1279,12 @@ master_margin_sm{
     .date_study{
         font-size: 16px;
     }
+    .appointment_button_menu{
+        background-color: #a9c6ff;
+        padding: 5px 10px;
+        margin: 0 4px 15px;
+        font-size: 12px;
+    }
 }
 @media only screen and (max-width: 320px) {
     .header_name{
@@ -1307,6 +1357,12 @@ master_margin_sm{
     .input_form_social{
         font-size: 12px;
         margin-right: 15px;
+    }
+    .appointment_button_menu{
+        background-color: #a9c6ff;
+        padding: 5px 8px;
+        margin: 0 5px 15px;
+        font-size: 10px;
     }
 }
 
