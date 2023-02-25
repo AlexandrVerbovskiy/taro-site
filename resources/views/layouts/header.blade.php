@@ -37,6 +37,14 @@
         .table:has(+.loader){
             margin-bottom: 0;
         }
+
+        .custom_loader{
+            display: none;
+        }
+
+        .custom_loader.visible{
+            display: block;
+        }
     </style>
 
 </head>

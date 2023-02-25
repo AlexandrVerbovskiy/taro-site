@@ -29,6 +29,7 @@
 
         <div class="form-group mb-3 image">
             <img style="max-width:100%; max-height:400px;" id="image_media_view"><br>
+            @include("layouts.file-loader")
             <button type="button" class="btn btn-primary media-changer" style="margin-top: 10px">Змінити</button>
         </div>
 
