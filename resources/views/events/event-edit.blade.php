@@ -75,19 +75,23 @@
         </div>
 
         <div class="form-group mb-3 image" style="display: none">
-            <img style="max-width:100%; max-height:400px;margin-bottom: 20px;" id="image_media_view"><br>
+            <img style="max-width:100%; max-height:400px;margin-bottom: 20px;" id="image_media_view">
+            <br>
+            @include("layouts.file-loader")
             <button type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 
         <div class="form-group mb-3 video" style="display: none">
             <video style="max-width:100%; max-height:400px;margin-bottom: 20px;" controls id="video_media_view"></video>
             <br>
+            @include("layouts.file-loader")
             <button type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 
         <div class="form-group mb-3 audio " style="display: none">
             <audio style="max-width:100%; max-height:400px;margin-bottom: 20px;" controls id="audio_media_view"></audio>
             <br>
+            @include("layouts.file-loader")
             <button type="button" class="btn btn-primary media-changer">Змінити</button>
         </div>
 

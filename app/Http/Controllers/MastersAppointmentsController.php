@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Master;
 use App\Models\MasterAppointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,18 +17,18 @@ class MastersAppointmentsController extends Controller
         if (!array_key_exists('id', $data)) $data['id'] = '-1';
 
         try {
-            $findedByData = MasterAppointment::where([["id", "!=", $data['id']], "status" => "wait_accept", "user_id" => $data['user_id'], "master_id" => $data['master_id']])->first();
+            $master = Master::where("id", $data['master_id'])->first();
+            if(!$master)
+                return json_encode(["error" => true, "message" => "Майстра не знайдено!"]);
+
+            $findedByData = MasterAppointment::where([["id", "!=", $data['id']], "status" => "wait_accept", "user_id" => auth()->user()->id, "master_id" => $data['master_id']])->first();
             if ($findedByData)
                 return json_encode(["error" => true, "message" => "Ви вже відправили запит на запис до майстра! Зачекайте, поки адміністратор зателефонує Вам для узгодження часу і місця!"]);
 
-            $findedByData = MasterAppointment::where(["time_id" => $data['time_id']])->first();
-            if ($findedByData && $findedByData['id'] == $data['id'] && $findedByData["status"] == $data['status'] && $findedByData["master_id"] == $data['master_id'] && $findedByData["user_id"] == $data['user_id'])
-                return json_encode(["error" => false, "message" => ""]);
-
             $date = MasterAppointment::firstOrNew(['id' => $data['id']]);
             $date->master_id = $data['master_id'];
-            $date->user_id = $data['user_id'];
-            $date->status = $data['status'];
+            $date->user_id = auth()->user()->id;
+            $date->status = "wait_accept";
             $date->save();
 
             return json_encode(["error" => false, "data" => $date]);

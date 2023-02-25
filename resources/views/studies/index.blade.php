@@ -18,33 +18,27 @@
                 <div class="card-body" style="padding: 0; margin-top: -10px">
                     <div>
                         <p>Запис на ім'я: <?=auth()->user()->first_name ?> <?=auth()->user()->last_name ?></p>
-                        <p>Відслідковувати статус запису на відовідній сторінці, щоб потрапити на неї натисніть на меню та оберіть її</p>
+                        <p>Відслідковувати статус запису на відовідній сторінці, щоб потрапити на неї натисніть на меню
+                            та оберіть її</p>
                         <p>Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
                     </div>
-                    @if (Session::has('message'))
-                        <div class="alert alert-success" role="alert">
-                            {{ Session::get('message') }}
-                        </div>
-                    @endif
+                    <div class="alert" role="alert"></div>
 
-                    <form action="{{ url('forget-password') }}" method="POST">
-                        @csrf
-                        <div class="form-group mb-3">
-                            <button style="cursor:pointer; margin: 0 0 -16px 0" type="submit"
-                                    class="btn btn-primary form_main_button">Відправити
-                            </button>
-                        </div>
-                    </form>
+                    <button id="note_to_study" style="cursor:pointer; margin: 0 0 -16px 0" type="button"
+                            class="btn btn-primary form_main_button">Відправити
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<a id="modal_open" class="btn btn-light master_sec_button" data-bs-toggle="modal" data-bs-target="#enrol" style="display:none;"></a>
+
 <script>
     let showed = 0;
     const count = 20;
-    let canShow = {{$count}}>0;
+    let canShow = {{$count}} > 0;
     const topicId = "{{$topic_id}}"
 
     const getNewPosts = () => {
@@ -54,7 +48,7 @@
         get("{{url('/get-studies')}}" + "?start=" + showed + "&count=" + count + "&topic=" + topicId, data => {
             document.querySelector(".loader").classList.add('hidden');
             if (data.error) return canShow = false;
-            if(data.studies.length != count) canShow = false;
+            if (data.studies.length != count) canShow = false;
 
             let rows = "";
             showed += data.studies.length;
@@ -67,7 +61,7 @@
                                     <div style="margin: 0 0 40px 0;">${study["body"]}</div>
                                     <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
                                         <label class="date_study">Дата: ${study["date"].split(' ')[0]}</label>
-                                        <a class="btn btn-light master_sec_button" data-bs-toggle="modal" data-bs-target="#enrol">Запис</a>
+                                        <a class="btn btn-light master_sec_button" onclick="openModal(${study["id"]})">Запис</a>
                                     </div>
                                 </div>
                             </div>
@@ -93,6 +87,27 @@
 
     getNewPosts();
 
+    function openModal(id){
+        document.querySelector(".alert").innerHTML="";
+        document.querySelector(".alert").classList.remove("alert-success");
+        document.querySelector(".alert").classList.remove("alert-danger");
+        document.querySelector("#note_to_study").dataset.id = id;
+        document.querySelector("#modal_open").click();
+    }
+
+    document.querySelector("#note_to_study").addEventListener("click", e => {
+        const study_id = e.target.dataset.id
+        post("{{"/note-to-study"}}", {study_id}, res => {
+            if(res.error){
+                document.querySelector(".alert").classList.remove("alert-success");
+                document.querySelector(".alert").classList.add("alert-danger");
+            }else{
+                document.querySelector(".alert").classList.add("alert-success");
+                document.querySelector(".alert").classList.remove("alert-danger");
+            }
+            document.querySelector(".alert").innerHTML=res.message;
+        })
+    })
 
 </script>
 

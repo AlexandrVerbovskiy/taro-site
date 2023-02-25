@@ -26,6 +26,25 @@
         #audio_media_view[src=""] + br, #video_media_view[src=""] + br, #image_media_view[src=""] + br, #youtube_media_view[src=""] + br {
             display: none;
         }
+
+        .loader{
+            align-items: center;
+            display: flex;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .table:has(+.loader){
+            margin-bottom: 0;
+        }
+
+        .custom_loader{
+            display: none;
+        }
+
+        .custom_loader.visible{
+            display: block;
+        }
     </style>
 
 </head>
@@ -201,6 +220,7 @@
     }
 
     function showError(message) {
+        if(!document.querySelector(".message-parent")) return;
         document.querySelector(".message-parent").insertAdjacentHTML("afterbegin", `
              <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 ${message}

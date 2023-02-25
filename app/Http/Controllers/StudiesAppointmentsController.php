@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Study;
 use App\Models\StudyAppointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,26 +17,26 @@ class StudiesAppointmentsController extends Controller
         if(!array_key_exists('id', $data)) $data['id']='-1';
 
         try {
-            $findedByData = StudyAppointment::where([["id", "!=", $data['id']], "status" => "wait_accept", "user_id" => $data['user_id'], "study_id" => $data['study_id']])->first();
+            $study = Study::where("id", $data["study_id"])->first();
+            if(!$study) return json_encode(["error" => true, "message" => "Навчання не знайдено!"]);
+
+
+            $findedByData = StudyAppointment::where([["id", "!=", $data['id']], "status" => "wait_accept", "user_id" => auth()->user()->id, "study_id" => $data['study_id']])->first();
             if ($findedByData)
                 return json_encode(["error" => true, "message" => "Ви вже відправили запит на запис щодо навчання! Зачекайте, поки адміністратор зателефонує Вам для узгодження часу і місця!"]);
 
-            $findedByData = StudyAppointment::where([["id", "!=", $data['id']], "status" => "accepted", "user_id" => $data['user_id'], "study_id" => $data['study_id']])->first();
+            $findedByData = StudyAppointment::where([["id", "!=", $data['id']], "status" => "accepted", "user_id" => auth()->user()->id, "study_id" => $data['study_id']])->first();
             if ($findedByData)
                 return json_encode(["error" => true, "message" => "Ви вже записані на даний курс навчання!"]);
 
-            $findedByData = StudyAppointment::where([["id", "!=", $data['id']], "status" => "rejected", "user_id" => $data['user_id'], "study_id" => $data['study_id']])->first();
+            $findedByData = StudyAppointment::where([["id", "!=", $data['id']], "status" => "rejected", "user_id" => auth()->user()->id, "study_id" => $data['study_id']])->first();
             if ($findedByData)
                 return json_encode(["error" => true, "message" => "На жаль, вас не прийнято до курсу, якщо вважаєте, що виникла помилка, зателефонуйте адміністратору!"]);
 
-            $findedByData = StudyAppointment::where(["time_id" => $data['time_id']])->first();
-            if($findedByData && $findedByData['id'] == $data['id'] && $findedByData["status"] == $data['status'] && $findedByData["study_id"] == $data['study_id'] && $findedByData["user_id"] == $data['user_id'])
-                return json_encode(["error" => false, "message" => ""]);
-
             $date = StudyAppointment::firstOrNew(['id' => $data['id']]);
             $date->study_id = $data['study_id'];
-            $date->user_id = $data['user_id'];
-            $date->status = $data['status'];
+            $date->user_id = auth()->user()->id;
+            $date->status = "wait_accept";
             $date->save();
 
             return json_encode(["error" => false, "data" => $date]);

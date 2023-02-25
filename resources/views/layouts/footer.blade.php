@@ -39,13 +39,14 @@
     });
 
     function setFile(body, callback) {
+        document.querySelectorAll(".custom_loader").forEach(elem=>elem.classList.add("visible"));
         fetch('{{url('/file-save')}}', {
             headers: {
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
             },
             method: 'POST',
             body
-        }).then(res => res.json()).then(data => callback(data.filename));
+        }).then(res => res.json()).then(data => callback(data.filename)).finally(()=>document.querySelectorAll(".custom_loader").forEach(elem=>elem.classList.remove("visible")));
     }
 
     function setImage() {

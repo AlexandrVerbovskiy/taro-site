@@ -213,6 +213,9 @@
 
 <div class="menu_2 d-lg-none " style="position: fixed; margin: 56px 0 0 0">
     <ul style="background: #a9c6ff;">
+        <a href="{{url("/")}}">
+            <li>Основна сторінка</li>
+        </a>
         <a href="{{url("/admin/main-settings")}}">
             <li>Головна</li>
         </a>
@@ -263,6 +266,9 @@
         <div class="admin-menu d-none d-lg-block col-lg-3">
             <div style="position: relative;">
                 <ul style="padding-bottom: 20px;">
+                    <a href="{{url("/")}}">
+                        <li>Основна сторінка</li>
+                    </a>
                     <a href="{{url("/admin/main-settings")}}">
                         <li>Головна</li>
                     </a>
@@ -370,6 +376,10 @@
     });
 
     observer.observe(element);
+
+    document.querySelectorAll(".loader").forEach(elem=>{
+        elem.insertAdjacentHTML("beforeend", `<div class="spinner-border" role="status"><span class="sr-only"></span></div>`)
+    })
 
 </script>
 
