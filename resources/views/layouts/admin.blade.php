@@ -162,7 +162,7 @@
         position: fixed;
         width: 100px;
         z-index: 1;
-        bottom: 150px;
+        bottom: 130px;
         left: calc(12.5% - 115px);
         transform: translate(50%);
         display: none;
