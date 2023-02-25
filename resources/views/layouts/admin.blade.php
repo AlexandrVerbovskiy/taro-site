@@ -163,9 +163,16 @@
         width: 100px;
         z-index: 1;
         bottom: 150px;
-        left: calc(12.5% - 100px);
+        left: calc(12.5% - 115px);
         transform: translate(50%);
         display: none;
+        background-color: #a9c6ff;
+        border: 0;
+        border-radius: 10px;
+        padding: 6px 14px;
+        margin: 0 15px 15px;
+        text-decoration: none;
+        color: white;
     }
 
     .scroller.visible{
@@ -177,11 +184,24 @@
         top: 150%;
         background-color: transparent;
     }
-
+    @media only screen and (max-width: 380px) {
+        .menu_2 li {
+            display: block;
+            padding: 10px 0;
+            background: #a9c6ff;
+            /*border-bottom: #dddddd 1px solid;*/
+        }
+        .menu_2 ul li a {
+            text-decoration: none;
+            margin: 0;
+            color: black;
+            font-size: 10px;
+        }
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light"
-     style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%;">
+     style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%; position: fixed">
     <div class="container-fluid" style="">
         <a class="navbar-brand" style="font-family: 'Oswald', sans-serif; font-size: 24px; padding: 2px 0" href="/">Адмін
             панель</a>
@@ -191,7 +211,7 @@
 </nav>
 
 
-<div class="menu_2 d-lg-none " style="position: absolute; margin: 55px 0 0 0">
+<div class="menu_2 d-lg-none " style="position: fixed; margin: 56px 0 0 0">
     <ul style="background: #a9c6ff;">
         <a href="{{url("/admin/main-settings")}}">
             <li>Головна</li>
@@ -239,10 +259,10 @@
 </div>
 
 <div class="container" style="padding: 0; margin: 0; max-width: 100%;">
-    <main class="row" style="width:100%; padding: 0; margin: 0">
+    <main class="row" style="width:100%; padding: 0; margin: 56px 0 0">
         <div class="admin-menu d-none d-lg-block col-lg-3">
             <div style="position: relative;">
-                <ul style="padding-bottom: 20px">
+                <ul style="padding-bottom: 20px;">
                     <a href="{{url("/admin/main-settings")}}">
                         <li>Головна</li>
                     </a>
@@ -289,7 +309,7 @@
                 <div id="admin_scrollup_trigger"></div>
             </div>
 
-            <button id="btn_scroll_up" class="scroller">Scroll up</button>
+            <button id="btn_scroll_up" class="scroller">Догори</button>
         </div>
         <div class="col-12 col-lg-9">
             @yield('content')

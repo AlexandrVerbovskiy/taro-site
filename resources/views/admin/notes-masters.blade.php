@@ -2,12 +2,12 @@
 @section('content')
     <div class="container message-parent">
         @include("layouts.error-message")
-        <h3 class="text-center title_margin" style="margin: 86px 0 30px">Записи до майстрів</h3>
+        <h3 class="text-center title_margin" style="margin: 24px 0">Записи до майстрів</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
             <input type="text" class="admin_search" name="search" placeholder="Search..."/>
             <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
         </div>
-        <div class="table table-responsive table-responsive-sm scroll_table">
+        <div class="table table-responsive table-responsive-sm">
             <table class="table ">
                 <thead>
                 <tr>

@@ -11,7 +11,7 @@
         border-radius: 10px;
         padding: 20px;
         margin-top: 30px;
-        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
     }
 
     .calendar-header {
@@ -65,7 +65,7 @@
     .calendar-day {
         text-align: center;
         padding: 5px;
-        margin-bottom: 5px;
+        margin: 0 2px 5px;
         border-radius: 5px;
         cursor: pointer;
     }
@@ -75,21 +75,43 @@
     }
 
     .calendar-day.active {
-        background-color: #1e88e5;
+        background-color: #a9c6ff;
         color: white;
     }
 
     .calendar-day.selected {
-        background-color: #fc7434;
+        background-color: #0d6efd;
+        color: white;
     }
 
     .calendar-day.disabled {
         color: #bbb;
     }
-
+    .button_calendar{
+        background-color: #a9c6ff;
+        border: 0;
+    }
+    .button_calendar::selection{
+        background-color: #0d6efd;
+        color: white;
+    }
     @media (max-width: 768px) {
         .calendar {
             max-width: 100%;
+        }
+    }
+    @media (max-width: 320px) {
+        #calendar-month-year{
+            font-size: 16px;
+        }
+        .button_calendar{
+            font-size: 12px;
+        }
+        .calendar-weekdays{
+            font-size: 12px;
+        }
+        .calendar-days{
+            font-size: 12px;
         }
     }
 </style>
@@ -98,9 +120,9 @@
     <div class="row" style="display: flex; justify-content: center;">
         <div class="calendar">
             <div class="calendar-header">
-                <button class="btn btn-primary float-start" id="previous-month">&lt;</button>
-                <h5 id="calendar-month-year"></h5>
-                <button class="btn btn-primary float-end" id="next-month">&gt;</button>
+                <button class="btn btn-primary float-start button_calendar" id="previous-month">&lt;</button>
+                <h5 id="calendar-month-year" style="margin: 0"></h5>
+                <button class="btn btn-primary float-end button_calendar" id="next-month">&gt;</button>
             </div>
             <div class="calendar-weekdays"></div>
             <div class="calendar-days"></div>

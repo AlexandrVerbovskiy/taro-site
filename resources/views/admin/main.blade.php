@@ -11,9 +11,14 @@
             background: #a9c6ff;
             /*height: 110px;*/
         }
+        @media only screen and (max-width: 380px) {
+            .card-body > h5{
+                font-size: 16px;
+            }
+        }
     </style>
 <div class="container">
-    <div class="row" style="margin-top: 86px">
+    <div class="row" style="margin-top: 24px">
         <div class="col-sm card">
             <div class="card-body">
                 <h5 class="card-title">Count all masters</h5>
