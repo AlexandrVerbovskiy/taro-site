@@ -201,6 +201,7 @@
     }
 
     function showError(message) {
+        if(!document.querySelector(".message-parent")) return;
         document.querySelector(".message-parent").insertAdjacentHTML("afterbegin", `
              <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 ${message}
