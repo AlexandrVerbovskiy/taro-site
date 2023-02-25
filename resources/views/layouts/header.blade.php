@@ -26,6 +26,17 @@
         #audio_media_view[src=""] + br, #video_media_view[src=""] + br, #image_media_view[src=""] + br, #youtube_media_view[src=""] + br {
             display: none;
         }
+
+        .loader{
+            align-items: center;
+            display: flex;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .table:has(+.loader){
+            margin-bottom: 0;
+        }
     </style>
 
 </head>

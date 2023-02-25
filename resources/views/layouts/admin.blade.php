@@ -377,6 +377,10 @@
 
     observer.observe(element);
 
+    document.querySelectorAll(".loader").forEach(elem=>{
+        elem.insertAdjacentHTML("beforeend", `<div class="spinner-border" role="status"><span class="sr-only"></span></div>`)
+    })
+
 </script>
 
 
