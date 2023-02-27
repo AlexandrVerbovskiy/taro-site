@@ -68,6 +68,7 @@
         document.querySelector("#search").addEventListener("click", () => {
             search = document.querySelector("input[name=search]").value;
             showed = 0;
+            canShow = true;
             document.querySelector("table tbody").innerHTML = "";
             getNewNotes();
         })

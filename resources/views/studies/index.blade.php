@@ -6,6 +6,7 @@
     </div>
 </div>
 
+@if (auth()->check())
 <div class="modal fade" id="enrol" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true"
      style="backdrop-filter: blur(15px);">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -34,6 +35,7 @@
 </div>
 
 <a id="modal_open" class="btn btn-light master_sec_button" data-bs-toggle="modal" data-bs-target="#enrol" style="display:none;"></a>
+@endif
 
 <script>
     let showed = 0;
@@ -61,7 +63,11 @@
                                     <div style="margin: 0 0 40px 0;">${study["body"]}</div>
                                     <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
                                         <label class="date_study">Дата: ${study["date"].split(' ')[0]}</label>
-                                        <a class="btn btn-light master_sec_button" onclick="openModal(${study["id"]})">Запис</a>
+                                        @if (auth()->check())
+                                            <a class="btn btn-light master_sec_button" onclick="openModal(${study["id"]})">Запис</a>
+                                        @else
+                                            <a type="button" class="btn btn-light master_sec_button" href="{{url("/login")}}" data-bs-toggle="modal" data-bs-target="#login">Увійти</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -95,6 +101,7 @@
         document.querySelector("#modal_open").click();
     }
 
+    @if (auth()->check())
     document.querySelector("#note_to_study").addEventListener("click", e => {
         const study_id = e.target.dataset.id
         post("{{"/note-to-study"}}", {study_id}, res => {
@@ -108,6 +115,7 @@
             document.querySelector(".alert").innerHTML=res.message;
         })
     })
+    @endif
 
 </script>
 

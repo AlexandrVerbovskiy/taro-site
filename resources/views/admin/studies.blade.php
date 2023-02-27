@@ -43,16 +43,14 @@
         document.querySelector("#search").addEventListener("click", () => {
             search = document.querySelector("input[name=search]").value;
             showed = 0;
+            canShow = true;
             document.querySelector("table tbody").innerHTML="";
             getNewStudies();
         })
 
         const acceptDelete = () => {
-            console.log(trashId);
             post('{{url('/admin/study-delete')}}', {id: trashId}, res => {
-                console.log(`tr[data-id='${trashId}']`)
                 document.querySelector(`tr[data-id='${trashId}']`).remove();
-                console.log(res)
             });
         }
 
@@ -76,7 +74,6 @@
         }
 
         const getNewStudies = () => {
-            console.log(showed, count)
             document.querySelector(".loader").classList.remove('hidden');
             if (!canShow) return document.querySelector(".loader").classList.add('hidden');
             get("{{url('/admin/get-studies')}}" + "?start=" + showed + "&count=" + count+"&search="+search, data => {
