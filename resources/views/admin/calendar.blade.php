@@ -60,8 +60,6 @@
                         </button>
                 </div><hr>`;
 
-
-
         const handleTrashClick = (e) => {
             if (e.tagName != "BUTTON") e = e.closest('button');
             trashId = e.dataset.id;
@@ -71,10 +69,15 @@
         const onGetTimes=res=>
         {
             const timeParent = document.querySelector(".time-list");
-            console.log(res.times)
+            /*console.log(res.times)*/
             res.times.forEach(time => timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time)));
+            if(res.times.length > 0){
+                console.log(res.times)
+                timeParent.insertAdjacentHTML("afterbegin", `
+                <h4>Записи</h4>`)
+            }
             timeParent.insertAdjacentHTML("afterbegin", `
-                <h4>Новий час</h4><input type="time" id="time" min="00:00" max="23:59" class="input_calendar_add_time"><button id="add_time" class="appointment_button_add_time">Додати</button><h4>Записи</h4>
+                <h4>Новий час</h4><input type="time" id="time" min="00:00" max="23:59" class="input_calendar_add_time"><button id="add_time" class="appointment_button_add_time">Додати</button><div id="add_time_title"></div>
 
             `)
 
@@ -91,7 +94,6 @@
                 });
             })
         }
-
         buildCalendar((e)=>get("/admin/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
         buildModal("danger", "Removing the master", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);
