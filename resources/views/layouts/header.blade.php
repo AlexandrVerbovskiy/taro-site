@@ -55,6 +55,7 @@
 <script>
 
     const subscriptions = {};
+    const placeholders = {};
 
     function subscribeOnChangeLanguage(selector, key) {
         subscriptions[selector] = key;
@@ -65,10 +66,18 @@
         subscriptions[selector] = key;
     }
 
+    function subscribeOnChangePlaceholderLanguage(selector, key) {
+        placeholders[selector] = key;
+    }
+
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
             document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
         });
+        Object.keys(placeholders).forEach(selector => {
+            document.querySelector(selector).placeholder = vocabulary[placeholders[selector]][lang];
+        });
+
         localStorage.setItem("language", lang);
 
         for (let langButton of document.querySelectorAll('.lang_button')) {

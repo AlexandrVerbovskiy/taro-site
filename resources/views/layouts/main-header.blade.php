@@ -34,10 +34,27 @@
     subscribeOnChangeLanguage("#menu_studies", "menu_studies");
     subscribeOnChangeLanguage("#menu_info", "menu_info");
     subscribeOnChangeLanguage("#menu_events", "menu_events");
+    subscribeOnChangeLanguage("#popup_register_title", "popup_register_title");
+    subscribeOnChangePlaceholderLanguage(".popup_register_name", "popup_register_name");
+    subscribeOnChangePlaceholderLanguage(".popup_register_last_name", "popup_register_last_name");
+    subscribeOnChangePlaceholderLanguage(".popup_register_email", "popup_register_email");
+    subscribeOnChangePlaceholderLanguage(".popup_register_phone", "popup_register_phone");
+    subscribeOnChangePlaceholderLanguage(".popup_register_social_type", "popup_register_social_type");
+    subscribeOnChangePlaceholderLanguage(".popup_register_social_phone", "popup_register_social_phone");
+    subscribeOnChangePlaceholderLanguage(".popup_register_password_confirmation", "popup_register_password_confirmation");
+    subscribeOnChangeLanguage(".popup_register_submit", "popup_register_submit");
+    subscribeOnChangeLanguage(".popup_login_title", "popup_login_title");
+    subscribeOnChangePlaceholderLanguage(".popup_login_email", "popup_login_email");
+    subscribeOnChangePlaceholderLanguage(".popup_login_password", "popup_login_password");
+    subscribeOnChangeLanguage(".popup_login_submit", "popup_login_submit");
+    subscribeOnChangeLanguage(".popup_login_register", "popup_login_register");
+    subscribeOnChangeLanguage(".popup_login_forget_password", "popup_login_forget_password");
+    subscribeOnChangeLanguage(".popup_forget_password_title", "popup_forget_password_title");
+    subscribeOnChangeLanguage(".popup_forget_password_text", "popup_forget_password_text");
+    subscribeOnChangePlaceholderLanguage(".popup_forget_password_email", "popup_forget_password_email");
+    subscribeOnChangeLanguage(".popup_forget_password_submit", "popup_forget_password_submit");
+
     if(document.querySelector("#menu_register")) subscribeOnChangeLanguage("#menu_register", "menu_register");
     if(document.querySelector("#menu_login")) subscribeOnChangeLanguage("#menu_login", "menu_login");
     if(document.querySelector("#menu_logout")) subscribeOnChangeLanguage("#menu_logout", "menu_logout");
-
-
-
 </script>

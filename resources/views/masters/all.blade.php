@@ -1,5 +1,5 @@
 @include('layouts.main-header')
-<h3 class="text-center title_margin" style="margin: 110px 0 30px">Майстри</h3>
+<h3 class="text-center title_margin masters_title" style="margin: 110px 0 30px">Майстри</h3>
 <!--@foreach($masters as $master)
     <div class="row justify-content-center" style="width: 100%; margin: 0;">
             <div class="master col-lg-9 col-md-12">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="align-items-end" style="padding: 0 0px; bottom: 0; ">
-                                <a class="btn btn-light master_sec_buttonSaniaZaebalEdition"
+                                <a class="btn btn-light master_sec_buttonSaniaZaebalEdition masters_master_details"
                                    href="/master/{{$master['id']}}}">Більше про майстра</a>
                             </div>
                         </div>
@@ -52,36 +52,10 @@
                 </div>
             </div>
         @endforeach
-
-        <div class="row justify-content-center" style="width: 100%; margin: 0;">
-            <div class="col-lg-9 col-md-12"
-                 style="background-color: #a9c6ff; border-radius: 20px; padding: 20px; margin-bottom: 50px; height: 160px;">
-                <div class="d-flex flex-column">
-                    <div style="margin: 0 0 40px 0;"><h3>Заголовок події</h3></div>
-                    <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
-                        <label>Дата: 19.10.2002</label>
-                        <a class="btn btn-light master_sec_button">Детальніше</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center" style="width: 100%; margin: 0;">
-            <div class="col-lg-9 col-md-12"
-                 style="background-color: #a9c6ff; border-radius: 20px; padding: 20px; margin-bottom: 50px; height: auto;">
-                <div class="d-flex flex-column">
-                    <div><h3>Заголовок навчання</h3></div>
-                    <div style="margin: 0 0 40px 0;">Lorem ipsum dol ut nulla nulla. Mauris dapibus tristiqueLorem ipsum
-                        dolor sit amet, consectetur adipiscing elit. Nam ut nulla nulla. Mauris dapibus tristique
-                    </div>
-                    <div class="d-flex justify-content-between align-items-end" style="bottom: 0;">
-                        <label>Дата: 19.10.2002</label>
-                        <a class="btn btn-light master_sec_button">Запис</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <script>
+        subscribeOnChangeLanguage('.masters_title', 'masters_title');
+        subscribeOnChangeLanguage('.masters_master_details', 'masters_master_details');
         (function () {
             var cut = document.getElementsByClassName('master_descriptionSaniaZaebalEdition');
             for (var i = 0; i < cut.length; i++) {
