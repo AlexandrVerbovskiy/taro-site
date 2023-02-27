@@ -192,6 +192,30 @@
                     dayEl.innerHTML = i;
                     daysEl.appendChild(dayEl);
                 }
+
+                console.log(daysEl.querySelectorAll(".calendar-day.active"));
+
+                daysEl.querySelectorAll(".calendar-day:not(.disabled)").forEach(date=>{
+                    date.addEventListener("click", e=>{
+                        const dayEl = e.target;
+                        if (dayEl.classList.contains('disabled')) return;
+
+                        @if(!$all)
+                        if (!dayEl.classList.contains('active')) return;
+                        @endif
+
+                        const findElem = document.querySelector(".selected");
+                        if (findElem == dayEl) return;
+
+                        if (findElem) findElem.classList.remove("selected");
+                        const selectedDate = new Date(this.year, this.month, dayEl.innerHTML);
+                        dayEl.classList.add("selected");
+                        document.querySelector(".time-list").innerHTML = "";
+                        console.log(event.target.dataset.date);
+                        console.log(event.target);
+                        onClick(event);
+                    })
+                })
             },
 
             listeners: function () {
@@ -215,24 +239,6 @@
                         this.year++;
                     }
                     this.render();
-                });
-
-                calendarDays.addEventListener('click', (event) => {
-                    const dayEl = event.target;
-                    if (dayEl.classList.contains('disabled')) return;
-
-                    @if(!$all)
-                    if (!dayEl.classList.contains('active')) return;
-                    @endif
-
-                    const findElem = document.querySelector(".selected");
-                    if (findElem == dayEl) return;
-
-                    if (findElem) findElem.classList.remove("selected");
-                    const selectedDate = new Date(this.year, this.month, dayEl.innerHTML);
-                    dayEl.classList.add("selected");
-                    document.querySelector(".time-list").innerHTML = "";
-                    onClick(event);
                 });
             },
 
