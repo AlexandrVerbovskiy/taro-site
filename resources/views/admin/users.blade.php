@@ -45,14 +45,13 @@
         document.querySelector("#search").addEventListener("click", () => {
             search = document.querySelector("input[name=search]").value;
             showed = 0;
+            canShow = true;
             document.querySelector("table tbody").innerHTML="";
             getNewUser();
         })
 
         const changeAdmin = (id, elem) => {
-            console.log(elem);
             get("{{url('/admin/change-admin-users')}}" + "?id=" + id, data => {
-
                 console.log(data);
                 if (data.error) return;
 

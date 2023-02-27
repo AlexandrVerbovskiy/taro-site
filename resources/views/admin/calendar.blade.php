@@ -71,6 +71,7 @@
         const onGetTimes=res=>
         {
             const timeParent = document.querySelector(".time-list");
+            console.log(res.times)
             res.times.forEach(time => timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time)));
             timeParent.insertAdjacentHTML("afterbegin", `
                 <h4>Новий час</h4><input type="time" id="time" min="00:00" max="23:59" class="input_calendar_add_time"><button id="add_time" class="appointment_button_add_time">Додати</button><h4>Записи</h4>

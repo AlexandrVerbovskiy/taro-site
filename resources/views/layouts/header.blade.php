@@ -67,8 +67,6 @@
 
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
-            console.log(document.querySelector(selector));
-            console.log(selector);
             document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
         });
         localStorage.setItem("language", lang);
@@ -78,6 +76,7 @@
         }
     }
 
+
     const get = (url, callback, ignoreSuccess = true) => {
         fetch(url, {
             headers: {
@@ -86,11 +85,9 @@
                 'X-CSRF-TOKEN': <?=json_encode(csrf_token())?>
             }
         }).then(res => res.json()).then(res => {
-            if (typeof (res) == "object") {
-                if (res.message) {
-                    if (!ignoreSuccess && res.error) showError(res.message);
-                    if (!res.error) showSuccess(res.message);
-                }
+            if (res.message) {
+                if (res.error) return showError(res.message);
+                if (!ignoreSuccess && !res.error) showSuccess(res.message);
             }
             callback(res);
         }).catch(e => showError(e.message));
@@ -106,11 +103,9 @@
             method: 'POST',
             body: JSON.stringify(data)
         }).then(res => res.json()).then(res => {
-            if (typeof (res) == "object") {
-                if (res.message) {
-                    if (!ignoreSuccess && res.error) showError(res.message);
-                    if (!res.error) showSuccess(res.message);
-                }
+            if (res.message) {
+                if (res.error) return showError(res.message);
+                if (!ignoreSuccess && !res.error) showSuccess(res.message);
             }
             callback(res);
         }).catch(e => showError(e.message));
@@ -156,7 +151,6 @@
     function parseYoutubeUrl(link = "") {
         if (!link) return "";
         if (link.includes("https://www.youtube.com") && link.includes("watch")) {
-            console.log(link)
             link = link.split("watch?v=")[1];
             link = link.split("&")[0];
 
@@ -165,7 +159,6 @@
             link = link.split("https://youtu.be/")[1];
             link = "https://www.youtube.com/embed/" + link;
         }
-        console.log(link);
         return link;
     }
 

@@ -245,6 +245,7 @@ class MainController extends Controller
                 ->leftJoin("users", "chief_appointments.user_id", "=", "users.id")
                 ->whereRaw("date='$date' and (chief_appointments.id is NULL or chief_appointments.status!='rejected')")
                 ->orderBy("time")
+                ->select("calendar_times.id as id", "calendar_times.time as time")
                 ->get();
             return json_encode(["error" => false, "date" => $date, "times" => $times]);
         } catch (\Exception $e) {

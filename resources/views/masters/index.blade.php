@@ -19,15 +19,8 @@
 </div>
 <div class="container text-center">
     @if (!auth()->check())
-        <a type="button" class="btn btn-primary button_for_valera @if(Request::segment(1) == 'login') active @endif"
-           href="{{url("/login")}}"
-           type="submit" data-bs-toggle="modal" data-bs-target="#login">Увійти</a>
-        <div class="d-flex flex-column">
-            <div style="font-size: 12px; margin: 20px 0 60px">
-                Зайти в акаунт сначала блять а потом заказывай свои наебки
-            </div>
-        </div>
-
+        <a type="button" class="btn btn-primary button_for_valera"
+           href="{{url("/login")}}" data-bs-toggle="modal" data-bs-target="#login">Увійти</a>
     @else
         <button id="modal_open" data-bs-toggle="modal" data-bs-target="#enrol" style="display: none;"></button>
         <button type="button" class="btn btn-primary button_for_valera" onclick="openModal()">Записатися</button>
@@ -54,6 +47,7 @@
 </div>
 <br>
 
+@if(auth()->check())
 <div class="modal fade" id="enrol" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true"
      style="backdrop-filter: blur(15px);">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -84,6 +78,7 @@
     </div>
     <div class="loader hidden"></div>
 </div>
+@endif
 
 <script>
     const count = 20;
@@ -154,6 +149,7 @@
         })
     })
 
+    @if(auth()->check())
     document.querySelector("#note_to_master").addEventListener("click", e=>{
         post("{{"/note-to-master"}}", {master_id: {{$master->id}}}, res=>{
             if(res.error){
@@ -166,5 +162,6 @@
             document.querySelector(".alert").innerHTML=res.message;
         })
     })
+    @endif
 </script>
 @include('layouts.footer')
