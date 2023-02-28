@@ -46,6 +46,7 @@
                     ${time["first_name"]?
                     `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
                         <div>Телефон: ${time["phone"]}</div>
+                        <div>Пошта: ${time["email"]}</div>
                         <button class="btn btn-success admin_button_SaniaZaebalEdition" onclick="accept(${time["id"]})">Погодити</button>
                         <button class="btn btn-danger admin_button_SaniaZaebalEdition" onclick="reject(${time["id"]})">Відхилити</button>
                        `:""}
@@ -72,7 +73,10 @@
         {
             const timeParent = document.querySelector(".time-list");
             console.log(res.times)
-            res.times.forEach(time => timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time)));
+            res.times.forEach(time => {
+                console.log(time);
+                timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time))
+            });
             timeParent.insertAdjacentHTML("afterbegin", `
                 <h4>Новий час</h4><input type="time" id="time" min="00:00" max="23:59" class="input_calendar_add_time"><button id="add_time" class="appointment_button_add_time">Додати</button><h4>Записи</h4>
 

@@ -245,8 +245,10 @@ class MainController extends Controller
                 ->leftJoin("users", "chief_appointments.user_id", "=", "users.id")
                 ->whereRaw("date='$date' and (chief_appointments.id is NULL or chief_appointments.status!='rejected')")
                 ->orderBy("time")
-                ->select("calendar_times.id as id", "calendar_times.time as time")
+                ->select("calendar_times.id as id", "calendar_times.time as time", "users.first_name as first_name",
+                    "users.last_name as last_name", "users.phone as phone", "users.email as email")
                 ->get();
+
             return json_encode(["error" => false, "date" => $date, "times" => $times]);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
