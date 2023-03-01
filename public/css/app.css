@@ -804,7 +804,7 @@ master_margin_sm{
         margin-top: 20px;
     }
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1280px) {
     .header_name{
         font-family: 'Oswald', sans-serif;
         font-size: 28px;

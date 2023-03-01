@@ -1,18 +1,17 @@
 @include('layouts.main-header')
-
-<div class="row justify-content-center" style="width: 100%; margin: 0px">
+<div style="height: 80px"></div>
+<div class="row justify-content-center" style="width: 100%; height: auto; max-height: 450px; margin: 0">
     <div class="shapka text-center col-lg-8" style="padding: 0; ">
         <img class="" src="{{Storage::url("")}}images/{{$main_img}}"
-             style="width: 100%; height: auto; margin-top: 80px">
+             style="width: 100%; height: inherit; max-height: 450px; object-fit: contain; /*margin-top: 80px*/">
     </div>
+
 </div>
 
-<h3 class="text-center" style=" margin: 20px;">Валерій</h3>
-<div class="container main_text">
+<h3 class="text-center" style="position: relative; margin: 20px;">Валерій</h3>
+<div class="container main_text" style="padding: 12px">
     {!! $main_body !!}
 </div>
-
-
 <div class="container text-center">
     @if (!auth()->check())
         <a type="button" class="btn btn-primary button_for_valera @if(Request::segment(1) == 'login') active @endif"
@@ -27,7 +26,7 @@
 
     @else
         @if(!$finded_note)
-        <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
+            <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
             <h4 class="text-center" style=" margin: 20px 0;">Запис</h4>
             <div class="d-flex flex-column">
                 <div>Оберіть дату та час</div>
@@ -52,7 +51,6 @@
         @endif
     @endif
 </div>
-
 <script>
 
     @if(!$finded_note)
@@ -94,5 +92,9 @@
 
     @endif
 </script>
-
 @include('layouts.footer')
+
+
+
+
+
