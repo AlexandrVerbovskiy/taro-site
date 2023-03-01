@@ -44,9 +44,9 @@
                 <div class="time-row" data-id="${time["id"]}">
                     <div>Час: <b>${time['time'].slice(0,5)}</b></div>
                     ${time["first_name"]?
-                    `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
+            `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
+                     <div>Пошта: ${time["email"]}</div>
                         <div>Телефон: ${time["phone"]}</div>
-                        <div>Пошта: ${time["email"]}</div>
                         <button class="btn btn-success admin_button_SaniaZaebalEdition" onclick="accept(${time["id"]})">Погодити</button>
                         <button class="btn btn-danger admin_button_SaniaZaebalEdition" onclick="reject(${time["id"]})">Відхилити</button>
                        `:""}
@@ -61,8 +61,6 @@
                         </button>
                 </div><hr>`;
 
-
-
         const handleTrashClick = (e) => {
             if (e.tagName != "BUTTON") e = e.closest('button');
             trashId = e.dataset.id;
@@ -72,13 +70,15 @@
         const onGetTimes=res=>
         {
             const timeParent = document.querySelector(".time-list");
-            console.log(res.times)
-            res.times.forEach(time => {
-                console.log(time);
-                timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time))
-            });
+            /*console.log(res.times)*/
+            res.times.forEach(time => timeParent.insertAdjacentHTML("beforeend", buildTimeRow(time)));
+            if(res.times.length > 0){
+                console.log(res.times)
+                timeParent.insertAdjacentHTML("afterbegin", `
+                <h4>Записи</h4>`)
+            }
             timeParent.insertAdjacentHTML("afterbegin", `
-                <h4>Новий час</h4><input type="time" id="time" min="00:00" max="23:59" class="input_calendar_add_time"><button id="add_time" class="appointment_button_add_time">Додати</button><h4>Записи</h4>
+                <h4>Новий час</h4><input type="time" id="time" min="00:00" max="23:59" class="input_calendar_add_time"><button id="add_time" class="appointment_button_add_time">Додати</button><div id="add_time_title"></div>
 
             `)
 
@@ -95,7 +95,6 @@
                 });
             })
         }
-
         buildCalendar((e)=>get("/admin/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
         buildModal("danger", "Removing the master", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);

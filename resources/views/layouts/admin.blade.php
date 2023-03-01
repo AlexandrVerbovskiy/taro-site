@@ -184,6 +184,17 @@
         top: 150%;
         background-color: transparent;
     }
+    .scroll_for_crop{
+        background: #a9c6ff;
+        width: auto;
+        height: 350px;
+        overflow: auto;
+    }
+    @media only screen and (max-width: 430px) {
+        .scroll_for_crop{
+            height: 450px;
+        }
+    }
     @media only screen and (max-width: 380px) {
         .menu_2 li {
             display: block;
@@ -212,7 +223,7 @@
 
 
 <div class="menu_2 d-lg-none " style="position: fixed; margin: 56px 0 0 0">
-    <ul style="background: #a9c6ff;">
+    <ul class="scroll_for_crop" style="">
         <a href="{{url("/")}}">
             <li>Основна сторінка</li>
         </a>

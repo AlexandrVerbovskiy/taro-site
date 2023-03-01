@@ -59,7 +59,7 @@
     </div>
 </div>
                        `;
-                });
+            });
             document.querySelector(".loader").insertAdjacentHTML('beforebegin', rows);
         });
     }
