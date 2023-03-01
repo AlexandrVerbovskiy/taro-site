@@ -151,16 +151,23 @@
 
     @if(auth()->check())
     document.querySelector("#note_to_master").addEventListener("click", e=>{
-        post("{{"/note-to-master"}}", {master_id: {{$master->id}}}, res=>{
-            if(res.error){
+        post("{{"/note-to-master"}}", {master_id: {{$master->id}}}, res=> {
+            const lang = getLang();
+            let message = "";
+
+            if (res.error) {
                 document.querySelector(".alert").classList.remove("alert-success");
                 document.querySelector(".alert").classList.add("alert-danger");
-            }else{
+                if (!res.status) return;
+                message = vocabulary['error_master_note'][res.status][lang];
+            } else {
                 document.querySelector(".alert").classList.add("alert-success");
                 document.querySelector(".alert").classList.remove("alert-danger");
+                message =vocabulary['success_master_note'][lang];
             }
-            document.querySelector(".alert").innerHTML=res.message;
-        })
+
+            document.querySelector(".alert").innerHTML = message;
+        }, true, true)
     })
     @endif
 </script>

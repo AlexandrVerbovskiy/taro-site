@@ -44,7 +44,8 @@
             </div>
         @else
             @if($finded_note->status=="wait_accept")
-                <div style="margin: 8px 0 36px">Ви вже відправили запит на підтвердженя на {{$finded_note->date}} {{$finded_note->time}}</div>
+                <div style="margin: 8px 0 36px">Ви вже відправили запит на підтвердженя
+                    на {{$finded_note->date}} {{$finded_note->time}}</div>
             @else
                 <div style="margin: 8px 0 36px">Ви вже записані на {{$finded_note->date}} {{$finded_note->time}}</div>
             @endif
@@ -59,7 +60,20 @@
         post("/note-to-boss",
             {
                 time_id: id
-            }, res => console.log(res));
+            }, res => {
+                if (res.error) {
+                    if (!res.status) return;
+
+                    const lang = getLang();
+                    if (res.status == -2) {
+                        showError(vocabulary['error_chief_note']["-2_p1"][lang] + res.date + vocabulary['error_chief_note']["-2_p2"][lang]);
+                    } else {
+                        showError(vocabulary['error_chief_note'][res.status][lang]);
+                    }
+                } else {
+                    showSuccess(vocabulary['success_chief_note'][lang]);
+                }
+            }, true, true);
     }
 
     const buildTimeRow = time => {

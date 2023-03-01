@@ -19,11 +19,11 @@ class MastersAppointmentsController extends Controller
         try {
             $master = Master::where("id", $data['master_id'])->first();
             if(!$master)
-                return json_encode(["error" => true, "message" => "Майстра не знайдено!"]);
+                return json_encode(["error" => true, "status"=>-1, "message" => "Майстра не знайдено!"]);
 
             $findedByData = MasterAppointment::where([["id", "!=", $data['id']], "status" => "wait_accept", "user_id" => auth()->user()->id, "master_id" => $data['master_id']])->first();
             if ($findedByData)
-                return json_encode(["error" => true, "message" => "Ви вже відправили запит на запис до майстра! Зачекайте, поки адміністратор зателефонує Вам для узгодження часу і місця!"]);
+                return json_encode(["error" => true, "status"=>-2, "message" => "Ви вже відправили запит на запис до майстра! Зачекайте, поки адміністратор зателефонує Вам для узгодження часу і місця!"]);
 
             $date = MasterAppointment::firstOrNew(['id' => $data['id']]);
             $date->master_id = $data['master_id'];
@@ -34,7 +34,7 @@ class MastersAppointmentsController extends Controller
             return json_encode(["error" => false, "data" => $date]);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
-            return json_encode(["error" => true, "message" => "Something went wrong"]);
+            return json_encode(["error" => true, "status"=>-5, "message" => "Something went wrong"]);
         }
     }
 

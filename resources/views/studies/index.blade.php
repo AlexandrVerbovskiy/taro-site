@@ -104,16 +104,24 @@
     @if (auth()->check())
     document.querySelector("#note_to_study").addEventListener("click", e => {
         const study_id = e.target.dataset.id
+        const lang = getLang();
+        let message = "";
+
         post("{{"/note-to-study"}}", {study_id}, res => {
+            console.log(res);
+            console.log(vocabulary['error_study_note'][res.status]);
             if(res.error){
                 document.querySelector(".alert").classList.remove("alert-success");
                 document.querySelector(".alert").classList.add("alert-danger");
+                if (!res.status) return;
+                message = vocabulary['error_study_note'][res.status][lang];
             }else{
                 document.querySelector(".alert").classList.add("alert-success");
                 document.querySelector(".alert").classList.remove("alert-danger");
+                message =vocabulary['success_study_note'][lang];
             }
-            document.querySelector(".alert").innerHTML=res.message;
-        })
+            document.querySelector(".alert").innerHTML = message;
+        }, true, true)
     })
     @endif
 

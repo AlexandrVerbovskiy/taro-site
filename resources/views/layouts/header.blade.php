@@ -93,7 +93,7 @@
         }).catch(e => showError(e.message));
     }
 
-    const post = (url, data, callback, ignoreSuccess = false) => {
+    const post = (url, data, callback, ignoreSuccess = false, ignoreError=false) => {
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
@@ -104,11 +104,15 @@
             body: JSON.stringify(data)
         }).then(res => res.json()).then(res => {
             if (res.message) {
-                if (res.error) return showError(res.message);
+                if (!ignoreError && res.error) return showError(res.message);
                 if (!ignoreSuccess && !res.error) showSuccess(res.message);
             }
             callback(res);
-        }).catch(e => showError(e.message));
+        }).catch(e => {
+            if(!ignoreError){
+                showError(e.message);
+            }
+        });
     }
 
     const btnFromEvent = e => {

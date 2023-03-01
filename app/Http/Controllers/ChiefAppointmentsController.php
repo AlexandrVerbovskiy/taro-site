@@ -20,16 +20,16 @@ class ChiefAppointmentsController extends Controller
 
             $date = CalendarTime::whereRaw("id" . "=" . $data['time_id'] . " AND cast(concat(calendar_times.date, ' ', calendar_times.time) as datetime) > CURRENT_TIMESTAMP()")->first();
             if (!$date)
-                return json_encode(["error" => true, "message" => "Дату не знайдено!"]);
+                return json_encode(["error" => true, "status"=>-1, "message" => "Дату не знайдено!"]);
 
 
             $findedByData = $this->getActualUserNotesToBoss();
             if ($findedByData)
-                return json_encode(["error" => true, "message" => "Ви вже зробили запис на <b>" . $findedByData->date . " " . $findedByData->time . "</b>! Для запису на наступну дату, дочекайтесь вказаної дати або відхилення запису адміністратором!"]);
+                return json_encode(["error" => true, "status"=>-2, "date"=>$findedByData->date . " " . $findedByData->time]);
 
             $findedByData = ChiefAppointment::where([["id", "!=", auth()->user()->id], "time_id" => $data['time_id']])->first();
             if ($findedByData)
-                return json_encode(["error" => true, "message" => "Запис на вибраний час зробити не можна!"]);
+                return json_encode(["error" => true, "status"=>-3,"message" => "Запис на вибраний час зробити не можна!"]);
 
 
             $findedByData = ChiefAppointment::where(["time_id" => $data['time_id']])->first();
@@ -42,10 +42,10 @@ class ChiefAppointmentsController extends Controller
             $date->status = "wait_accept";
             $date->save();
 
-            return json_encode(["error" => false, "message" => "Ви успішно записались на прийом до Валерія! Адміністратор зв'яжеться з Вами для підтвердження дати та часу!", "data" => $date]);
+            return json_encode(["error" => false, "message" => "Ви успішно надіслали запит на прийом до Валерія! Адміністратор зв'яжеться з Вами для підтвердження дати та часу!", "data" => $date]);
         } catch (\Exception $e) {
             file_put_contents("log.txt", $e->getMessage());
-            return json_encode(["error" => true, "message" => "Something went wrong"]);
+            return json_encode(["error" => true, "status"=>-5, "message" => "Something went wrong"]);
         }
     }
 
