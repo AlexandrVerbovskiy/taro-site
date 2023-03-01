@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="container message-parent">
+    <style>
+        .btn-suc-dan{
+            height: 30px;
+            padding: 0 10px;
+        }
+        @media only screen and (max-width: 320px) {
+            .btn-suc-dan{
+                height: 24px;
+                font-size: 12px;
+                padding: 0 10px;
+            }
+        }
+    </style>
+    <div class="message-parent" style="padding: 8px">
         @include("layouts.error-message")
         <h3 class="text-center title_margin" style="margin: 24px 0">Записи на навчання</h3>
         <div style="display: flex; justify-content: flex-end; margin: 20px 0 10px;">
@@ -8,15 +21,15 @@
             <a id="search" href="#"><img src="{{ URL("image/loupe.png")}}" class="admin_button_search align-middle"></a>
         </div>
         <div class="table table-responsive table-responsive-sm">
-            <table class="table ">
+            <table class="table" style="width: 100%;">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Study</th>
-                    <th scope="col">User</th>
-                    <th scope="col">User phone</th>
-                    <th scope="col">User email</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" style="width: auto; min-width: 80px; max-width: 100px;">Study</th>
+                    <th scope="col" style="">User</th>
+                    <th scope="col" style="width: auto; min-width: 120px; max-width: 220px;">User phone</th>
+                    <th scope="col" style="width: auto; min-width: 180px; max-width: 320px;">User email</th>
+                    <th scope="col" style="width: auto; min-width: 180px; max-width: 320px;">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,8 +114,8 @@
                         "<span style = 'color:red'>Rejected</span>"
                         : (note["status"] === "accepted" ?
                             "<span style = 'color:green'>Accepted</span>" :
-                            '<button onclick="handleAcceptClick('+note["id"]+')" class="actions">Accept</button>' +
-                            '<button onclick="handleRejectClick('+note["id"]+')" class="actions">Reject</button>')}
+                            '<button onclick="handleAcceptClick('+note["id"]+')" class="btn btn-success btn-suc-dan actions" style="">Accept</button>' +
+                            '<button onclick="handleRejectClick('+note["id"]+')" class="btn btn-danger btn-suc-dan actions" style="margin-left: 5px">Reject</button>')}
                         </td>
                     </tr>`)
                 document.querySelector(".table tbody").insertAdjacentHTML('beforeend', rows);

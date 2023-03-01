@@ -95,7 +95,7 @@
         background-color: #0d6efd;
         color: white;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         .calendar {
             max-width: 100%;
         }

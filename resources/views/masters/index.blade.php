@@ -4,16 +4,18 @@
         <h4 style="margin: 20px 0" class="text-center">{{$master->last_name}} {{$master->first_name}}</h4>
     </div>
 </div>
-<div class="row justify-content-center" style="width: 100%; margin: 0">
-    <div class="col-lg-3 col-md-6 col-sm-8">
+<div class="row justify-content-center" style="width: 100%; height: auto; max-height: 450px; margin: 0">
+    <div class="text-center col-lg-8" style="padding: 0; ">
         <img src="{{Storage::url("/images/$master->img_src")}}"
-             style="width: 100%; height: auto; margin-bottom: 30px">
+             style="width: 100%; height: inherit; max-height: 450px; object-fit: contain; /*margin-top: 80px*/">
     </div>
+
 </div>
+
 <div class="row justify-content-center" style="width: 100%; margin: 0">
 </div>
 <div>
-    <div class="container">
+    <div class="container" style="margin-top: 20px">
         {!!$master->description!!}
     </div>
 </div>
@@ -48,36 +50,36 @@
 <br>
 
 @if(auth()->check())
-<div class="modal fade" id="enrol" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true"
-     style="backdrop-filter: blur(15px);">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
-            <div class="modal-header d-flex justify-content-center"
-                 style="border: 0; margin: 18px 0; padding-bottom: 0">
-                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Запис
-                    до {{$master->last_name}} {{$master->first_name}}</p>
-            </div>
-            <div class="modal-body padding_for_form">
-                <div class="card-body" style="padding: 0; margin-top: -10px">
-                    <div>
-                        <p>Запис на ім'я: <?=auth()->user()->first_name ?> <?=auth()->user()->last_name ?></p>
-                        <p>Відслідковувати статус запису на відовідній сторінці, щоб потрапити на неї натисніть на меню
-                            та оберіть її</p>
-                        <p>Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
+    <div class="modal fade" id="enrol" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true"
+         style="backdrop-filter: blur(15px);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
+                <div class="modal-header d-flex justify-content-center"
+                     style="border: 0; margin: 18px 0; padding-bottom: 0">
+                    <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Запис
+                        до {{$master->last_name}} {{$master->first_name}}</p>
+                </div>
+                <div class="modal-body padding_for_form">
+                    <div class="card-body" style="padding: 0; margin-top: -10px">
+                        <div>
+                            <p>Запис на ім'я: <?=auth()->user()->first_name ?> <?=auth()->user()->last_name ?></p>
+                            <p>Відслідковувати статус запису на відовідній сторінці, щоб потрапити на неї натисніть на меню
+                                та оберіть її</p>
+                            <p>Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
+                        </div>
+                        <div class="alert" role="alert"></div>
+                        <button id="note_to_master" style="cursor:pointer; margin: -16px 0 0 0" type="button"
+                                class="btn btn-primary form_main_button">Записатися
+                        </button>
                     </div>
-                    <div class="alert" role="alert"></div>
-                    <button id="note_to_master" style="cursor:pointer; margin: 0 0 -16px 0" type="button"
-                            class="btn btn-primary form_main_button">Записатися
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="comments_list">
+        <div id="comments_list">
 
+        </div>
+        <div class="loader hidden"></div>
     </div>
-    <div class="loader hidden"></div>
-</div>
 @endif
 
 <script>
