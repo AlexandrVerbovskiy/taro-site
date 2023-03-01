@@ -22,10 +22,12 @@
     if (document.querySelector(".lang_button"))
         document.querySelectorAll(".lang_button").forEach(elem => elem.addEventListener("click", e => changeLanguage(e.target.dataset.value)));
 
-    const lang = localStorage.getItem("language") ?? "ua";
+    function getLang(){
+        return localStorage.getItem("language") ?? "ua";
+    }
 
+    const lang = getLang();
     changeLanguage(lang);
-
 
     $(document).ready(function () {
         if ($(".form").length > 0) {
