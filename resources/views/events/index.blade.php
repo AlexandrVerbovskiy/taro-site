@@ -1,6 +1,6 @@
 @include('layouts.main-header')
 <div class="container">
-    <h3 class="text-center title_margin" style="margin: 110px 0 30px">ТОПИК</h3>
+    <h3 class="text-center title_margin" style="margin: 110px 0 30px">Події</h3>
     <div class="loader hidden">
 
     </div>
