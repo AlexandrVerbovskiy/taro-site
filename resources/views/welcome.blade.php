@@ -35,7 +35,7 @@
                 </div>
             </div>
             @include("layouts.calendar", ["all"=>false, "dates"=>$dates])
-            <h5 style="margin: 20px 0">Доступні години запису:</h5>
+
             <div class="time-list"></div>
 
             <div class="container py-4 message-parent">
@@ -85,6 +85,11 @@
 
     const onGetTimes = res => {
         if (res.error) return;
+        if(res.times.length > 0){
+            console.log(res.times)
+            document.querySelector(".time-list").insertAdjacentHTML("afterbegin", `
+                <h5 style="margin: 20px 0">Доступні години запису:</h5>`)
+        }
         res.times.forEach(time => document.querySelector(".time-list").insertAdjacentHTML("beforeend", buildTimeRow(time)));
     }
 
