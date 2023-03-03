@@ -12,27 +12,27 @@
                     </div>
                     <div class="card-body" style="padding: 0">
 
-                        <form action="{{ url('reset-password') }}" method="POST">
+                            <form action="{{ url('reset-password') }}" method="POST">
 
-                            @csrf
-                            <div class="modal-body padding_for_form">
-                                <input type="hidden" name="token" value="{{ $token }}">
+                                @csrf
+                                <div class="modal-body padding_for_form">
+                                    <input type="hidden" name="token" value="{{ $token }}">
 
-                                <div class="" >
+                                    <div class="" >
 
                                         <input type="text" id="email_address" placeholder="Пошта" class="form-control input_form reset_password_email" name="email" required autofocus>
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
 
-                                </div>
+                                    </div>
 
                                 <div class="">
                                         <input type="password" id="password" class="form-control input_form reset_password_password" placeholder="Пароль" name="password" required autofocus>
                                         @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif
-                                </div>
+                                    </div>
 
                                 <div class="">
                                         <input type="password" id="password-confirm" class="form-control input_form reset_password_confirmation" placeholder="Повторіть пароль" name="password_confirmation" required autofocus>
@@ -40,7 +40,7 @@
                                             <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                         @endif
 
-                                </div>
+                                    </div>
 
                                 <div class="">
                                     <button type="submit" class="btn btn-primary form_main_button reset_password_submit">
@@ -50,13 +50,12 @@
                             </div>
 
                         </form>
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 </div>
 <script>
     subscribeOnChangeLanguage(".reset_password_title", "reset_password_title");

@@ -4,16 +4,18 @@
         <h4 style="margin: 20px 0" class="text-center">{{$master->last_name}} {{$master->first_name}}</h4>
     </div>
 </div>
-<div class="row justify-content-center" style="width: 100%; margin: 0">
-    <div class="col-lg-3 col-md-6 col-sm-8">
+<div class="row justify-content-center" style="width: 100%; height: auto; max-height: 450px; margin: 0">
+    <div class="text-center col-lg-8" style="padding: 0; ">
         <img src="{{Storage::url("/images/$master->img_src")}}"
-             style="width: 100%; height: auto; margin-bottom: 30px">
+             style="width: 100%; height: inherit; max-height: 450px; object-fit: contain; /*margin-top: 80px*/">
     </div>
+
 </div>
+
 <div class="row justify-content-center" style="width: 100%; margin: 0">
 </div>
 <div>
-    <div class="container">
+    <div class="container" style="margin-top: 20px">
         {!!$master->description!!}
     </div>
 </div>
@@ -66,18 +68,17 @@
                         <p class="popup_master_enrol_text_two">Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
                     </div>
                     <div class="alert" role="alert"></div>
-                    <button id="note_to_master" style="cursor:pointer; margin: 0 0 -16px 0" type="button"
+                    <button id="note_to_master" style="cursor:pointer; margin: -16px 0 0 0" type="button"
                             class="btn btn-primary form_main_button popup_master_enrol_submit">Записатися
                     </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="comments_list">
+        <div id="comments_list">
 
+        </div>
+        <div class="loader hidden"></div>
     </div>
-    <div class="loader hidden"></div>
-</div>
 @endif
 
 <script>
@@ -151,16 +152,23 @@
 
     @if(auth()->check())
     document.querySelector("#note_to_master").addEventListener("click", e=>{
-        post("{{"/note-to-master"}}", {master_id: {{$master->id}}}, res=>{
-            if(res.error){
+        post("{{"/note-to-master"}}", {master_id: {{$master->id}}}, res=> {
+            const lang = getLang();
+            let message = "";
+
+            if (res.error) {
                 document.querySelector(".alert").classList.remove("alert-success");
                 document.querySelector(".alert").classList.add("alert-danger");
-            }else{
+                if (!res.status) return;
+                message = vocabulary['error_master_note'][res.status][lang];
+            } else {
                 document.querySelector(".alert").classList.add("alert-success");
                 document.querySelector(".alert").classList.remove("alert-danger");
+                message =vocabulary['success_master_note'][lang];
             }
-            document.querySelector(".alert").innerHTML=res.message;
-        })
+
+            document.querySelector(".alert").innerHTML = message;
+        }, true, true)
     })
     @endif
     if (document.querySelector('.master_login')) subscribeOnChangeLanguage('.master_login', 'master_login');

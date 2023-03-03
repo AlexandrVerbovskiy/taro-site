@@ -13,10 +13,10 @@
                             <p class="master_name">{{$master['last_name']}} {{$master['first_name']}}</p>
                             <div class="master_description">
                                 {{$master['description']}}
-        </div>
     </div>
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 align-items-end" style="padding: 0 12px; bottom: 0">
-        <button type="button" class="btn btn-light master_sec_button" style="margin-right: 20px">Запис до {{$master['first_name']}}</button>
+</div>
+<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 align-items-end" style="padding: 0 12px; bottom: 0">
+    <button type="button" class="btn btn-light master_sec_button" style="margin-right: 20px">Запис до {{$master['first_name']}}</button>
                             <a class="btn btn-light master_sec_button" href="/master/{{$master['id']}}}">Більше про майстра</a>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
     <div class="container">
         @foreach($masters as $master)
             <div class="row justify-content-center" style=" margin: 0 20px;">
-                <div class="masterSaniaZaebalEdition col-lg-9 col-md-12">
+                <div class="masterSaniaZaebalEdition col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-auto">
                             <div style="">

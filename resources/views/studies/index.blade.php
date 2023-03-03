@@ -25,17 +25,17 @@
                     </div>
                     <div class="alert" role="alert" onload="alert(123);"></div>
 
-                    <button id="note_to_study" style="cursor:pointer; margin: 0 0 -16px 0" type="button"
+                    <button id="note_to_study" style="cursor:pointer; margin: -16px 0 0 0" type="button"
                             class="btn btn-primary form_main_button popup_studies_send_button">Відправити
                     </button>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 <a id="modal_open" class="btn btn-light master_sec_button" data-bs-toggle="modal" data-bs-target="#enrol" style="display:none;"></a>
+
 @endif
 
 <script>
@@ -69,10 +69,10 @@
                                         @else
                                             <a type="button" class="btn btn-light master_sec_button" href="{{url("/login")}}"  data-bs-toggle="modal" data-bs-target="#login">Увійти</a>
                                         @endif
-                                    </div>
-                                </div>
-                            </div>
-                    </div>`)
+                </div>
+            </div>
+        </div>
+</div>`)
             document.querySelector(".loader").insertAdjacentHTML('beforebegin', rows);
         });
     }
@@ -105,16 +105,24 @@
     @if (auth()->check())
     document.querySelector("#note_to_study").addEventListener("click", e => {
         const study_id = e.target.dataset.id
+        const lang = getLang();
+        let message = "";
+
         post("{{"/note-to-study"}}", {study_id}, res => {
+            console.log(res);
+            console.log(vocabulary['error_study_note'][res.status]);
             if(res.error){
                 document.querySelector(".alert").classList.remove("alert-success");
                 document.querySelector(".alert").classList.add("alert-danger");
+                if (!res.status) return;
+                message = vocabulary['error_study_note'][res.status][lang];
             }else{
                 document.querySelector(".alert").classList.add("alert-success");
                 document.querySelector(".alert").classList.remove("alert-danger");
+                message =vocabulary['success_study_note'][lang];
             }
-            document.querySelector(".alert").innerHTML=res.message;
-        })
+            document.querySelector(".alert").innerHTML = message;
+        }, true, true)
     })
     @endif
 

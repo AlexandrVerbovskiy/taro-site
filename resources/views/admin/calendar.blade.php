@@ -44,7 +44,8 @@
                 <div class="time-row" data-id="${time["id"]}">
                     <div>Час: <b>${time['time'].slice(0,5)}</b></div>
                     ${time["first_name"]?
-                    `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
+            `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
+                     <div>Пошта: ${time["email"]}</div>
                         <div>Телефон: ${time["phone"]}</div>
                         <button class="btn btn-success admin_button_SaniaZaebalEdition" onclick="accept(${time["id"]})">Погодити</button>
                         <button class="btn btn-danger admin_button_SaniaZaebalEdition" onclick="reject(${time["id"]})">Відхилити</button>
