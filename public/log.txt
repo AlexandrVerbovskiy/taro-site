@@ -1,1 +1,1 @@
-SQLSTATE[HY000]: General error: 1525 Incorrect DATE value: 'undefined' (SQL: select `calendar_times`.`id` as `id`, `calendar_times`.`time` as `time` from `calendar_times` left join `chief_appointments` on `chief_appointments`.`time_id` = `calendar_times`.`id` left join `users` on `chief_appointments`.`user_id` = `users`.`id` where date='undefined' and (chief_appointments.id is NULL or chief_appointments.status!='rejected') order by `time` asc)
+Undefined variable $times
