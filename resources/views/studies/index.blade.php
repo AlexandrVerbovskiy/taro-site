@@ -125,6 +125,9 @@
     })
     @endif
 
+    subscribeOnChangeLanguageCustomWords(".master_sec_button", "master_sec_button", {ru:"Запись", ua:"Запис"})
+
+
 </script>
 
 @include('layouts.footer')

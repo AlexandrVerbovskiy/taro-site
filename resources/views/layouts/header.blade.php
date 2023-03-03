@@ -67,7 +67,7 @@
 
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
-            document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
+            document.querySelectorAll(selector).forEach(elem=>elem.innerHTML = vocabulary[subscriptions[selector]][lang]);
         });
         localStorage.setItem("language", lang);
 
