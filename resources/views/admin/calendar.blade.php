@@ -65,6 +65,7 @@
             `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
                      <div>Пошта: ${time["email"]}</div>
                         <div>Телефон: ${time["phone"]}</div>
+                        <div>Статус: ${time["status"]}</div>
                         <button class="btn btn-success admin_button_SaniaZaebalEdition" onclick="accept(${time["id"]})">Погодити</button>
                         <button class="btn btn-danger admin_button_SaniaZaebalEdition" onclick="reject(${time["id"]})">Відхилити</button>
                        `:""}
@@ -115,7 +116,7 @@
         }
         buildCalendar((e)=>get("/admin/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
-        buildModal("danger", "Removing the master", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Видалення часу запису", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);
 
     </script>
 @stop
