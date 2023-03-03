@@ -56,7 +56,7 @@ class ChiefAppointmentsController extends Controller
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Запит на запис не знайдено!']);
 
         try {
-            $appointment = ChiefAppointment::where("id", $data['id'])->first();
+            $appointment = ChiefAppointment::where("time_id", $data['id'])->first();
             $appointment->status = "accepted";
             $appointment->save();
             return json_encode(["error" => false, "message" => 'Час прийому прийнято успішно!']);
@@ -72,7 +72,7 @@ class ChiefAppointmentsController extends Controller
         if (!array_key_exists('id', $data)) return json_encode(["error" => true, "message" => 'Запит на запис не знайдено!']);
 
         try {
-            $appointment = ChiefAppointment::where("id", $data['id'])->first();
+            $appointment = ChiefAppointment::where("time_id", $data['id'])->first();
             $appointment->status = "rejected";
             $appointment->save();
             return json_encode(["error" => false, "message" => 'Час прийому відхилено успішно!']);
