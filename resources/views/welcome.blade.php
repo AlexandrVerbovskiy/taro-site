@@ -5,17 +5,17 @@
         <img class="" src="{{Storage::url("")}}images/{{$main_img}}"
              style="width: inherit;  height: inherit; max-height: 600px; object-fit: contain; /*margin-top: 80px*/">
     </div>
-    <h3 class="text-center" style="position: relative; margin: 20px;">Валерій</h3>
+    <h3 class="text-center welcome_name" style="position: relative; margin: 20px;">Валерій</h3>
     <div class="container main_text" style="padding: 12px">
         {!! $main_body !!}
     </div>
     <div class="container text-center">
         @if (!auth()->check())
-            <a type="button" class="btn btn-primary button_for_valera @if(Request::segment(1) == 'login') active @endif"
+            <a type="button" class="btn btn-primary welcome_login button_for_valera @if(Request::segment(1) == 'login') active @endif"
                href="{{url("/login")}}"
                type="submit" data-bs-toggle="modal" data-bs-target="#login">Увійти</a>
             <div class="d-flex flex-column">
-                <div style="font-size: 12px; margin: 20px 0 60px">
+                <div style="font-size: 12px; margin: 20px 0 60px" class="welcome_login_text">
                     Запис доступний тільки після входу до акаунту на сайті, для цього натисніть на кнопку “Увійти”,
                     якщо ви вперше на нашому сайті, то на сторінці входу ви зможете зареєструвати новий акаунт.
                 </div>
@@ -24,15 +24,15 @@
         @else
             @if(!$finded_note)
                 <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
-                <h4 class="text-center" style=" margin: 20px 0;">Запис</h4>
+                <h4 class="text-center welcome_enrol" style=" margin: 20px 0;">Запис</h4>
                 <div class="d-flex flex-column">
-                    <div>Оберіть дату та час</div>
-                    <div>
+                    <div class="welcome_text_one">Оберіть дату та час</div>
+                    <div class="welcome_text_two">
                         Доступні дати виділені синім, після натискання будуть відображені години для запису.
                     </div>
                 </div>
                 @include("layouts.calendar", ["all"=>false, "dates"=>$dates])
-                <h5 style="margin: 20px 0">Доступні години запису:</h5>
+                <h5 style="margin: 20px 0" class="welcome_hours_available">Доступні години запису:</h5>
                 <div class="time-list" style="margin-bottom: 80px"></div>
 
                 <div class="container py-4 message-parent">
@@ -74,9 +74,24 @@
         if (document.querySelector(".calendar")) buildCalendar((e) => get("/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
         @endif
+
+        subscribeOnChangeLanguage('.welcome_name', 'welcome_name');
+        if (document.querySelector('.welcome_login')) {
+            subscribeOnChangeLanguage('.welcome_login', 'welcome_login');
+            subscribeOnChangeLanguage('.welcome_login_text', 'welcome_login_text');
+        }
+        else {
+            if (document.querySelector('.welcome_enrol')) {
+                subscribeOnChangeLanguage('.welcome_enrol', 'welcome_enrol');
+                subscribeOnChangeLanguage('.welcome_text_one', 'welcome_text_one');
+                subscribeOnChangeLanguage('.welcome_text_two', 'welcome_text_two');
+                subscribeOnChangeLanguage('.welcome_hours_available', 'welcome_hours_available');
+            }
+        }
     </script>
     @include('layouts.footer')
 </div>
+
 
 
 
