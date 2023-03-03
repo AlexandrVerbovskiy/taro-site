@@ -102,7 +102,10 @@
             </div>
 
             <div class="form-group">
-                <button style="cursor:pointer;" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
+                <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти</button>
+                <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">
+                    Save
+                </button>
             </div>
         </form>
 
@@ -111,6 +114,25 @@
     </div>
 
     <script>
+
+        $(document).ready(function () {
+            $('.form').keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+
+        $("#save_changes_fake").on("click", function () {
+            if (document.querySelector("[name='url']").value) {
+                $("#save_changes").click();
+            } else {
+                showError("Оберіть файл або посилання на ютуб для коректного збереження події!");
+            }
+        })
+
+
         function hideAllBlocks(media) {
             document.querySelector(".youtube").style.display = "none";
             document.querySelector(".video").style.display = "none";

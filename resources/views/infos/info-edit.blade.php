@@ -27,7 +27,11 @@
             </div>
 
             <div class="form-group">
-                <button style="cursor:pointer; width: 100px" id="save_changes" type="submit" class="btn btn-primary">Зберегти</button>
+                <button style="cursor:pointer" id="save_changes_fake" type="button" class="btn btn-primary">Зберегти
+                </button>
+                <button style="cursor:pointer; display: none;" id="save_changes" type="submit" class="btn btn-primary">
+                    Save
+                </button>
             </div>
         </form>
     </div>

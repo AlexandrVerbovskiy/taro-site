@@ -46,10 +46,12 @@ class EventsController extends Controller
 
 
         try {
-            $findedByData = EventTopic::where(["title_ua" => $data['title_ua'], ['id', '!=', $data['id']]])->first();
+            $findedByData = EventTopic::where([["title_ua","=", $data['title_ua']], ['id', '!=', $data['id']]])->first();
             if (is_null($findedByData)) {
-                $findedByData = EventTopic::where(["title_ru" => $data['title_ru'], ['id', '!=', $data['id']]])->first();
+                $findedByData = EventTopic::where([["title_ru", "=", $data['title_ru']], ['id', '!=', $data['id']]])->first();
             }
+
+
             if ($findedByData && $findedByData['id'] != $data['id'])
                 return back()->withInput(\Illuminate\Support\Facades\Request::except(''))->withErrors([
                     'error' => 'Розділ подій з такими даними уже існує: <a href="' . url("/admin/edit-topic-event/" . $findedByData->id) . '">' . $data['title_ua'] . '</a>'
