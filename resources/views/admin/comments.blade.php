@@ -83,7 +83,7 @@
         }
 
         const handleTrashClick = (e) => {
-            trashId = btnFromEvent(e).dataset.id;
+            trashId = e.dataset.id;
             document.querySelector("#trash-modal").click();
         }
 
