@@ -104,6 +104,6 @@
 
         document.querySelectorAll(".trash").forEach(trash => trash.addEventListener("click", handleTrashClick));
 
-        buildModal("danger", "Removing the master", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Видалення коментаря", "Ви впевнені, що хочете видалити цей коментар?", document.querySelector("#trash-modal"), acceptDelete);
     </script>
 @stop

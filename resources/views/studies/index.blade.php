@@ -23,9 +23,9 @@
                             та оберіть її</p>
                         <p class="popup_studies_text_two">Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
                     </div>
-                    <div class="alert" role="alert" onload="alert(123);"></div>
+                    <div class="alert" role="alert" onload="alert(123);" style="margin-bottom: 48px; border-radius: 15px; border: 0"></div>
 
-                    <button id="note_to_study" style="cursor:pointer; margin: -16px 0 0 0" type="button"
+                    <button id="note_to_study" style="cursor:pointer; margin: -32px 0 0 0" type="button"
                             class="btn btn-primary form_main_button popup_studies_send_button">Відправити
                     </button>
                 </div>

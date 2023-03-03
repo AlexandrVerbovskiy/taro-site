@@ -31,7 +31,7 @@
             <div class="d-flex flex-column">
                 <div class="welcome_text_one">Оберіть дату та час</div>
                 <div class="welcome_text_two">
-                    Доступні дати виділені синім, після натискання будуть відображені години для запису.
+                    Доступні дати виділені голубим, після натискання будуть відображені години для запису.
                 </div>
             </div>
             @include("layouts.calendar", ["all"=>false, "dates"=>$dates])

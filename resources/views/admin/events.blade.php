@@ -116,6 +116,6 @@
             });
         });
 
-        buildModal("danger", "Removing the activity", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Видалення поста події", "Ви впевнені, що хочете видалити цей пост подій?", document.querySelector("#trash-modal"), acceptDelete);
     </script>
 @stop

@@ -97,7 +97,10 @@ ul>li>a{
     width: 100%;
 }
 
-
+.alert_css{
+    border-radius: 15px;
+    border: 0;
+}
 .img_menu{
     width: 30px;
     padding: 0;

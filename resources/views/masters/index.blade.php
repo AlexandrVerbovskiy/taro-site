@@ -67,8 +67,8 @@
                             та оберіть її</p>
                         <p class="popup_master_enrol_text_two">Коли адміністратор розгляне ваш запис, то статус зміниться та вам зателефонують</p>
                     </div>
-                    <div class="alert" role="alert"></div>
-                    <button id="note_to_master" style="cursor:pointer; margin: -16px 0 0 0" type="button"
+                    <div class="alert_css alert" role="alert" style="margin-bottom: 48px;"></div>
+                    <button id="note_to_master" style="cursor:pointer; margin: -32px 0 0 0" type="button"
                             class="btn btn-primary form_main_button popup_master_enrol_submit">Записатися
                     </button>
                 </div>

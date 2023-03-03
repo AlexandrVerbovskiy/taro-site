@@ -93,6 +93,6 @@
         document.querySelectorAll(".trash").forEach(trash => trash.addEventListener("click", handleTrashClick));
         document.querySelectorAll(".change-visible").forEach(btn => btn.addEventListener("click", handleChangeVisibleClick));
 
-        buildModal("danger", "Removing the info", "Are you sure you want to remove the wizard?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Видалення категорії корисної інформації", "Ви впевнені, що хочете видалити цю категорію корисної інформації?", document.querySelector("#trash-modal"), acceptDelete);
     </script>
 @stop
