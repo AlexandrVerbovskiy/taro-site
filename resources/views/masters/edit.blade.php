@@ -59,7 +59,7 @@
             if(document.querySelector("[name='img_src']").value){
                 $("#save_changes").click();
             }else{
-                alert("error");
+                showError("Оберіть малюнок для коректного збереження інформації!");
             }
         })
 

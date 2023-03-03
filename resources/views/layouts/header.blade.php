@@ -45,6 +45,7 @@
         .custom_loader.visible{
             display: block;
         }
+
     </style>
 
 </head>

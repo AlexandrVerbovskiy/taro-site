@@ -1,6 +1,6 @@
 @include('layouts.main-header')
 <div class="container">
-    <h3 class="text-center title_margin" style="margin: 110px 0 30px">ТОПИК</h3>
+    <h3 class="text-center title_margin event-header" style="margin: 110px 0 30px"></h3>
     <div class="loader hidden">
 
     </div>
@@ -80,7 +80,7 @@
     });
 
     getNewEvents();
-
+    subscribeOnChangeLanguageCustomWords(".event-header", "event-header", {ru: '{{$topic_title_ru}}', ua: '{{$topic_title_ua}}'})
 
 </script>
 @include('layouts.footer')

@@ -87,7 +87,7 @@
             if (document.querySelector("[name='img_src']").value) {
                 $("#save_changes").click();
             } else {
-                alert("error");
+                showError("Оберіть картинку для коректного збереження інформації про напрямки діяльності!");
             }
         })
 
