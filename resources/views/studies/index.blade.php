@@ -1,6 +1,8 @@
 @include('layouts.main-header')
 <div class="container">
-    <h3 class="text-center title_margin studies_title" style="margin: 110px 0 30px">Навчання</h3>
+
+    <h3 class="text-center title_margin study-header" style="margin: 110px 0 30px"></h3>
+
     <div class="loader hidden row justify-content-center" style="width: 100%; margin: 0;">
 
     </div>
@@ -126,6 +128,7 @@
     })
     @endif
 
+
     subscribeOnChangeLanguage(".studies_title", "studies_title");
     if (document.querySelector(".popup_studies_name")) subscribeOnChangeLanguage(".popup_studies_name", "popup_studies_name");
     if (document.querySelector(".popup_studies_title")) {
@@ -134,6 +137,11 @@
         subscribeOnChangeLanguage(".popup_studies_text_two", "popup_studies_text_two");
         subscribeOnChangeLanguage(".popup_studies_send_button", "popup_studies_send_button");
     }
+
+    subscribeOnChangeLanguageCustomWords(".master_sec_button", "master_sec_button", {ru:"Запись", ua:"Запис"})
+    subscribeOnChangeLanguageCustomWords(".study-header", "study-header", {ru: '{{$topic_title_ru}}', ua: '{{$topic_title_ua}}'})
+
+
 </script>
 
 @include('layouts.footer')

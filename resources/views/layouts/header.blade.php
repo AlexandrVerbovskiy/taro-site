@@ -45,6 +45,7 @@
         .custom_loader.visible{
             display: block;
         }
+
     </style>
 
 </head>
@@ -77,7 +78,7 @@
 
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
-            document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
+            document.querySelectorAll(selector).forEach(elem=>elem.innerHTML = vocabulary[subscriptions[selector]][lang]);
         });
         Object.keys(placeholders).forEach(selector => {
             document.querySelector(selector).placeholder = vocabulary[placeholders[selector]][lang];

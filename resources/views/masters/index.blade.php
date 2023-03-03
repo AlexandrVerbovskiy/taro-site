@@ -141,8 +141,8 @@
 
     document.querySelector("#send_comment").addEventListener("click", () => {
         const value = document.querySelector("#comment_inbox").value;
-        console.log(value);
         document.querySelector("#comment_inbox").innerHTML = "";
+        document.querySelector("#comment_inbox").value = "";
         post("/create-master-comments", {master_id: {{$master->id}}, body: value}, res => {
             console.log(res)
             if (res.error) return alert(res.message)
