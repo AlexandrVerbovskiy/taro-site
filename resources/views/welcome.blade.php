@@ -44,7 +44,7 @@
         @else
             @if($finded_note->status=="wait_accept")
                 <div style="margin: 8px 0 36px">Ви вже відправили запит на підтвердженя
-                    на {{$finded_note->date}} {{$finded_note->time}}</div>
+                    на <b>{{$finded_note->date}} {{$finded_note->time}}</b></div>
             @else
                 <div style="margin: 8px 0 36px">Ви вже записані на <b>{{$finded_note->date}} {{$finded_note->time}}</b></div>
             @endif
