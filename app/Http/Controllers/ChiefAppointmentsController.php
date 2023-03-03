@@ -73,9 +73,10 @@ class ChiefAppointmentsController extends Controller
 
         try {
             $appointment = ChiefAppointment::where("time_id", $data['id'])->first();
+            $time = CalendarTime::where("id", $data['id'])->first();
             $appointment->status = "rejected";
             $appointment->save();
-            return json_encode(["error" => false, "message" => 'Час прийому відхилено успішно!']);
+            return json_encode(["error" => false, "data"=>$time, "message" => 'Час прийому відхилено успішно!']);
         } catch (\Exception $e) {
             return json_encode(["error" => true, "message" => $e->getMessage()]);
         }

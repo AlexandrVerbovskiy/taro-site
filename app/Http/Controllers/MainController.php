@@ -240,14 +240,22 @@ class MainController extends Controller
     public function getTimes(Request $request, $date)
     {
         try {
-            $times = DB::table("calendar_times")
-                ->leftJoin("chief_appointments", "chief_appointments.time_id", "=", "calendar_times.id")
+            $times = DB::table('calendar_times')
+                ->leftJoin('chief_appointments', function ($join) {
+                    $join->on('chief_appointments.time_id', '=', 'calendar_times.id')
+                        ->where(function ($query) {
+                            $query->where('chief_appointments.status', '=', 'wait_accept')
+                                ->orWhere('chief_appointments.status', '=', 'accepted')
+                                ->orWhere('chief_appointments.status', '!=', 'rejected');
+                        });
+                })
                 ->leftJoin("users", "chief_appointments.user_id", "=", "users.id")
-                ->whereRaw("date='$date' and (chief_appointments.id is NULL or chief_appointments.status!='rejected')")
+                ->whereRaw("date='$date'")
                 ->orderBy("time")
                 ->select("calendar_times.id as id", "calendar_times.time as time", "users.first_name as first_name",
-                    "users.last_name as last_name", "users.phone as phone", "users.email as email")
+                    "users.last_name as last_name", "users.phone as phone", "users.email as email", "chief_appointments.status as status")
                 ->get();
+
 
             return json_encode(["error" => false, "date" => $date, "times" => $times]);
         } catch (\Exception $e) {
