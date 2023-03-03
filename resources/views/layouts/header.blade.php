@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,11 +50,12 @@
 </head>
 <body class="antialiased d-flex flex-column min-vh-100">
 
-@include("layouts.vocabulary")
+<?php echo $__env->make("layouts.vocabulary", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <script>
 
     const subscriptions = {};
+    const arraySubscriptions = {};
     const placeholders = {};
 
     function subscribeOnChangeLanguage(selector, key) {
@@ -70,6 +71,10 @@
         placeholders[selector] = key;
     }
 
+    function subscribeOnChangeArrayLanguage(selector, key) {
+        arraySubscriptions[selector] = key;
+    }
+
     function changeLanguage(lang) {
         Object.keys(subscriptions).forEach(selector => {
             document.querySelector(selector).innerHTML = vocabulary[subscriptions[selector]][lang];
@@ -77,7 +82,11 @@
         Object.keys(placeholders).forEach(selector => {
             document.querySelector(selector).placeholder = vocabulary[placeholders[selector]][lang];
         });
-
+        Object.keys(arraySubscriptions).forEach(selector => {
+            document.querySelectorAll(selector).forEach((element) => {
+                element.innerHTML = vocabulary[arraySubscriptions[selector]][lang];
+            });
+        });
         localStorage.setItem("language", lang);
 
         for (let langButton of document.querySelectorAll('.lang_button')) {

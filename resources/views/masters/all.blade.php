@@ -55,7 +55,7 @@
     </div>
     <script>
         subscribeOnChangeLanguage('.masters_title', 'masters_title');
-        subscribeOnChangeLanguage('.masters_master_details', 'masters_master_details');
+        subscribeOnChangeArrayLanguage('.masters_master_details', 'masters_master_details');
         (function () {
             var cut = document.getElementsByClassName('master_descriptionSaniaZaebalEdition');
             for (var i = 0; i < cut.length; i++) {
