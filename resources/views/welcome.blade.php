@@ -46,7 +46,7 @@
                 <div style="margin: 8px 0 36px">Ви вже відправили запит на підтвердженя
                     на {{$finded_note->date}} {{$finded_note->time}}</div>
             @else
-                <div style="margin: 8px 0 36px">Ви вже записані на {{$finded_note->date}} {{$finded_note->time}}</div>
+                <div style="margin: 8px 0 36px">Ви вже записані на <b>{{$finded_note->date}} {{$finded_note->time}}</b></div>
             @endif
         @endif
     @endif
