@@ -4,11 +4,11 @@
 
 <div class="container">
     <div class="light-nav text-center">
-        <a class="btn btn-primary appointment_button_menu @if(Request::segment(1) == 'user' && Request::segment(2) == 'notes-to-chief') active @endif"
+        <a class="btn btn-primary appointment_button_menu enrols_val @if(Request::segment(1) == 'user' && Request::segment(2) == 'notes-to-chief') active @endif"
            href="{{url('/user/notes-to-chief')}}">До Валерія</a>
-        <a class="btn btn-primary appointment_button_menu @if(Request::segment(1) == 'user' && Request::segment(2) == 'notes-to-masters') active @endif"
+        <a class="btn btn-primary appointment_button_menu enrols_masters @if(Request::segment(1) == 'user' && Request::segment(2) == 'notes-to-masters') active @endif"
            href="{{url('/user/notes-to-masters')}}">До майстрів</a>
-        <a class="btn btn-primary appointment_button_menu @if(Request::segment(1) == 'user' && Request::segment(2) == 'notes-to-studies') active @endif"
+        <a class="btn btn-primary appointment_button_menu enrols_studies @if(Request::segment(1) == 'user' && Request::segment(2) == 'notes-to-studies') active @endif"
            href="{{url('/user/notes-to-studies')}}">На навчання</a>
     </div>
 
@@ -18,10 +18,10 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Дата запису</th>
-                    <th scope="col">Час</th>
+                    <th scope="col" class="val_date">Дата запису</th>
+                    <th scope="col" class="val_time">Час</th>
                     <th scope="col">Статус</th>
-                    <th scope="col">Дата відправленя</th>
+                    <th scope="col" class="val_enrol_date">Дата відправленя</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Заголовок</th>
                     <th scope="col">Статус</th>
-                    <th scope="col">Дата відправлення</th>
+                    <th scope="col" class="studies_enrol_date">Дата відправлення</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,9 +66,9 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Майстер</th>
+                    <th scope="col" class="masters_master">Майстер</th>
                     <th scope="col">Статус</th>
-                    <th scope="col">Дата відправлення</th>
+                    <th scope="col" class="masters_enrol_date">Дата відправлення</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -84,6 +84,25 @@
             </table>
         @endif
     </div>
+    </div>
 </div>
+
+<script>
+    subscribeOnChangeLanguage('.enrols_val', 'enrols_val');
+    subscribeOnChangeLanguage('.enrols_masters', 'enrols_masters');
+    subscribeOnChangeLanguage('.enrols_studies', 'enrols_studies');
+    if (document.querySelector('.val_date')) {
+        subscribeOnChangeLanguage('.val_date', 'val_date');
+        subscribeOnChangeLanguage('.val_time', 'val_time');
+        subscribeOnChangeLanguage('.val_enrol_date', 'enrol_date');
+    }
+    if (document.querySelector('.studies_enrol_date'))
+        subscribeOnChangeLanguage('.studies_enrol_date', 'enrol_date');
+    if (document.querySelector('.masters_enrol_date')) {
+        subscribeOnChangeLanguage('.masters_enrol_date', 'enrol_date');
+        subscribeOnChangeLanguage('.masters_master', 'masters_master');
+    }
+
+</script>
 
 @include('layouts.footer')

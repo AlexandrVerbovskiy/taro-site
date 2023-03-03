@@ -27,7 +27,7 @@
     @else
         @if(!$finded_note)
         <!--<button type="button" class="btn btn-primary button_for_valera">Записатися</button>-->
-            <h4 class="text-center" style=" margin: 20px 0;">Запис</h4>
+            <h4 class="text-center welcome_enrol" style=" margin: 20px 0;">Запис</h4>
             <div class="d-flex flex-column">
                 <div class="welcome_text_one">Оберіть дату та час</div>
                 <div class="welcome_text_two">
