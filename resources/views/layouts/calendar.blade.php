@@ -217,7 +217,7 @@
                     this.render();
                 });
 
-                calendarDays.addEventListener('click', (event) => {
+                document.querySelectorAll(".calendar-day").forEach(elem=>elem.addEventListener('click', (event) => {
                     const dayEl = event.target;
                     if (dayEl.classList.contains('disabled')) return;
 
@@ -232,8 +232,9 @@
                     const selectedDate = new Date(this.year, this.month, dayEl.innerHTML);
                     dayEl.classList.add("selected");
                     document.querySelector(".time-list").innerHTML = "";
+                    console.log(event)
                     onClick(event);
-                });
+                }));
             },
 
             getMonthName: function (month) {
