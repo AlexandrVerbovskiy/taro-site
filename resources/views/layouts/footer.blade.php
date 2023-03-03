@@ -1,9 +1,9 @@
 <footer class="d-flex flex-column justify-content-center text-center footer mt-auto" style="background-color: #a9c6ff; z-index: 2">
     <div class="footer_text">Контакти</div>
     <div class="d-flex flex-row justify-content-center">
-        <div><a href="#"><img src="{{ URL("image/instagram.png")}}" class="footer-image"></a></div>
-        <div><a href="#"><img src="{{ URL("image/youtube.png") }}" class="footer-image"></a></div>
-        <div><a href="#"><img src="{{ URL("image/facebook.png") }}" class="footer-image"></a></div>
+        <div><a href="https://www.instagram.com/valera_shatilovich"><img src="{{ URL("image/instagram.png")}}" class="footer-image"></a></div>
+        <div><a href="https://www.youtube.com/@Valery_Shatilovich"><img src="{{ URL("image/youtube.png") }}" class="footer-image"></a></div>
+        <div><a href="https://www.facebook.com/valera.shatilovich"><img src="{{ URL("image/facebook.png") }}" class="footer-image"></a></div>
     </div>
 </footer>
 
