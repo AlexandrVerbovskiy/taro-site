@@ -111,33 +111,33 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
             <div class="modal-header d-flex justify-content-center form_header" style="">
-                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Реєстрація</p>
+                <p class="modal-title" id="popup_register_title" style="/*font-size: 30px;*/"></p>
             </div>
             <form method="POST" action="{{url('/registration')}}">
                 <div class="modal-body padding_for_form">
                     {{ csrf_field() }}
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control input_form" value="{{ old('first_name') }}"
+                        <input type="text" class="form-control input_form popup_register_name" value="{{ old('first_name') }}"
                                id="first_name" name="first_name" placeholder="Ім'я">
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control input_form" value="{{ old('last_name') }}" id="last_name"
+                        <input type="text" class="form-control input_form popup_register_last_name" value="{{ old('last_name') }}" id="last_name"
                                name="last_name" placeholder="Прізвище">
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="email" class="form-control input_form" value="{{ old('email') }}" id="email"
+                        <input type="email" class="form-control input_form popup_register_email" value="{{ old('email') }}" id="email"
                                name="email" placeholder="Пошта">
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control input_form" value="{{ old('phone') }}" id="phone"
+                        <input type="text" class="form-control input_form popup_register_phone" value="{{ old('phone') }}" id="phone"
                                name="phone" placeholder="Телефон">
                     </div>
 
                     <div class="form-group mb-3 d-flex flex-row div_form_social" style="">
-                        <input type="text" class="form-control input_form input_form_social" readonly style=""
+                        <input type="text" class="form-control input_form input_form_social popup_register_social_type" readonly style=""
                                value="{{ old('social_type') }}" id="social_type" name="social_type"
                                placeholder="Оберіть соц. мережу">
 
@@ -162,17 +162,17 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control input_form" value="{{ old('social_phone') }}"
+                        <input type="text" class="form-control input_form popup_register_social_phone" value="{{ old('social_phone') }}"
                                id="social_phone" name="social_phone" placeholder="Телефон соц. мережі">
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="password" class="form-control input_form" id="password" name="password"
+                        <input type="password" class="form-control input_form popup_register_password" id="password" name="password"
                                placeholder="Пароль">
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="password" class="form-control input_form" id="password_confirmation"
+                        <input type="password" class="form-control input_form popup_register_password_confirmation" id="password_confirmation"
                                name="password_confirmation" placeholder="Повторіть пароль">
                     </div>
 
@@ -185,7 +185,7 @@
                 </div>
                 <div class="modal-footer padding_for_form" style="border: 0; margin-top: -24px">
                     <div class="d-flex justify-content-center" style="width: 100%">
-                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button">
+                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button popup_register_submit">
                             Зареєструватися
                         </button>
                     </div>
@@ -201,17 +201,17 @@
         <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
             <div class="modal-header d-flex justify-content-center"
                  style="border: 0; margin: 18px 0; padding-bottom: 0">
-                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Вхід</p>
+                <p class="modal-title popup_login_title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Вхід</p>
             </div>
             <form method="POST" action="{{url('/login')}}">
                 <div class="modal-body padding_for_form">
                     {{ csrf_field() }}
                     <div class="form-group mb-3">
-                        <input type="email" class="form-control input_form" id="email" value="{{old('email')}}"
+                        <input type="email" class="form-control input_form popup_login_email" id="email" value="{{old('email')}}"
                                name="email" placeholder="Пошта">
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" class="form-control input_form" id="password" name="password"
+                        <input type="password" class="form-control input_form popup_login_password" id="password" name="password"
                                placeholder="Пароль">
                     </div>
                     <div class="text-center d-flex align-items-center justify-content-center" style="height: 40px">
@@ -222,15 +222,15 @@
                 </div>
                 <div class="modal-footer padding_for_form" style="border: 0; margin-top: -24px">
                     <div class="d-flex justify-content-center" style="width: 100%">
-                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button">Увійти
+                        <button style="cursor:pointer;" type="submit" class="btn btn-primary form_main_button popup_login_submit">Увійти
                         </button>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 d-flex justify-content-between"
                          style="width: 100%">
-                        <a class="btn btn-primary form_sec_button col @if(Request::segment(1) == 'registration') active @endif"
+                        <a class="btn btn-primary form_sec_button col popup_login_register @if(Request::segment(1) == 'registration') active @endif"
                            href="{{url("/registration")}} "
                            type="submit" data-bs-target="#register" data-bs-toggle="modal" data-bs-dismiss="modal">Реєстрація</a>
-                        <a type="button" onclick="exitLogin()" class="btn btn-primary form_sec_button col"
+                        <a type="button" onclick="exitLogin()" class="btn btn-primary form_sec_button col popup_login_forget_password"
                            href="{{url("forget-password")}}" data-bs-toggle="modal" data-bs-target="#forget_password">Забули
                             пароль?</a>
                     </div>
@@ -246,12 +246,12 @@
         <div class="modal-content" style="background-color: #a9c6ff; border-radius: 25px; border: 0; margin: 0 20px">
             <div class="modal-header d-flex justify-content-center"
                  style="border: 0; margin: 18px 0; padding-bottom: 0">
-                <p class="modal-title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Забули пароль?</p>
+                <p class="modal-title popup_forget_password_title" id="exampleModalLongTitle" style="/*font-size: 30px;*/">Забули пароль?</p>
             </div>
             <div class="modal-body padding_for_form">
                 <div class="card-body" style="padding: 0; margin-top: -10px">
                     <div>
-                        <p class="text-center" style="font-size: 14px">На вказану вами пошту прийде лист для скидання
+                        <p class="text-center popup_forget_password_text" style="font-size: 14px">На вказану вами пошту прийде лист для скидання
                             паролю. Якщо ви не побачите листа, то перевірте будь-ласка спам.</p>
                     </div>
                     @if (Session::has('message'))
@@ -264,7 +264,7 @@
                         @csrf
                         <div class="form-group row">
                             <div class="form-group mb-3">
-                                <input class="form-control input_form" type="text" id="email_address"
+                                <input class="form-control input_form popup_forget_password_email" type="text" id="email_address"
                                        value="{{old('email')}}" name="email" placeholder="Пошта" required autofocus>
                                 @if ($errors->has('email'))
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -273,7 +273,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <button style="cursor:pointer; margin: 0 0 -16px 0" type="submit"
-                                    class="btn btn-primary form_main_button">Відправити
+                                    class="btn btn-primary form_main_button popup_forget_password_submit">Відправити
                             </button>
                         </div>
                     </form>

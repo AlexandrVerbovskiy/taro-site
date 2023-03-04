@@ -1,5 +1,5 @@
 @include('layouts.main-header')
-<h3 class="text-center title_margin" style="margin: 110px 0 30px">Майстри</h3>
+<h3 class="text-center title_margin masters_title" style="margin: 110px 0 30px">Майстри</h3>
 <!--@foreach($masters as $master)
     <div class="row justify-content-center" style="width: 100%; margin: 0;">
             <div class="master col-lg-9 col-md-12">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="align-items-end" style="padding: 0 0px; bottom: 0; ">
-                                <a class="btn btn-light master_sec_buttonSaniaZaebalEdition"
+                                <a class="btn btn-light master_sec_buttonSaniaZaebalEdition masters_master_details"
                                    href="/master/{{$master['id']}}}">Більше про майстра</a>
                             </div>
                         </div>
@@ -52,10 +52,10 @@
                 </div>
             </div>
         @endforeach
-
-
     </div>
     <script>
+        subscribeOnChangeLanguage('.masters_title', 'masters_title');
+        subscribeOnChangeArrayLanguage('.masters_master_details', 'masters_master_details');
         (function () {
             var cut = document.getElementsByClassName('master_descriptionSaniaZaebalEdition');
             for (var i = 0; i < cut.length; i++) {

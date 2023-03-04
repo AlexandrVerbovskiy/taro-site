@@ -212,7 +212,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light"
-     style="background-color: #a9c6ff; margin: 0; z-index: 10000000000000000000000; width: 100%; position: fixed">
+     style="background-color: #a9c6ff; margin: 0; z-index: 10; width: 100%; position: fixed">
     <div class="container-fluid" style="">
         <a class="navbar-brand" style="font-family: 'Oswald', sans-serif; font-size: 24px; padding: 2px 0" href="/">Адмін
             панель</a>
@@ -222,7 +222,7 @@
 </nav>
 
 
-<div class="menu_2 d-lg-none " style="position: fixed; margin: 56px 0 0 0">
+<div class="menu_2 d-lg-none " style="position: fixed; margin: 56px 0 0 0; z-index: 9;">
     <ul class="scroll_for_crop" style="">
         <a href="{{url("/")}}">
             <li>Основна сторінка</li>
@@ -275,7 +275,7 @@
 <div class="container" style="padding: 0; margin: 0; max-width: 100%;">
     <main class="row" style="width:100%; padding: 0; margin: 56px 0 0">
         <div class="admin-menu d-none d-lg-block col-lg-3">
-            <div style="position: relative;">
+            <div style="position: relative; z-index: 9;">
                 <ul style="padding-bottom: 20px;">
                     <a href="{{url("/")}}">
                         <li>Основна сторінка</li>

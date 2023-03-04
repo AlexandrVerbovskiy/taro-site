@@ -1,4 +1,4 @@
-<div class="custom_loader"></div>
+<div class="custom_loader" style="margin-bottom: 16px"></div>
 
 <script>
     (() => {

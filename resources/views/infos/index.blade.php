@@ -1,6 +1,6 @@
 @include('layouts.main-header')
 <div class="container">
-    <h3 class="text-center title_margin" style="margin: 110px 0 30px">
+    <h3 class="text-center title_margin infos_title" style="margin: 110px 0 30px">
         Корисна інформація
     </h3>
     <div class="loader hidden">
@@ -80,6 +80,4 @@
     });
 
     getNewPosts();
-
-
 </script>

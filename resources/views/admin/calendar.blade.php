@@ -22,13 +22,22 @@
     <button id="trash-modal" style="display: none;">Trash</button>
 
     <script>
+        function deleteBtns() {
+            let parent = event.target.parentNode;
+            let buttons = parent.getElementsByTagName('button');
+            for (var i = buttons.length - 1; i >= 0; i--) {
+                parent.removeChild(buttons[i]);
+            }
+        }
         const acceptDelete = () => {
+            deleteBtns();
             post('{{url('/admin/calendar-time-delete')}}', {id: trashId}, res => {
                 document.querySelector(`.time-row[data-id='${trashId}']`).remove();
             });
         }
 
         const reject = (id) => {
+            deleteBtns();
             post('{{url('/admin/note-to-boss-reject')}}', {id}, res => {
                 document.querySelector(`.time-row[data-id='${id}']`).innerHTML=`<div>Час: <b>${res.data['time'].slice(0,5)}</b></div> <button type="button" class="btn trash btn-danger admin_button_SaniaZaebalEdition" data-id="${res.data["id"]}" onclick="handleTrashClick(this)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -43,6 +52,7 @@
         }
 
         const accept = (id) => {
+            deleteBtns();
             post('{{url('/admin/note-to-boss-accept')}}', {id}, res => {
                 console.log(res);
             });
@@ -55,6 +65,7 @@
             `<div>Клієнт: ${time["first_name"]} ${time["last_name"]}</div>
                      <div>Пошта: ${time["email"]}</div>
                         <div>Телефон: ${time["phone"]}</div>
+                        <div>Статус: ${time["status"]}</div>
                         <button class="btn btn-success admin_button_SaniaZaebalEdition" onclick="accept(${time["id"]})">Погодити</button>
                         <button class="btn btn-danger admin_button_SaniaZaebalEdition" onclick="reject(${time["id"]})">Відхилити</button>
                        `:""}
@@ -105,7 +116,7 @@
         }
         buildCalendar((e)=>get("/admin/calendar-times/" + e.target.dataset.date, res => onGetTimes(res)));
 
-        buildModal("danger", "Removing the master", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);
+        buildModal("danger", "Видалення часу запису", "Ви точно хочете видалити час запису?", document.querySelector("#trash-modal"), acceptDelete);
 
     </script>
 @stop
