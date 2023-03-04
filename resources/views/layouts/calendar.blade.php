@@ -193,30 +193,7 @@
                     daysEl.appendChild(dayEl);
                 }
             },
-
-            listeners: function () {
-                const previousMonthButton = document.getElementById('previous-month');
-                const nextMonthButton = document.getElementById('next-month');
-                const calendarDays = document.querySelector('.calendar-days');
-
-                previousMonthButton.addEventListener('click', () => {
-                    this.month--;
-                    if (this.month < 0) {
-                        this.month = 11;
-                        this.year--
-                    }
-                    this.render();
-                });
-
-                nextMonthButton.addEventListener('click', () => {
-                    this.month++;
-                    if (this.month > 11) {
-                        this.month = 0;
-                        this.year++;
-                    }
-                    this.render();
-                });
-
+            dayListenerInit: function (){
                 document.querySelectorAll(".calendar-day").forEach(elem=>elem.addEventListener('click', (event) => {
                     const dayEl = event.target;
                     if (dayEl.classList.contains('disabled')) return;
@@ -235,6 +212,32 @@
                     console.log(event)
                     onClick(event);
                 }));
+            },
+            listeners: function () {
+                const previousMonthButton = document.getElementById('previous-month');
+                const nextMonthButton = document.getElementById('next-month');
+                const calendarDays = document.querySelector('.calendar-days');
+
+                previousMonthButton.addEventListener('click', () => {
+                    this.month--;
+                    if (this.month < 0) {
+                        this.month = 11;
+                        this.year--
+                    }
+                    this.render();
+                    this.dayListenerInit();
+                });
+
+                nextMonthButton.addEventListener('click', () => {
+                    this.month++;
+                    if (this.month > 11) {
+                        this.month = 0;
+                        this.year++;
+                    }
+                    this.render();
+                    this.dayListenerInit();
+                });
+                this.dayListenerInit();
             },
 
             getMonthName: function (month) {
